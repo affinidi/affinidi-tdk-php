@@ -1,0 +1,76 @@
+name: release
+"on":
+  push:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  security:
+    permissions:
+      contents: read
+      checks: read
+      statuses: read
+      security-events: write
+    uses: affinidi/pipeline-security/.github/workflows/security-scanners.yml@main
+    with:
+      config-path: .github/labeler.yml
+    secrets: inherit  
+  validate-package:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Setup PHP with PECL extension
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.4'
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Install dependencies
+      run: composer install
+
+    - name: Lint PHP files
+      uses: overtrue/phplint@main
+      with:
+        path: .
+        options: --exclude=vendor
+
+  release:
+    environment: release
+    permissions:
+      contents: write
+      issues: write 
+      pull-requests: write
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate token from app token #https://github.com/tibdex/github-app-token
+        id: generate_token
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ secrets.RELEASE_BOT_APP_ID }}
+          private_key: ${{ secrets.RELEASE_BOT_PKEY }}      
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: configure git
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - name: semver release
+        run: npx semantic-release@24.2.0
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+      - uses: hotaruma/packagist-sync@v1.0.1
+        with:
+          api-token: ${{ secrets.PACKAGIST_TOKEN }}
+          packagist-username: 'affinidi'
+          package-name: 'affinidi-tdk/affinidi-tdk-php"'
+          github-repository-url: 'https://github.com/affinidi/affinidi-tdk-php'
+          packagist-domain: 'https://packagist.org'
