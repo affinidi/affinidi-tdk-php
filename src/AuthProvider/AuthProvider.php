@@ -5,7 +5,7 @@ namespace AffinidiTdk\AuthProvider;
 use AffinidiTdk\AuthProvider\Helpers\JwtHelper;
 use AffinidiTdk\AuthProvider\Helpers\ProjectScopedToken;
 use AffinidiTdk\AuthProvider\Helpers\Iota;
-use Common\Helpers\EnvironmentUtils;
+use AffinidiTdk\Commons\Helpers\EnvironmentUtils;
 
 class AuthProvider
 {

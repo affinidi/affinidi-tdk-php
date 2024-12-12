@@ -3,10 +3,18 @@
     "description": "Affinidi Trust Developement Kit",
     "type": "library",
     "license": "Apache-2.0",
-    "keywords": ["trust"],
+    "keywords": [
+        "trust"
+    ],
     "autoload": {
         "psr-4": {
-            "AffinidiTdk\\": "src/"
+            "AffinidiTdk\\": "src/",
+            "AffinidiTdk\\Clients\\CredentialIssuance\\": "src/Clients/CredentialIssuanceClient/lib/",
+            "AffinidiTdk\\Clients\\CredentialVerification\\": "src/Clients/CredentialVerificationClient/lib/",
+            "AffinidiTdk\\Clients\\Iam\\": "src/Clients/IamClient/lib/",
+            "AffinidiTdk\\Clients\\Iota\\": "src/Clients/IotaClient/lib/",
+            "AffinidiTdk\\Clients\\LoginConfiguration\\": "src/Clients/LoginConfigurationClient/lib/",
+            "AffinidiTdk\\Clients\\Wallets\\": "src/Clients/WalletsClient/lib/"
         }
     },
     "authors": [
@@ -32,5 +40,3 @@
     },
     "minimum-stability": "stable"
 }
-
-
