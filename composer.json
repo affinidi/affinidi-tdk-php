@@ -9,12 +9,12 @@
     "autoload": {
         "psr-4": {
             "AffinidiTdk\\": "src/",
-            "AffinidiTdk\\Clients\\CredentialIssuance\\": "src/Clients/credential-issuance-client/lib/",
-            "AffinidiTdk\\Clients\\CredentialVerification\\": "src/Clients/credential-verification-client/lib/",
-            "AffinidiTdk\\Clients\\Iam\\": "src/Clients/iam-client/lib/",
-            "AffinidiTdk\\Clients\\Iota\\": "src/Clients/iota-client/lib/",
-            "AffinidiTdk\\Clients\\LoginConfiguration\\": "src/Clients/login-configuration-client/lib/",
-            "AffinidiTdk\\Clients\\Wallets\\": "src/Clients/wallets-client/lib/"
+            "AffinidiTdk\\Clients\\CredentialIssuance\\": "src/Clients/CredentialIssuanceClient/lib/",
+            "AffinidiTdk\\Clients\\CredentialVerification\\": "src/Clients/CredentialVerificationClient/lib/",
+            "AffinidiTdk\\Clients\\Iam\\": "src/Clients/IamClient/lib/",
+            "AffinidiTdk\\Clients\\Iota\\": "src/Clients/IotaClient/lib/",
+            "AffinidiTdk\\Clients\\LoginConfiguration\\": "src/Clients/LoginConfigurationClient/lib/",
+            "AffinidiTdk\\Clients\\Wallets\\": "src/Clients/WalletsClient/lib/"
         }
     },
     "authors": [
