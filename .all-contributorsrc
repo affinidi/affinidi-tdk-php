@@ -94,6 +94,17 @@
         "doc",
         "research"
       ]
+    },
+    {
+      "login": "andrew-affinidi",
+      "name": "andrew-affinidi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/181356348?v=4",
+      "profile": "https://github.com/andrew-affinidi",
+      "contributions": [
+        "code",
+        "doc",
+        "research"
+      ]
     }
   ],
   "contributorsPerLine": 7,
