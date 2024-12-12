@@ -16,7 +16,7 @@ require_once 'vendor/autoload.php';
 use AuthProvider\AuthProvider;
 use AffinidiTdk\Clients\Wallets as WalletsClient;
 
-params = [
+$params = [
   'privateKey' => "",
   // 'apiGatewayUrl' => 'https://apse1.api.affinidi.io',
   // 'tokenEndpoint' => 'https://apse1.auth.developer.affinidi.io/auth/oauth2/token',
