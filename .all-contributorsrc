@@ -116,6 +116,19 @@
         "doc",
         "research"
       ]
+    },
+    {
+      "login": "kamarthiparamesh",
+      "name": "Paramesh Kamarthi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46393683?v=4",
+      "profile": "https://github.com/kamarthiparamesh",
+      "contributions": [
+        "ideas",
+        "example",
+        "code",
+        "doc",
+        "research"
+      ]
     }
   ],
   "contributorsPerLine": 7,
