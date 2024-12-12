@@ -1,6 +1,6 @@
 <?php
 
-namespace Common\Helpers;
+namespace AffinidiTdk\Commons\Helpers;
 
 class VaultUtils
 {
