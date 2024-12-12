@@ -1,6 +1,6 @@
 # Affinidi Trust Development Kit (Affinidi TDK)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 The Affinidi Trust Development Kit (Affinidi TDK) is a modern interface that allows you to easily manage and integrate [Affinidi Elements](https://www.affinidi.com/product/affinidi-elements) and [Frameworks](https://www.affinidi.com/developer#lota-framework) into your application. It minimises dependencies and enables developers seamless entry into the [Affinidi Trust Network (ATN)](https://www.affinidi.com/get-started).
@@ -112,6 +112,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/andrew-affinidi"><img src="https://avatars.githubusercontent.com/u/181356348?v=4?s=100" width="100px;" alt="andrew-affinidi"/><br /><sub><b>andrew-affinidi</b></sub></a><br /><a href="https://github.com/affinidi/affinidi-tdk/commits?author=andrew-affinidi" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=andrew-affinidi" title="Documentation">📖</a> <a href="#research-andrew-affinidi" title="Research">🔬</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/rohitjjw"><img src="https://avatars.githubusercontent.com/u/80765488?v=4?s=100" width="100px;" alt="rohitjjw"/><br /><sub><b>rohitjjw</b></sub></a><br /><a href="https://github.com/affinidi/affinidi-tdk/commits?author=rohitjjw" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=rohitjjw" title="Documentation">📖</a> <a href="#research-rohitjjw" title="Research">🔬</a></td>
     </tr>
   </tbody>
   <tfoot>
