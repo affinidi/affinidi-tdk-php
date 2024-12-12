@@ -1,6 +1,6 @@
 # Affinidi Trust Development Kit (Affinidi TDK)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 The Affinidi Trust Development Kit (Affinidi TDK) is a modern interface that allows you to easily manage and integrate [Affinidi Elements](https://www.affinidi.com/product/affinidi-elements) and [Frameworks](https://www.affinidi.com/developer#lota-framework) into your application. It minimises dependencies and enables developers seamless entry into the [Affinidi Trust Network (ATN)](https://www.affinidi.com/get-started).
@@ -9,9 +9,9 @@ The Affinidi Trust Development Kit (Affinidi TDK) is a modern interface that all
 
 The Affinidi TDK provides three type of modules:
 
-- [Clients](clients), which offer methods to access Affinidi Elements services like Credential Issuance, Credential Verification, and Login Configurations, among others.
-- [Packages](packages), which are commonly used utilities/helpers that are self-contained and composable.
-- [Libraries](libs), which are high-level abstractions that combine logic and data to perform necessary business logic functionalities.
+- [Clients](src/Clients), which offer methods to access Affinidi Elements services like Credential Issuance, Credential Verification, and Login Configurations, among others.
+- [Packages](src/), which are commonly used utilities/helpers that are self-contained and composable.
+- [Libraries](src/Libs/), which are high-level abstractions that combine logic and data to perform necessary business logic functionalities.
 
 Each module has its own README that you can check to better understand how to integrate it into your application.
 
@@ -26,6 +26,57 @@ To learn how to integrate Affinidi TDK and use the different modules into your a
 - [Affinidi TDK Clients](https://docs.affinidi.com/dev-tools/affinidi-tdk/clients/)
 - [Affinidi TDK Libraries](https://docs.affinidi.com/dev-tools/affinidi-tdk/libraries/)
 - [Affinidi TDK Packages](https://docs.affinidi.com/dev-tools/affinidi-tdk/packages/)
+
+## Install
+
+```bash
+composer install affinidi-tdk/affinidi-tdk-php
+```
+
+## Usage
+
+```php
+<?php
+
+require_once 'vendor/autoload.php';
+
+use AuthProvider\AuthProvider;
+use AffinidiTdk\Clients\Wallets as WalletsClient;
+
+$params = [
+  'privateKey' => "",
+  // 'apiGatewayUrl' => 'https://apse1.api.affinidi.io',
+  // 'tokenEndpoint' => 'https://apse1.auth.developer.affinidi.io/auth/oauth2/token',
+  'keyId' => '',
+  'passphrase' => '',
+  'projectId' => '',
+  'tokenId' => ''
+];
+
+$authProvider = new AuthProvider($params);
+
+try {
+  $tokenCallback = [$authProvider, 'fetchProjectScopedToken'];
+
+  $configCwe = WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', $tokenCallback);
+
+  $apiInstanceCwe = new WalletsClient\Api\WalletApi(
+    new GuzzleHttp\Client(),
+    $configCwe
+  );
+
+  $apiInstanceCwe->listWallets();
+
+  $resultCwe = $apiInstanceCwe->listWallets();
+
+  $resultCweJson = json_decode($resultCwe, true);
+
+  print_r(count($resultCweJson['wallets']));
+
+} catch (Exception $e) {
+  print_r($e->getMessage());
+}
+```
 
 ## Support & feedback
 
@@ -102,14 +153,18 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/maratsh"><img src="https://avatars.githubusercontent.com/u/533533?v=4?s=100" width="100px;" alt="maratsh"/><br /><sub><b>maratsh</b></sub></a><br /><a href="https://github.com/affinidi/affinidi-tdk/commits?author=maratsh" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=maratsh" title="Documentation">📖</a> <a href="#example-maratsh" title="Examples">💡</a> <a href="#ideas-maratsh" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-maratsh" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#platform-maratsh" title="Packaging/porting to new platform">📦</a> <a href="#security-maratsh" title="Security">🛡️</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/aeffinidi"><img src="https://avatars.githubusercontent.com/u/86773100?v=4?s=100" width="100px;" alt="aeffinidi"/><br /><sub><b>aeffinidi</b></sub></a><br /><a href="https://github.com/affinidi/affinidi-tdk/commits?author=aeffinidi" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=aeffinidi" title="Documentation">📖</a> <a href="#example-aeffinidi" title="Examples">💡</a> <a href="#ideas-aeffinidi" title="Ideas, Planning, & Feedback">🤔</a> <a href="#tool-aeffinidi" title="Tools">🔧</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/rbrazhnyk"><img src="https://avatars.githubusercontent.com/u/4462680?v=4?s=100" width="100px;" alt="Roman Brazhnyk"/><br /><sub><b>Roman Brazhnyk</b></sub></a><br /><a href="https://github.com/affinidi/affinidi-tdk/commits?author=rbrazhnyk" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=rbrazhnyk" title="Documentation">📖</a> <a href="#ideas-rbrazhnyk" title="Ideas, Planning, & Feedback">🤔</a> <a href="#research-rbrazhnyk" title="Research">🔬</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/carlos-affinidi"><img src="https://avatars.githubusercontent.com/u/86779651?v=4?s=100" width="100px;" alt="Carlos Rincon"/><br /><sub><b>Carlos Rincon</b></sub></a><br /><a href="https://github.com/affinidi/affinidi-tdk/commits?author=carlos-affinidi" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=carlos-affinidi" title="Documentation">📖</a> <a href="#ideas-carlos-affinidi" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-carlos-affinidi" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/maratsh"><img src="https://avatars.githubusercontent.com/u/533533?v=4?s=100" width="100px;" alt="maratsh"/><br /><sub><b>maratsh</b></sub></a><br /><a href="https://github.com/affinidi/affinidi-tdk/commits?author=maratsh" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=maratsh" title="Documentation">📖</a> <a href="#example-maratsh" title="Examples">💡</a> <a href="#ideas-maratsh" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-maratsh" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#platform-maratsh" title="Packaging/porting to new platform">📦</a> <a href="#security-maratsh" title="Security">🛡️</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/pulkitb2"><img src="https://avatars.githubusercontent.com/u/146182581?v=4?s=100" width="100px;" alt="Pulkit Batra"/><br /><sub><b>Pulkit Batra</b></sub></a><br /><a href="https://github.com/affinidi/affinidi-tdk/commits?author=pulkitb2" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=pulkitb2" title="Documentation">📖</a> <a href="#example-pulkitb2" title="Examples">💡</a> <a href="#ideas-pulkitb2" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-pulkitb2" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-pulkitb2" title="Maintenance">🚧</a> <a href="#platform-pulkitb2" title="Packaging/porting to new platform">📦</a> <a href="#plugin-pulkitb2" title="Plugin/utility libraries">🔌</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Bergmam"><img src="https://avatars.githubusercontent.com/u/4987930?v=4?s=100" width="100px;" alt="Anton Bergman"/><br /><sub><b>Anton Bergman</b></sub></a><br /><a href="https://github.com/affinidi/affinidi-tdk/commits?author=Bergmam" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=Bergmam" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/sureshaff"><img src="https://avatars.githubusercontent.com/u/170073177?v=4?s=100" width="100px;" alt="sureshaff"/><br /><sub><b>sureshaff</b></sub></a><br /><a href="#security-sureshaff" title="Security">🛡️</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/maindotdev"><img src="https://avatars.githubusercontent.com/u/56207234?v=4?s=100" width="100px;" alt="Sebastian Müller"/><br /><sub><b>Sebastian Müller</b></sub></a><br /><a href="https://github.com/affinidi/affinidi-tdk/commits?author=maindotdev" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=maindotdev" title="Documentation">📖</a> <a href="#research-maindotdev" title="Research">🔬</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/sureshaff"><img src="https://avatars.githubusercontent.com/u/170073177?v=4?s=100" width="100px;" alt="sureshaff"/><br /><sub><b>sureshaff</b></sub></a><br /><a href="#security-sureshaff" title="Security">🛡️</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/andrew-affinidi"><img src="https://avatars.githubusercontent.com/u/181356348?v=4?s=100" width="100px;" alt="andrew-affinidi"/><br /><sub><b>andrew-affinidi</b></sub></a><br /><a href="https://github.com/affinidi/affinidi-tdk/commits?author=andrew-affinidi" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=andrew-affinidi" title="Documentation">📖</a> <a href="#research-andrew-affinidi" title="Research">🔬</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/rohitjjw"><img src="https://avatars.githubusercontent.com/u/80765488?v=4?s=100" width="100px;" alt="rohitjjw"/><br /><sub><b>rohitjjw</b></sub></a><br /><a href="https://github.com/affinidi/affinidi-tdk/commits?author=rohitjjw" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=rohitjjw" title="Documentation">📖</a> <a href="#research-rohitjjw" title="Research">🔬</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kamarthiparamesh"><img src="https://avatars.githubusercontent.com/u/46393683?v=4?s=100" width="100px;" alt="Paramesh Kamarthi"/><br /><sub><b>Paramesh Kamarthi</b></sub></a><br /><a href="#ideas-kamarthiparamesh" title="Ideas, Planning, & Feedback">🤔</a> <a href="#example-kamarthiparamesh" title="Examples">💡</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=kamarthiparamesh" title="Code">💻</a> <a href="https://github.com/affinidi/affinidi-tdk/commits?author=kamarthiparamesh" title="Documentation">📖</a> <a href="#research-kamarthiparamesh" title="Research">🔬</a></td>
     </tr>
   </tbody>
   <tfoot>
