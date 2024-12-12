@@ -9,9 +9,9 @@ The Affinidi Trust Development Kit (Affinidi TDK) is a modern interface that all
 
 The Affinidi TDK provides three type of modules:
 
-- [Clients](clients), which offer methods to access Affinidi Elements services like Credential Issuance, Credential Verification, and Login Configurations, among others.
-- [Packages](packages), which are commonly used utilities/helpers that are self-contained and composable.
-- [Libraries](libs), which are high-level abstractions that combine logic and data to perform necessary business logic functionalities.
+- [Clients](src/Clients), which offer methods to access Affinidi Elements services like Credential Issuance, Credential Verification, and Login Configurations, among others.
+- [Packages](src/), which are commonly used utilities/helpers that are self-contained and composable.
+- [Libraries](src/Libs/), which are high-level abstractions that combine logic and data to perform necessary business logic functionalities.
 
 Each module has its own README that you can check to better understand how to integrate it into your application.
 
@@ -26,6 +26,57 @@ To learn how to integrate Affinidi TDK and use the different modules into your a
 - [Affinidi TDK Clients](https://docs.affinidi.com/dev-tools/affinidi-tdk/clients/)
 - [Affinidi TDK Libraries](https://docs.affinidi.com/dev-tools/affinidi-tdk/libraries/)
 - [Affinidi TDK Packages](https://docs.affinidi.com/dev-tools/affinidi-tdk/packages/)
+
+## Install
+
+```bash
+composer install affinidi-tdk/affinidi-tdk-php
+```
+
+## Usage
+
+```php
+<?php
+
+require_once 'vendor/autoload.php';
+
+use AuthProvider\AuthProvider;
+use AffinidiTdk\Clients\Wallets as WalletsClient;
+
+$params = [
+  'privateKey' => "",
+  // 'apiGatewayUrl' => 'https://apse1.api.affinidi.io',
+  // 'tokenEndpoint' => 'https://apse1.auth.developer.affinidi.io/auth/oauth2/token',
+  'keyId' => '',
+  'passphrase' => '',
+  'projectId' => '',
+  'tokenId' => ''
+];
+
+$authProvider = new AuthProvider($params);
+
+try {
+  $tokenCallback = [$authProvider, 'fetchProjectScopedToken'];
+
+  $configCwe = WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', $tokenCallback);
+
+  $apiInstanceCwe = new WalletsClient\Api\WalletApi(
+    new GuzzleHttp\Client(),
+    $configCwe
+  );
+
+  $apiInstanceCwe->listWallets();
+
+  $resultCwe = $apiInstanceCwe->listWallets();
+
+  $resultCweJson = json_decode($resultCwe, true);
+
+  print_r(count($resultCweJson['wallets']));
+
+} catch (Exception $e) {
+  print_r($e->getMessage());
+}
+```
 
 ## Support & feedback
 

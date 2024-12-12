@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-composer install affinidi-tdk/affinidi-tdk-php affinidi-tdk/wallets-client
+composer install affinidi-tdk/affinidi-tdk-php
 ```
 
 ## Usage
