@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\LoginConfiguration\Model;
+namespace AffinidiTdk\Clients\LoginConfigurationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\LoginConfiguration\ObjectSerializer;
+use \AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
 
 /**
  * IdTokenMapping Class Doc Comment
  *
  * @category Class
  * @description Fields name/path mapping between the vp_token and the id_token
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>

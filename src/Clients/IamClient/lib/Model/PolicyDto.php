@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iam\Model;
+namespace AffinidiTdk\Clients\IamClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iam\ObjectSerializer;
+use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
 
 /**
  * PolicyDto Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -63,7 +63,7 @@ class PolicyDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'principal_id' => 'string',
         'project_id' => 'string',
         'version' => 'string',
-        'statement' => '\AffinidiTdk\Clients\Iam\Model\PolicyStatementDto[]'
+        'statement' => '\AffinidiTdk\Clients\IamClient\Model\PolicyStatementDto[]'
     ];
 
     /**
@@ -469,7 +469,7 @@ class PolicyDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets statement
      *
-     * @return \AffinidiTdk\Clients\Iam\Model\PolicyStatementDto[]
+     * @return \AffinidiTdk\Clients\IamClient\Model\PolicyStatementDto[]
      */
     public function getStatement()
     {
@@ -479,7 +479,7 @@ class PolicyDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets statement
      *
-     * @param \AffinidiTdk\Clients\Iam\Model\PolicyStatementDto[] $statement statement
+     * @param \AffinidiTdk\Clients\IamClient\Model\PolicyStatementDto[] $statement statement
      *
      * @return self
      */

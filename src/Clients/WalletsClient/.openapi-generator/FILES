@@ -1,8 +1,6 @@
 .gitignore
 .php-cs-fixer.dist.php
-.travis.yml
 README.md
-composer.json
 docs/Api/RevocationApi.md
 docs/Api/WalletApi.md
 docs/Model/CreateWalletInput.md

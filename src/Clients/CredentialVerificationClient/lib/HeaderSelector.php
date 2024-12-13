@@ -4,7 +4,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,13 +26,13 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification;
+namespace AffinidiTdk\Clients\CredentialVerificationClient;
 
 /**
  * HeaderSelector Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */

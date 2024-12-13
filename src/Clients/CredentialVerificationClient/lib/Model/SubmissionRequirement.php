@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialVerification\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
  * SubmissionRequirement Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -65,7 +65,7 @@ class SubmissionRequirement implements ModelInterface, ArrayAccess, \JsonSeriali
         'min' => 'int',
         'max' => 'int',
         'from' => 'string',
-        'from_nested' => '\AffinidiTdk\Clients\CredentialVerification\Model\SubmissionRequirement[]'
+        'from_nested' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\SubmissionRequirement[]'
     ];
 
     /**
@@ -568,7 +568,7 @@ class SubmissionRequirement implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets from_nested
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\SubmissionRequirement[]|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\SubmissionRequirement[]|null
      */
     public function getFromNested()
     {
@@ -578,7 +578,7 @@ class SubmissionRequirement implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets from_nested
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\SubmissionRequirement[]|null $from_nested from_nested
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\SubmissionRequirement[]|null $from_nested from_nested
      *
      * @return self
      */

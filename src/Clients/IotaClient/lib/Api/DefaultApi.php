@@ -4,7 +4,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iota\Api;
+namespace AffinidiTdk\Clients\IotaClient\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -35,16 +35,107 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use AffinidiTdk\Clients\Iota\ApiException;
-use AffinidiTdk\Clients\Iota\Configuration;
-use AffinidiTdk\Clients\Iota\HeaderSelector;
-use AffinidiTdk\Clients\Iota\ObjectSerializer;
+use AffinidiTdk\Clients\IotaClient\ApiException;
+use AffinidiTdk\Clients\IotaClient\Configuration;
+use AffinidiTdk\Clients\IotaClient\HeaderSelector;
+use AffinidiTdk\Clients\IotaClient\ObjectSerializer;
+
+/**
+ * InvalidJwtTokenError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\IotaClient
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class InvalidJwtTokenError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'InvalidJwtTokenError';
+
+    /**
+     * @var string
+     */
+    protected $message = 'JWT token is invalid';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $issue, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $this->message,
+            'issue' => $issue,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 403);
+        $this->issue = $issue;
+        $this->traceId = $traceId;
+    }
+}
+
+/**
+ * NotFoundError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\Wallets
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class NotFoundError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'NotFoundError';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $message, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $message,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 404);
+        $this->traceId = $traceId;
+    }
+}
 
 /**
  * DefaultApi Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -84,10 +175,10 @@ class DefaultApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -126,15 +217,15 @@ class DefaultApi
     /**
      * Operation listLoggedConsents
      *
-     * @param  string $configuration_id configuration_id (optional)
-     * @param  string $user_id user_id (optional)
-     * @param  int $limit The maximum number of records to fetch from the list of logged consents. (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string|null $configuration_id configuration_id (optional)
+     * @param  string|null $user_id user_id (optional)
+     * @param  int|null $limit The maximum number of records to fetch from the list of logged consents. (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLoggedConsents'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\Iota\Model\ListLoggedConsentsOK|\AffinidiTdk\Clients\Iota\Model\InvalidParameterError|\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError
+     * @return \AffinidiTdk\Clients\IotaClient\Model\ListLoggedConsentsOK|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError
      */
     public function listLoggedConsents($configuration_id = null, $user_id = null, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listLoggedConsents'][0])
     {
@@ -145,15 +236,15 @@ class DefaultApi
     /**
      * Operation listLoggedConsentsWithHttpInfo
      *
-     * @param  string $configuration_id (optional)
-     * @param  string $user_id (optional)
-     * @param  int $limit The maximum number of records to fetch from the list of logged consents. (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string|null $configuration_id (optional)
+     * @param  string|null $user_id (optional)
+     * @param  int|null $limit The maximum number of records to fetch from the list of logged consents. (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLoggedConsents'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\Iota\Model\ListLoggedConsentsOK|\AffinidiTdk\Clients\Iota\Model\InvalidParameterError|\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\IotaClient\Model\ListLoggedConsentsOK|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError, HTTP status code, HTTP response headers (array of strings)
      */
     public function listLoggedConsentsWithHttpInfo($configuration_id = null, $user_id = null, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listLoggedConsents'][0])
     {
@@ -164,6 +255,16 @@ class DefaultApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -184,11 +285,11 @@ class DefaultApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\Iota\Model\ListLoggedConsentsOK' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\ListLoggedConsentsOK' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\ListLoggedConsentsOK' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\ListLoggedConsentsOK' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -206,16 +307,16 @@ class DefaultApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\ListLoggedConsentsOK', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\ListLoggedConsentsOK', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\Iota\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -233,16 +334,16 @@ class DefaultApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -260,7 +361,7 @@ class DefaultApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -279,7 +380,7 @@ class DefaultApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\Iota\Model\ListLoggedConsentsOK';
+            $returnType = '\AffinidiTdk\Clients\IotaClient\Model\ListLoggedConsentsOK';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -312,7 +413,7 @@ class DefaultApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\ListLoggedConsentsOK',
+                        '\AffinidiTdk\Clients\IotaClient\Model\ListLoggedConsentsOK',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -320,7 +421,7 @@ class DefaultApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -328,7 +429,7 @@ class DefaultApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -341,10 +442,10 @@ class DefaultApi
     /**
      * Operation listLoggedConsentsAsync
      *
-     * @param  string $configuration_id (optional)
-     * @param  string $user_id (optional)
-     * @param  int $limit The maximum number of records to fetch from the list of logged consents. (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string|null $configuration_id (optional)
+     * @param  string|null $user_id (optional)
+     * @param  int|null $limit The maximum number of records to fetch from the list of logged consents. (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLoggedConsents'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -363,10 +464,10 @@ class DefaultApi
     /**
      * Operation listLoggedConsentsAsyncWithHttpInfo
      *
-     * @param  string $configuration_id (optional)
-     * @param  string $user_id (optional)
-     * @param  int $limit The maximum number of records to fetch from the list of logged consents. (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string|null $configuration_id (optional)
+     * @param  string|null $user_id (optional)
+     * @param  int|null $limit The maximum number of records to fetch from the list of logged consents. (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLoggedConsents'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -374,7 +475,7 @@ class DefaultApi
      */
     public function listLoggedConsentsAsyncWithHttpInfo($configuration_id = null, $user_id = null, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listLoggedConsents'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\Iota\Model\ListLoggedConsentsOK';
+        $returnType = '\AffinidiTdk\Clients\IotaClient\Model\ListLoggedConsentsOK';
         $request = $this->listLoggedConsentsRequest($configuration_id, $user_id, $limit, $exclusive_start_key, $contentType);
 
         return $this->client
@@ -416,10 +517,10 @@ class DefaultApi
     /**
      * Create request for operation 'listLoggedConsents'
      *
-     * @param  string $configuration_id (optional)
-     * @param  string $user_id (optional)
-     * @param  int $limit The maximum number of records to fetch from the list of logged consents. (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string|null $configuration_id (optional)
+     * @param  string|null $user_id (optional)
+     * @param  int|null $limit The maximum number of records to fetch from the list of logged consents. (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLoggedConsents'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

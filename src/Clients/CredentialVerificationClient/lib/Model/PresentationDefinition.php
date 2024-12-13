@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialVerification\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
  * PresentationDefinition Class Doc Comment
  *
  * @category Class
  * @description Presentation definition
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -62,10 +62,10 @@ class PresentationDefinition implements ModelInterface, ArrayAccess, \JsonSerial
         'id' => 'string',
         'name' => 'string',
         'purpose' => 'string',
-        'format' => '\AffinidiTdk\Clients\CredentialVerification\Model\Format',
-        'submission_requirements' => '\AffinidiTdk\Clients\CredentialVerification\Model\SubmissionRequirement[]',
-        'input_descriptors' => '\AffinidiTdk\Clients\CredentialVerification\Model\InputDescriptor[]',
-        'frame' => '\AffinidiTdk\Clients\CredentialVerification\Model\FreeFormObject'
+        'format' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\Format',
+        'submission_requirements' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\SubmissionRequirement[]',
+        'input_descriptors' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\InputDescriptor[]',
+        'frame' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\FreeFormObject'
     ];
 
     /**
@@ -423,7 +423,7 @@ class PresentationDefinition implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets format
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\Format|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\Format|null
      */
     public function getFormat()
     {
@@ -433,7 +433,7 @@ class PresentationDefinition implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets format
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\Format|null $format format
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\Format|null $format format
      *
      * @return self
      */
@@ -450,7 +450,7 @@ class PresentationDefinition implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets submission_requirements
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\SubmissionRequirement[]|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\SubmissionRequirement[]|null
      */
     public function getSubmissionRequirements()
     {
@@ -460,7 +460,7 @@ class PresentationDefinition implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets submission_requirements
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\SubmissionRequirement[]|null $submission_requirements submission_requirements
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\SubmissionRequirement[]|null $submission_requirements submission_requirements
      *
      * @return self
      */
@@ -477,7 +477,7 @@ class PresentationDefinition implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets input_descriptors
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\InputDescriptor[]
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\InputDescriptor[]
      */
     public function getInputDescriptors()
     {
@@ -487,7 +487,7 @@ class PresentationDefinition implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets input_descriptors
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\InputDescriptor[] $input_descriptors input_descriptors
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\InputDescriptor[] $input_descriptors input_descriptors
      *
      * @return self
      */
@@ -504,7 +504,7 @@ class PresentationDefinition implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets frame
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\FreeFormObject|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\FreeFormObject|null
      */
     public function getFrame()
     {
@@ -514,7 +514,7 @@ class PresentationDefinition implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets frame
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\FreeFormObject|null $frame frame
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\FreeFormObject|null $frame frame
      *
      * @return self
      */

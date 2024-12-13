@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam\Model
+ * @package  AffinidiTdk\Clients\IamClient\Model
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,12 +27,12 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iam\Model;
+namespace AffinidiTdk\Clients\IamClient\Model;
 
 /**
  * Interface abstracting model access.
  *
- * @package AffinidiTdk\Clients\Iam\Model
+ * @package AffinidiTdk\Clients\IamClient\Model
  * @author  OpenAPI Generator team
  */
 interface ModelInterface

@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iam\Model;
+namespace AffinidiTdk\Clients\IamClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iam\ObjectSerializer;
+use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
 
 /**
  * TokenPrivateKeyAuthenticationMethodDto Class Doc Comment
  *
  * @category Class
  * @description Private Key JWT Authentication of Client with &#x60;private_key_jwt&#x60; oAuth Method
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -61,7 +61,7 @@ class TokenPrivateKeyAuthenticationMethodDto implements ModelInterface, ArrayAcc
     protected static $openAPITypes = [
         'type' => 'string',
         'signing_algorithm' => 'string',
-        'public_key_info' => '\AffinidiTdk\Clients\Iam\Model\TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo'
+        'public_key_info' => '\AffinidiTdk\Clients\IamClient\Model\TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo'
     ];
 
     /**
@@ -441,7 +441,7 @@ class TokenPrivateKeyAuthenticationMethodDto implements ModelInterface, ArrayAcc
     /**
      * Gets public_key_info
      *
-     * @return \AffinidiTdk\Clients\Iam\Model\TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo
+     * @return \AffinidiTdk\Clients\IamClient\Model\TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo
      */
     public function getPublicKeyInfo()
     {
@@ -451,7 +451,7 @@ class TokenPrivateKeyAuthenticationMethodDto implements ModelInterface, ArrayAcc
     /**
      * Sets public_key_info
      *
-     * @param \AffinidiTdk\Clients\Iam\Model\TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo $public_key_info public_key_info
+     * @param \AffinidiTdk\Clients\IamClient\Model\TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo $public_key_info public_key_info
      *
      * @return self
      */

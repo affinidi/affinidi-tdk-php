@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\LoginConfiguration\Model;
+namespace AffinidiTdk\Clients\LoginConfigurationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\LoginConfiguration\ObjectSerializer;
+use \AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
 
 /**
  * ListLoginConfigurationOutput Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class ListLoginConfigurationOutput implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'configurations' => '\AffinidiTdk\Clients\LoginConfiguration\Model\LoginConfigurationObject[]',
+        'configurations' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationObject[]',
         'last_evaluated_key' => 'string'
     ];
 
@@ -303,7 +303,7 @@ class ListLoginConfigurationOutput implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets configurations
      *
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\LoginConfigurationObject[]
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationObject[]
      */
     public function getConfigurations()
     {
@@ -313,7 +313,7 @@ class ListLoginConfigurationOutput implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets configurations
      *
-     * @param \AffinidiTdk\Clients\LoginConfiguration\Model\LoginConfigurationObject[] $configurations configurations
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationObject[] $configurations configurations
      *
      * @return self
      */

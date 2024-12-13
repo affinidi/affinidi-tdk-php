@@ -1,21 +1,24 @@
-# AffinidiTdk\Clients\Iam\ProjectsApi
+# AffinidiTdk\Clients\IamClient\ProjectsApi
 
 All URIs are relative to https://apse1.api.affinidi.io/iam, except if the operation defines another base path.
 
-| Method                                                                        | HTTP request                                     | Description |
-| ----------------------------------------------------------------------------- | ------------------------------------------------ | ----------- |
-| [**addPrincipalToProject()**](ProjectsApi.md#addPrincipalToProject)           | **POST** /v1/projects/principals                 |             |
-| [**createProject()**](ProjectsApi.md#createProject)                           | **POST** /v1/projects                            |             |
-| [**deletePrincipalFromProject()**](ProjectsApi.md#deletePrincipalFromProject) | **DELETE** /v1/projects/principals/{principalId} |             |
-| [**listPrincipalsOfProject()**](ProjectsApi.md#listPrincipalsOfProject)       | **GET** /v1/projects/principals                  |             |
-| [**listProject()**](ProjectsApi.md#listProject)                               | **GET** /v1/projects                             |             |
-| [**updateProject()**](ProjectsApi.md#updateProject)                           | **PATCH** /v1/projects/{projectId}               |             |
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**addPrincipalToProject()**](ProjectsApi.md#addPrincipalToProject) | **POST** /v1/projects/principals |  |
+| [**createProject()**](ProjectsApi.md#createProject) | **POST** /v1/projects |  |
+| [**deletePrincipalFromProject()**](ProjectsApi.md#deletePrincipalFromProject) | **DELETE** /v1/projects/principals/{principalId} |  |
+| [**listPrincipalsOfProject()**](ProjectsApi.md#listPrincipalsOfProject) | **GET** /v1/projects/principals |  |
+| [**listProject()**](ProjectsApi.md#listProject) | **GET** /v1/projects |  |
+| [**updateProject()**](ProjectsApi.md#updateProject) | **PATCH** /v1/projects/{projectId} |  |
+
 
 ## `addPrincipalToProject()`
 
 ```php
 addPrincipalToProject($add_user_to_project_input)
 ```
+
+
 
 ### Example
 
@@ -25,18 +28,18 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\ProjectsApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\ProjectsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$add_user_to_project_input = new \AffinidiTdk\Clients\Iam\Model\AddUserToProjectInput(); // \AffinidiTdk\Clients\Iam\Model\AddUserToProjectInput | AddPrincipalToProject
+$add_user_to_project_input = new \AffinidiTdk\Clients\IamClient\Model\AddUserToProjectInput(); // \AffinidiTdk\Clients\IamClient\Model\AddUserToProjectInput | AddPrincipalToProject
 
 try {
     $apiInstance->addPrincipalToProject($add_user_to_project_input);
@@ -47,9 +50,9 @@ try {
 
 ### Parameters
 
-| Name                          | Type                                                                                          | Description           | Notes |
-| ----------------------------- | --------------------------------------------------------------------------------------------- | --------------------- | ----- |
-| **add_user_to_project_input** | [**\AffinidiTdk\Clients\Iam\Model\AddUserToProjectInput**](../Model/AddUserToProjectInput.md) | AddPrincipalToProject |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **add_user_to_project_input** | [**\AffinidiTdk\Clients\IamClient\Model\AddUserToProjectInput**](../Model/AddUserToProjectInput.md)| AddPrincipalToProject | |
 
 ### Return type
 
@@ -71,8 +74,10 @@ void (empty response body)
 ## `createProject()`
 
 ```php
-createProject($create_project_input): \AffinidiTdk\Clients\Iam\Model\ProjectDto
+createProject($create_project_input): \AffinidiTdk\Clients\IamClient\Model\ProjectDto
 ```
+
+
 
 ### Example
 
@@ -82,18 +87,18 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: UserTokenAuth
-$config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\ProjectsApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\ProjectsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$create_project_input = new \AffinidiTdk\Clients\Iam\Model\CreateProjectInput(); // \AffinidiTdk\Clients\Iam\Model\CreateProjectInput | CreateProject
+$create_project_input = new \AffinidiTdk\Clients\IamClient\Model\CreateProjectInput(); // \AffinidiTdk\Clients\IamClient\Model\CreateProjectInput | CreateProject
 
 try {
     $result = $apiInstance->createProject($create_project_input);
@@ -105,13 +110,13 @@ try {
 
 ### Parameters
 
-| Name                     | Type                                                                                    | Description   | Notes |
-| ------------------------ | --------------------------------------------------------------------------------------- | ------------- | ----- |
-| **create_project_input** | [**\AffinidiTdk\Clients\Iam\Model\CreateProjectInput**](../Model/CreateProjectInput.md) | CreateProject |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **create_project_input** | [**\AffinidiTdk\Clients\IamClient\Model\CreateProjectInput**](../Model/CreateProjectInput.md)| CreateProject | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iam\Model\ProjectDto**](../Model/ProjectDto.md)
+[**\AffinidiTdk\Clients\IamClient\Model\ProjectDto**](../Model/ProjectDto.md)
 
 ### Authorization
 
@@ -132,6 +137,8 @@ try {
 deletePrincipalFromProject($principal_id, $principal_type)
 ```
 
+
+
 ### Example
 
 ```php
@@ -140,12 +147,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\ProjectsApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\ProjectsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -163,10 +170,10 @@ try {
 
 ### Parameters
 
-| Name               | Type       | Description       | Notes |
-| ------------------ | ---------- | ----------------- | ----- |
-| **principal_id**   | **string** | id of principal   |       |
-| **principal_type** | **string** | type of principal |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **principal_id** | **string**| id of principal | |
+| **principal_type** | **string**| type of principal | |
 
 ### Return type
 
@@ -188,8 +195,10 @@ void (empty response body)
 ## `listPrincipalsOfProject()`
 
 ```php
-listPrincipalsOfProject(): \AffinidiTdk\Clients\Iam\Model\UserList
+listPrincipalsOfProject(): \AffinidiTdk\Clients\IamClient\Model\UserList
 ```
+
+
 
 ### Example
 
@@ -199,12 +208,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\ProjectsApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\ProjectsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -225,7 +234,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iam\Model\UserList**](../Model/UserList.md)
+[**\AffinidiTdk\Clients\IamClient\Model\UserList**](../Model/UserList.md)
 
 ### Authorization
 
@@ -243,8 +252,10 @@ This endpoint does not need any parameter.
 ## `listProject()`
 
 ```php
-listProject(): \AffinidiTdk\Clients\Iam\Model\ProjectList
+listProject(): \AffinidiTdk\Clients\IamClient\Model\ProjectList
 ```
+
+
 
 ### Example
 
@@ -254,12 +265,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: UserTokenAuth
-$config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\ProjectsApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\ProjectsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -280,7 +291,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iam\Model\ProjectList**](../Model/ProjectList.md)
+[**\AffinidiTdk\Clients\IamClient\Model\ProjectList**](../Model/ProjectList.md)
 
 ### Authorization
 
@@ -298,8 +309,10 @@ This endpoint does not need any parameter.
 ## `updateProject()`
 
 ```php
-updateProject($project_id, $update_project_input): \AffinidiTdk\Clients\Iam\Model\ProjectDto
+updateProject($project_id, $update_project_input): \AffinidiTdk\Clients\IamClient\Model\ProjectDto
 ```
+
+
 
 ### Example
 
@@ -309,19 +322,19 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: UserTokenAuth
-$config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\ProjectsApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\ProjectsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $project_id = 'project_id_example'; // string | projectId
-$update_project_input = new \AffinidiTdk\Clients\Iam\Model\UpdateProjectInput(); // \AffinidiTdk\Clients\Iam\Model\UpdateProjectInput | UpdateProject
+$update_project_input = new \AffinidiTdk\Clients\IamClient\Model\UpdateProjectInput(); // \AffinidiTdk\Clients\IamClient\Model\UpdateProjectInput | UpdateProject
 
 try {
     $result = $apiInstance->updateProject($project_id, $update_project_input);
@@ -333,14 +346,14 @@ try {
 
 ### Parameters
 
-| Name                     | Type                                                                                    | Description   | Notes |
-| ------------------------ | --------------------------------------------------------------------------------------- | ------------- | ----- |
-| **project_id**           | **string**                                                                              | projectId     |       |
-| **update_project_input** | [**\AffinidiTdk\Clients\Iam\Model\UpdateProjectInput**](../Model/UpdateProjectInput.md) | UpdateProject |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**| projectId | |
+| **update_project_input** | [**\AffinidiTdk\Clients\IamClient\Model\UpdateProjectInput**](../Model/UpdateProjectInput.md)| UpdateProject | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iam\Model\ProjectDto**](../Model/ProjectDto.md)
+[**\AffinidiTdk\Clients\IamClient\Model\ProjectDto**](../Model/ProjectDto.md)
 
 ### Authorization
 

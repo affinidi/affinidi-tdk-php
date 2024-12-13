@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration\Model
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient\Model
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,12 +27,12 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\LoginConfiguration\Model;
+namespace AffinidiTdk\Clients\LoginConfigurationClient\Model;
 
 /**
  * Interface abstracting model access.
  *
- * @package AffinidiTdk\Clients\LoginConfiguration\Model
+ * @package AffinidiTdk\Clients\LoginConfigurationClient\Model
  * @author  OpenAPI Generator team
  */
 interface ModelInterface

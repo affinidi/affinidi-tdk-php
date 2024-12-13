@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\LoginConfiguration\Model;
+namespace AffinidiTdk\Clients\LoginConfigurationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\LoginConfiguration\ObjectSerializer;
+use \AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
 
 /**
  * VPTokenValidationError Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -62,7 +62,7 @@ class VPTokenValidationError implements ModelInterface, ArrayAccess, \JsonSerial
         'message' => 'string',
         'http_status_code' => 'float',
         'trace_id' => 'string',
-        'details' => '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterErrorDetailsInner[]'
+        'details' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterErrorDetailsInner[]'
     ];
 
     /**
@@ -537,7 +537,7 @@ class VPTokenValidationError implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets details
      *
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterErrorDetailsInner[]|null
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterErrorDetailsInner[]|null
      */
     public function getDetails()
     {
@@ -547,7 +547,7 @@ class VPTokenValidationError implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets details
      *
-     * @param \AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterErrorDetailsInner[]|null $details details
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterErrorDetailsInner[]|null $details details
      *
      * @return self
      */

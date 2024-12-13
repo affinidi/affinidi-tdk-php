@@ -1,8 +1,6 @@
 .gitignore
 .php-cs-fixer.dist.php
-.travis.yml
 README.md
-composer.json
 docs/Api/CallbackApi.md
 docs/Api/ConfigurationsApi.md
 docs/Api/DefaultApi.md

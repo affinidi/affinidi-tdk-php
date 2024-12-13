@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\LoginConfiguration\Model;
+namespace AffinidiTdk\Clients\LoginConfigurationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\LoginConfiguration\ObjectSerializer;
+use \AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
 
 /**
  * GroupsList Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class GroupsList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'groups' => '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto[]'
+        'groups' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto[]'
     ];
 
     /**
@@ -293,7 +293,7 @@ class GroupsList implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets groups
      *
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto[]|null
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto[]|null
      */
     public function getGroups()
     {
@@ -303,7 +303,7 @@ class GroupsList implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets groups
      *
-     * @param \AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto[]|null $groups groups
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto[]|null $groups groups
      *
      * @return self
      */

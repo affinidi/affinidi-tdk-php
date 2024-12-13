@@ -1,16 +1,19 @@
-# AffinidiTdk\Clients\Iota\CallbackApi
+# AffinidiTdk\Clients\IotaClient\CallbackApi
 
 All URIs are relative to https://apse1.api.affinidi.io/ais, except if the operation defines another base path.
 
-| Method                                                        | HTTP request          | Description |
-| ------------------------------------------------------------- | --------------------- | ----------- |
-| [**iotOIDC4VPCallback()**](CallbackApi.md#iotOIDC4VPCallback) | **POST** /v1/callback |             |
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**iotOIDC4VPCallback()**](CallbackApi.md#iotOIDC4VPCallback) | **POST** /v1/callback |  |
+
 
 ## `iotOIDC4VPCallback()`
 
 ```php
-iotOIDC4VPCallback($callback_input): \AffinidiTdk\Clients\Iota\Model\CallbackResponseOK
+iotOIDC4VPCallback($callback_input): \AffinidiTdk\Clients\IotaClient\Model\CallbackResponseOK
 ```
+
+
 
 It handles the client's (e.g., Affinidi Vault) callback about the result of the data-sharing request. It may contain the data shared by the user, including the presentation submission, verification token, and state. Using the MQTT protocol, it communicates the completion of the request or if any error occurred.
 
@@ -22,12 +25,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iota\Api\CallbackApi(
+$apiInstance = new AffinidiTdk\Clients\IotaClient\Api\CallbackApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$callback_input = new \AffinidiTdk\Clients\Iota\Model\CallbackInput(); // \AffinidiTdk\Clients\Iota\Model\CallbackInput | CallbackRequestInput
+$callback_input = new \AffinidiTdk\Clients\IotaClient\Model\CallbackInput(); // \AffinidiTdk\Clients\IotaClient\Model\CallbackInput | CallbackRequestInput
 
 try {
     $result = $apiInstance->iotOIDC4VPCallback($callback_input);
@@ -39,13 +42,13 @@ try {
 
 ### Parameters
 
-| Name               | Type                                                                           | Description          | Notes |
-| ------------------ | ------------------------------------------------------------------------------ | -------------------- | ----- |
-| **callback_input** | [**\AffinidiTdk\Clients\Iota\Model\CallbackInput**](../Model/CallbackInput.md) | CallbackRequestInput |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **callback_input** | [**\AffinidiTdk\Clients\IotaClient\Model\CallbackInput**](../Model/CallbackInput.md)| CallbackRequestInput | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iota\Model\CallbackResponseOK**](../Model/CallbackResponseOK.md)
+[**\AffinidiTdk\Clients\IotaClient\Model\CallbackResponseOK**](../Model/CallbackResponseOK.md)
 
 ### Authorization
 

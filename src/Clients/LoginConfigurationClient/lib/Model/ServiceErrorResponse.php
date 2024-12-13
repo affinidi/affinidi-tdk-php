@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\LoginConfiguration\Model;
+namespace AffinidiTdk\Clients\LoginConfigurationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\LoginConfiguration\ObjectSerializer;
+use \AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
 
 /**
  * ServiceErrorResponse Class Doc Comment
  *
  * @category Class
  * @description Service Error Response
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -62,7 +62,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'debug_id' => 'string',
         'name' => 'string',
         'code' => 'string',
-        'details' => '\AffinidiTdk\Clients\LoginConfiguration\Model\ServiceErrorResponseDetailsInner[]'
+        'details' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ServiceErrorResponseDetailsInner[]'
     ];
 
     /**
@@ -405,7 +405,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets details
      *
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\ServiceErrorResponseDetailsInner[]|null
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\ServiceErrorResponseDetailsInner[]|null
      */
     public function getDetails()
     {
@@ -415,7 +415,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets details
      *
-     * @param \AffinidiTdk\Clients\LoginConfiguration\Model\ServiceErrorResponseDetailsInner[]|null $details error details
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\ServiceErrorResponseDetailsInner[]|null $details error details
      *
      * @return self
      */

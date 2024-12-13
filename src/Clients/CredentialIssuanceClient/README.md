@@ -1,5 +1,6 @@
 # credential-issuance-client
 
+
 For more information, please visit [https://github.com/affinidi/affinidi-tdk](https://github.com/affinidi/affinidi-tdk).
 
 ## Installation & Usage
@@ -14,7 +15,7 @@ Should also work with PHP 8.0.
 To install the bindings via [Composer](https://getcomposer.org/), run:
 
 ```bash
-composer require affinidi-tdk/credential-issuance-client
+composer require affinidi-tdk/affinidi-tdk-php
 ```
 
 ### Manual Installation
@@ -37,18 +38,18 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\CredentialIssuance\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\CredentialIssuance\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\CredentialIssuance\Api\ConfigurationApi(
+$apiInstance = new AffinidiTdk\Clients\CredentialIssuanceClient\Api\ConfigurationApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$create_issuance_config_input = new \AffinidiTdk\Clients\CredentialIssuance\Model\CreateIssuanceConfigInput(); // \AffinidiTdk\Clients\CredentialIssuance\Model\CreateIssuanceConfigInput | Request body of create configuration
+$create_issuance_config_input = new \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CreateIssuanceConfigInput(); // \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CreateIssuanceConfigInput | Request body of create configuration
 
 try {
     $result = $apiInstance->createIssuanceConfig($create_issuance_config_input);
@@ -63,22 +64,21 @@ try {
 
 All URIs are relative to *https://apse1.api.affinidi.io/cis*
 
-| Class              | Method                                                                                                | HTTP request                                                                            | Description                   |
-| ------------------ | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------- |
-| _ConfigurationApi_ | [**createIssuanceConfig**](docs/Api/ConfigurationApi.md#createissuanceconfig)                         | **POST** /v1/configurations                                                             |
-| _ConfigurationApi_ | [**deleteIssuanceConfigById**](docs/Api/ConfigurationApi.md#deleteissuanceconfigbyid)                 | **DELETE** /v1/configurations/{configurationId}                                         |
-| _ConfigurationApi_ | [**getIssuanceConfigById**](docs/Api/ConfigurationApi.md#getissuanceconfigbyid)                       | **GET** /v1/configurations/{configurationId}                                            |
-| _ConfigurationApi_ | [**getIssuanceConfigList**](docs/Api/ConfigurationApi.md#getissuanceconfiglist)                       | **GET** /v1/configurations                                                              |
-| _ConfigurationApi_ | [**updateIssuanceConfigById**](docs/Api/ConfigurationApi.md#updateissuanceconfigbyid)                 | **PUT** /v1/configurations/{configurationId}                                            |
-| _CredentialsApi_   | [**generateCredentials**](docs/Api/CredentialsApi.md#generatecredentials)                             | **POST** /v1/{projectId}/credential                                                     |
-| _DefaultApi_       | [**changeCredentialSatatus**](docs/Api/DefaultApi.md#changecredentialsatatus)                         | **POST** /v1/{projectId}/configurations/{configurationId}/issuance/change-status        | change credential status.     |
-| _DefaultApi_       | [**getStatusList**](docs/Api/DefaultApi.md#getstatuslist)                                             | **GET** /v1/{projectId}/status-list/{statusListId}                                      | Return status list credential |
-| _DefaultApi_       | [**listIssuanceDataRecords**](docs/Api/DefaultApi.md#listissuancedatarecords)                         | **GET** /v1/{projectId}/configurations/{configurationId}/issuance/issuance-data-records | List records                  |
-| _IssuanceApi_      | [**issuanceState**](docs/Api/IssuanceApi.md#issuancestate)                                            | **GET** /v1/{projectId}/issuance/state/{issuanceId}                                     |
-| _IssuanceApi_      | [**listIssuance**](docs/Api/IssuanceApi.md#listissuance)                                              | **GET** /v1/{projectId}/issuance                                                        |
-| _IssuanceApi_      | [**startIssuance**](docs/Api/IssuanceApi.md#startissuance)                                            | **POST** /v1/{projectId}/issuance/start                                                 |
-| _OfferApi_         | [**getCredentialOffer**](docs/Api/OfferApi.md#getcredentialoffer)                                     | **GET** /v1/{projectId}/offers/{issuanceId}                                             |
-| _WellKnownApi_     | [**getWellKnownOpenIdCredentialIssuer**](docs/Api/WellKnownApi.md#getwellknownopenidcredentialissuer) | **GET** /v1/{projectId}/.well-known/openid-credential-issuer                            |
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*ConfigurationApi* | [**createIssuanceConfig**](docs/Api/ConfigurationApi.md#createissuanceconfig) | **POST** /v1/configurations | 
+*ConfigurationApi* | [**deleteIssuanceConfigById**](docs/Api/ConfigurationApi.md#deleteissuanceconfigbyid) | **DELETE** /v1/configurations/{configurationId} | 
+*ConfigurationApi* | [**getIssuanceConfigById**](docs/Api/ConfigurationApi.md#getissuanceconfigbyid) | **GET** /v1/configurations/{configurationId} | 
+*ConfigurationApi* | [**getIssuanceConfigList**](docs/Api/ConfigurationApi.md#getissuanceconfiglist) | **GET** /v1/configurations | 
+*ConfigurationApi* | [**updateIssuanceConfigById**](docs/Api/ConfigurationApi.md#updateissuanceconfigbyid) | **PUT** /v1/configurations/{configurationId} | 
+*CredentialsApi* | [**generateCredentials**](docs/Api/CredentialsApi.md#generatecredentials) | **POST** /v1/{projectId}/credential | 
+*DefaultApi* | [**changeCredentialStatus**](docs/Api/DefaultApi.md#changecredentialstatus) | **POST** /v1/{projectId}/configurations/{configurationId}/issuance/change-status | change credential status.
+*DefaultApi* | [**listIssuanceDataRecords**](docs/Api/DefaultApi.md#listissuancedatarecords) | **GET** /v1/{projectId}/configurations/{configurationId}/issuance/issuance-data-records | List records
+*IssuanceApi* | [**issuanceState**](docs/Api/IssuanceApi.md#issuancestate) | **GET** /v1/{projectId}/issuance/state/{issuanceId} | 
+*IssuanceApi* | [**listIssuance**](docs/Api/IssuanceApi.md#listissuance) | **GET** /v1/{projectId}/issuance | 
+*IssuanceApi* | [**startIssuance**](docs/Api/IssuanceApi.md#startissuance) | **POST** /v1/{projectId}/issuance/start | 
+*OfferApi* | [**getCredentialOffer**](docs/Api/OfferApi.md#getcredentialoffer) | **GET** /v1/{projectId}/offers/{issuanceId} | 
+*WellKnownApi* | [**getWellKnownOpenIdCredentialIssuer**](docs/Api/WellKnownApi.md#getwellknownopenidcredentialissuer) | **GET** /v1/{projectId}/.well-known/openid-credential-issuer | 
 
 ## Models
 
@@ -111,7 +111,6 @@ All URIs are relative to *https://apse1.api.affinidi.io/cis*
 - [FlowDataStatusListsDetailsInner](docs/Model/FlowDataStatusListsDetailsInner.md)
 - [GenerateCredentials400Response](docs/Model/GenerateCredentials400Response.md)
 - [GetCredentialOffer400Response](docs/Model/GetCredentialOffer400Response.md)
-- [GetStatusListResultDto](docs/Model/GetStatusListResultDto.md)
 - [InvalidCredentialRequestError](docs/Model/InvalidCredentialRequestError.md)
 - [InvalidCredentialTypeError](docs/Model/InvalidCredentialTypeError.md)
 - [InvalidIssuerWalletError](docs/Model/InvalidIssuerWalletError.md)
@@ -146,18 +145,19 @@ All URIs are relative to *https://apse1.api.affinidi.io/cis*
 ## Authorization
 
 Authentication schemes defined for the API:
-
 ### AwsSigV4
 
 - **Type**: API key
 - **API key parameter name**: Authorization
 - **Location**: HTTP header
 
+
 ### ApiKey
 
 - **Type**: API key
 - **API key parameter name**: x-api-key
 - **Location**: HTTP header
+
 
 ### bearerAuth
 
@@ -169,11 +169,13 @@ Authentication schemes defined for the API:
 - **API key parameter name**: authorization
 - **Location**: HTTP header
 
+
 ### UserTokenAuth
 
 - **Type**: API key
 - **API key parameter name**: authorization
 - **Location**: HTTP header
+
 
 ### ProjectTokenAuth
 
@@ -181,11 +183,13 @@ Authentication schemes defined for the API:
 - **API key parameter name**: authorization
 - **Location**: HTTP header
 
+
 ### HeritageTokenAuth
 
 - **Type**: API key
 - **API key parameter name**: authorization
 - **Location**: HTTP header
+
 
 ## Tests
 
@@ -205,5 +209,5 @@ info@affinidi.com
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `1.0.0`
-  - Generator version: `7.9.0`
+    - Generator version: `7.9.0`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

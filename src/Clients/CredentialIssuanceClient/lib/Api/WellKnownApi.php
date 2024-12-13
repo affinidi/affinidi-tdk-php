@@ -4,7 +4,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Api;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -35,16 +35,107 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use AffinidiTdk\Clients\CredentialIssuance\ApiException;
-use AffinidiTdk\Clients\CredentialIssuance\Configuration;
-use AffinidiTdk\Clients\CredentialIssuance\HeaderSelector;
-use AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use AffinidiTdk\Clients\CredentialIssuanceClient\ApiException;
+use AffinidiTdk\Clients\CredentialIssuanceClient\Configuration;
+use AffinidiTdk\Clients\CredentialIssuanceClient\HeaderSelector;
+use AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
+
+/**
+ * InvalidJwtTokenError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class InvalidJwtTokenError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'InvalidJwtTokenError';
+
+    /**
+     * @var string
+     */
+    protected $message = 'JWT token is invalid';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $issue, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $this->message,
+            'issue' => $issue,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 403);
+        $this->issue = $issue;
+        $this->traceId = $traceId;
+    }
+}
+
+/**
+ * NotFoundError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\Wallets
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class NotFoundError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'NotFoundError';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $message, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $message,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 404);
+        $this->traceId = $traceId;
+    }
+}
 
 /**
  * WellKnownApi Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -84,10 +175,10 @@ class WellKnownApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -129,9 +220,9 @@ class WellKnownApi
      * @param  string $project_id Affinidi project id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWellKnownOpenIdCredentialIssuer'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\CredentialIssuance\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponse
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponse
      */
     public function getWellKnownOpenIdCredentialIssuer($project_id, string $contentType = self::contentTypes['getWellKnownOpenIdCredentialIssuer'][0])
     {
@@ -145,9 +236,9 @@ class WellKnownApi
      * @param  string $project_id Affinidi project id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWellKnownOpenIdCredentialIssuer'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\CredentialIssuance\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getWellKnownOpenIdCredentialIssuerWithHttpInfo($project_id, string $contentType = self::contentTypes['getWellKnownOpenIdCredentialIssuer'][0])
     {
@@ -158,6 +249,16 @@ class WellKnownApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -178,11 +279,11 @@ class WellKnownApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponse' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponse' !== 'string') {
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -200,7 +301,7 @@ class WellKnownApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponse', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -219,7 +320,7 @@ class WellKnownApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponse';
+            $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -252,7 +353,7 @@ class WellKnownApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponse',
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -292,7 +393,7 @@ class WellKnownApi
      */
     public function getWellKnownOpenIdCredentialIssuerAsyncWithHttpInfo($project_id, string $contentType = self::contentTypes['getWellKnownOpenIdCredentialIssuer'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponse';
+        $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponse';
         $request = $this->getWellKnownOpenIdCredentialIssuerRequest($project_id, $contentType);
 
         return $this->client

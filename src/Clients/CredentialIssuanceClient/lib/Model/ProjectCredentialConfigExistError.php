@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
  * ProjectCredentialConfigExistError Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -62,7 +62,7 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
         'message' => 'string',
         'http_status_code' => 'float',
         'trace_id' => 'string',
-        'details' => '\AffinidiTdk\Clients\CredentialIssuance\Model\ActionForbiddenErrorDetailsInner[]'
+        'details' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]'
     ];
 
     /**
@@ -537,7 +537,7 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
     /**
      * Gets details
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\ActionForbiddenErrorDetailsInner[]|null
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]|null
      */
     public function getDetails()
     {
@@ -547,7 +547,7 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
     /**
      * Sets details
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuance\Model\ActionForbiddenErrorDetailsInner[]|null $details details
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]|null $details details
      *
      * @return self
      */
