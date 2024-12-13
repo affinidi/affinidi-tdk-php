@@ -14,7 +14,7 @@ composer install affinidi-tdk/affinidi-tdk-php
 require_once 'vendor/autoload.php';
 
 use AuthProvider\AuthProvider;
-use AffinidiTdk\Clients\Wallets as WalletsClient;
+use AffinidiTdk\Clients\WalletsClient;
 
 $params = [
   'privateKey' => "",
