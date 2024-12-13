@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialVerification\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
  * Error Class Doc Comment
  *
  * @category Class
  * @description Error object
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -64,7 +64,7 @@ class Error implements ModelInterface, ArrayAccess, \JsonSerializable
         'message' => 'string',
         'name' => 'string',
         'debug_id' => 'string',
-        'details' => '\AffinidiTdk\Clients\CredentialVerification\Model\ErrorDetail[]'
+        'details' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\ErrorDetail[]'
     ];
 
     /**
@@ -464,7 +464,7 @@ class Error implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets details
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\ErrorDetail[]|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\ErrorDetail[]|null
      */
     public function getDetails()
     {
@@ -474,7 +474,7 @@ class Error implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets details
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\ErrorDetail[]|null $details Error details
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\ErrorDetail[]|null $details Error details
      *
      * @return self
      */

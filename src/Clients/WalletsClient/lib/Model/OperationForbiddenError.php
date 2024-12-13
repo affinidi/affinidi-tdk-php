@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Wallets
+ * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Wallets\Model;
+namespace AffinidiTdk\Clients\WalletsClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Wallets\ObjectSerializer;
+use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
  * OperationForbiddenError Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Wallets
+ * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -62,7 +62,7 @@ class OperationForbiddenError implements ModelInterface, ArrayAccess, \JsonSeria
         'message' => 'string',
         'http_status_code' => 'float',
         'trace_id' => 'string',
-        'details' => '\AffinidiTdk\Clients\Wallets\Model\ServiceErrorResponseDetailsInner[]'
+        'details' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]'
     ];
 
     /**
@@ -537,7 +537,7 @@ class OperationForbiddenError implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets details
      *
-     * @return \AffinidiTdk\Clients\Wallets\Model\ServiceErrorResponseDetailsInner[]|null
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null
      */
     public function getDetails()
     {
@@ -547,7 +547,7 @@ class OperationForbiddenError implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets details
      *
-     * @param \AffinidiTdk\Clients\Wallets\Model\ServiceErrorResponseDetailsInner[]|null $details details
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null $details details
      *
      * @return self
      */

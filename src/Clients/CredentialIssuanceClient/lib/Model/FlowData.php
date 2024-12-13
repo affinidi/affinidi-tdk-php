@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
  * FlowData Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -72,7 +72,7 @@ class FlowData implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_id_configuration_id' => 'string',
         'project_id_configuration_id_wallet_id' => 'string',
         'project_id_configuration_id_credential_type' => 'string',
-        'status_lists_details' => '\AffinidiTdk\Clients\CredentialIssuance\Model\FlowDataStatusListsDetailsInner[]'
+        'status_lists_details' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowDataStatusListsDetailsInner[]'
     ];
 
     /**
@@ -790,7 +790,7 @@ class FlowData implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets status_lists_details
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\FlowDataStatusListsDetailsInner[]|null
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowDataStatusListsDetailsInner[]|null
      */
     public function getStatusListsDetails()
     {
@@ -800,7 +800,7 @@ class FlowData implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status_lists_details
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuance\Model\FlowDataStatusListsDetailsInner[]|null $status_lists_details status_lists_details
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowDataStatusListsDetailsInner[]|null $status_lists_details status_lists_details
      *
      * @return self
      */

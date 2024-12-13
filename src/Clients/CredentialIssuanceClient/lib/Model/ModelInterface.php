@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance\Model
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient\Model
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,12 +27,12 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 /**
  * Interface abstracting model access.
  *
- * @package AffinidiTdk\Clients\CredentialIssuance\Model
+ * @package AffinidiTdk\Clients\CredentialIssuanceClient\Model
  * @author  OpenAPI Generator team
  */
 interface ModelInterface

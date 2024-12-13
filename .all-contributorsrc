@@ -138,6 +138,15 @@
       "contributions": [
         "business"
       ]
+    },
+    {
+      "login": "yilmazlarmurat",
+      "name": "yilmazlarmurat",
+      "avatar_url": "https://avatars.githubusercontent.com/u/185046039?v=4",
+      "profile": "https://github.com/yilmazlarmurat",
+      "contributions": [
+        "security"
+      ]
     }
   ],
   "contributorsPerLine": 7,

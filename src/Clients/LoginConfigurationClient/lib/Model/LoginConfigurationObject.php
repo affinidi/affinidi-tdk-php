@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\LoginConfiguration\Model;
+namespace AffinidiTdk\Clients\LoginConfigurationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\LoginConfiguration\ObjectSerializer;
+use \AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
 
 /**
  * LoginConfigurationObject Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -69,9 +69,9 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
         'creation_date' => 'string',
         'vp_definition' => 'string',
         'presentation_definition' => 'object',
-        'id_token_mapping' => '\AffinidiTdk\Clients\LoginConfiguration\Model\IdTokenMapping',
-        'client_metadata' => '\AffinidiTdk\Clients\LoginConfiguration\Model\LoginConfigurationClientMetadataOutput',
-        'token_endpoint_auth_method' => '\AffinidiTdk\Clients\LoginConfiguration\Model\TokenEndpointAuthMethod'
+        'id_token_mapping' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping',
+        'client_metadata' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataOutput',
+        'token_endpoint_auth_method' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\TokenEndpointAuthMethod'
     ];
 
     /**
@@ -708,7 +708,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets id_token_mapping
      *
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\IdTokenMapping
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping
      */
     public function getIdTokenMapping()
     {
@@ -718,7 +718,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets id_token_mapping
      *
-     * @param \AffinidiTdk\Clients\LoginConfiguration\Model\IdTokenMapping $id_token_mapping id_token_mapping
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping $id_token_mapping id_token_mapping
      *
      * @return self
      */
@@ -735,7 +735,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets client_metadata
      *
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\LoginConfigurationClientMetadataOutput
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataOutput
      */
     public function getClientMetadata()
     {
@@ -745,7 +745,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets client_metadata
      *
-     * @param \AffinidiTdk\Clients\LoginConfiguration\Model\LoginConfigurationClientMetadataOutput $client_metadata client_metadata
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataOutput $client_metadata client_metadata
      *
      * @return self
      */
@@ -762,7 +762,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets token_endpoint_auth_method
      *
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\TokenEndpointAuthMethod
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\TokenEndpointAuthMethod
      */
     public function getTokenEndpointAuthMethod()
     {
@@ -772,7 +772,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets token_endpoint_auth_method
      *
-     * @param \AffinidiTdk\Clients\LoginConfiguration\Model\TokenEndpointAuthMethod $token_endpoint_auth_method token_endpoint_auth_method
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\TokenEndpointAuthMethod $token_endpoint_auth_method token_endpoint_auth_method
      *
      * @return self
      */

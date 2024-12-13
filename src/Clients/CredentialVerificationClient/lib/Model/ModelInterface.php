@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification\Model
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient\Model
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,12 +27,12 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Model;
 
 /**
  * Interface abstracting model access.
  *
- * @package AffinidiTdk\Clients\CredentialVerification\Model
+ * @package AffinidiTdk\Clients\CredentialVerificationClient\Model
  * @author  OpenAPI Generator team
  */
 interface ModelInterface

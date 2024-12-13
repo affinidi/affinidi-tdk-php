@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialVerification\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
  * VerifyPresentationOutput Class Doc Comment
  *
  * @category Class
  * @description Response model of /verify-vp
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -59,7 +59,7 @@ class VerifyPresentationOutput implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
-        'errors' => '\AffinidiTdk\Clients\CredentialVerification\Model\VerifyPresentationOutputErrors',
+        'errors' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\VerifyPresentationOutputErrors',
         'is_valid' => 'bool'
     ];
 
@@ -307,7 +307,7 @@ class VerifyPresentationOutput implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets errors
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\VerifyPresentationOutputErrors
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\VerifyPresentationOutputErrors
      */
     public function getErrors()
     {
@@ -317,7 +317,7 @@ class VerifyPresentationOutput implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets errors
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\VerifyPresentationOutputErrors $errors errors
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\VerifyPresentationOutputErrors $errors errors
      *
      * @return self
      */

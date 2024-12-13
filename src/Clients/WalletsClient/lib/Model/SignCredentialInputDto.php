@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Wallets
+ * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Wallets\Model;
+namespace AffinidiTdk\Clients\WalletsClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Wallets\ObjectSerializer;
+use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
  * SignCredentialInputDto Class Doc Comment
  *
  * @category Class
  * @description DTO contains params to sign credential
- * @package  AffinidiTdk\Clients\Wallets
+ * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -62,7 +62,7 @@ class SignCredentialInputDto implements ModelInterface, ArrayAccess, \JsonSerial
         'unsigned_credential' => 'object',
         'revocable' => 'bool',
         'credential_format' => 'string',
-        'unsigned_credential_params' => '\AffinidiTdk\Clients\Wallets\Model\SignCredentialInputDtoUnsignedCredentialParams'
+        'unsigned_credential_params' => '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialInputDtoUnsignedCredentialParams'
     ];
 
     /**
@@ -432,7 +432,7 @@ class SignCredentialInputDto implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets unsigned_credential_params
      *
-     * @return \AffinidiTdk\Clients\Wallets\Model\SignCredentialInputDtoUnsignedCredentialParams|null
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialInputDtoUnsignedCredentialParams|null
      */
     public function getUnsignedCredentialParams()
     {
@@ -442,7 +442,7 @@ class SignCredentialInputDto implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets unsigned_credential_params
      *
-     * @param \AffinidiTdk\Clients\Wallets\Model\SignCredentialInputDtoUnsignedCredentialParams|null $unsigned_credential_params unsigned_credential_params
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialInputDtoUnsignedCredentialParams|null $unsigned_credential_params unsigned_credential_params
      *
      * @return self
      */

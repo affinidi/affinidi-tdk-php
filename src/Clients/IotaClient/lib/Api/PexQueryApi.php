@@ -4,7 +4,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iota\Api;
+namespace AffinidiTdk\Clients\IotaClient\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -35,16 +35,107 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use AffinidiTdk\Clients\Iota\ApiException;
-use AffinidiTdk\Clients\Iota\Configuration;
-use AffinidiTdk\Clients\Iota\HeaderSelector;
-use AffinidiTdk\Clients\Iota\ObjectSerializer;
+use AffinidiTdk\Clients\IotaClient\ApiException;
+use AffinidiTdk\Clients\IotaClient\Configuration;
+use AffinidiTdk\Clients\IotaClient\HeaderSelector;
+use AffinidiTdk\Clients\IotaClient\ObjectSerializer;
+
+/**
+ * InvalidJwtTokenError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\IotaClient
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class InvalidJwtTokenError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'InvalidJwtTokenError';
+
+    /**
+     * @var string
+     */
+    protected $message = 'JWT token is invalid';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $issue, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $this->message,
+            'issue' => $issue,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 403);
+        $this->issue = $issue;
+        $this->traceId = $traceId;
+    }
+}
+
+/**
+ * NotFoundError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\Wallets
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class NotFoundError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'NotFoundError';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $message, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $message,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 404);
+        $this->traceId = $traceId;
+    }
+}
 
 /**
  * PexQueryApi Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -102,10 +193,10 @@ class PexQueryApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -145,12 +236,12 @@ class PexQueryApi
      * Operation createPexQuery
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\CreatePexQueryInput $create_pex_query_input CreatePexQuery (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\CreatePexQueryInput $create_pex_query_input CreatePexQuery (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createPexQuery'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\Iota\Model\PexQueryDto|\AffinidiTdk\Clients\Iota\Model\InvalidParameterError|\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError|\AffinidiTdk\Clients\Iota\Model\NotFoundError|\AffinidiTdk\Clients\Iota\Model\AlreadyExistsError|\AffinidiTdk\Clients\Iota\Model\ResourceLimitExceededError
+     * @return \AffinidiTdk\Clients\IotaClient\Model\PexQueryDto|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\IotaClient\Model\NotFoundError|\AffinidiTdk\Clients\IotaClient\Model\AlreadyExistsError|\AffinidiTdk\Clients\IotaClient\Model\ResourceLimitExceededError
      */
     public function createPexQuery($configuration_id, $create_pex_query_input, string $contentType = self::contentTypes['createPexQuery'][0])
     {
@@ -162,12 +253,12 @@ class PexQueryApi
      * Operation createPexQueryWithHttpInfo
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\CreatePexQueryInput $create_pex_query_input CreatePexQuery (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\CreatePexQueryInput $create_pex_query_input CreatePexQuery (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createPexQuery'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\Iota\Model\PexQueryDto|\AffinidiTdk\Clients\Iota\Model\InvalidParameterError|\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError|\AffinidiTdk\Clients\Iota\Model\NotFoundError|\AffinidiTdk\Clients\Iota\Model\AlreadyExistsError|\AffinidiTdk\Clients\Iota\Model\ResourceLimitExceededError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\IotaClient\Model\PexQueryDto|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\IotaClient\Model\NotFoundError|\AffinidiTdk\Clients\IotaClient\Model\AlreadyExistsError|\AffinidiTdk\Clients\IotaClient\Model\ResourceLimitExceededError, HTTP status code, HTTP response headers (array of strings)
      */
     public function createPexQueryWithHttpInfo($configuration_id, $create_pex_query_input, string $contentType = self::contentTypes['createPexQuery'][0])
     {
@@ -178,6 +269,16 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -198,11 +299,11 @@ class PexQueryApi
 
             switch($statusCode) {
                 case 201:
-                    if ('\AffinidiTdk\Clients\Iota\Model\PexQueryDto' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\PexQueryDto' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -220,16 +321,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\PexQueryDto', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\Iota\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -247,16 +348,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -274,16 +375,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\Iota\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -301,16 +402,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 409:
-                    if ('\AffinidiTdk\Clients\Iota\Model\AlreadyExistsError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\AlreadyExistsError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\AlreadyExistsError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\AlreadyExistsError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -328,16 +429,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\AlreadyExistsError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\AlreadyExistsError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 422:
-                    if ('\AffinidiTdk\Clients\Iota\Model\ResourceLimitExceededError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\ResourceLimitExceededError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\ResourceLimitExceededError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\ResourceLimitExceededError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -355,7 +456,7 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\ResourceLimitExceededError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\ResourceLimitExceededError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -374,7 +475,7 @@ class PexQueryApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\Iota\Model\PexQueryDto';
+            $returnType = '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -407,7 +508,7 @@ class PexQueryApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\PexQueryDto',
+                        '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -415,7 +516,7 @@ class PexQueryApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -423,7 +524,7 @@ class PexQueryApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -431,7 +532,7 @@ class PexQueryApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -439,7 +540,7 @@ class PexQueryApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\AlreadyExistsError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\AlreadyExistsError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -447,7 +548,7 @@ class PexQueryApi
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\ResourceLimitExceededError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\ResourceLimitExceededError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -461,7 +562,7 @@ class PexQueryApi
      * Operation createPexQueryAsync
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\CreatePexQueryInput $create_pex_query_input CreatePexQuery (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\CreatePexQueryInput $create_pex_query_input CreatePexQuery (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createPexQuery'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -481,7 +582,7 @@ class PexQueryApi
      * Operation createPexQueryAsyncWithHttpInfo
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\CreatePexQueryInput $create_pex_query_input CreatePexQuery (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\CreatePexQueryInput $create_pex_query_input CreatePexQuery (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createPexQuery'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -489,7 +590,7 @@ class PexQueryApi
      */
     public function createPexQueryAsyncWithHttpInfo($configuration_id, $create_pex_query_input, string $contentType = self::contentTypes['createPexQuery'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\Iota\Model\PexQueryDto';
+        $returnType = '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto';
         $request = $this->createPexQueryRequest($configuration_id, $create_pex_query_input, $contentType);
 
         return $this->client
@@ -532,7 +633,7 @@ class PexQueryApi
      * Create request for operation 'createPexQuery'
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\CreatePexQueryInput $create_pex_query_input CreatePexQuery (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\CreatePexQueryInput $create_pex_query_input CreatePexQuery (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createPexQuery'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -646,7 +747,7 @@ class PexQueryApi
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePexQueries'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -661,7 +762,7 @@ class PexQueryApi
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePexQueries'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -674,6 +775,16 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -699,7 +810,7 @@ class PexQueryApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -707,7 +818,7 @@ class PexQueryApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -877,7 +988,7 @@ class PexQueryApi
      * @param  string $query_id The ID of the query. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePexQueryById'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -893,7 +1004,7 @@ class PexQueryApi
      * @param  string $query_id The ID of the query. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePexQueryById'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -906,6 +1017,16 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -931,7 +1052,7 @@ class PexQueryApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -939,7 +1060,7 @@ class PexQueryApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -947,7 +1068,7 @@ class PexQueryApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1135,9 +1256,9 @@ class PexQueryApi
      * @param  string $query_id The ID of the query. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPexQueryById'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\Iota\Model\PexQueryDto|\AffinidiTdk\Clients\Iota\Model\InvalidParameterError|\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError|\AffinidiTdk\Clients\Iota\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\IotaClient\Model\PexQueryDto|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\IotaClient\Model\NotFoundError
      */
     public function getPexQueryById($configuration_id, $query_id, string $contentType = self::contentTypes['getPexQueryById'][0])
     {
@@ -1152,9 +1273,9 @@ class PexQueryApi
      * @param  string $query_id The ID of the query. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPexQueryById'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\Iota\Model\PexQueryDto|\AffinidiTdk\Clients\Iota\Model\InvalidParameterError|\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError|\AffinidiTdk\Clients\Iota\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\IotaClient\Model\PexQueryDto|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\IotaClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getPexQueryByIdWithHttpInfo($configuration_id, $query_id, string $contentType = self::contentTypes['getPexQueryById'][0])
     {
@@ -1165,6 +1286,16 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1185,11 +1316,11 @@ class PexQueryApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\Iota\Model\PexQueryDto' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\PexQueryDto' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1207,16 +1338,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\PexQueryDto', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\Iota\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1234,16 +1365,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1261,16 +1392,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\Iota\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1288,7 +1419,7 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1307,7 +1438,7 @@ class PexQueryApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\Iota\Model\PexQueryDto';
+            $returnType = '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1340,7 +1471,7 @@ class PexQueryApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\PexQueryDto',
+                        '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1348,7 +1479,7 @@ class PexQueryApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1356,7 +1487,7 @@ class PexQueryApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1364,7 +1495,7 @@ class PexQueryApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1406,7 +1537,7 @@ class PexQueryApi
      */
     public function getPexQueryByIdAsyncWithHttpInfo($configuration_id, $query_id, string $contentType = self::contentTypes['getPexQueryById'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\Iota\Model\PexQueryDto';
+        $returnType = '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto';
         $request = $this->getPexQueryByIdRequest($configuration_id, $query_id, $contentType);
 
         return $this->client
@@ -1562,13 +1693,13 @@ class PexQueryApi
      * Operation listPexQueries
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPexQueries'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\Iota\Model\ListPexQueriesOK|\AffinidiTdk\Clients\Iota\Model\InvalidParameterError|\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError|\AffinidiTdk\Clients\Iota\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\IotaClient\Model\ListPexQueriesOK|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\IotaClient\Model\NotFoundError
      */
     public function listPexQueries($configuration_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listPexQueries'][0])
     {
@@ -1580,13 +1711,13 @@ class PexQueryApi
      * Operation listPexQueriesWithHttpInfo
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPexQueries'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\Iota\Model\ListPexQueriesOK|\AffinidiTdk\Clients\Iota\Model\InvalidParameterError|\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError|\AffinidiTdk\Clients\Iota\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\IotaClient\Model\ListPexQueriesOK|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\IotaClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
      */
     public function listPexQueriesWithHttpInfo($configuration_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listPexQueries'][0])
     {
@@ -1597,6 +1728,16 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1617,11 +1758,11 @@ class PexQueryApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\Iota\Model\ListPexQueriesOK' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\ListPexQueriesOK' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\ListPexQueriesOK' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\ListPexQueriesOK' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1639,16 +1780,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\ListPexQueriesOK', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\ListPexQueriesOK', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\Iota\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1666,16 +1807,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1693,16 +1834,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\Iota\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1720,7 +1861,7 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1739,7 +1880,7 @@ class PexQueryApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\Iota\Model\ListPexQueriesOK';
+            $returnType = '\AffinidiTdk\Clients\IotaClient\Model\ListPexQueriesOK';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1772,7 +1913,7 @@ class PexQueryApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\ListPexQueriesOK',
+                        '\AffinidiTdk\Clients\IotaClient\Model\ListPexQueriesOK',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1780,7 +1921,7 @@ class PexQueryApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1788,7 +1929,7 @@ class PexQueryApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1796,7 +1937,7 @@ class PexQueryApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1810,8 +1951,8 @@ class PexQueryApi
      * Operation listPexQueriesAsync
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPexQueries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1831,8 +1972,8 @@ class PexQueryApi
      * Operation listPexQueriesAsyncWithHttpInfo
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPexQueries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1840,7 +1981,7 @@ class PexQueryApi
      */
     public function listPexQueriesAsyncWithHttpInfo($configuration_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listPexQueries'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\Iota\Model\ListPexQueriesOK';
+        $returnType = '\AffinidiTdk\Clients\IotaClient\Model\ListPexQueriesOK';
         $request = $this->listPexQueriesRequest($configuration_id, $limit, $exclusive_start_key, $contentType);
 
         return $this->client
@@ -1883,8 +2024,8 @@ class PexQueryApi
      * Create request for operation 'listPexQueries'
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPexQueries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2011,12 +2152,12 @@ class PexQueryApi
      * Operation savePexQueries
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\SavePexQueriesUpdateInput $save_pex_queries_update_input SavePexQueriesInput (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\SavePexQueriesUpdateInput $save_pex_queries_update_input SavePexQueriesInput (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['savePexQueries'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object|\AffinidiTdk\Clients\Iota\Model\InvalidParameterError|\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError
+     * @return object|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError
      */
     public function savePexQueries($configuration_id, $save_pex_queries_update_input, string $contentType = self::contentTypes['savePexQueries'][0])
     {
@@ -2028,12 +2169,12 @@ class PexQueryApi
      * Operation savePexQueriesWithHttpInfo
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\SavePexQueriesUpdateInput $save_pex_queries_update_input SavePexQueriesInput (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\SavePexQueriesUpdateInput $save_pex_queries_update_input SavePexQueriesInput (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['savePexQueries'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object|\AffinidiTdk\Clients\Iota\Model\InvalidParameterError|\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError, HTTP status code, HTTP response headers (array of strings)
      */
     public function savePexQueriesWithHttpInfo($configuration_id, $save_pex_queries_update_input, string $contentType = self::contentTypes['savePexQueries'][0])
     {
@@ -2044,6 +2185,16 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -2091,11 +2242,11 @@ class PexQueryApi
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\Iota\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2113,16 +2264,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2140,7 +2291,7 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2200,7 +2351,7 @@ class PexQueryApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2208,7 +2359,7 @@ class PexQueryApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2222,7 +2373,7 @@ class PexQueryApi
      * Operation savePexQueriesAsync
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\SavePexQueriesUpdateInput $save_pex_queries_update_input SavePexQueriesInput (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\SavePexQueriesUpdateInput $save_pex_queries_update_input SavePexQueriesInput (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['savePexQueries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2242,7 +2393,7 @@ class PexQueryApi
      * Operation savePexQueriesAsyncWithHttpInfo
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\SavePexQueriesUpdateInput $save_pex_queries_update_input SavePexQueriesInput (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\SavePexQueriesUpdateInput $save_pex_queries_update_input SavePexQueriesInput (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['savePexQueries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2293,7 +2444,7 @@ class PexQueryApi
      * Create request for operation 'savePexQueries'
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\SavePexQueriesUpdateInput $save_pex_queries_update_input SavePexQueriesInput (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\SavePexQueriesUpdateInput $save_pex_queries_update_input SavePexQueriesInput (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['savePexQueries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2406,12 +2557,12 @@ class PexQueryApi
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
      * @param  string $query_id The ID of the query. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\UpdatePexQueryInput $update_pex_query_input UpdatePexQueryById (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\UpdatePexQueryInput $update_pex_query_input UpdatePexQueryById (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePexQueryById'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\Iota\Model\PexQueryDto|\AffinidiTdk\Clients\Iota\Model\InvalidParameterError|\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError|\AffinidiTdk\Clients\Iota\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\IotaClient\Model\PexQueryDto|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\IotaClient\Model\NotFoundError
      */
     public function updatePexQueryById($configuration_id, $query_id, $update_pex_query_input, string $contentType = self::contentTypes['updatePexQueryById'][0])
     {
@@ -2424,12 +2575,12 @@ class PexQueryApi
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
      * @param  string $query_id The ID of the query. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\UpdatePexQueryInput $update_pex_query_input UpdatePexQueryById (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\UpdatePexQueryInput $update_pex_query_input UpdatePexQueryById (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePexQueryById'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iota\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\Iota\Model\PexQueryDto|\AffinidiTdk\Clients\Iota\Model\InvalidParameterError|\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError|\AffinidiTdk\Clients\Iota\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\IotaClient\Model\PexQueryDto|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\IotaClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
      */
     public function updatePexQueryByIdWithHttpInfo($configuration_id, $query_id, $update_pex_query_input, string $contentType = self::contentTypes['updatePexQueryById'][0])
     {
@@ -2440,6 +2591,16 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -2460,11 +2621,11 @@ class PexQueryApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\Iota\Model\PexQueryDto' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\PexQueryDto' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2482,16 +2643,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\PexQueryDto', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\Iota\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2509,16 +2670,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2536,16 +2697,16 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\Iota\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iota\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2563,7 +2724,7 @@ class PexQueryApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iota\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2582,7 +2743,7 @@ class PexQueryApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\Iota\Model\PexQueryDto';
+            $returnType = '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2615,7 +2776,7 @@ class PexQueryApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\PexQueryDto',
+                        '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2623,7 +2784,7 @@ class PexQueryApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2631,7 +2792,7 @@ class PexQueryApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\OperationForbiddenError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2639,7 +2800,7 @@ class PexQueryApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iota\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\IotaClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2654,7 +2815,7 @@ class PexQueryApi
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
      * @param  string $query_id The ID of the query. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\UpdatePexQueryInput $update_pex_query_input UpdatePexQueryById (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\UpdatePexQueryInput $update_pex_query_input UpdatePexQueryById (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePexQueryById'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2675,7 +2836,7 @@ class PexQueryApi
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
      * @param  string $query_id The ID of the query. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\UpdatePexQueryInput $update_pex_query_input UpdatePexQueryById (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\UpdatePexQueryInput $update_pex_query_input UpdatePexQueryById (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePexQueryById'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2683,7 +2844,7 @@ class PexQueryApi
      */
     public function updatePexQueryByIdAsyncWithHttpInfo($configuration_id, $query_id, $update_pex_query_input, string $contentType = self::contentTypes['updatePexQueryById'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\Iota\Model\PexQueryDto';
+        $returnType = '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto';
         $request = $this->updatePexQueryByIdRequest($configuration_id, $query_id, $update_pex_query_input, $contentType);
 
         return $this->client
@@ -2727,7 +2888,7 @@ class PexQueryApi
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
      * @param  string $query_id The ID of the query. (required)
-     * @param  \AffinidiTdk\Clients\Iota\Model\UpdatePexQueryInput $update_pex_query_input UpdatePexQueryById (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\UpdatePexQueryInput $update_pex_query_input UpdatePexQueryById (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePexQueryById'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

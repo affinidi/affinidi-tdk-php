@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
  * StartIssuanceInput Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -61,7 +61,7 @@ class StartIssuanceInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'claim_mode' => 'string',
         'holder_did' => 'string',
         'issuance_id' => 'string',
-        'data' => '\AffinidiTdk\Clients\CredentialIssuance\Model\StartIssuanceInputDataInner[]'
+        'data' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\StartIssuanceInputDataInner[]'
     ];
 
     /**
@@ -443,7 +443,7 @@ class StartIssuanceInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets data
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\StartIssuanceInputDataInner[]
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\StartIssuanceInputDataInner[]
      */
     public function getData()
     {
@@ -453,7 +453,7 @@ class StartIssuanceInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets data
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuance\Model\StartIssuanceInputDataInner[] $data data
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\StartIssuanceInputDataInner[] $data data
      *
      * @return self
      */

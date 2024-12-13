@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\LoginConfiguration\Model;
+namespace AffinidiTdk\Clients\LoginConfigurationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\LoginConfiguration\ObjectSerializer;
+use \AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
 
 /**
  * JsonWebKey Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class JsonWebKey implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'keys' => '\AffinidiTdk\Clients\LoginConfiguration\Model\JsonWebKeyKeysInner[]'
+        'keys' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\JsonWebKeyKeysInner[]'
     ];
 
     /**
@@ -293,7 +293,7 @@ class JsonWebKey implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets keys
      *
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\JsonWebKeyKeysInner[]|null
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\JsonWebKeyKeysInner[]|null
      */
     public function getKeys()
     {
@@ -303,7 +303,7 @@ class JsonWebKey implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets keys
      *
-     * @param \AffinidiTdk\Clients\LoginConfiguration\Model\JsonWebKeyKeysInner[]|null $keys The value of the \"keys\" parameter is an array of JSON Web Key (JWK) values.  By default, the order of the JWK values within the array does not imply an  order of preference among them, although applications of JWK Sets can choose  to assign a meaning to the order for their purposes, if desired.
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\JsonWebKeyKeysInner[]|null $keys The value of the \"keys\" parameter is an array of JSON Web Key (JWK) values.  By default, the order of the JWK values within the array does not imply an  order of preference among them, although applications of JWK Sets can choose  to assign a meaning to the order for their purposes, if desired.
      *
      * @return self
      */

@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iota\Model;
+namespace AffinidiTdk\Clients\IotaClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iota\ObjectSerializer;
+use \AffinidiTdk\Clients\IotaClient\ObjectSerializer;
 
 /**
  * SavePexQueriesUpdateInput Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class SavePexQueriesUpdateInput implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'queries' => '\AffinidiTdk\Clients\Iota\Model\SavePexQueriesUpdateInputQueriesInner[]'
+        'queries' => '\AffinidiTdk\Clients\IotaClient\Model\SavePexQueriesUpdateInputQueriesInner[]'
     ];
 
     /**
@@ -297,7 +297,7 @@ class SavePexQueriesUpdateInput implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets queries
      *
-     * @return \AffinidiTdk\Clients\Iota\Model\SavePexQueriesUpdateInputQueriesInner[]|null
+     * @return \AffinidiTdk\Clients\IotaClient\Model\SavePexQueriesUpdateInputQueriesInner[]|null
      */
     public function getQueries()
     {
@@ -307,7 +307,7 @@ class SavePexQueriesUpdateInput implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets queries
      *
-     * @param \AffinidiTdk\Clients\Iota\Model\SavePexQueriesUpdateInputQueriesInner[]|null $queries queries
+     * @param \AffinidiTdk\Clients\IotaClient\Model\SavePexQueriesUpdateInputQueriesInner[]|null $queries queries
      *
      * @return self
      */

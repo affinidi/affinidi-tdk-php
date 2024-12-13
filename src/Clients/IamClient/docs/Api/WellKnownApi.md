@@ -1,17 +1,20 @@
-# AffinidiTdk\Clients\Iam\WellKnownApi
+# AffinidiTdk\Clients\IamClient\WellKnownApi
 
 All URIs are relative to https://apse1.api.affinidi.io/iam, except if the operation defines another base path.
 
-| Method                                                     | HTTP request                   | Description |
-| ---------------------------------------------------------- | ------------------------------ | ----------- |
-| [**getWellKnownDid()**](WellKnownApi.md#getWellKnownDid)   | **GET** /.well-known/did.json  |             |
-| [**getWellKnownJwks()**](WellKnownApi.md#getWellKnownJwks) | **GET** /.well-known/jwks.json |             |
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getWellKnownDid()**](WellKnownApi.md#getWellKnownDid) | **GET** /.well-known/did.json |  |
+| [**getWellKnownJwks()**](WellKnownApi.md#getWellKnownJwks) | **GET** /.well-known/jwks.json |  |
+
 
 ## `getWellKnownDid()`
 
 ```php
-getWellKnownDid(): \AffinidiTdk\Clients\Iam\Model\GetWellKnownDidOK
+getWellKnownDid(): \AffinidiTdk\Clients\IamClient\Model\GetWellKnownDidOK
 ```
+
+
 
 ### Example
 
@@ -21,7 +24,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\WellKnownApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\WellKnownApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -41,7 +44,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iam\Model\GetWellKnownDidOK**](../Model/GetWellKnownDidOK.md)
+[**\AffinidiTdk\Clients\IamClient\Model\GetWellKnownDidOK**](../Model/GetWellKnownDidOK.md)
 
 ### Authorization
 
@@ -59,8 +62,10 @@ No authorization required
 ## `getWellKnownJwks()`
 
 ```php
-getWellKnownJwks(): \AffinidiTdk\Clients\Iam\Model\JsonWebKeySetDto
+getWellKnownJwks(): \AffinidiTdk\Clients\IamClient\Model\JsonWebKeySetDto
 ```
+
+
 
 ### Example
 
@@ -70,7 +75,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\WellKnownApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\WellKnownApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -90,7 +95,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iam\Model\JsonWebKeySetDto**](../Model/JsonWebKeySetDto.md)
+[**\AffinidiTdk\Clients\IamClient\Model\JsonWebKeySetDto**](../Model/JsonWebKeySetDto.md)
 
 ### Authorization
 

@@ -1,5 +1,6 @@
 # iota-client
 
+
 For more information, please visit [https://github.com/affinidi/affinidi-tdk](https://github.com/affinidi/affinidi-tdk).
 
 ## Installation & Usage
@@ -14,7 +15,7 @@ Should also work with PHP 8.0.
 To install the bindings via [Composer](https://getcomposer.org/), run:
 
 ```bash
-composer require affinidi-tdk/iota-client
+composer require affinidi-tdk/affinidi-tdk-php
 ```
 
 ### Manual Installation
@@ -37,12 +38,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iota\Api\CallbackApi(
+$apiInstance = new AffinidiTdk\Clients\IotaClient\Api\CallbackApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$callback_input = new \AffinidiTdk\Clients\Iota\Model\CallbackInput(); // \AffinidiTdk\Clients\Iota\Model\CallbackInput | CallbackRequestInput
+$callback_input = new \AffinidiTdk\Clients\IotaClient\Model\CallbackInput(); // \AffinidiTdk\Clients\IotaClient\Model\CallbackInput | CallbackRequestInput
 
 try {
     $result = $apiInstance->iotOIDC4VPCallback($callback_input);
@@ -57,28 +58,28 @@ try {
 
 All URIs are relative to *https://apse1.api.affinidi.io/ais*
 
-| Class               | Method                                                                                           | HTTP request                                                               | Description |
-| ------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | ----------- |
-| _CallbackApi_       | [**iotOIDC4VPCallback**](docs/Api/CallbackApi.md#iotoidc4vpcallback)                             | **POST** /v1/callback                                                      |
-| _ConfigurationsApi_ | [**createIotaConfiguration**](docs/Api/ConfigurationsApi.md#createiotaconfiguration)             | **POST** /v1/configurations                                                |
-| _ConfigurationsApi_ | [**deleteIotaConfigurationById**](docs/Api/ConfigurationsApi.md#deleteiotaconfigurationbyid)     | **DELETE** /v1/configurations/{configurationId}                            |
-| _ConfigurationsApi_ | [**getIotaConfigurationById**](docs/Api/ConfigurationsApi.md#getiotaconfigurationbyid)           | **GET** /v1/configurations/{configurationId}                               |
-| _ConfigurationsApi_ | [**getIotaConfigurationMetaData**](docs/Api/ConfigurationsApi.md#getiotaconfigurationmetadata)   | **GET** /v1/projects/{projectId}/configurations/{configurationId}/metadata |
-| _ConfigurationsApi_ | [**listIotaConfigurations**](docs/Api/ConfigurationsApi.md#listiotaconfigurations)               | **GET** /v1/configurations                                                 |
-| _ConfigurationsApi_ | [**updateIotaConfigurationById**](docs/Api/ConfigurationsApi.md#updateiotaconfigurationbyid)     | **PATCH** /v1/configurations/{configurationId}                             |
-| _DefaultApi_        | [**listLoggedConsents**](docs/Api/DefaultApi.md#listloggedconsents)                              | **GET** /v1/logged-consents                                                |
-| _IotaApi_           | [**awsExchangeCredentials**](docs/Api/IotaApi.md#awsexchangecredentials)                         | **POST** /v1/aws-exchange-credentials                                      |
-| _IotaApi_           | [**awsExchangeCredentialsProjectToken**](docs/Api/IotaApi.md#awsexchangecredentialsprojecttoken) | **POST** /v1/aws-exchange-credentials/project-token                        |
-| _IotaApi_           | [**fetchIotaVpResponse**](docs/Api/IotaApi.md#fetchiotavpresponse)                               | **POST** /v1/fetch-iota-response                                           |
-| _IotaApi_           | [**initiateDataSharingRequest**](docs/Api/IotaApi.md#initiatedatasharingrequest)                 | **POST** /v1/initiate-data-sharing-request                                 |
-| _IotaApi_           | [**iotaExchangeCredentials**](docs/Api/IotaApi.md#iotaexchangecredentials)                       | **POST** /v1/exchange-credentials                                          |
-| _PexQueryApi_       | [**createPexQuery**](docs/Api/PexQueryApi.md#createpexquery)                                     | **POST** /v1/configurations/{configurationId}/pex-queries                  |
-| _PexQueryApi_       | [**deletePexQueries**](docs/Api/PexQueryApi.md#deletepexqueries)                                 | **POST** /v1/configurations/{configurationId}/delete-queries               |
-| _PexQueryApi_       | [**deletePexQueryById**](docs/Api/PexQueryApi.md#deletepexquerybyid)                             | **DELETE** /v1/configurations/{configurationId}/pex-queries/{queryId}      |
-| _PexQueryApi_       | [**getPexQueryById**](docs/Api/PexQueryApi.md#getpexquerybyid)                                   | **GET** /v1/configurations/{configurationId}/pex-queries/{queryId}         |
-| _PexQueryApi_       | [**listPexQueries**](docs/Api/PexQueryApi.md#listpexqueries)                                     | **GET** /v1/configurations/{configurationId}/pex-queries                   |
-| _PexQueryApi_       | [**savePexQueries**](docs/Api/PexQueryApi.md#savepexqueries)                                     | **POST** /v1/configurations/{configurationId}/save-queries                 |
-| _PexQueryApi_       | [**updatePexQueryById**](docs/Api/PexQueryApi.md#updatepexquerybyid)                             | **PATCH** /v1/configurations/{configurationId}/pex-queries/{queryId}       |
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*CallbackApi* | [**iotOIDC4VPCallback**](docs/Api/CallbackApi.md#iotoidc4vpcallback) | **POST** /v1/callback | 
+*ConfigurationsApi* | [**createIotaConfiguration**](docs/Api/ConfigurationsApi.md#createiotaconfiguration) | **POST** /v1/configurations | 
+*ConfigurationsApi* | [**deleteIotaConfigurationById**](docs/Api/ConfigurationsApi.md#deleteiotaconfigurationbyid) | **DELETE** /v1/configurations/{configurationId} | 
+*ConfigurationsApi* | [**getIotaConfigurationById**](docs/Api/ConfigurationsApi.md#getiotaconfigurationbyid) | **GET** /v1/configurations/{configurationId} | 
+*ConfigurationsApi* | [**getIotaConfigurationMetaData**](docs/Api/ConfigurationsApi.md#getiotaconfigurationmetadata) | **GET** /v1/projects/{projectId}/configurations/{configurationId}/metadata | 
+*ConfigurationsApi* | [**listIotaConfigurations**](docs/Api/ConfigurationsApi.md#listiotaconfigurations) | **GET** /v1/configurations | 
+*ConfigurationsApi* | [**updateIotaConfigurationById**](docs/Api/ConfigurationsApi.md#updateiotaconfigurationbyid) | **PATCH** /v1/configurations/{configurationId} | 
+*DefaultApi* | [**listLoggedConsents**](docs/Api/DefaultApi.md#listloggedconsents) | **GET** /v1/logged-consents | 
+*IotaApi* | [**awsExchangeCredentials**](docs/Api/IotaApi.md#awsexchangecredentials) | **POST** /v1/aws-exchange-credentials | 
+*IotaApi* | [**awsExchangeCredentialsProjectToken**](docs/Api/IotaApi.md#awsexchangecredentialsprojecttoken) | **POST** /v1/aws-exchange-credentials/project-token | 
+*IotaApi* | [**fetchIotaVpResponse**](docs/Api/IotaApi.md#fetchiotavpresponse) | **POST** /v1/fetch-iota-response | 
+*IotaApi* | [**initiateDataSharingRequest**](docs/Api/IotaApi.md#initiatedatasharingrequest) | **POST** /v1/initiate-data-sharing-request | 
+*IotaApi* | [**iotaExchangeCredentials**](docs/Api/IotaApi.md#iotaexchangecredentials) | **POST** /v1/exchange-credentials | 
+*PexQueryApi* | [**createPexQuery**](docs/Api/PexQueryApi.md#createpexquery) | **POST** /v1/configurations/{configurationId}/pex-queries | 
+*PexQueryApi* | [**deletePexQueries**](docs/Api/PexQueryApi.md#deletepexqueries) | **POST** /v1/configurations/{configurationId}/delete-queries | 
+*PexQueryApi* | [**deletePexQueryById**](docs/Api/PexQueryApi.md#deletepexquerybyid) | **DELETE** /v1/configurations/{configurationId}/pex-queries/{queryId} | 
+*PexQueryApi* | [**getPexQueryById**](docs/Api/PexQueryApi.md#getpexquerybyid) | **GET** /v1/configurations/{configurationId}/pex-queries/{queryId} | 
+*PexQueryApi* | [**listPexQueries**](docs/Api/PexQueryApi.md#listpexqueries) | **GET** /v1/configurations/{configurationId}/pex-queries | 
+*PexQueryApi* | [**savePexQueries**](docs/Api/PexQueryApi.md#savepexqueries) | **POST** /v1/configurations/{configurationId}/save-queries | 
+*PexQueryApi* | [**updatePexQueryById**](docs/Api/PexQueryApi.md#updatepexquerybyid) | **PATCH** /v1/configurations/{configurationId}/pex-queries/{queryId} | 
 
 ## Models
 
@@ -134,18 +135,19 @@ All URIs are relative to *https://apse1.api.affinidi.io/ais*
 ## Authorization
 
 Authentication schemes defined for the API:
-
 ### AwsSigV4
 
 - **Type**: API key
 - **API key parameter name**: Authorization
 - **Location**: HTTP header
 
+
 ### ApiKey
 
 - **Type**: API key
 - **API key parameter name**: x-api-key
 - **Location**: HTTP header
+
 
 ### bearerAuth
 
@@ -157,11 +159,13 @@ Authentication schemes defined for the API:
 - **API key parameter name**: authorization
 - **Location**: HTTP header
 
+
 ### UserTokenAuth
 
 - **Type**: API key
 - **API key parameter name**: authorization
 - **Location**: HTTP header
+
 
 ### ProjectTokenAuth
 
@@ -169,11 +173,13 @@ Authentication schemes defined for the API:
 - **API key parameter name**: authorization
 - **Location**: HTTP header
 
+
 ### HeritageTokenAuth
 
 - **Type**: API key
 - **API key parameter name**: authorization
 - **Location**: HTTP header
+
 
 ## Tests
 
@@ -193,5 +199,5 @@ info@affinidi.com
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `1.0.0`
-  - Generator version: `7.9.0`
+    - Generator version: `7.9.0`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

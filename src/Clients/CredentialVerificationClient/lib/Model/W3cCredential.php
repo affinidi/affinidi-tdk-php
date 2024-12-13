@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialVerification\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
  * W3cCredential Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,17 +58,17 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'at_context' => '\AffinidiTdk\Clients\CredentialVerification\Model\W3cPresentationContext',
+        'at_context' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentationContext',
         'id' => 'string',
         'type' => 'string[]',
-        'holder' => '\AffinidiTdk\Clients\CredentialVerification\Model\W3cCredentialHolder',
-        'credential_subject' => '\AffinidiTdk\Clients\CredentialVerification\Model\W3cCredentialCredentialSubject',
-        'credential_status' => '\AffinidiTdk\Clients\CredentialVerification\Model\W3cCredentialStatus',
+        'holder' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialHolder',
+        'credential_subject' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialCredentialSubject',
+        'credential_status' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialStatus',
         'issuance_date' => 'string',
         'issuer' => 'string',
         'expiration_date' => 'string',
-        'proof' => '\AffinidiTdk\Clients\CredentialVerification\Model\W3cProof',
-        'credential_schema' => '\AffinidiTdk\Clients\CredentialVerification\Model\W3cCredentialCredentialSchema'
+        'proof' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cProof',
+        'credential_schema' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialCredentialSchema'
     ];
 
     /**
@@ -381,7 +381,7 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets at_context
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\W3cPresentationContext
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentationContext
      */
     public function getAtContext()
     {
@@ -391,7 +391,7 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets at_context
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\W3cPresentationContext $at_context at_context
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentationContext $at_context at_context
      *
      * @return self
      */
@@ -469,7 +469,7 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets holder
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\W3cCredentialHolder|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialHolder|null
      */
     public function getHolder()
     {
@@ -479,7 +479,7 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets holder
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\W3cCredentialHolder|null $holder holder
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialHolder|null $holder holder
      *
      * @return self
      */
@@ -496,7 +496,7 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets credential_subject
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\W3cCredentialCredentialSubject
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialCredentialSubject
      */
     public function getCredentialSubject()
     {
@@ -506,7 +506,7 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets credential_subject
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\W3cCredentialCredentialSubject $credential_subject credential_subject
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialCredentialSubject $credential_subject credential_subject
      *
      * @return self
      */
@@ -523,7 +523,7 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets credential_status
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\W3cCredentialStatus|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialStatus|null
      */
     public function getCredentialStatus()
     {
@@ -533,7 +533,7 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets credential_status
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\W3cCredentialStatus|null $credential_status credential_status
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialStatus|null $credential_status credential_status
      *
      * @return self
      */
@@ -638,7 +638,7 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets proof
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\W3cProof
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cProof
      */
     public function getProof()
     {
@@ -648,7 +648,7 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets proof
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\W3cProof $proof proof
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cProof $proof proof
      *
      * @return self
      */
@@ -665,7 +665,7 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets credential_schema
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\W3cCredentialCredentialSchema|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialCredentialSchema|null
      */
     public function getCredentialSchema()
     {
@@ -675,7 +675,7 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets credential_schema
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\W3cCredentialCredentialSchema|null $credential_schema credential_schema
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialCredentialSchema|null $credential_schema credential_schema
      *
      * @return self
      */

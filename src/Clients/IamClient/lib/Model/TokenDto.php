@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iam\Model;
+namespace AffinidiTdk\Clients\IamClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iam\ObjectSerializer;
+use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
 
 /**
  * TokenDto Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -62,7 +62,7 @@ class TokenDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => 'string',
         'owner_ari' => 'string',
         'name' => 'string',
-        'authentication_method' => '\AffinidiTdk\Clients\Iam\Model\TokenAuthenticationMethodDto',
+        'authentication_method' => '\AffinidiTdk\Clients\IamClient\Model\TokenAuthenticationMethodDto',
         'scopes' => 'string[]'
     ];
 
@@ -454,7 +454,7 @@ class TokenDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets authentication_method
      *
-     * @return \AffinidiTdk\Clients\Iam\Model\TokenAuthenticationMethodDto
+     * @return \AffinidiTdk\Clients\IamClient\Model\TokenAuthenticationMethodDto
      */
     public function getAuthenticationMethod()
     {
@@ -464,7 +464,7 @@ class TokenDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets authentication_method
      *
-     * @param \AffinidiTdk\Clients\Iam\Model\TokenAuthenticationMethodDto $authentication_method authentication_method
+     * @param \AffinidiTdk\Clients\IamClient\Model\TokenAuthenticationMethodDto $authentication_method authentication_method
      *
      * @return self
      */

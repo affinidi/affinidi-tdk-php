@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iota\Model;
+namespace AffinidiTdk\Clients\IotaClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iota\ObjectSerializer;
+use \AffinidiTdk\Clients\IotaClient\ObjectSerializer;
 
 /**
  * CreateIotaConfigurationInput Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -65,7 +65,7 @@ class CreateIotaConfigurationInput implements ModelInterface, ArrayAccess, \Json
         'enable_verification' => 'bool',
         'enable_consent_audit_log' => 'bool',
         'token_max_age' => 'float',
-        'client_metadata' => '\AffinidiTdk\Clients\Iota\Model\IotaConfigurationDtoClientMetadata',
+        'client_metadata' => '\AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDtoClientMetadata',
         'mode' => 'string',
         'redirect_uris' => 'string[]',
         'enable_idv_providers' => 'bool'
@@ -600,7 +600,7 @@ class CreateIotaConfigurationInput implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets client_metadata
      *
-     * @return \AffinidiTdk\Clients\Iota\Model\IotaConfigurationDtoClientMetadata
+     * @return \AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDtoClientMetadata
      */
     public function getClientMetadata()
     {
@@ -610,7 +610,7 @@ class CreateIotaConfigurationInput implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets client_metadata
      *
-     * @param \AffinidiTdk\Clients\Iota\Model\IotaConfigurationDtoClientMetadata $client_metadata client_metadata
+     * @param \AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDtoClientMetadata $client_metadata client_metadata
      *
      * @return self
      */

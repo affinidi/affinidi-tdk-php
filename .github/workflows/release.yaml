@@ -74,6 +74,6 @@ jobs:
         with:
           api-token: ${{ secrets.PACKAGIST_TOKEN }}
           packagist-username: 'affinidi'
-          package-name: 'affinidi-tdk/affinidi-tdk-php"'
+          package-name: 'affinidi-tdk/affinidi-tdk-php'
           github-repository-url: 'https://github.com/affinidi/affinidi-tdk-php'
           packagist-domain: 'https://packagist.org'

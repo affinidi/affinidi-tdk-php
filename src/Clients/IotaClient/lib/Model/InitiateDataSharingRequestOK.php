@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iota\Model;
+namespace AffinidiTdk\Clients\IotaClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iota\ObjectSerializer;
+use \AffinidiTdk\Clients\IotaClient\ObjectSerializer;
 
 /**
  * InitiateDataSharingRequestOK Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class InitiateDataSharingRequestOK implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'data' => '\AffinidiTdk\Clients\Iota\Model\InitiateDataSharingRequestOKData'
+        'data' => '\AffinidiTdk\Clients\IotaClient\Model\InitiateDataSharingRequestOKData'
     ];
 
     /**
@@ -293,7 +293,7 @@ class InitiateDataSharingRequestOK implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets data
      *
-     * @return \AffinidiTdk\Clients\Iota\Model\InitiateDataSharingRequestOKData|null
+     * @return \AffinidiTdk\Clients\IotaClient\Model\InitiateDataSharingRequestOKData|null
      */
     public function getData()
     {
@@ -303,7 +303,7 @@ class InitiateDataSharingRequestOK implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets data
      *
-     * @param \AffinidiTdk\Clients\Iota\Model\InitiateDataSharingRequestOKData|null $data data
+     * @param \AffinidiTdk\Clients\IotaClient\Model\InitiateDataSharingRequestOKData|null $data data
      *
      * @return self
      */

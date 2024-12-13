@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Wallets
+ * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Wallets\Model;
+namespace AffinidiTdk\Clients\WalletsClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Wallets\ObjectSerializer;
+use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
  * WalletDto Class Doc Comment
  *
  * @category Class
  * @description wallet dto
- * @package  AffinidiTdk\Clients\Wallets
+ * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -65,7 +65,7 @@ class WalletDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'description' => 'string',
         'did_document' => 'object',
         'ari' => 'string',
-        'keys' => '\AffinidiTdk\Clients\Wallets\Model\WalletDtoKeysInner[]',
+        'keys' => '\AffinidiTdk\Clients\WalletsClient\Model\WalletDtoKeysInner[]',
         'created_at' => 'string',
         'modified_at' => 'string'
     ];
@@ -512,7 +512,7 @@ class WalletDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets keys
      *
-     * @return \AffinidiTdk\Clients\Wallets\Model\WalletDtoKeysInner[]|null
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\WalletDtoKeysInner[]|null
      */
     public function getKeys()
     {
@@ -522,7 +522,7 @@ class WalletDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets keys
      *
-     * @param \AffinidiTdk\Clients\Wallets\Model\WalletDtoKeysInner[]|null $keys keys
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\WalletDtoKeysInner[]|null $keys keys
      *
      * @return self
      */
