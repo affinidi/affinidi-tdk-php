@@ -1,13 +1,8 @@
 <?php
 
-namespace AffinidiTdk\Commons\Helpers;
+namespace AffinidiTdk\Common\Helpers;
 
-class Environment
-{
-    const LOCAL = 'local';
-    const DEVELOPMENT = 'dev';
-    const PRODUCTION = 'prod';
-}
+use AffinidiTdk\Common\Helpers\Environment;
 
 class EnvironmentUtils
 {
