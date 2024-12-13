@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\LoginConfiguration\Model;
+namespace AffinidiTdk\Clients\LoginConfigurationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\LoginConfiguration\ObjectSerializer;
+use \AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
 
 /**
  * LoginSessionDto Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -59,7 +59,7 @@ class LoginSessionDto implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'authorization_request' => '\AffinidiTdk\Clients\LoginConfiguration\Model\LoginSessionDtoAuthorizationRequest'
+        'authorization_request' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginSessionDtoAuthorizationRequest'
     ];
 
     /**
@@ -333,7 +333,7 @@ class LoginSessionDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets authorization_request
      *
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\LoginSessionDtoAuthorizationRequest
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginSessionDtoAuthorizationRequest
      */
     public function getAuthorizationRequest()
     {
@@ -343,7 +343,7 @@ class LoginSessionDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets authorization_request
      *
-     * @param \AffinidiTdk\Clients\LoginConfiguration\Model\LoginSessionDtoAuthorizationRequest $authorization_request authorization_request
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginSessionDtoAuthorizationRequest $authorization_request authorization_request
      *
      * @return self
      */

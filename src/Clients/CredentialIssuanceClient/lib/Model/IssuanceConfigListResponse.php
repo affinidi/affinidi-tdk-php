@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
  * IssuanceConfigListResponse Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class IssuanceConfigListResponse implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'configurations' => '\AffinidiTdk\Clients\CredentialIssuance\Model\IssuanceConfigMiniDto[]'
+        'configurations' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\IssuanceConfigMiniDto[]'
     ];
 
     /**
@@ -296,7 +296,7 @@ class IssuanceConfigListResponse implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Gets configurations
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\IssuanceConfigMiniDto[]
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\IssuanceConfigMiniDto[]
      */
     public function getConfigurations()
     {
@@ -306,7 +306,7 @@ class IssuanceConfigListResponse implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets configurations
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuance\Model\IssuanceConfigMiniDto[] $configurations configurations
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\IssuanceConfigMiniDto[] $configurations configurations
      *
      * @return self
      */

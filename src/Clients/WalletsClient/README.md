@@ -1,5 +1,6 @@
 # wallets-client
 
+
 For more information, please visit [https://github.com/affinidi/affinidi-tdk](https://github.com/affinidi/affinidi-tdk).
 
 ## Installation & Usage
@@ -14,7 +15,7 @@ Should also work with PHP 8.0.
 To install the bindings via [Composer](https://getcomposer.org/), run:
 
 ```bash
-composer require affinidi-tdk/wallets-client
+composer require affinidi-tdk/affinidi-tdk-php
 ```
 
 ### Manual Installation
@@ -37,12 +38,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Wallets\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Wallets\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Wallets\Api\RevocationApi(
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\RevocationApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -65,18 +66,18 @@ try {
 
 All URIs are relative to *https://apse1.api.affinidi.io/cwe*
 
-| Class           | Method                                                                                       | HTTP request                                                                       | Description                        |
-| --------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------- |
-| _RevocationApi_ | [**getRevocationCredentialStatus**](docs/Api/RevocationApi.md#getrevocationcredentialstatus) | **GET** /v1/projects/{projectId}/wallets/{walletId}/revocation-statuses/{statusId} |
-| _RevocationApi_ | [**getRevocationListCredential**](docs/Api/RevocationApi.md#getrevocationlistcredential)     | **GET** /v1/wallets/{walletId}/revocation-list/{listId}                            | Return revocation list credential. |
-| _RevocationApi_ | [**revokeCredential**](docs/Api/RevocationApi.md#revokecredential)                           | **POST** /v1/wallets/{walletId}/revoke                                             | Revoke Credential.                 |
-| _WalletApi_     | [**createWallet**](docs/Api/WalletApi.md#createwallet)                                       | **POST** /v1/wallets                                                               |
-| _WalletApi_     | [**deleteWallet**](docs/Api/WalletApi.md#deletewallet)                                       | **DELETE** /v1/wallets/{walletId}                                                  |
-| _WalletApi_     | [**getWallet**](docs/Api/WalletApi.md#getwallet)                                             | **GET** /v1/wallets/{walletId}                                                     |
-| _WalletApi_     | [**listWallets**](docs/Api/WalletApi.md#listwallets)                                         | **GET** /v1/wallets                                                                |
-| _WalletApi_     | [**signCredential**](docs/Api/WalletApi.md#signcredential)                                   | **POST** /v1/wallets/{walletId}/sign-credential                                    |
-| _WalletApi_     | [**signJwtToken**](docs/Api/WalletApi.md#signjwttoken)                                       | **POST** /v1/wallets/{walletId}/sign-jwt                                           |
-| _WalletApi_     | [**updateWallet**](docs/Api/WalletApi.md#updatewallet)                                       | **PATCH** /v1/wallets/{walletId}                                                   |
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*RevocationApi* | [**getRevocationCredentialStatus**](docs/Api/RevocationApi.md#getrevocationcredentialstatus) | **GET** /v1/projects/{projectId}/wallets/{walletId}/revocation-statuses/{statusId} | 
+*RevocationApi* | [**getRevocationListCredential**](docs/Api/RevocationApi.md#getrevocationlistcredential) | **GET** /v1/wallets/{walletId}/revocation-list/{listId} | Return revocation list credential.
+*RevocationApi* | [**revokeCredential**](docs/Api/RevocationApi.md#revokecredential) | **POST** /v1/wallets/{walletId}/revoke | Revoke Credential.
+*WalletApi* | [**createWallet**](docs/Api/WalletApi.md#createwallet) | **POST** /v1/wallets | 
+*WalletApi* | [**deleteWallet**](docs/Api/WalletApi.md#deletewallet) | **DELETE** /v1/wallets/{walletId} | 
+*WalletApi* | [**getWallet**](docs/Api/WalletApi.md#getwallet) | **GET** /v1/wallets/{walletId} | 
+*WalletApi* | [**listWallets**](docs/Api/WalletApi.md#listwallets) | **GET** /v1/wallets | 
+*WalletApi* | [**signCredential**](docs/Api/WalletApi.md#signcredential) | **POST** /v1/wallets/{walletId}/sign-credential | 
+*WalletApi* | [**signJwtToken**](docs/Api/WalletApi.md#signjwttoken) | **POST** /v1/wallets/{walletId}/sign-jwt | 
+*WalletApi* | [**updateWallet**](docs/Api/WalletApi.md#updatewallet) | **PATCH** /v1/wallets/{walletId} | 
 
 ## Models
 
@@ -111,12 +112,12 @@ All URIs are relative to *https://apse1.api.affinidi.io/cwe*
 ## Authorization
 
 Authentication schemes defined for the API:
-
 ### ProjectTokenAuth
 
 - **Type**: API key
 - **API key parameter name**: authorization
 - **Location**: HTTP header
+
 
 ## Tests
 
@@ -136,5 +137,5 @@ info@affinidi.com
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `1.0.0`
-  - Generator version: `7.9.0`
+    - Generator version: `7.9.0`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

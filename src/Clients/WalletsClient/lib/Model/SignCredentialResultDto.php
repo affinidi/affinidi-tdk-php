@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Wallets
+ * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Wallets\Model;
+namespace AffinidiTdk\Clients\WalletsClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Wallets\ObjectSerializer;
+use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
  * SignCredentialResultDto Class Doc Comment
  *
  * @category Class
  * @description DTO contains signed credential
- * @package  AffinidiTdk\Clients\Wallets
+ * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -59,7 +59,7 @@ class SignCredentialResultDto implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'signed_credential' => '\AffinidiTdk\Clients\Wallets\Model\SignCredentialResultDtoSignedCredential'
+        'signed_credential' => '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialResultDtoSignedCredential'
     ];
 
     /**
@@ -297,7 +297,7 @@ class SignCredentialResultDto implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets signed_credential
      *
-     * @return \AffinidiTdk\Clients\Wallets\Model\SignCredentialResultDtoSignedCredential
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialResultDtoSignedCredential
      */
     public function getSignedCredential()
     {
@@ -307,7 +307,7 @@ class SignCredentialResultDto implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets signed_credential
      *
-     * @param \AffinidiTdk\Clients\Wallets\Model\SignCredentialResultDtoSignedCredential $signed_credential signed_credential
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialResultDtoSignedCredential $signed_credential signed_credential
      *
      * @return self
      */

@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
  * ListIssuanceResponse Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class ListIssuanceResponse implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'issuances' => '\AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceResponseIssuancesInner[]'
+        'issuances' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceResponseIssuancesInner[]'
     ];
 
     /**
@@ -296,7 +296,7 @@ class ListIssuanceResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets issuances
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceResponseIssuancesInner[]
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceResponseIssuancesInner[]
      */
     public function getIssuances()
     {
@@ -306,7 +306,7 @@ class ListIssuanceResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets issuances
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceResponseIssuancesInner[] $issuances The list of all issuances for the Project
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceResponseIssuancesInner[] $issuances The list of all issuances for the Project
      *
      * @return self
      */

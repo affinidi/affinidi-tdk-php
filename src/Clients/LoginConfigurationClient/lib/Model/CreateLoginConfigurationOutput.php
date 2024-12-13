@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\LoginConfiguration\Model;
+namespace AffinidiTdk\Clients\LoginConfigurationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\LoginConfiguration\ObjectSerializer;
+use \AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
 
 /**
  * CreateLoginConfigurationOutput Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -62,9 +62,9 @@ class CreateLoginConfigurationOutput implements ModelInterface, ArrayAccess, \Js
         'project_id' => 'string',
         'configuration_id' => 'string',
         'name' => 'string',
-        'auth' => '\AffinidiTdk\Clients\LoginConfiguration\Model\CreateLoginConfigurationOutputAuth',
+        'auth' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\CreateLoginConfigurationOutputAuth',
         'redirect_uris' => 'string[]',
-        'client_metadata' => '\AffinidiTdk\Clients\LoginConfiguration\Model\LoginConfigurationClientMetadataOutput',
+        'client_metadata' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataOutput',
         'creation_date' => 'string',
         'post_logout_redirect_uris' => 'string[]'
     ];
@@ -478,7 +478,7 @@ class CreateLoginConfigurationOutput implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets auth
      *
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\CreateLoginConfigurationOutputAuth
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\CreateLoginConfigurationOutputAuth
      */
     public function getAuth()
     {
@@ -488,7 +488,7 @@ class CreateLoginConfigurationOutput implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets auth
      *
-     * @param \AffinidiTdk\Clients\LoginConfiguration\Model\CreateLoginConfigurationOutputAuth $auth auth
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\CreateLoginConfigurationOutputAuth $auth auth
      *
      * @return self
      */
@@ -532,7 +532,7 @@ class CreateLoginConfigurationOutput implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets client_metadata
      *
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\LoginConfigurationClientMetadataOutput
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataOutput
      */
     public function getClientMetadata()
     {
@@ -542,7 +542,7 @@ class CreateLoginConfigurationOutput implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets client_metadata
      *
-     * @param \AffinidiTdk\Clients\LoginConfiguration\Model\LoginConfigurationClientMetadataOutput $client_metadata client_metadata
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataOutput $client_metadata client_metadata
      *
      * @return self
      */

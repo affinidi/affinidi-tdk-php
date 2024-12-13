@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialVerification\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
  * PresentationSubmission Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -60,7 +60,7 @@ class PresentationSubmission implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $openAPITypes = [
         'id' => 'string',
         'definition_id' => 'string',
-        'descriptor_map' => '\AffinidiTdk\Clients\CredentialVerification\Model\Descriptor[]'
+        'descriptor_map' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\Descriptor[]'
     ];
 
     /**
@@ -370,7 +370,7 @@ class PresentationSubmission implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets descriptor_map
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\Descriptor[]
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\Descriptor[]
      */
     public function getDescriptorMap()
     {
@@ -380,7 +380,7 @@ class PresentationSubmission implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets descriptor_map
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\Descriptor[] $descriptor_map descriptor_map
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\Descriptor[] $descriptor_map descriptor_map
      *
      * @return self
      */

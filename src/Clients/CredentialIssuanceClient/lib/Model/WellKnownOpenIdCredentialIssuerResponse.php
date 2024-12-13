@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
  * WellKnownOpenIdCredentialIssuerResponse Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -61,7 +61,7 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'authorization_endpoint' => 'string',
         'credential_endpoint' => 'string',
         'credential_issuer' => 'string',
-        'credentials_supported' => '\AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner[]',
+        'credentials_supported' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner[]',
         'deferred_credential_endpoint' => 'string',
         'grant_types_supported' => 'string[]',
         'jwks_uri' => 'string',
@@ -482,7 +482,7 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
     /**
      * Gets credentials_supported
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner[]|null
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner[]|null
      */
     public function getCredentialsSupported()
     {
@@ -492,7 +492,7 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
     /**
      * Sets credentials_supported
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner[]|null $credentials_supported credentials_supported
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner[]|null $credentials_supported credentials_supported
      *
      * @return self
      */

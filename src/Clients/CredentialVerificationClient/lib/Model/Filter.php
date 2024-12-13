@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialVerification\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
  * Filter Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,10 +58,10 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        '_const' => '\AffinidiTdk\Clients\CredentialVerification\Model\FilterConst',
-        '_enum' => '\AffinidiTdk\Clients\CredentialVerification\Model\FilterConst[]',
-        'exclusive_minimum' => '\AffinidiTdk\Clients\CredentialVerification\Model\FilterConst',
-        'exclusive_maximum' => '\AffinidiTdk\Clients\CredentialVerification\Model\FilterConst',
+        '_const' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst',
+        '_enum' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst[]',
+        'exclusive_minimum' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst',
+        'exclusive_maximum' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst',
         'format' => 'string',
         'format_maximum' => 'string',
         'format_minimum' => 'string',
@@ -69,12 +69,12 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
         'format_exclusive_minimum' => 'string',
         'min_length' => 'int',
         'max_length' => 'int',
-        'minimum' => '\AffinidiTdk\Clients\CredentialVerification\Model\FilterConst',
-        'maximum' => '\AffinidiTdk\Clients\CredentialVerification\Model\FilterConst',
+        'minimum' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst',
+        'maximum' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst',
         'not' => 'object',
         'pattern' => 'string',
-        'contains' => '\AffinidiTdk\Clients\CredentialVerification\Model\Filter',
-        'items' => '\AffinidiTdk\Clients\CredentialVerification\Model\FilterItems',
+        'contains' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\Filter',
+        'items' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterItems',
         'type' => 'string'
     ];
 
@@ -412,7 +412,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets _const
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\FilterConst|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst|null
      */
     public function getConst()
     {
@@ -422,7 +422,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets _const
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\FilterConst|null $_const _const
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst|null $_const _const
      *
      * @return self
      */
@@ -439,7 +439,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets _enum
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\FilterConst[]|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst[]|null
      */
     public function getEnum()
     {
@@ -449,7 +449,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets _enum
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\FilterConst[]|null $_enum _enum
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst[]|null $_enum _enum
      *
      * @return self
      */
@@ -466,7 +466,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets exclusive_minimum
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\FilterConst|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst|null
      */
     public function getExclusiveMinimum()
     {
@@ -476,7 +476,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets exclusive_minimum
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\FilterConst|null $exclusive_minimum exclusive_minimum
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst|null $exclusive_minimum exclusive_minimum
      *
      * @return self
      */
@@ -493,7 +493,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets exclusive_maximum
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\FilterConst|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst|null
      */
     public function getExclusiveMaximum()
     {
@@ -503,7 +503,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets exclusive_maximum
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\FilterConst|null $exclusive_maximum exclusive_maximum
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst|null $exclusive_maximum exclusive_maximum
      *
      * @return self
      */
@@ -709,7 +709,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets minimum
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\FilterConst|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst|null
      */
     public function getMinimum()
     {
@@ -719,7 +719,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets minimum
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\FilterConst|null $minimum minimum
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst|null $minimum minimum
      *
      * @return self
      */
@@ -736,7 +736,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets maximum
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\FilterConst|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst|null
      */
     public function getMaximum()
     {
@@ -746,7 +746,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets maximum
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\FilterConst|null $maximum maximum
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterConst|null $maximum maximum
      *
      * @return self
      */
@@ -817,7 +817,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets contains
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\Filter|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\Filter|null
      */
     public function getContains()
     {
@@ -827,7 +827,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets contains
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\Filter|null $contains contains
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\Filter|null $contains contains
      *
      * @return self
      */
@@ -844,7 +844,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets items
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\FilterItems|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterItems|null
      */
     public function getItems()
     {
@@ -854,7 +854,7 @@ class Filter implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets items
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\FilterItems|null $items items
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\FilterItems|null $items items
      *
      * @return self
      */

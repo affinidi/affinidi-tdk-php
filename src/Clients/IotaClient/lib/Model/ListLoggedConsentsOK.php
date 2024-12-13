@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iota\Model;
+namespace AffinidiTdk\Clients\IotaClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iota\ObjectSerializer;
+use \AffinidiTdk\Clients\IotaClient\ObjectSerializer;
 
 /**
  * ListLoggedConsentsOK Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class ListLoggedConsentsOK implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'consents' => '\AffinidiTdk\Clients\Iota\Model\ConsentDto[]',
+        'consents' => '\AffinidiTdk\Clients\IotaClient\Model\ConsentDto[]',
         'last_evaluated_key' => 'string'
     ];
 
@@ -303,7 +303,7 @@ class ListLoggedConsentsOK implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets consents
      *
-     * @return \AffinidiTdk\Clients\Iota\Model\ConsentDto[]
+     * @return \AffinidiTdk\Clients\IotaClient\Model\ConsentDto[]
      */
     public function getConsents()
     {
@@ -313,7 +313,7 @@ class ListLoggedConsentsOK implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets consents
      *
-     * @param \AffinidiTdk\Clients\Iota\Model\ConsentDto[] $consents consents
+     * @param \AffinidiTdk\Clients\IotaClient\Model\ConsentDto[] $consents consents
      *
      * @return self
      */

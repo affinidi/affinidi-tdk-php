@@ -1,16 +1,19 @@
-# AffinidiTdk\Clients\CredentialIssuance\WellKnownApi
+# AffinidiTdk\Clients\CredentialIssuanceClient\WellKnownApi
 
 All URIs are relative to https://apse1.api.affinidi.io/cis, except if the operation defines another base path.
 
-| Method                                                                                         | HTTP request                                                 | Description |
-| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ----------- |
-| [**getWellKnownOpenIdCredentialIssuer()**](WellKnownApi.md#getWellKnownOpenIdCredentialIssuer) | **GET** /v1/{projectId}/.well-known/openid-credential-issuer |             |
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getWellKnownOpenIdCredentialIssuer()**](WellKnownApi.md#getWellKnownOpenIdCredentialIssuer) | **GET** /v1/{projectId}/.well-known/openid-credential-issuer |  |
+
 
 ## `getWellKnownOpenIdCredentialIssuer()`
 
 ```php
-getWellKnownOpenIdCredentialIssuer($project_id): \AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponse
+getWellKnownOpenIdCredentialIssuer($project_id): \AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponse
 ```
+
+
 
 ### Example
 
@@ -20,7 +23,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\CredentialIssuance\Api\WellKnownApi(
+$apiInstance = new AffinidiTdk\Clients\CredentialIssuanceClient\Api\WellKnownApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -37,13 +40,13 @@ try {
 
 ### Parameters
 
-| Name           | Type       | Description         | Notes |
-| -------------- | ---------- | ------------------- | ----- |
-| **project_id** | **string** | Affinidi project id |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**| Affinidi project id | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\CredentialIssuance\Model\WellKnownOpenIdCredentialIssuerResponse**](../Model/WellKnownOpenIdCredentialIssuerResponse.md)
+[**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponse**](../Model/WellKnownOpenIdCredentialIssuerResponse.md)
 
 ### Authorization
 

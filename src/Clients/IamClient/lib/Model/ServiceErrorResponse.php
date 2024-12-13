@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iam\Model;
+namespace AffinidiTdk\Clients\IamClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iam\ObjectSerializer;
+use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
 
 /**
  * ServiceErrorResponse Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -61,7 +61,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'debug_id' => 'string',
         'name' => 'string',
         'code' => 'string',
-        'details' => '\AffinidiTdk\Clients\Iam\Model\ServiceErrorResponseDetailsInner[]'
+        'details' => '\AffinidiTdk\Clients\IamClient\Model\ServiceErrorResponseDetailsInner[]'
     ];
 
     /**
@@ -404,7 +404,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets details
      *
-     * @return \AffinidiTdk\Clients\Iam\Model\ServiceErrorResponseDetailsInner[]|null
+     * @return \AffinidiTdk\Clients\IamClient\Model\ServiceErrorResponseDetailsInner[]|null
      */
     public function getDetails()
     {
@@ -414,7 +414,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets details
      *
-     * @param \AffinidiTdk\Clients\Iam\Model\ServiceErrorResponseDetailsInner[]|null $details details
+     * @param \AffinidiTdk\Clients\IamClient\Model\ServiceErrorResponseDetailsInner[]|null $details details
      *
      * @return self
      */

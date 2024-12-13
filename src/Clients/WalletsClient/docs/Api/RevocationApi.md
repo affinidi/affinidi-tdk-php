@@ -1,18 +1,21 @@
-# AffinidiTdk\Clients\Wallets\RevocationApi
+# AffinidiTdk\Clients\WalletsClient\RevocationApi
 
 All URIs are relative to https://apse1.api.affinidi.io/cwe, except if the operation defines another base path.
 
-| Method                                                                                | HTTP request                                                                       | Description                        |
-| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------- |
-| [**getRevocationCredentialStatus()**](RevocationApi.md#getRevocationCredentialStatus) | **GET** /v1/projects/{projectId}/wallets/{walletId}/revocation-statuses/{statusId} |                                    |
-| [**getRevocationListCredential()**](RevocationApi.md#getRevocationListCredential)     | **GET** /v1/wallets/{walletId}/revocation-list/{listId}                            | Return revocation list credential. |
-| [**revokeCredential()**](RevocationApi.md#revokeCredential)                           | **POST** /v1/wallets/{walletId}/revoke                                             | Revoke Credential.                 |
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getRevocationCredentialStatus()**](RevocationApi.md#getRevocationCredentialStatus) | **GET** /v1/projects/{projectId}/wallets/{walletId}/revocation-statuses/{statusId} |  |
+| [**getRevocationListCredential()**](RevocationApi.md#getRevocationListCredential) | **GET** /v1/wallets/{walletId}/revocation-list/{listId} | Return revocation list credential. |
+| [**revokeCredential()**](RevocationApi.md#revokeCredential) | **POST** /v1/wallets/{walletId}/revoke | Revoke Credential. |
+
 
 ## `getRevocationCredentialStatus()`
 
 ```php
-getRevocationCredentialStatus($project_id, $wallet_id, $status_id): \AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto
+getRevocationCredentialStatus($project_id, $wallet_id, $status_id): \AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto
 ```
+
+
 
 Get revocation status list as RevocationListCredential
 
@@ -24,12 +27,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Wallets\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Wallets\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Wallets\Api\RevocationApi(
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\RevocationApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -49,15 +52,15 @@ try {
 
 ### Parameters
 
-| Name           | Type       | Description                | Notes |
-| -------------- | ---------- | -------------------------- | ----- |
-| **project_id** | **string** | Description for projectId. |       |
-| **wallet_id**  | **string** | Description for walletId.  |       |
-| **status_id**  | **string** | Description for statusId.  |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**| Description for projectId. | |
+| **wallet_id** | **string**| Description for walletId. | |
+| **status_id** | **string**| Description for statusId. | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto**](../Model/GetRevocationListCredentialResultDto.md)
+[**\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto**](../Model/GetRevocationListCredentialResultDto.md)
 
 ### Authorization
 
@@ -75,7 +78,7 @@ try {
 ## `getRevocationListCredential()`
 
 ```php
-getRevocationListCredential($list_id, $wallet_id): \AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto
+getRevocationListCredential($list_id, $wallet_id): \AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto
 ```
 
 Return revocation list credential.
@@ -90,12 +93,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Wallets\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Wallets\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Wallets\Api\RevocationApi(
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\RevocationApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -114,14 +117,14 @@ try {
 
 ### Parameters
 
-| Name          | Type       | Description      | Notes |
-| ------------- | ---------- | ---------------- | ----- |
-| **list_id**   | **string** |                  |       |
-| **wallet_id** | **string** | id of the wallet |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **list_id** | **string**|  | |
+| **wallet_id** | **string**| id of the wallet | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto**](../Model/GetRevocationListCredentialResultDto.md)
+[**\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto**](../Model/GetRevocationListCredentialResultDto.md)
 
 ### Authorization
 
@@ -154,19 +157,19 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Wallets\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Wallets\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Wallets\Api\RevocationApi(
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\RevocationApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $wallet_id = 'wallet_id_example'; // string | id of the wallet
-$revoke_credential_input = new \AffinidiTdk\Clients\Wallets\Model\RevokeCredentialInput(); // \AffinidiTdk\Clients\Wallets\Model\RevokeCredentialInput | RevokeCredential
+$revoke_credential_input = new \AffinidiTdk\Clients\WalletsClient\Model\RevokeCredentialInput(); // \AffinidiTdk\Clients\WalletsClient\Model\RevokeCredentialInput | RevokeCredential
 
 try {
     $apiInstance->revokeCredential($wallet_id, $revoke_credential_input);
@@ -177,10 +180,10 @@ try {
 
 ### Parameters
 
-| Name                        | Type                                                                                              | Description      | Notes |
-| --------------------------- | ------------------------------------------------------------------------------------------------- | ---------------- | ----- |
-| **wallet_id**               | **string**                                                                                        | id of the wallet |       |
-| **revoke_credential_input** | [**\AffinidiTdk\Clients\Wallets\Model\RevokeCredentialInput**](../Model/RevokeCredentialInput.md) | RevokeCredential |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **wallet_id** | **string**| id of the wallet | |
+| **revoke_credential_input** | [**\AffinidiTdk\Clients\WalletsClient\Model\RevokeCredentialInput**](../Model/RevokeCredentialInput.md)| RevokeCredential | |
 
 ### Return type
 

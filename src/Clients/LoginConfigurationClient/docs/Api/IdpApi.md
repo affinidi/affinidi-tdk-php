@@ -1,16 +1,17 @@
-# AffinidiTdk\Clients\LoginConfiguration\IdpApi
+# AffinidiTdk\Clients\LoginConfigurationClient\IdpApi
 
 All URIs are relative to https://apse1.api.affinidi.io/vpa, except if the operation defines another base path.
 
-| Method                                                                                                                           | HTTP request                                                           | Description                                           |
-| -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------- |
-| [**v1LoginProjectProjectIdOauth2AuthGet()**](IdpApi.md#v1LoginProjectProjectIdOauth2AuthGet)                                     | **GET** /v1/login/project/{projectId}/oauth2/auth                      | OAuth 2.0 Authorize Endpoint                          |
-| [**v1LoginProjectProjectIdOauth2RevokePost()**](IdpApi.md#v1LoginProjectProjectIdOauth2RevokePost)                               | **POST** /v1/login/project/{projectId}/oauth2/revoke                   | Revoke OAuth 2.0 Access or Refresh Token              |
-| [**v1LoginProjectProjectIdOauth2SessionsLogoutGet()**](IdpApi.md#v1LoginProjectProjectIdOauth2SessionsLogoutGet)                 | **GET** /v1/login/project/{projectId}/oauth2/sessions/logout           | OpenID Connect Front- and Back-channel Enabled Logout |
-| [**v1LoginProjectProjectIdOauth2TokenPost()**](IdpApi.md#v1LoginProjectProjectIdOauth2TokenPost)                                 | **POST** /v1/login/project/{projectId}/oauth2/token                    | The OAuth 2.0 Token Endpoint                          |
-| [**v1LoginProjectProjectIdUserinfoGet()**](IdpApi.md#v1LoginProjectProjectIdUserinfoGet)                                         | **GET** /v1/login/project/{projectId}/userinfo                         | OpenID Connect Userinfo                               |
-| [**v1LoginProjectProjectIdWellKnownJwksJsonGet()**](IdpApi.md#v1LoginProjectProjectIdWellKnownJwksJsonGet)                       | **GET** /v1/login/project/{projectId}/.well-known/jwks.json            | Discover Well-Known JSON Web Keys                     |
-| [**v1LoginProjectProjectIdWellKnownOpenidConfigurationGet()**](IdpApi.md#v1LoginProjectProjectIdWellKnownOpenidConfigurationGet) | **GET** /v1/login/project/{projectId}/.well-known/openid-configuration | OpenID Connect Discovery                              |
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**v1LoginProjectProjectIdOauth2AuthGet()**](IdpApi.md#v1LoginProjectProjectIdOauth2AuthGet) | **GET** /v1/login/project/{projectId}/oauth2/auth | OAuth 2.0 Authorize Endpoint |
+| [**v1LoginProjectProjectIdOauth2RevokePost()**](IdpApi.md#v1LoginProjectProjectIdOauth2RevokePost) | **POST** /v1/login/project/{projectId}/oauth2/revoke | Revoke OAuth 2.0 Access or Refresh Token |
+| [**v1LoginProjectProjectIdOauth2SessionsLogoutGet()**](IdpApi.md#v1LoginProjectProjectIdOauth2SessionsLogoutGet) | **GET** /v1/login/project/{projectId}/oauth2/sessions/logout | OpenID Connect Front- and Back-channel Enabled Logout |
+| [**v1LoginProjectProjectIdOauth2TokenPost()**](IdpApi.md#v1LoginProjectProjectIdOauth2TokenPost) | **POST** /v1/login/project/{projectId}/oauth2/token | The OAuth 2.0 Token Endpoint |
+| [**v1LoginProjectProjectIdUserinfoGet()**](IdpApi.md#v1LoginProjectProjectIdUserinfoGet) | **GET** /v1/login/project/{projectId}/userinfo | OpenID Connect Userinfo |
+| [**v1LoginProjectProjectIdWellKnownJwksJsonGet()**](IdpApi.md#v1LoginProjectProjectIdWellKnownJwksJsonGet) | **GET** /v1/login/project/{projectId}/.well-known/jwks.json | Discover Well-Known JSON Web Keys |
+| [**v1LoginProjectProjectIdWellKnownOpenidConfigurationGet()**](IdpApi.md#v1LoginProjectProjectIdWellKnownOpenidConfigurationGet) | **GET** /v1/login/project/{projectId}/.well-known/openid-configuration | OpenID Connect Discovery |
+
 
 ## `v1LoginProjectProjectIdOauth2AuthGet()`
 
@@ -30,7 +31,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\LoginConfiguration\Api\IdpApi(
+$apiInstance = new AffinidiTdk\Clients\LoginConfigurationClient\Api\IdpApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -46,9 +47,9 @@ try {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **project_id** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**|  | |
 
 ### Return type
 
@@ -75,7 +76,7 @@ v1LoginProjectProjectIdOauth2RevokePost($project_id)
 
 Revoke OAuth 2.0 Access or Refresh Token
 
-Revoking a token (both access and refresh) means that the tokens will be invalid. A revoked access token can no longer be used to make access requests, and a revoked refresh token can no longer be used to refresh an access token. Revoking a refresh token also invalidates the access token that was created with it. A token may only be revoked by the client the token was generated for.
+Revoking a token (both access and refresh) means that the tokens will be invalid.  A revoked access token can no longer be used to make access requests, and a revoked  refresh token can no longer be used to refresh an access token. Revoking a refresh  token also invalidates the access token that was created with it. A token may only  be revoked by the client the token was generated for.
 
 ### Example
 
@@ -85,7 +86,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\LoginConfiguration\Api\IdpApi(
+$apiInstance = new AffinidiTdk\Clients\LoginConfigurationClient\Api\IdpApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -101,9 +102,9 @@ try {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **project_id** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**|  | |
 
 ### Return type
 
@@ -140,7 +141,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\LoginConfiguration\Api\IdpApi(
+$apiInstance = new AffinidiTdk\Clients\LoginConfigurationClient\Api\IdpApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -156,9 +157,9 @@ try {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **project_id** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**|  | |
 
 ### Return type
 
@@ -180,7 +181,7 @@ No authorization required
 ## `v1LoginProjectProjectIdOauth2TokenPost()`
 
 ```php
-v1LoginProjectProjectIdOauth2TokenPost($project_id): \AffinidiTdk\Clients\LoginConfiguration\Model\OAuth2Token
+v1LoginProjectProjectIdOauth2TokenPost($project_id): \AffinidiTdk\Clients\LoginConfigurationClient\Model\OAuth2Token
 ```
 
 The OAuth 2.0 Token Endpoint
@@ -195,7 +196,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\LoginConfiguration\Api\IdpApi(
+$apiInstance = new AffinidiTdk\Clients\LoginConfigurationClient\Api\IdpApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -212,13 +213,13 @@ try {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **project_id** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**|  | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\LoginConfiguration\Model\OAuth2Token**](../Model/OAuth2Token.md)
+[**\AffinidiTdk\Clients\LoginConfigurationClient\Model\OAuth2Token**](../Model/OAuth2Token.md)
 
 ### Authorization
 
@@ -236,12 +237,12 @@ No authorization required
 ## `v1LoginProjectProjectIdUserinfoGet()`
 
 ```php
-v1LoginProjectProjectIdUserinfoGet($project_id): \AffinidiTdk\Clients\LoginConfiguration\Model\GetUserInfo
+v1LoginProjectProjectIdUserinfoGet($project_id): \AffinidiTdk\Clients\LoginConfigurationClient\Model\GetUserInfo
 ```
 
 OpenID Connect Userinfo
 
-This endpoint returns the payload of the ID Token, including session.id_token values, of the provided OAuth 2.0 Access Token's consent request. In the case of authentication error, a WWW-Authenticate header might be set in the response with more information about the error. See the spec for more details about header format.
+This endpoint returns the payload of the ID Token,  including session.id_token values, of the provided  OAuth 2.0 Access Token's consent request. In the case of authentication error, a WWW-Authenticate  header might be set in the response with more information  about the error. See the spec for more details about  header format.
 
 ### Example
 
@@ -251,7 +252,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\LoginConfiguration\Api\IdpApi(
+$apiInstance = new AffinidiTdk\Clients\LoginConfigurationClient\Api\IdpApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -268,13 +269,13 @@ try {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **project_id** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**|  | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\LoginConfiguration\Model\GetUserInfo**](../Model/GetUserInfo.md)
+[**\AffinidiTdk\Clients\LoginConfigurationClient\Model\GetUserInfo**](../Model/GetUserInfo.md)
 
 ### Authorization
 
@@ -292,7 +293,7 @@ No authorization required
 ## `v1LoginProjectProjectIdWellKnownJwksJsonGet()`
 
 ```php
-v1LoginProjectProjectIdWellKnownJwksJsonGet($project_id): \AffinidiTdk\Clients\LoginConfiguration\Model\JsonWebKey
+v1LoginProjectProjectIdWellKnownJwksJsonGet($project_id): \AffinidiTdk\Clients\LoginConfigurationClient\Model\JsonWebKey
 ```
 
 Discover Well-Known JSON Web Keys
@@ -307,7 +308,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\LoginConfiguration\Api\IdpApi(
+$apiInstance = new AffinidiTdk\Clients\LoginConfigurationClient\Api\IdpApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -324,13 +325,13 @@ try {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **project_id** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**|  | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\LoginConfiguration\Model\JsonWebKey**](../Model/JsonWebKey.md)
+[**\AffinidiTdk\Clients\LoginConfigurationClient\Model\JsonWebKey**](../Model/JsonWebKey.md)
 
 ### Authorization
 
@@ -348,12 +349,12 @@ No authorization required
 ## `v1LoginProjectProjectIdWellKnownOpenidConfigurationGet()`
 
 ```php
-v1LoginProjectProjectIdWellKnownOpenidConfigurationGet($project_id): \AffinidiTdk\Clients\LoginConfiguration\Model\OIDCConfig
+v1LoginProjectProjectIdWellKnownOpenidConfigurationGet($project_id): \AffinidiTdk\Clients\LoginConfigurationClient\Model\OIDCConfig
 ```
 
 OpenID Connect Discovery
 
-A mechanism for an OpenID Connect Relying Party to discover the End-User's OpenID Provider and obtain information needed to interact with it, including its OAuth 2.0 endpoint locations.
+A mechanism for an OpenID Connect Relying Party to discover the End-User's  OpenID Provider and obtain information needed to interact with it, including  its OAuth 2.0 endpoint locations.
 
 ### Example
 
@@ -363,7 +364,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\LoginConfiguration\Api\IdpApi(
+$apiInstance = new AffinidiTdk\Clients\LoginConfigurationClient\Api\IdpApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -380,13 +381,13 @@ try {
 
 ### Parameters
 
-| Name           | Type       | Description | Notes |
-| -------------- | ---------- | ----------- | ----- |
-| **project_id** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**|  | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\LoginConfiguration\Model\OIDCConfig**](../Model/OIDCConfig.md)
+[**\AffinidiTdk\Clients\LoginConfigurationClient\Model\OIDCConfig**](../Model/OIDCConfig.md)
 
 ### Authorization
 

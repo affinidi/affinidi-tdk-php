@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
  * CredentialSupportedObject Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -61,7 +61,7 @@ class CredentialSupportedObject implements ModelInterface, ArrayAccess, \JsonSer
         'credential_type_id' => 'string',
         'json_schema_url' => 'string',
         'json_ld_context_url' => 'string',
-        'metadata' => '\AffinidiTdk\Clients\CredentialIssuance\Model\SupportedCredentialMetadata'
+        'metadata' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadata'
     ];
 
     /**
@@ -422,7 +422,7 @@ class CredentialSupportedObject implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets metadata
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\SupportedCredentialMetadata|null
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadata|null
      */
     public function getMetadata()
     {
@@ -432,7 +432,7 @@ class CredentialSupportedObject implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets metadata
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuance\Model\SupportedCredentialMetadata|null $metadata metadata
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadata|null $metadata metadata
      *
      * @return self
      */

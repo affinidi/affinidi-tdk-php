@@ -4,7 +4,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Api;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -35,16 +35,107 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use AffinidiTdk\Clients\CredentialIssuance\ApiException;
-use AffinidiTdk\Clients\CredentialIssuance\Configuration;
-use AffinidiTdk\Clients\CredentialIssuance\HeaderSelector;
-use AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use AffinidiTdk\Clients\CredentialIssuanceClient\ApiException;
+use AffinidiTdk\Clients\CredentialIssuanceClient\Configuration;
+use AffinidiTdk\Clients\CredentialIssuanceClient\HeaderSelector;
+use AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
+
+/**
+ * InvalidJwtTokenError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class InvalidJwtTokenError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'InvalidJwtTokenError';
+
+    /**
+     * @var string
+     */
+    protected $message = 'JWT token is invalid';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $issue, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $this->message,
+            'issue' => $issue,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 403);
+        $this->issue = $issue;
+        $this->traceId = $traceId;
+    }
+}
+
+/**
+ * NotFoundError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\Wallets
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class NotFoundError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'NotFoundError';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $message, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $message,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 404);
+        $this->traceId = $traceId;
+    }
+}
 
 /**
  * DefaultApi Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -72,10 +163,7 @@ class DefaultApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'changeCredentialSatatus' => [
-            'application/json',
-        ],
-        'getStatusList' => [
+        'changeCredentialStatus' => [
             'application/json',
         ],
         'listIssuanceDataRecords' => [
@@ -90,10 +178,10 @@ class DefaultApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -130,46 +218,56 @@ class DefaultApi
     }
 
     /**
-     * Operation changeCredentialSatatus
+     * Operation changeCredentialStatus
      *
      * change credential status.
      *
      * @param  string $project_id project id (required)
      * @param  string $configuration_id configuration id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialSatatus'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialStatus'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\CredentialIssuance\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\FlowData|\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError
      */
-    public function changeCredentialSatatus($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialSatatus'][0])
+    public function changeCredentialStatus($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialStatus'][0])
     {
-        list($response) = $this->changeCredentialSatatusWithHttpInfo($project_id, $configuration_id, $contentType);
+        list($response) = $this->changeCredentialStatusWithHttpInfo($project_id, $configuration_id, $contentType);
         return $response;
     }
 
     /**
-     * Operation changeCredentialSatatusWithHttpInfo
+     * Operation changeCredentialStatusWithHttpInfo
      *
      * change credential status.
      *
      * @param  string $project_id project id (required)
      * @param  string $configuration_id configuration id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialSatatus'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialStatus'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\CredentialIssuance\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\CredentialIssuance\Model\FlowData|\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function changeCredentialSatatusWithHttpInfo($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialSatatus'][0])
+    public function changeCredentialStatusWithHttpInfo($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialStatus'][0])
     {
-        $request = $this->changeCredentialSatatusRequest($project_id, $configuration_id, $contentType);
+        $request = $this->changeCredentialStatusRequest($project_id, $configuration_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -190,11 +288,11 @@ class DefaultApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\CredentialIssuance\Model\FlowData' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuance\Model\FlowData' !== 'string') {
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -212,16 +310,16 @@ class DefaultApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuance\Model\FlowData', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -239,16 +337,16 @@ class DefaultApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -266,7 +364,7 @@ class DefaultApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -285,7 +383,7 @@ class DefaultApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\CredentialIssuance\Model\FlowData';
+            $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -318,7 +416,7 @@ class DefaultApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuance\Model\FlowData',
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -326,7 +424,7 @@ class DefaultApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -334,7 +432,7 @@ class DefaultApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -345,20 +443,20 @@ class DefaultApi
     }
 
     /**
-     * Operation changeCredentialSatatusAsync
+     * Operation changeCredentialStatusAsync
      *
      * change credential status.
      *
      * @param  string $project_id project id (required)
      * @param  string $configuration_id configuration id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialSatatus'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialStatus'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function changeCredentialSatatusAsync($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialSatatus'][0])
+    public function changeCredentialStatusAsync($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialStatus'][0])
     {
-        return $this->changeCredentialSatatusAsyncWithHttpInfo($project_id, $configuration_id, $contentType)
+        return $this->changeCredentialStatusAsyncWithHttpInfo($project_id, $configuration_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -367,21 +465,21 @@ class DefaultApi
     }
 
     /**
-     * Operation changeCredentialSatatusAsyncWithHttpInfo
+     * Operation changeCredentialStatusAsyncWithHttpInfo
      *
      * change credential status.
      *
      * @param  string $project_id project id (required)
      * @param  string $configuration_id configuration id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialSatatus'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialStatus'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function changeCredentialSatatusAsyncWithHttpInfo($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialSatatus'][0])
+    public function changeCredentialStatusAsyncWithHttpInfo($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialStatus'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\CredentialIssuance\Model\FlowData';
-        $request = $this->changeCredentialSatatusRequest($project_id, $configuration_id, $contentType);
+        $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData';
+        $request = $this->changeCredentialStatusRequest($project_id, $configuration_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -420,29 +518,29 @@ class DefaultApi
     }
 
     /**
-     * Create request for operation 'changeCredentialSatatus'
+     * Create request for operation 'changeCredentialStatus'
      *
      * @param  string $project_id project id (required)
      * @param  string $configuration_id configuration id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialSatatus'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialStatus'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function changeCredentialSatatusRequest($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialSatatus'][0])
+    public function changeCredentialStatusRequest($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialStatus'][0])
     {
 
         // verify the required parameter 'project_id' is set
         if ($project_id === null || (is_array($project_id) && count($project_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $project_id when calling changeCredentialSatatus'
+                'Missing the required parameter $project_id when calling changeCredentialStatus'
             );
         }
 
         // verify the required parameter 'configuration_id' is set
         if ($configuration_id === null || (is_array($configuration_id) && count($configuration_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $configuration_id when calling changeCredentialSatatus'
+                'Missing the required parameter $configuration_id when calling changeCredentialStatus'
             );
         }
 
@@ -533,417 +631,19 @@ class DefaultApi
     }
 
     /**
-     * Operation getStatusList
-     *
-     * Return status list credential
-     *
-     * @param  string $project_id project_id (required)
-     * @param  string $status_list_id id of the status list (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStatusList'] to see the possible values for this operation
-     *
-     * @throws \AffinidiTdk\Clients\CredentialIssuance\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\GetStatusListResultDto|\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError
-     */
-    public function getStatusList($project_id, $status_list_id, string $contentType = self::contentTypes['getStatusList'][0])
-    {
-        list($response) = $this->getStatusListWithHttpInfo($project_id, $status_list_id, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation getStatusListWithHttpInfo
-     *
-     * Return status list credential
-     *
-     * @param  string $project_id (required)
-     * @param  string $status_list_id id of the status list (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStatusList'] to see the possible values for this operation
-     *
-     * @throws \AffinidiTdk\Clients\CredentialIssuance\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\CredentialIssuance\Model\GetStatusListResultDto|\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function getStatusListWithHttpInfo($project_id, $status_list_id, string $contentType = self::contentTypes['getStatusList'][0])
-    {
-        $request = $this->getStatusListRequest($project_id, $status_list_id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    if ('\AffinidiTdk\Clients\CredentialIssuance\Model\GetStatusListResultDto' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuance\Model\GetStatusListResultDto' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuance\Model\GetStatusListResultDto', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 400:
-                    if ('\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 404:
-                    if ('\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\AffinidiTdk\Clients\CredentialIssuance\Model\GetStatusListResultDto';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuance\Model\GetStatusListResultDto',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation getStatusListAsync
-     *
-     * Return status list credential
-     *
-     * @param  string $project_id (required)
-     * @param  string $status_list_id id of the status list (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStatusList'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getStatusListAsync($project_id, $status_list_id, string $contentType = self::contentTypes['getStatusList'][0])
-    {
-        return $this->getStatusListAsyncWithHttpInfo($project_id, $status_list_id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation getStatusListAsyncWithHttpInfo
-     *
-     * Return status list credential
-     *
-     * @param  string $project_id (required)
-     * @param  string $status_list_id id of the status list (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStatusList'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getStatusListAsyncWithHttpInfo($project_id, $status_list_id, string $contentType = self::contentTypes['getStatusList'][0])
-    {
-        $returnType = '\AffinidiTdk\Clients\CredentialIssuance\Model\GetStatusListResultDto';
-        $request = $this->getStatusListRequest($project_id, $status_list_id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'getStatusList'
-     *
-     * @param  string $project_id (required)
-     * @param  string $status_list_id id of the status list (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStatusList'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function getStatusListRequest($project_id, $status_list_id, string $contentType = self::contentTypes['getStatusList'][0])
-    {
-
-        // verify the required parameter 'project_id' is set
-        if ($project_id === null || (is_array($project_id) && count($project_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $project_id when calling getStatusList'
-            );
-        }
-
-        // verify the required parameter 'status_list_id' is set
-        if ($status_list_id === null || (is_array($status_list_id) && count($status_list_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $status_list_id when calling getStatusList'
-            );
-        }
-
-
-        $resourcePath = '/v1/{projectId}/status-list/{statusListId}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($project_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'projectId' . '}',
-                ObjectSerializer::toPathValue($project_id),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($status_list_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'statusListId' . '}',
-                ObjectSerializer::toPathValue($status_list_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation listIssuanceDataRecords
      *
      * List records
      *
      * @param  string $project_id Affinidi project id (required)
      * @param  string $configuration_id The id of the issuance configuration (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional, default to 10)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 10)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIssuanceDataRecords'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\CredentialIssuance\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceRecordResponse|\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceRecordResponse|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError
      */
     public function listIssuanceDataRecords($project_id, $configuration_id, $limit = 10, $exclusive_start_key = null, string $contentType = self::contentTypes['listIssuanceDataRecords'][0])
     {
@@ -958,13 +658,13 @@ class DefaultApi
      *
      * @param  string $project_id Affinidi project id (required)
      * @param  string $configuration_id The id of the issuance configuration (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional, default to 10)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 10)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIssuanceDataRecords'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\CredentialIssuance\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceRecordResponse|\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceRecordResponse|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
      */
     public function listIssuanceDataRecordsWithHttpInfo($project_id, $configuration_id, $limit = 10, $exclusive_start_key = null, string $contentType = self::contentTypes['listIssuanceDataRecords'][0])
     {
@@ -975,6 +675,16 @@ class DefaultApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -995,11 +705,11 @@ class DefaultApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceRecordResponse' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceRecordResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceRecordResponse' !== 'string') {
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceRecordResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1017,16 +727,16 @@ class DefaultApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceRecordResponse', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceRecordResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1044,16 +754,16 @@ class DefaultApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1071,7 +781,7 @@ class DefaultApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1090,7 +800,7 @@ class DefaultApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceRecordResponse';
+            $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceRecordResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1123,7 +833,7 @@ class DefaultApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceRecordResponse',
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceRecordResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1131,7 +841,7 @@ class DefaultApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuance\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1139,7 +849,7 @@ class DefaultApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuance\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1156,8 +866,8 @@ class DefaultApi
      *
      * @param  string $project_id Affinidi project id (required)
      * @param  string $configuration_id The id of the issuance configuration (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional, default to 10)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 10)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIssuanceDataRecords'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1180,8 +890,8 @@ class DefaultApi
      *
      * @param  string $project_id Affinidi project id (required)
      * @param  string $configuration_id The id of the issuance configuration (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional, default to 10)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 10)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIssuanceDataRecords'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1189,7 +899,7 @@ class DefaultApi
      */
     public function listIssuanceDataRecordsAsyncWithHttpInfo($project_id, $configuration_id, $limit = 10, $exclusive_start_key = null, string $contentType = self::contentTypes['listIssuanceDataRecords'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceRecordResponse';
+        $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceRecordResponse';
         $request = $this->listIssuanceDataRecordsRequest($project_id, $configuration_id, $limit, $exclusive_start_key, $contentType);
 
         return $this->client
@@ -1233,8 +943,8 @@ class DefaultApi
      *
      * @param  string $project_id Affinidi project id (required)
      * @param  string $configuration_id The id of the issuance configuration (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional, default to 10)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 10)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIssuanceDataRecords'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

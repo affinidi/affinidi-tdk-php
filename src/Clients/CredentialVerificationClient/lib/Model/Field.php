@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialVerification\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
  * Field Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -61,7 +61,7 @@ class Field implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'string',
         'path' => 'string[]',
         'purpose' => 'string',
-        'filter' => '\AffinidiTdk\Clients\CredentialVerification\Model\Filter',
+        'filter' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\Filter',
         'predicate' => 'string'
     ];
 
@@ -426,7 +426,7 @@ class Field implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets filter
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\Filter|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\Filter|null
      */
     public function getFilter()
     {
@@ -436,7 +436,7 @@ class Field implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets filter
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\Filter|null $filter filter
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\Filter|null $filter filter
      *
      * @return self
      */

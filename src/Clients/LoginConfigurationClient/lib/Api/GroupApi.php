@@ -4,7 +4,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\LoginConfiguration\Api;
+namespace AffinidiTdk\Clients\LoginConfigurationClient\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -35,16 +35,107 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use AffinidiTdk\Clients\LoginConfiguration\ApiException;
-use AffinidiTdk\Clients\LoginConfiguration\Configuration;
-use AffinidiTdk\Clients\LoginConfiguration\HeaderSelector;
-use AffinidiTdk\Clients\LoginConfiguration\ObjectSerializer;
+use AffinidiTdk\Clients\LoginConfigurationClient\ApiException;
+use AffinidiTdk\Clients\LoginConfigurationClient\Configuration;
+use AffinidiTdk\Clients\LoginConfigurationClient\HeaderSelector;
+use AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
+
+/**
+ * InvalidJwtTokenError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class InvalidJwtTokenError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'InvalidJwtTokenError';
+
+    /**
+     * @var string
+     */
+    protected $message = 'JWT token is invalid';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $issue, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $this->message,
+            'issue' => $issue,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 403);
+        $this->issue = $issue;
+        $this->traceId = $traceId;
+    }
+}
+
+/**
+ * NotFoundError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\Wallets
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class NotFoundError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'NotFoundError';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $message, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $message,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 404);
+        $this->traceId = $traceId;
+    }
+}
 
 /**
  * GroupApi Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\LoginConfiguration
+ * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -102,10 +193,10 @@ class GroupApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -145,12 +236,12 @@ class GroupApi
      * Operation addUserToGroup
      *
      * @param  string $group_name group_name (required)
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\AddUserToGroupInput $add_user_to_group_input AddUserToGroup (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\AddUserToGroupInput $add_user_to_group_input AddUserToGroup (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addUserToGroup'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingDto|\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingDto|\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError
      */
     public function addUserToGroup($group_name, $add_user_to_group_input, string $contentType = self::contentTypes['addUserToGroup'][0])
     {
@@ -162,12 +253,12 @@ class GroupApi
      * Operation addUserToGroupWithHttpInfo
      *
      * @param  string $group_name (required)
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\AddUserToGroupInput $add_user_to_group_input AddUserToGroup (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\AddUserToGroupInput $add_user_to_group_input AddUserToGroup (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addUserToGroup'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingDto|\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingDto|\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
      */
     public function addUserToGroupWithHttpInfo($group_name, $add_user_to_group_input, string $contentType = self::contentTypes['addUserToGroup'][0])
     {
@@ -178,6 +269,16 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -198,11 +299,11 @@ class GroupApi
 
             switch($statusCode) {
                 case 201:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingDto' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingDto' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -220,16 +321,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingDto', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -247,16 +348,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -274,16 +375,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -301,7 +402,7 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -320,7 +421,7 @@ class GroupApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingDto';
+            $returnType = '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -353,7 +454,7 @@ class GroupApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingDto',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -361,7 +462,7 @@ class GroupApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -369,7 +470,7 @@ class GroupApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -377,7 +478,7 @@ class GroupApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -391,7 +492,7 @@ class GroupApi
      * Operation addUserToGroupAsync
      *
      * @param  string $group_name (required)
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\AddUserToGroupInput $add_user_to_group_input AddUserToGroup (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\AddUserToGroupInput $add_user_to_group_input AddUserToGroup (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addUserToGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -411,7 +512,7 @@ class GroupApi
      * Operation addUserToGroupAsyncWithHttpInfo
      *
      * @param  string $group_name (required)
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\AddUserToGroupInput $add_user_to_group_input AddUserToGroup (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\AddUserToGroupInput $add_user_to_group_input AddUserToGroup (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addUserToGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -419,7 +520,7 @@ class GroupApi
      */
     public function addUserToGroupAsyncWithHttpInfo($group_name, $add_user_to_group_input, string $contentType = self::contentTypes['addUserToGroup'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingDto';
+        $returnType = '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingDto';
         $request = $this->addUserToGroupRequest($group_name, $add_user_to_group_input, $contentType);
 
         return $this->client
@@ -462,7 +563,7 @@ class GroupApi
      * Create request for operation 'addUserToGroup'
      *
      * @param  string $group_name (required)
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\AddUserToGroupInput $add_user_to_group_input AddUserToGroup (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\AddUserToGroupInput $add_user_to_group_input AddUserToGroup (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addUserToGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -573,12 +674,12 @@ class GroupApi
     /**
      * Operation createGroup
      *
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\CreateGroupInput $create_group_input CreateGroup (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\CreateGroupInput $create_group_input CreateGroup (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto|\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfiguration\Model\GroupsPerUserLimitExceededError
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto|\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsPerUserLimitExceededError
      */
     public function createGroup($create_group_input, string $contentType = self::contentTypes['createGroup'][0])
     {
@@ -589,12 +690,12 @@ class GroupApi
     /**
      * Operation createGroupWithHttpInfo
      *
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\CreateGroupInput $create_group_input CreateGroup (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\CreateGroupInput $create_group_input CreateGroup (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto|\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfiguration\Model\GroupsPerUserLimitExceededError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto|\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsPerUserLimitExceededError, HTTP status code, HTTP response headers (array of strings)
      */
     public function createGroupWithHttpInfo($create_group_input, string $contentType = self::contentTypes['createGroup'][0])
     {
@@ -605,6 +706,16 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -625,11 +736,11 @@ class GroupApi
 
             switch($statusCode) {
                 case 201:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -647,16 +758,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -674,16 +785,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -701,16 +812,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 409:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\GroupsPerUserLimitExceededError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsPerUserLimitExceededError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\GroupsPerUserLimitExceededError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsPerUserLimitExceededError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -728,7 +839,7 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupsPerUserLimitExceededError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsPerUserLimitExceededError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -747,7 +858,7 @@ class GroupApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto';
+            $returnType = '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -780,7 +891,7 @@ class GroupApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -788,7 +899,7 @@ class GroupApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -796,7 +907,7 @@ class GroupApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -804,7 +915,7 @@ class GroupApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupsPerUserLimitExceededError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsPerUserLimitExceededError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -817,7 +928,7 @@ class GroupApi
     /**
      * Operation createGroupAsync
      *
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\CreateGroupInput $create_group_input CreateGroup (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\CreateGroupInput $create_group_input CreateGroup (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -836,7 +947,7 @@ class GroupApi
     /**
      * Operation createGroupAsyncWithHttpInfo
      *
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\CreateGroupInput $create_group_input CreateGroup (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\CreateGroupInput $create_group_input CreateGroup (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -844,7 +955,7 @@ class GroupApi
      */
     public function createGroupAsyncWithHttpInfo($create_group_input, string $contentType = self::contentTypes['createGroup'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto';
+        $returnType = '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto';
         $request = $this->createGroupRequest($create_group_input, $contentType);
 
         return $this->client
@@ -886,7 +997,7 @@ class GroupApi
     /**
      * Create request for operation 'createGroup'
      *
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\CreateGroupInput $create_group_input CreateGroup (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\CreateGroupInput $create_group_input CreateGroup (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -985,7 +1096,7 @@ class GroupApi
      * @param  string $group_name group_name (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroup'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -1000,7 +1111,7 @@ class GroupApi
      * @param  string $group_name (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroup'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -1013,6 +1124,16 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1038,7 +1159,7 @@ class GroupApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1046,7 +1167,7 @@ class GroupApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1215,9 +1336,9 @@ class GroupApi
      * @param  string $group_name group_name (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getGroupById'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto|\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto|\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError
      */
     public function getGroupById($group_name, string $contentType = self::contentTypes['getGroupById'][0])
     {
@@ -1231,9 +1352,9 @@ class GroupApi
      * @param  string $group_name (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getGroupById'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto|\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto|\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getGroupByIdWithHttpInfo($group_name, string $contentType = self::contentTypes['getGroupById'][0])
     {
@@ -1244,6 +1365,16 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1264,11 +1395,11 @@ class GroupApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1286,16 +1417,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1313,16 +1444,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1340,16 +1471,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1367,7 +1498,7 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1386,7 +1517,7 @@ class GroupApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto';
+            $returnType = '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1419,7 +1550,7 @@ class GroupApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1427,7 +1558,7 @@ class GroupApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1435,7 +1566,7 @@ class GroupApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1443,7 +1574,7 @@ class GroupApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1483,7 +1614,7 @@ class GroupApi
      */
     public function getGroupByIdAsyncWithHttpInfo($group_name, string $contentType = self::contentTypes['getGroupById'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupDto';
+        $returnType = '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupDto';
         $request = $this->getGroupByIdRequest($group_name, $contentType);
 
         return $this->client
@@ -1623,14 +1754,14 @@ class GroupApi
      * Operation listGroupUserMappings
      *
      * @param  string $group_name group_name (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
-     * @param  string $sort_order sort response in specific order. By default it is in desc order (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string|null $sort_order sort response in specific order. By default it is in desc order (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUserMappings'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingsList|\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingsList|\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError
      */
     public function listGroupUserMappings($group_name, $limit = null, $exclusive_start_key = null, $sort_order = null, string $contentType = self::contentTypes['listGroupUserMappings'][0])
     {
@@ -1642,14 +1773,14 @@ class GroupApi
      * Operation listGroupUserMappingsWithHttpInfo
      *
      * @param  string $group_name (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
-     * @param  string $sort_order sort response in specific order. By default it is in desc order (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string|null $sort_order sort response in specific order. By default it is in desc order (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUserMappings'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingsList|\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingsList|\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
      */
     public function listGroupUserMappingsWithHttpInfo($group_name, $limit = null, $exclusive_start_key = null, $sort_order = null, string $contentType = self::contentTypes['listGroupUserMappings'][0])
     {
@@ -1660,6 +1791,16 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1680,11 +1821,11 @@ class GroupApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingsList' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingsList' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingsList' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingsList' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1702,16 +1843,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingsList', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingsList', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1729,16 +1870,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1756,16 +1897,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1783,7 +1924,7 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1802,7 +1943,7 @@ class GroupApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingsList';
+            $returnType = '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingsList';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1835,7 +1976,7 @@ class GroupApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingsList',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingsList',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1843,7 +1984,7 @@ class GroupApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1851,7 +1992,7 @@ class GroupApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1859,7 +2000,7 @@ class GroupApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1873,9 +2014,9 @@ class GroupApi
      * Operation listGroupUserMappingsAsync
      *
      * @param  string $group_name (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
-     * @param  string $sort_order sort response in specific order. By default it is in desc order (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string|null $sort_order sort response in specific order. By default it is in desc order (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUserMappings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1895,9 +2036,9 @@ class GroupApi
      * Operation listGroupUserMappingsAsyncWithHttpInfo
      *
      * @param  string $group_name (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
-     * @param  string $sort_order sort response in specific order. By default it is in desc order (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string|null $sort_order sort response in specific order. By default it is in desc order (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUserMappings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1905,7 +2046,7 @@ class GroupApi
      */
     public function listGroupUserMappingsAsyncWithHttpInfo($group_name, $limit = null, $exclusive_start_key = null, $sort_order = null, string $contentType = self::contentTypes['listGroupUserMappings'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupUserMappingsList';
+        $returnType = '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupUserMappingsList';
         $request = $this->listGroupUserMappingsRequest($group_name, $limit, $exclusive_start_key, $sort_order, $contentType);
 
         return $this->client
@@ -1948,9 +2089,9 @@ class GroupApi
      * Create request for operation 'listGroupUserMappings'
      *
      * @param  string $group_name (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
-     * @param  string $sort_order sort response in specific order. By default it is in desc order (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string|null $sort_order sort response in specific order. By default it is in desc order (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUserMappings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2088,9 +2229,9 @@ class GroupApi
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroups'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\LoginConfiguration\Model\GroupsList|\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsList|\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError
      */
     public function listGroups(string $contentType = self::contentTypes['listGroups'][0])
     {
@@ -2103,9 +2244,9 @@ class GroupApi
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroups'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\LoginConfiguration\Model\GroupsList|\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsList|\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
      */
     public function listGroupsWithHttpInfo(string $contentType = self::contentTypes['listGroups'][0])
     {
@@ -2116,6 +2257,16 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -2136,11 +2287,11 @@ class GroupApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\GroupsList' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsList' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\GroupsList' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsList' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2158,16 +2309,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupsList', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsList', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2185,16 +2336,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2212,16 +2363,16 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2239,7 +2390,7 @@ class GroupApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2258,7 +2409,7 @@ class GroupApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupsList';
+            $returnType = '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsList';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2291,7 +2442,7 @@ class GroupApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupsList',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsList',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2299,7 +2450,7 @@ class GroupApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2307,7 +2458,7 @@ class GroupApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2315,7 +2466,7 @@ class GroupApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2353,7 +2504,7 @@ class GroupApi
      */
     public function listGroupsAsyncWithHttpInfo(string $contentType = self::contentTypes['listGroups'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\LoginConfiguration\Model\GroupsList';
+        $returnType = '\AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupsList';
         $request = $this->listGroupsRequest($contentType);
 
         return $this->client
@@ -2477,10 +2628,10 @@ class GroupApi
      * Operation removeUserFromGroup
      *
      * @param  string $group_name group_name (required)
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\RemoveUserFromGroupInput $remove_user_from_group_input Remove user from group (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\RemoveUserFromGroupInput $remove_user_from_group_input Remove user from group (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeUserFromGroup'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -2493,10 +2644,10 @@ class GroupApi
      * Operation removeUserFromGroupWithHttpInfo
      *
      * @param  string $group_name (required)
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\RemoveUserFromGroupInput $remove_user_from_group_input Remove user from group (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\RemoveUserFromGroupInput $remove_user_from_group_input Remove user from group (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeUserFromGroup'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\LoginConfiguration\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -2509,6 +2660,16 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -2534,7 +2695,7 @@ class GroupApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2542,7 +2703,7 @@ class GroupApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\ActionForbiddenError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\ActionForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2550,7 +2711,7 @@ class GroupApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\LoginConfiguration\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\LoginConfigurationClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2564,7 +2725,7 @@ class GroupApi
      * Operation removeUserFromGroupAsync
      *
      * @param  string $group_name (required)
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\RemoveUserFromGroupInput $remove_user_from_group_input Remove user from group (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\RemoveUserFromGroupInput $remove_user_from_group_input Remove user from group (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeUserFromGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2584,7 +2745,7 @@ class GroupApi
      * Operation removeUserFromGroupAsyncWithHttpInfo
      *
      * @param  string $group_name (required)
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\RemoveUserFromGroupInput $remove_user_from_group_input Remove user from group (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\RemoveUserFromGroupInput $remove_user_from_group_input Remove user from group (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeUserFromGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2622,7 +2783,7 @@ class GroupApi
      * Create request for operation 'removeUserFromGroup'
      *
      * @param  string $group_name (required)
-     * @param  \AffinidiTdk\Clients\LoginConfiguration\Model\RemoveUserFromGroupInput $remove_user_from_group_input Remove user from group (required)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\RemoveUserFromGroupInput $remove_user_from_group_input Remove user from group (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeUserFromGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

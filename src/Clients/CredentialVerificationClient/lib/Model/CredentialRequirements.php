@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialVerification\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
  * CredentialRequirements Class Doc Comment
  *
  * @category Class
  * @description Requirements of the VC
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -60,7 +60,7 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPITypes = [
         'type' => 'string[]',
-        'constraints' => '\AffinidiTdk\Clients\CredentialVerification\Model\CredentialRequirementsConstraints'
+        'constraints' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\CredentialRequirementsConstraints'
     ];
 
     /**
@@ -331,7 +331,7 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets constraints
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\CredentialRequirementsConstraints|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\CredentialRequirementsConstraints|null
      */
     public function getConstraints()
     {
@@ -341,7 +341,7 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets constraints
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\CredentialRequirementsConstraints|null $constraints constraints
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\CredentialRequirementsConstraints|null $constraints constraints
      *
      * @return self
      */

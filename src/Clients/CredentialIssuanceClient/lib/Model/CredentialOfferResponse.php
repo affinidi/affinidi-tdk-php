@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
  * CredentialOfferResponse Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -60,7 +60,7 @@ class CredentialOfferResponse implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $openAPITypes = [
         'credential_issuer' => 'string',
         'credential_configuration_ids' => 'string[]',
-        'grants' => '\AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponseGrants'
+        'grants' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponseGrants'
     ];
 
     /**
@@ -370,7 +370,7 @@ class CredentialOfferResponse implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets grants
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponseGrants
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponseGrants
      */
     public function getGrants()
     {
@@ -380,7 +380,7 @@ class CredentialOfferResponse implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets grants
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponseGrants $grants grants
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponseGrants $grants grants
      *
      * @return self
      */

@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
  * UpdateIssuanceConfigInput Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -64,7 +64,7 @@ class UpdateIssuanceConfigInput implements ModelInterface, ArrayAccess, \JsonSer
         'credential_offer_duration' => 'float',
         'format' => 'string',
         'issuer_uri' => 'string',
-        'credential_supported' => '\AffinidiTdk\Clients\CredentialIssuance\Model\CredentialSupportedObject[]',
+        'credential_supported' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialSupportedObject[]',
         'issuer_metadata' => 'array<string,mixed>',
         'return_uris' => 'string[]'
     ];
@@ -572,7 +572,7 @@ class UpdateIssuanceConfigInput implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets credential_supported
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\CredentialSupportedObject[]|null
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialSupportedObject[]|null
      */
     public function getCredentialSupported()
     {
@@ -582,7 +582,7 @@ class UpdateIssuanceConfigInput implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets credential_supported
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuance\Model\CredentialSupportedObject[]|null $credential_supported credential_supported
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialSupportedObject[]|null $credential_supported credential_supported
      *
      * @return self
      */

@@ -1,25 +1,28 @@
-# AffinidiTdk\Clients\Iam\DefaultApi
+# AffinidiTdk\Clients\IamClient\DefaultApi
 
 All URIs are relative to https://apse1.api.affinidi.io/iam, except if the operation defines another base path.
 
-| Method                                                     | HTTP request                 | Description |
-| ---------------------------------------------------------- | ---------------------------- | ----------- |
-| [**v1AuthProxyDelete()**](DefaultApi.md#v1AuthProxyDelete) | **DELETE** /v1/auth/{proxy+} |             |
-| [**v1AuthProxyGet()**](DefaultApi.md#v1AuthProxyGet)       | **GET** /v1/auth/{proxy+}    |             |
-| [**v1AuthProxyPatch()**](DefaultApi.md#v1AuthProxyPatch)   | **PATCH** /v1/auth/{proxy+}  |             |
-| [**v1AuthProxyPost()**](DefaultApi.md#v1AuthProxyPost)     | **POST** /v1/auth/{proxy+}   |             |
-| [**v1AuthProxyPut()**](DefaultApi.md#v1AuthProxyPut)       | **PUT** /v1/auth/{proxy+}    |             |
-| [**v1IdpProxyDelete()**](DefaultApi.md#v1IdpProxyDelete)   | **DELETE** /v1/idp/{proxy+}  |             |
-| [**v1IdpProxyGet()**](DefaultApi.md#v1IdpProxyGet)         | **GET** /v1/idp/{proxy+}     |             |
-| [**v1IdpProxyPatch()**](DefaultApi.md#v1IdpProxyPatch)     | **PATCH** /v1/idp/{proxy+}   |             |
-| [**v1IdpProxyPost()**](DefaultApi.md#v1IdpProxyPost)       | **POST** /v1/idp/{proxy+}    |             |
-| [**v1IdpProxyPut()**](DefaultApi.md#v1IdpProxyPut)         | **PUT** /v1/idp/{proxy+}     |             |
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**v1AuthProxyDelete()**](DefaultApi.md#v1AuthProxyDelete) | **DELETE** /v1/auth/{proxy+} |  |
+| [**v1AuthProxyGet()**](DefaultApi.md#v1AuthProxyGet) | **GET** /v1/auth/{proxy+} |  |
+| [**v1AuthProxyPatch()**](DefaultApi.md#v1AuthProxyPatch) | **PATCH** /v1/auth/{proxy+} |  |
+| [**v1AuthProxyPost()**](DefaultApi.md#v1AuthProxyPost) | **POST** /v1/auth/{proxy+} |  |
+| [**v1AuthProxyPut()**](DefaultApi.md#v1AuthProxyPut) | **PUT** /v1/auth/{proxy+} |  |
+| [**v1IdpProxyDelete()**](DefaultApi.md#v1IdpProxyDelete) | **DELETE** /v1/idp/{proxy+} |  |
+| [**v1IdpProxyGet()**](DefaultApi.md#v1IdpProxyGet) | **GET** /v1/idp/{proxy+} |  |
+| [**v1IdpProxyPatch()**](DefaultApi.md#v1IdpProxyPatch) | **PATCH** /v1/idp/{proxy+} |  |
+| [**v1IdpProxyPost()**](DefaultApi.md#v1IdpProxyPost) | **POST** /v1/idp/{proxy+} |  |
+| [**v1IdpProxyPut()**](DefaultApi.md#v1IdpProxyPut) | **PUT** /v1/idp/{proxy+} |  |
+
 
 ## `v1AuthProxyDelete()`
 
 ```php
 v1AuthProxyDelete($proxy)
 ```
+
+
 
 ### Example
 
@@ -29,7 +32,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\DefaultApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -45,9 +48,9 @@ try {
 
 ### Parameters
 
-| Name      | Type       | Description | Notes |
-| --------- | ---------- | ----------- | ----- |
-| **proxy** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **proxy** | **string**|  | |
 
 ### Return type
 
@@ -72,6 +75,8 @@ No authorization required
 v1AuthProxyGet($proxy)
 ```
 
+
+
 ### Example
 
 ```php
@@ -80,7 +85,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\DefaultApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -96,9 +101,9 @@ try {
 
 ### Parameters
 
-| Name      | Type       | Description | Notes |
-| --------- | ---------- | ----------- | ----- |
-| **proxy** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **proxy** | **string**|  | |
 
 ### Return type
 
@@ -123,6 +128,8 @@ No authorization required
 v1AuthProxyPatch($proxy)
 ```
 
+
+
 ### Example
 
 ```php
@@ -131,7 +138,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\DefaultApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -147,9 +154,9 @@ try {
 
 ### Parameters
 
-| Name      | Type       | Description | Notes |
-| --------- | ---------- | ----------- | ----- |
-| **proxy** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **proxy** | **string**|  | |
 
 ### Return type
 
@@ -174,6 +181,8 @@ No authorization required
 v1AuthProxyPost($proxy)
 ```
 
+
+
 ### Example
 
 ```php
@@ -182,7 +191,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\DefaultApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -198,9 +207,9 @@ try {
 
 ### Parameters
 
-| Name      | Type       | Description | Notes |
-| --------- | ---------- | ----------- | ----- |
-| **proxy** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **proxy** | **string**|  | |
 
 ### Return type
 
@@ -225,6 +234,8 @@ No authorization required
 v1AuthProxyPut($proxy)
 ```
 
+
+
 ### Example
 
 ```php
@@ -233,7 +244,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\DefaultApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -249,9 +260,9 @@ try {
 
 ### Parameters
 
-| Name      | Type       | Description | Notes |
-| --------- | ---------- | ----------- | ----- |
-| **proxy** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **proxy** | **string**|  | |
 
 ### Return type
 
@@ -276,6 +287,8 @@ No authorization required
 v1IdpProxyDelete($proxy)
 ```
 
+
+
 ### Example
 
 ```php
@@ -284,7 +297,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\DefaultApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -300,9 +313,9 @@ try {
 
 ### Parameters
 
-| Name      | Type       | Description | Notes |
-| --------- | ---------- | ----------- | ----- |
-| **proxy** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **proxy** | **string**|  | |
 
 ### Return type
 
@@ -327,6 +340,8 @@ No authorization required
 v1IdpProxyGet($proxy)
 ```
 
+
+
 ### Example
 
 ```php
@@ -335,7 +350,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\DefaultApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -351,9 +366,9 @@ try {
 
 ### Parameters
 
-| Name      | Type       | Description | Notes |
-| --------- | ---------- | ----------- | ----- |
-| **proxy** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **proxy** | **string**|  | |
 
 ### Return type
 
@@ -378,6 +393,8 @@ No authorization required
 v1IdpProxyPatch($proxy)
 ```
 
+
+
 ### Example
 
 ```php
@@ -386,7 +403,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\DefaultApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -402,9 +419,9 @@ try {
 
 ### Parameters
 
-| Name      | Type       | Description | Notes |
-| --------- | ---------- | ----------- | ----- |
-| **proxy** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **proxy** | **string**|  | |
 
 ### Return type
 
@@ -429,6 +446,8 @@ No authorization required
 v1IdpProxyPost($proxy)
 ```
 
+
+
 ### Example
 
 ```php
@@ -437,7 +456,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\DefaultApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -453,9 +472,9 @@ try {
 
 ### Parameters
 
-| Name      | Type       | Description | Notes |
-| --------- | ---------- | ----------- | ----- |
-| **proxy** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **proxy** | **string**|  | |
 
 ### Return type
 
@@ -480,6 +499,8 @@ No authorization required
 v1IdpProxyPut($proxy)
 ```
 
+
+
 ### Example
 
 ```php
@@ -488,7 +509,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\DefaultApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\DefaultApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -504,9 +525,9 @@ try {
 
 ### Parameters
 
-| Name      | Type       | Description | Notes |
-| --------- | ---------- | ----------- | ----- |
-| **proxy** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **proxy** | **string**|  | |
 
 ### Return type
 
