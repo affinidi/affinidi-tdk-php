@@ -1,16 +1,19 @@
-# AffinidiTdk\Clients\CredentialIssuance\OfferApi
+# AffinidiTdk\Clients\CredentialIssuanceClient\OfferApi
 
 All URIs are relative to https://apse1.api.affinidi.io/cis, except if the operation defines another base path.
 
-| Method                                                     | HTTP request                                | Description |
-| ---------------------------------------------------------- | ------------------------------------------- | ----------- |
-| [**getCredentialOffer()**](OfferApi.md#getCredentialOffer) | **GET** /v1/{projectId}/offers/{issuanceId} |             |
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getCredentialOffer()**](OfferApi.md#getCredentialOffer) | **GET** /v1/{projectId}/offers/{issuanceId} |  |
+
 
 ## `getCredentialOffer()`
 
 ```php
-getCredentialOffer($project_id, $issuance_id): \AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponse
+getCredentialOffer($project_id, $issuance_id): \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponse
 ```
+
+
 
 Endpoint used to return Credential Offer details, used with `credential_offer_uri` response
 
@@ -22,7 +25,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\CredentialIssuance\Api\OfferApi(
+$apiInstance = new AffinidiTdk\Clients\CredentialIssuanceClient\Api\OfferApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -40,14 +43,14 @@ try {
 
 ### Parameters
 
-| Name            | Type       | Description                          | Notes |
-| --------------- | ---------- | ------------------------------------ | ----- |
-| **project_id**  | **string** | Affinidi project id                  |       |
-| **issuance_id** | **string** | issuanceId from credential_offer_uri |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**| Affinidi project id | |
+| **issuance_id** | **string**| issuanceId from credential_offer_uri | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponse**](../Model/CredentialOfferResponse.md)
+[**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponse**](../Model/CredentialOfferResponse.md)
 
 ### Authorization
 

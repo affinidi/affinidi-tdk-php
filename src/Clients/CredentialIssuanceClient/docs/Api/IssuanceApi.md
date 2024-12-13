@@ -1,18 +1,21 @@
-# AffinidiTdk\Clients\CredentialIssuance\IssuanceApi
+# AffinidiTdk\Clients\CredentialIssuanceClient\IssuanceApi
 
 All URIs are relative to https://apse1.api.affinidi.io/cis, except if the operation defines another base path.
 
-| Method                                              | HTTP request                                        | Description |
-| --------------------------------------------------- | --------------------------------------------------- | ----------- |
-| [**issuanceState()**](IssuanceApi.md#issuanceState) | **GET** /v1/{projectId}/issuance/state/{issuanceId} |             |
-| [**listIssuance()**](IssuanceApi.md#listIssuance)   | **GET** /v1/{projectId}/issuance                    |             |
-| [**startIssuance()**](IssuanceApi.md#startIssuance) | **POST** /v1/{projectId}/issuance/start             |             |
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**issuanceState()**](IssuanceApi.md#issuanceState) | **GET** /v1/{projectId}/issuance/state/{issuanceId} |  |
+| [**listIssuance()**](IssuanceApi.md#listIssuance) | **GET** /v1/{projectId}/issuance |  |
+| [**startIssuance()**](IssuanceApi.md#startIssuance) | **POST** /v1/{projectId}/issuance/start |  |
+
 
 ## `issuanceState()`
 
 ```php
-issuanceState($issuance_id, $project_id): \AffinidiTdk\Clients\CredentialIssuance\Model\IssuanceStateResponse
+issuanceState($issuance_id, $project_id): \AffinidiTdk\Clients\CredentialIssuanceClient\Model\IssuanceStateResponse
 ```
+
+
 
 Get issuance status
 
@@ -24,12 +27,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\CredentialIssuance\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\CredentialIssuance\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\CredentialIssuance\Api\IssuanceApi(
+$apiInstance = new AffinidiTdk\Clients\CredentialIssuanceClient\Api\IssuanceApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -48,14 +51,14 @@ try {
 
 ### Parameters
 
-| Name            | Type       | Description         | Notes |
-| --------------- | ---------- | ------------------- | ----- |
-| **issuance_id** | **string** |                     |       |
-| **project_id**  | **string** | Affinidi project id |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **issuance_id** | **string**|  | |
+| **project_id** | **string**| Affinidi project id | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\CredentialIssuance\Model\IssuanceStateResponse**](../Model/IssuanceStateResponse.md)
+[**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\IssuanceStateResponse**](../Model/IssuanceStateResponse.md)
 
 ### Authorization
 
@@ -73,8 +76,10 @@ try {
 ## `listIssuance()`
 
 ```php
-listIssuance($project_id): \AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceResponse
+listIssuance($project_id): \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceResponse
 ```
+
+
 
 List all issuances for Project
 
@@ -86,12 +91,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\CredentialIssuance\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\CredentialIssuance\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\CredentialIssuance\Api\IssuanceApi(
+$apiInstance = new AffinidiTdk\Clients\CredentialIssuanceClient\Api\IssuanceApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -109,13 +114,13 @@ try {
 
 ### Parameters
 
-| Name           | Type       | Description         | Notes |
-| -------------- | ---------- | ------------------- | ----- |
-| **project_id** | **string** | Affinidi project id |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**| Affinidi project id | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\CredentialIssuance\Model\ListIssuanceResponse**](../Model/ListIssuanceResponse.md)
+[**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceResponse**](../Model/ListIssuanceResponse.md)
 
 ### Authorization
 
@@ -133,8 +138,10 @@ try {
 ## `startIssuance()`
 
 ```php
-startIssuance($project_id, $start_issuance_input): \AffinidiTdk\Clients\CredentialIssuance\Model\StartIssuanceResponse
+startIssuance($project_id, $start_issuance_input): \AffinidiTdk\Clients\CredentialIssuanceClient\Model\StartIssuanceResponse
 ```
+
+
 
 Endpoint used b websites to start the issuance process
 
@@ -146,19 +153,19 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\CredentialIssuance\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\CredentialIssuance\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\CredentialIssuance\Api\IssuanceApi(
+$apiInstance = new AffinidiTdk\Clients\CredentialIssuanceClient\Api\IssuanceApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $project_id = 'project_id_example'; // string | Affinidi project id
-$start_issuance_input = new \AffinidiTdk\Clients\CredentialIssuance\Model\StartIssuanceInput(); // \AffinidiTdk\Clients\CredentialIssuance\Model\StartIssuanceInput | Request body to start issuance
+$start_issuance_input = new \AffinidiTdk\Clients\CredentialIssuanceClient\Model\StartIssuanceInput(); // \AffinidiTdk\Clients\CredentialIssuanceClient\Model\StartIssuanceInput | Request body to start issuance
 
 try {
     $result = $apiInstance->startIssuance($project_id, $start_issuance_input);
@@ -170,14 +177,14 @@ try {
 
 ### Parameters
 
-| Name                     | Type                                                                                                   | Description                    | Notes |
-| ------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------ | ----- |
-| **project_id**           | **string**                                                                                             | Affinidi project id            |       |
-| **start_issuance_input** | [**\AffinidiTdk\Clients\CredentialIssuance\Model\StartIssuanceInput**](../Model/StartIssuanceInput.md) | Request body to start issuance |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**| Affinidi project id | |
+| **start_issuance_input** | [**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\StartIssuanceInput**](../Model/StartIssuanceInput.md)| Request body to start issuance | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\CredentialIssuance\Model\StartIssuanceResponse**](../Model/StartIssuanceResponse.md)
+[**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\StartIssuanceResponse**](../Model/StartIssuanceResponse.md)
 
 ### Authorization
 

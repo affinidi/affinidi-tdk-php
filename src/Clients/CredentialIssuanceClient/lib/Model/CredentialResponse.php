@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
  * CredentialResponse Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class CredentialResponse implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credential' => '\AffinidiTdk\Clients\CredentialIssuance\Model\CredentialResponseImmediateCredential',
+        'credential' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialResponseImmediateCredential',
         'c_nonce' => 'string',
         'c_nonce_expires_in' => 'float',
         'transaction_id' => 'string'
@@ -326,7 +326,7 @@ class CredentialResponse implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets credential
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\CredentialResponseImmediateCredential
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialResponseImmediateCredential
      */
     public function getCredential()
     {
@@ -336,7 +336,7 @@ class CredentialResponse implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets credential
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuance\Model\CredentialResponseImmediateCredential $credential credential
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialResponseImmediateCredential $credential credential
      *
      * @return self
      */

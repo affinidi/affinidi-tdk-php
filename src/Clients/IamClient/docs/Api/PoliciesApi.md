@@ -1,17 +1,20 @@
-# AffinidiTdk\Clients\Iam\PoliciesApi
+# AffinidiTdk\Clients\IamClient\PoliciesApi
 
 All URIs are relative to https://apse1.api.affinidi.io/iam, except if the operation defines another base path.
 
-| Method                                                | HTTP request                                  | Description |
-| ----------------------------------------------------- | --------------------------------------------- | ----------- |
-| [**getPolicies()**](PoliciesApi.md#getPolicies)       | **GET** /v1/policies/principals/{principalId} |             |
-| [**updatePolicies()**](PoliciesApi.md#updatePolicies) | **PUT** /v1/policies/principals/{principalId} |             |
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getPolicies()**](PoliciesApi.md#getPolicies) | **GET** /v1/policies/principals/{principalId} |  |
+| [**updatePolicies()**](PoliciesApi.md#updatePolicies) | **PUT** /v1/policies/principals/{principalId} |  |
+
 
 ## `getPolicies()`
 
 ```php
-getPolicies($principal_id, $principal_type): \AffinidiTdk\Clients\Iam\Model\PolicyDto
+getPolicies($principal_id, $principal_type): \AffinidiTdk\Clients\IamClient\Model\PolicyDto
 ```
+
+
 
 ### Example
 
@@ -21,12 +24,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\PoliciesApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\PoliciesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -45,14 +48,14 @@ try {
 
 ### Parameters
 
-| Name               | Type       | Description | Notes |
-| ------------------ | ---------- | ----------- | ----- |
-| **principal_id**   | **string** |             |       |
-| **principal_type** | **string** |             |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **principal_id** | **string**|  | |
+| **principal_type** | **string**|  | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iam\Model\PolicyDto**](../Model/PolicyDto.md)
+[**\AffinidiTdk\Clients\IamClient\Model\PolicyDto**](../Model/PolicyDto.md)
 
 ### Authorization
 
@@ -70,8 +73,10 @@ try {
 ## `updatePolicies()`
 
 ```php
-updatePolicies($principal_id, $principal_type, $policy_dto): \AffinidiTdk\Clients\Iam\Model\PolicyDto
+updatePolicies($principal_id, $principal_type, $policy_dto): \AffinidiTdk\Clients\IamClient\Model\PolicyDto
 ```
+
+
 
 ### Example
 
@@ -81,12 +86,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iam\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\PoliciesApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\PoliciesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -94,7 +99,7 @@ $apiInstance = new AffinidiTdk\Clients\Iam\Api\PoliciesApi(
 );
 $principal_id = 'principal_id_example'; // string
 $principal_type = 'principal_type_example'; // string
-$policy_dto = new \AffinidiTdk\Clients\Iam\Model\PolicyDto(); // \AffinidiTdk\Clients\Iam\Model\PolicyDto | UpdatePolicies
+$policy_dto = new \AffinidiTdk\Clients\IamClient\Model\PolicyDto(); // \AffinidiTdk\Clients\IamClient\Model\PolicyDto | UpdatePolicies
 
 try {
     $result = $apiInstance->updatePolicies($principal_id, $principal_type, $policy_dto);
@@ -106,15 +111,15 @@ try {
 
 ### Parameters
 
-| Name               | Type                                                                  | Description    | Notes |
-| ------------------ | --------------------------------------------------------------------- | -------------- | ----- |
-| **principal_id**   | **string**                                                            |                |       |
-| **principal_type** | **string**                                                            |                |       |
-| **policy_dto**     | [**\AffinidiTdk\Clients\Iam\Model\PolicyDto**](../Model/PolicyDto.md) | UpdatePolicies |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **principal_id** | **string**|  | |
+| **principal_type** | **string**|  | |
+| **policy_dto** | [**\AffinidiTdk\Clients\IamClient\Model\PolicyDto**](../Model/PolicyDto.md)| UpdatePolicies | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iam\Model\PolicyDto**](../Model/PolicyDto.md)
+[**\AffinidiTdk\Clients\IamClient\Model\PolicyDto**](../Model/PolicyDto.md)
 
 ### Authorization
 

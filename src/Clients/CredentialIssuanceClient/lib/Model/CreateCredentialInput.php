@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
  * CreateCredentialInput Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -59,7 +59,7 @@ class CreateCredentialInput implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static $openAPITypes = [
         'credential_identifier' => 'string',
-        'proof' => '\AffinidiTdk\Clients\CredentialIssuance\Model\CredentialProof'
+        'proof' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialProof'
     ];
 
     /**
@@ -330,7 +330,7 @@ class CreateCredentialInput implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets proof
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\CredentialProof
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialProof
      */
     public function getProof()
     {
@@ -340,7 +340,7 @@ class CreateCredentialInput implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets proof
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuance\Model\CredentialProof $proof proof
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialProof $proof proof
      *
      * @return self
      */

@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
  * SupportedCredentialMetadata Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class SupportedCredentialMetadata implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'display' => '\AffinidiTdk\Clients\CredentialIssuance\Model\SupportedCredentialMetadataDisplayInner[]'
+        'display' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataDisplayInner[]'
     ];
 
     /**
@@ -293,7 +293,7 @@ class SupportedCredentialMetadata implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets display
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\SupportedCredentialMetadataDisplayInner[]|null
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataDisplayInner[]|null
      */
     public function getDisplay()
     {
@@ -303,7 +303,7 @@ class SupportedCredentialMetadata implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets display
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuance\Model\SupportedCredentialMetadataDisplayInner[]|null $display display
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataDisplayInner[]|null $display display
      *
      * @return self
      */

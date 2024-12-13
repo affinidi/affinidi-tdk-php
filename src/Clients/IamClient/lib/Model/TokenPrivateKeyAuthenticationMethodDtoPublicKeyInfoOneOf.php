@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iam\Model;
+namespace AffinidiTdk\Clients\IamClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iam\ObjectSerializer;
+use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
 
 /**
  * TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf implements ModelI
       * @var string[]
       */
     protected static $openAPITypes = [
-        'jwks' => '\AffinidiTdk\Clients\Iam\Model\JsonWebKeySetDto'
+        'jwks' => '\AffinidiTdk\Clients\IamClient\Model\JsonWebKeySetDto'
     ];
 
     /**
@@ -296,7 +296,7 @@ class TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf implements ModelI
     /**
      * Gets jwks
      *
-     * @return \AffinidiTdk\Clients\Iam\Model\JsonWebKeySetDto
+     * @return \AffinidiTdk\Clients\IamClient\Model\JsonWebKeySetDto
      */
     public function getJwks()
     {
@@ -306,7 +306,7 @@ class TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf implements ModelI
     /**
      * Sets jwks
      *
-     * @param \AffinidiTdk\Clients\Iam\Model\JsonWebKeySetDto $jwks jwks
+     * @param \AffinidiTdk\Clients\IamClient\Model\JsonWebKeySetDto $jwks jwks
      *
      * @return self
      */

@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iota\Model;
+namespace AffinidiTdk\Clients\IotaClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iota\ObjectSerializer;
+use \AffinidiTdk\Clients\IotaClient\ObjectSerializer;
 
 /**
  * AwsExchangeCredentialsProjectTokenOK Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -59,7 +59,7 @@ class AwsExchangeCredentialsProjectTokenOK implements ModelInterface, ArrayAcces
       */
     protected static $openAPITypes = [
         'connection_client_id' => 'string',
-        'credentials' => '\AffinidiTdk\Clients\Iota\Model\AwsExchangeCredentialsProjectTokenOKCredentials'
+        'credentials' => '\AffinidiTdk\Clients\IotaClient\Model\AwsExchangeCredentialsProjectTokenOKCredentials'
     ];
 
     /**
@@ -333,7 +333,7 @@ class AwsExchangeCredentialsProjectTokenOK implements ModelInterface, ArrayAcces
     /**
      * Gets credentials
      *
-     * @return \AffinidiTdk\Clients\Iota\Model\AwsExchangeCredentialsProjectTokenOKCredentials
+     * @return \AffinidiTdk\Clients\IotaClient\Model\AwsExchangeCredentialsProjectTokenOKCredentials
      */
     public function getCredentials()
     {
@@ -343,7 +343,7 @@ class AwsExchangeCredentialsProjectTokenOK implements ModelInterface, ArrayAcces
     /**
      * Sets credentials
      *
-     * @param \AffinidiTdk\Clients\Iota\Model\AwsExchangeCredentialsProjectTokenOKCredentials $credentials credentials
+     * @param \AffinidiTdk\Clients\IotaClient\Model\AwsExchangeCredentialsProjectTokenOKCredentials $credentials credentials
      *
      * @return self
      */

@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialVerification\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
  * Descriptor Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -60,7 +60,7 @@ class Descriptor implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'id' => 'string',
         'path' => 'string',
-        'path_nested' => '\AffinidiTdk\Clients\CredentialVerification\Model\NestedDescriptor',
+        'path_nested' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\NestedDescriptor',
         'format' => 'string'
     ];
 
@@ -377,7 +377,7 @@ class Descriptor implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets path_nested
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\NestedDescriptor|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\NestedDescriptor|null
      */
     public function getPathNested()
     {
@@ -387,7 +387,7 @@ class Descriptor implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets path_nested
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\NestedDescriptor|null $path_nested path_nested
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\NestedDescriptor|null $path_nested path_nested
      *
      * @return self
      */

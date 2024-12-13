@@ -1,5 +1,6 @@
 # iam-client
 
+
 For more information, please visit [https://github.com/affinidi/affinidi-tdk](https://github.com/affinidi/affinidi-tdk).
 
 ## Installation & Usage
@@ -14,7 +15,7 @@ Should also work with PHP 8.0.
 To install the bindings via [Composer](https://getcomposer.org/), run:
 
 ```bash
-composer require affinidi-tdk/iam-client
+composer require affinidi-tdk/affinidi-tdk-php
 ```
 
 ### Manual Installation
@@ -37,12 +38,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iam\Api\ConsumerAuthApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\ConsumerAuthApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$consumer_auth_token_endpoint_input = new \AffinidiTdk\Clients\Iam\Model\ConsumerAuthTokenEndpointInput(); // \AffinidiTdk\Clients\Iam\Model\ConsumerAuthTokenEndpointInput | ConsumerAuthTokenEndpoint
+$consumer_auth_token_endpoint_input = new \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointInput(); // \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointInput | ConsumerAuthTokenEndpoint
 
 try {
     $result = $apiInstance->consumerAuthTokenEndpoint($consumer_auth_token_endpoint_input);
@@ -57,36 +58,37 @@ try {
 
 All URIs are relative to *https://apse1.api.affinidi.io/iam*
 
-| Class             | Method                                                                                 | HTTP request                                     | Description                           |
-| ----------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------ | ------------------------------------- |
-| _ConsumerAuthApi_ | [**consumerAuthTokenEndpoint**](docs/Api/ConsumerAuthApi.md#consumerauthtokenendpoint) | **POST** /v1/consumer/oauth2/token               | The Consumer OAuth 2.0 Token Endpoint |
-| _DefaultApi_      | [**v1AuthProxyDelete**](docs/Api/DefaultApi.md#v1authproxydelete)                      | **DELETE** /v1/auth/{proxy+}                     |
-| _DefaultApi_      | [**v1AuthProxyGet**](docs/Api/DefaultApi.md#v1authproxyget)                            | **GET** /v1/auth/{proxy+}                        |
-| _DefaultApi_      | [**v1AuthProxyPatch**](docs/Api/DefaultApi.md#v1authproxypatch)                        | **PATCH** /v1/auth/{proxy+}                      |
-| _DefaultApi_      | [**v1AuthProxyPost**](docs/Api/DefaultApi.md#v1authproxypost)                          | **POST** /v1/auth/{proxy+}                       |
-| _DefaultApi_      | [**v1AuthProxyPut**](docs/Api/DefaultApi.md#v1authproxyput)                            | **PUT** /v1/auth/{proxy+}                        |
-| _DefaultApi_      | [**v1IdpProxyDelete**](docs/Api/DefaultApi.md#v1idpproxydelete)                        | **DELETE** /v1/idp/{proxy+}                      |
-| _DefaultApi_      | [**v1IdpProxyGet**](docs/Api/DefaultApi.md#v1idpproxyget)                              | **GET** /v1/idp/{proxy+}                         |
-| _DefaultApi_      | [**v1IdpProxyPatch**](docs/Api/DefaultApi.md#v1idpproxypatch)                          | **PATCH** /v1/idp/{proxy+}                       |
-| _DefaultApi_      | [**v1IdpProxyPost**](docs/Api/DefaultApi.md#v1idpproxypost)                            | **POST** /v1/idp/{proxy+}                        |
-| _DefaultApi_      | [**v1IdpProxyPut**](docs/Api/DefaultApi.md#v1idpproxyput)                              | **PUT** /v1/idp/{proxy+}                         |
-| _PoliciesApi_     | [**getPolicies**](docs/Api/PoliciesApi.md#getpolicies)                                 | **GET** /v1/policies/principals/{principalId}    |
-| _PoliciesApi_     | [**updatePolicies**](docs/Api/PoliciesApi.md#updatepolicies)                           | **PUT** /v1/policies/principals/{principalId}    |
-| _ProjectsApi_     | [**addPrincipalToProject**](docs/Api/ProjectsApi.md#addprincipaltoproject)             | **POST** /v1/projects/principals                 |
-| _ProjectsApi_     | [**createProject**](docs/Api/ProjectsApi.md#createproject)                             | **POST** /v1/projects                            |
-| _ProjectsApi_     | [**deletePrincipalFromProject**](docs/Api/ProjectsApi.md#deleteprincipalfromproject)   | **DELETE** /v1/projects/principals/{principalId} |
-| _ProjectsApi_     | [**listPrincipalsOfProject**](docs/Api/ProjectsApi.md#listprincipalsofproject)         | **GET** /v1/projects/principals                  |
-| _ProjectsApi_     | [**listProject**](docs/Api/ProjectsApi.md#listproject)                                 | **GET** /v1/projects                             |
-| _ProjectsApi_     | [**updateProject**](docs/Api/ProjectsApi.md#updateproject)                             | **PATCH** /v1/projects/{projectId}               |
-| _StsApi_          | [**createProjectScopedToken**](docs/Api/StsApi.md#createprojectscopedtoken)            | **POST** /v1/sts/create-project-scoped-token     |
-| _StsApi_          | [**whoami**](docs/Api/StsApi.md#whoami)                                                | **GET** /v1/sts/whoami                           |
-| _TokensApi_       | [**createToken**](docs/Api/TokensApi.md#createtoken)                                   | **POST** /v1/tokens                              |
-| _TokensApi_       | [**deleteToken**](docs/Api/TokensApi.md#deletetoken)                                   | **DELETE** /v1/tokens/{tokenId}                  |
-| _TokensApi_       | [**getToken**](docs/Api/TokensApi.md#gettoken)                                         | **GET** /v1/tokens/{tokenId}                     |
-| _TokensApi_       | [**listToken**](docs/Api/TokensApi.md#listtoken)                                       | **GET** /v1/tokens                               |
-| _TokensApi_       | [**updateToken**](docs/Api/TokensApi.md#updatetoken)                                   | **PATCH** /v1/tokens/{tokenId}                   |
-| _WellKnownApi_    | [**getWellKnownDid**](docs/Api/WellKnownApi.md#getwellknowndid)                        | **GET** /.well-known/did.json                    |
-| _WellKnownApi_    | [**getWellKnownJwks**](docs/Api/WellKnownApi.md#getwellknownjwks)                      | **GET** /.well-known/jwks.json                   |
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*ConsumerAuthApi* | [**consumerAuthTokenEndpoint**](docs/Api/ConsumerAuthApi.md#consumerauthtokenendpoint) | **POST** /v1/consumer/oauth2/token | The Consumer OAuth 2.0 Token Endpoint
+*DefaultApi* | [**v1AuthProxyDelete**](docs/Api/DefaultApi.md#v1authproxydelete) | **DELETE** /v1/auth/{proxy+} | 
+*DefaultApi* | [**v1AuthProxyGet**](docs/Api/DefaultApi.md#v1authproxyget) | **GET** /v1/auth/{proxy+} | 
+*DefaultApi* | [**v1AuthProxyPatch**](docs/Api/DefaultApi.md#v1authproxypatch) | **PATCH** /v1/auth/{proxy+} | 
+*DefaultApi* | [**v1AuthProxyPost**](docs/Api/DefaultApi.md#v1authproxypost) | **POST** /v1/auth/{proxy+} | 
+*DefaultApi* | [**v1AuthProxyPut**](docs/Api/DefaultApi.md#v1authproxyput) | **PUT** /v1/auth/{proxy+} | 
+*DefaultApi* | [**v1IdpProxyDelete**](docs/Api/DefaultApi.md#v1idpproxydelete) | **DELETE** /v1/idp/{proxy+} | 
+*DefaultApi* | [**v1IdpProxyGet**](docs/Api/DefaultApi.md#v1idpproxyget) | **GET** /v1/idp/{proxy+} | 
+*DefaultApi* | [**v1IdpProxyPatch**](docs/Api/DefaultApi.md#v1idpproxypatch) | **PATCH** /v1/idp/{proxy+} | 
+*DefaultApi* | [**v1IdpProxyPost**](docs/Api/DefaultApi.md#v1idpproxypost) | **POST** /v1/idp/{proxy+} | 
+*DefaultApi* | [**v1IdpProxyPut**](docs/Api/DefaultApi.md#v1idpproxyput) | **PUT** /v1/idp/{proxy+} | 
+*PoliciesApi* | [**getPolicies**](docs/Api/PoliciesApi.md#getpolicies) | **GET** /v1/policies/principals/{principalId} | 
+*PoliciesApi* | [**updatePolicies**](docs/Api/PoliciesApi.md#updatepolicies) | **PUT** /v1/policies/principals/{principalId} | 
+*ProjectsApi* | [**addPrincipalToProject**](docs/Api/ProjectsApi.md#addprincipaltoproject) | **POST** /v1/projects/principals | 
+*ProjectsApi* | [**createProject**](docs/Api/ProjectsApi.md#createproject) | **POST** /v1/projects | 
+*ProjectsApi* | [**deletePrincipalFromProject**](docs/Api/ProjectsApi.md#deleteprincipalfromproject) | **DELETE** /v1/projects/principals/{principalId} | 
+*ProjectsApi* | [**listPrincipalsOfProject**](docs/Api/ProjectsApi.md#listprincipalsofproject) | **GET** /v1/projects/principals | 
+*ProjectsApi* | [**listProject**](docs/Api/ProjectsApi.md#listproject) | **GET** /v1/projects | 
+*ProjectsApi* | [**updateProject**](docs/Api/ProjectsApi.md#updateproject) | **PATCH** /v1/projects/{projectId} | 
+*StsApi* | [**createProjectScopedToken**](docs/Api/StsApi.md#createprojectscopedtoken) | **POST** /v1/sts/create-project-scoped-token | 
+*StsApi* | [**whoami**](docs/Api/StsApi.md#whoami) | **GET** /v1/sts/whoami | 
+*TokensApi* | [**createToken**](docs/Api/TokensApi.md#createtoken) | **POST** /v1/tokens | 
+*TokensApi* | [**deleteToken**](docs/Api/TokensApi.md#deletetoken) | **DELETE** /v1/tokens/{tokenId} | 
+*TokensApi* | [**getToken**](docs/Api/TokensApi.md#gettoken) | **GET** /v1/tokens/{tokenId} | 
+*TokensApi* | [**listProjectsOfToken**](docs/Api/TokensApi.md#listprojectsoftoken) | **GET** /v1/tokens/{tokenId}/projects | 
+*TokensApi* | [**listToken**](docs/Api/TokensApi.md#listtoken) | **GET** /v1/tokens | 
+*TokensApi* | [**updateToken**](docs/Api/TokensApi.md#updatetoken) | **PATCH** /v1/tokens/{tokenId} | 
+*WellKnownApi* | [**getWellKnownDid**](docs/Api/WellKnownApi.md#getwellknowndid) | **GET** /.well-known/did.json | 
+*WellKnownApi* | [**getWellKnownJwks**](docs/Api/WellKnownApi.md#getwellknownjwks) | **GET** /.well-known/jwks.json | 
 
 ## Models
 
@@ -112,6 +114,8 @@ All URIs are relative to *https://apse1.api.affinidi.io/iam*
 - [PrincipalDoesNotBelongToProjectError](docs/Model/PrincipalDoesNotBelongToProjectError.md)
 - [ProjectDto](docs/Model/ProjectDto.md)
 - [ProjectList](docs/Model/ProjectList.md)
+- [ProjectWithPolicyDto](docs/Model/ProjectWithPolicyDto.md)
+- [ProjectWithPolicyList](docs/Model/ProjectWithPolicyList.md)
 - [PublicKeyCannotBeResolvedFromDidError](docs/Model/PublicKeyCannotBeResolvedFromDidError.md)
 - [ServiceErrorResponse](docs/Model/ServiceErrorResponse.md)
 - [ServiceErrorResponseDetailsInner](docs/Model/ServiceErrorResponseDetailsInner.md)
@@ -135,12 +139,12 @@ All URIs are relative to *https://apse1.api.affinidi.io/iam*
 ## Authorization
 
 Authentication schemes defined for the API:
-
 ### HeritageTokenAuth
 
 - **Type**: API key
 - **API key parameter name**: authorization
 - **Location**: HTTP header
+
 
 ### UserTokenAuth
 
@@ -148,17 +152,20 @@ Authentication schemes defined for the API:
 - **API key parameter name**: authorization
 - **Location**: HTTP header
 
+
 ### ProjectTokenAuth
 
 - **Type**: API key
 - **API key parameter name**: authorization
 - **Location**: HTTP header
 
+
 ### ConsumerTokenAuth
 
 - **Type**: API key
 - **API key parameter name**: authorization
 - **Location**: HTTP header
+
 
 ## Tests
 
@@ -178,5 +185,5 @@ info@affinidi.com
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `1.0.0`
-  - Generator version: `7.9.0`
+    - Generator version: `7.9.0`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

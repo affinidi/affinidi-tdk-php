@@ -4,7 +4,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iam\Api;
+namespace AffinidiTdk\Clients\IamClient\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -35,16 +35,107 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use AffinidiTdk\Clients\Iam\ApiException;
-use AffinidiTdk\Clients\Iam\Configuration;
-use AffinidiTdk\Clients\Iam\HeaderSelector;
-use AffinidiTdk\Clients\Iam\ObjectSerializer;
+use AffinidiTdk\Clients\IamClient\ApiException;
+use AffinidiTdk\Clients\IamClient\Configuration;
+use AffinidiTdk\Clients\IamClient\HeaderSelector;
+use AffinidiTdk\Clients\IamClient\ObjectSerializer;
+
+/**
+ * InvalidJwtTokenError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\IamClient
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class InvalidJwtTokenError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'InvalidJwtTokenError';
+
+    /**
+     * @var string
+     */
+    protected $message = 'JWT token is invalid';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $issue, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $this->message,
+            'issue' => $issue,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 403);
+        $this->issue = $issue;
+        $this->traceId = $traceId;
+    }
+}
+
+/**
+ * NotFoundError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\Wallets
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class NotFoundError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'NotFoundError';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $message, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $message,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 404);
+        $this->traceId = $traceId;
+    }
+}
 
 /**
  * TokensApi Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -81,6 +172,9 @@ class TokensApi
         'getToken' => [
             'application/json',
         ],
+        'listProjectsOfToken' => [
+            'application/json',
+        ],
         'listToken' => [
             'application/json',
         ],
@@ -96,10 +190,10 @@ class TokensApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -138,12 +232,12 @@ class TokensApi
     /**
      * Operation createToken
      *
-     * @param  \AffinidiTdk\Clients\Iam\Model\CreateTokenInput $create_token_input CreateToken (required)
+     * @param  \AffinidiTdk\Clients\IamClient\Model\CreateTokenInput $create_token_input CreateToken (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createToken'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iam\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\Iam\Model\TokenDto|\AffinidiTdk\Clients\Iam\Model\InvalidParameterError|\AffinidiTdk\Clients\Iam\Model\UnexpectedError
+     * @return \AffinidiTdk\Clients\IamClient\Model\TokenDto|\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError
      */
     public function createToken($create_token_input, string $contentType = self::contentTypes['createToken'][0])
     {
@@ -154,12 +248,12 @@ class TokensApi
     /**
      * Operation createTokenWithHttpInfo
      *
-     * @param  \AffinidiTdk\Clients\Iam\Model\CreateTokenInput $create_token_input CreateToken (required)
+     * @param  \AffinidiTdk\Clients\IamClient\Model\CreateTokenInput $create_token_input CreateToken (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createToken'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iam\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\Iam\Model\TokenDto|\AffinidiTdk\Clients\Iam\Model\InvalidParameterError|\AffinidiTdk\Clients\Iam\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\IamClient\Model\TokenDto|\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
      */
     public function createTokenWithHttpInfo($create_token_input, string $contentType = self::contentTypes['createToken'][0])
     {
@@ -170,6 +264,16 @@ class TokensApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -190,11 +294,11 @@ class TokensApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\Iam\Model\TokenDto' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\TokenDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\TokenDto' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\TokenDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -212,16 +316,16 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\TokenDto', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\TokenDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\Iam\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -239,16 +343,16 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 500:
-                    if ('\AffinidiTdk\Clients\Iam\Model\UnexpectedError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\UnexpectedError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\UnexpectedError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\UnexpectedError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -266,7 +370,7 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\UnexpectedError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\UnexpectedError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -285,7 +389,7 @@ class TokensApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\Iam\Model\TokenDto';
+            $returnType = '\AffinidiTdk\Clients\IamClient\Model\TokenDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -318,7 +422,7 @@ class TokensApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\TokenDto',
+                        '\AffinidiTdk\Clients\IamClient\Model\TokenDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -326,7 +430,7 @@ class TokensApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -334,7 +438,7 @@ class TokensApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\UnexpectedError',
+                        '\AffinidiTdk\Clients\IamClient\Model\UnexpectedError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -347,7 +451,7 @@ class TokensApi
     /**
      * Operation createTokenAsync
      *
-     * @param  \AffinidiTdk\Clients\Iam\Model\CreateTokenInput $create_token_input CreateToken (required)
+     * @param  \AffinidiTdk\Clients\IamClient\Model\CreateTokenInput $create_token_input CreateToken (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -366,7 +470,7 @@ class TokensApi
     /**
      * Operation createTokenAsyncWithHttpInfo
      *
-     * @param  \AffinidiTdk\Clients\Iam\Model\CreateTokenInput $create_token_input CreateToken (required)
+     * @param  \AffinidiTdk\Clients\IamClient\Model\CreateTokenInput $create_token_input CreateToken (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -374,7 +478,7 @@ class TokensApi
      */
     public function createTokenAsyncWithHttpInfo($create_token_input, string $contentType = self::contentTypes['createToken'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\Iam\Model\TokenDto';
+        $returnType = '\AffinidiTdk\Clients\IamClient\Model\TokenDto';
         $request = $this->createTokenRequest($create_token_input, $contentType);
 
         return $this->client
@@ -416,7 +520,7 @@ class TokensApi
     /**
      * Create request for operation 'createToken'
      *
-     * @param  \AffinidiTdk\Clients\Iam\Model\CreateTokenInput $create_token_input CreateToken (required)
+     * @param  \AffinidiTdk\Clients\IamClient\Model\CreateTokenInput $create_token_input CreateToken (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -515,7 +619,7 @@ class TokensApi
      * @param  string $token_id token_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteToken'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iam\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -530,7 +634,7 @@ class TokensApi
      * @param  string $token_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteToken'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iam\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -543,6 +647,16 @@ class TokensApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -568,7 +682,7 @@ class TokensApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError',
+                        '\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -576,7 +690,7 @@ class TokensApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\IamClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -584,7 +698,7 @@ class TokensApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\UnexpectedError',
+                        '\AffinidiTdk\Clients\IamClient\Model\UnexpectedError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -753,9 +867,9 @@ class TokensApi
      * @param  string $token_id token_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getToken'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iam\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\Iam\Model\TokenDto|\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError|\AffinidiTdk\Clients\Iam\Model\NotFoundError|\AffinidiTdk\Clients\Iam\Model\UnexpectedError
+     * @return \AffinidiTdk\Clients\IamClient\Model\TokenDto|\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\IamClient\Model\NotFoundError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError
      */
     public function getToken($token_id, string $contentType = self::contentTypes['getToken'][0])
     {
@@ -769,9 +883,9 @@ class TokensApi
      * @param  string $token_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getToken'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iam\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\Iam\Model\TokenDto|\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError|\AffinidiTdk\Clients\Iam\Model\NotFoundError|\AffinidiTdk\Clients\Iam\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\IamClient\Model\TokenDto|\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\IamClient\Model\NotFoundError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getTokenWithHttpInfo($token_id, string $contentType = self::contentTypes['getToken'][0])
     {
@@ -782,6 +896,16 @@ class TokensApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -802,11 +926,11 @@ class TokensApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\Iam\Model\TokenDto' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\TokenDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\TokenDto' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\TokenDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -824,16 +948,16 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\TokenDto', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\TokenDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -851,16 +975,16 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\Iam\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -878,16 +1002,16 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 500:
-                    if ('\AffinidiTdk\Clients\Iam\Model\UnexpectedError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\UnexpectedError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\UnexpectedError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\UnexpectedError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -905,7 +1029,7 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\UnexpectedError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\UnexpectedError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -924,7 +1048,7 @@ class TokensApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\Iam\Model\TokenDto';
+            $returnType = '\AffinidiTdk\Clients\IamClient\Model\TokenDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -957,7 +1081,7 @@ class TokensApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\TokenDto',
+                        '\AffinidiTdk\Clients\IamClient\Model\TokenDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -965,7 +1089,7 @@ class TokensApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError',
+                        '\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -973,7 +1097,7 @@ class TokensApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\IamClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -981,7 +1105,7 @@ class TokensApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\UnexpectedError',
+                        '\AffinidiTdk\Clients\IamClient\Model\UnexpectedError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1021,7 +1145,7 @@ class TokensApi
      */
     public function getTokenAsyncWithHttpInfo($token_id, string $contentType = self::contentTypes['getToken'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\Iam\Model\TokenDto';
+        $returnType = '\AffinidiTdk\Clients\IamClient\Model\TokenDto';
         $request = $this->getTokenRequest($token_id, $contentType);
 
         return $this->client
@@ -1158,38 +1282,54 @@ class TokensApi
     }
 
     /**
-     * Operation listToken
+     * Operation listProjectsOfToken
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listToken'] to see the possible values for this operation
+     * @param  string $token_id token_id (required)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjectsOfToken'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iam\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\Iam\Model\TokenList|\AffinidiTdk\Clients\Iam\Model\InvalidParameterError|\AffinidiTdk\Clients\Iam\Model\UnexpectedError
+     * @return \AffinidiTdk\Clients\IamClient\Model\ProjectWithPolicyList|\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\IamClient\Model\NotFoundError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError
      */
-    public function listToken(string $contentType = self::contentTypes['listToken'][0])
+    public function listProjectsOfToken($token_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
     {
-        list($response) = $this->listTokenWithHttpInfo($contentType);
+        list($response) = $this->listProjectsOfTokenWithHttpInfo($token_id, $limit, $exclusive_start_key, $contentType);
         return $response;
     }
 
     /**
-     * Operation listTokenWithHttpInfo
+     * Operation listProjectsOfTokenWithHttpInfo
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listToken'] to see the possible values for this operation
+     * @param  string $token_id (required)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjectsOfToken'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iam\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\Iam\Model\TokenList|\AffinidiTdk\Clients\Iam\Model\InvalidParameterError|\AffinidiTdk\Clients\Iam\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\IamClient\Model\ProjectWithPolicyList|\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\IamClient\Model\NotFoundError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listTokenWithHttpInfo(string $contentType = self::contentTypes['listToken'][0])
+    public function listProjectsOfTokenWithHttpInfo($token_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
     {
-        $request = $this->listTokenRequest($contentType);
+        $request = $this->listProjectsOfTokenRequest($token_id, $limit, $exclusive_start_key, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1210,11 +1350,11 @@ class TokensApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\Iam\Model\TokenList' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\ProjectWithPolicyList' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\TokenList' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\ProjectWithPolicyList' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1232,16 +1372,16 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\TokenList', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\ProjectWithPolicyList', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 400:
-                    if ('\AffinidiTdk\Clients\Iam\Model\InvalidParameterError' === '\SplFileObject') {
+                case 403:
+                    if ('\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1259,16 +1399,43 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\AffinidiTdk\Clients\IamClient\Model\NotFoundError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\IamClient\Model\NotFoundError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 500:
-                    if ('\AffinidiTdk\Clients\Iam\Model\UnexpectedError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\UnexpectedError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\UnexpectedError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\UnexpectedError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1286,7 +1453,7 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\UnexpectedError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\UnexpectedError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1305,7 +1472,7 @@ class TokensApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\Iam\Model\TokenList';
+            $returnType = '\AffinidiTdk\Clients\IamClient\Model\ProjectWithPolicyList';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1338,15 +1505,23 @@ class TokensApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\TokenList',
+                        '\AffinidiTdk\Clients\IamClient\Model\ProjectWithPolicyList',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                     break;
-                case 400:
+                case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\IamClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1354,7 +1529,416 @@ class TokensApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\UnexpectedError',
+                        '\AffinidiTdk\Clients\IamClient\Model\UnexpectedError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listProjectsOfTokenAsync
+     *
+     * @param  string $token_id (required)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjectsOfToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listProjectsOfTokenAsync($token_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
+    {
+        return $this->listProjectsOfTokenAsyncWithHttpInfo($token_id, $limit, $exclusive_start_key, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listProjectsOfTokenAsyncWithHttpInfo
+     *
+     * @param  string $token_id (required)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjectsOfToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listProjectsOfTokenAsyncWithHttpInfo($token_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\IamClient\Model\ProjectWithPolicyList';
+        $request = $this->listProjectsOfTokenRequest($token_id, $limit, $exclusive_start_key, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listProjectsOfToken'
+     *
+     * @param  string $token_id (required)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjectsOfToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listProjectsOfTokenRequest($token_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
+    {
+
+        // verify the required parameter 'token_id' is set
+        if ($token_id === null || (is_array($token_id) && count($token_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $token_id when calling listProjectsOfToken'
+            );
+        }
+
+
+
+
+        $resourcePath = '/v1/tokens/{tokenId}/projects';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $exclusive_start_key,
+            'exclusiveStartKey', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($token_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'tokenId' . '}',
+                ObjectSerializer::toPathValue($token_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listToken
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listToken'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\IamClient\Model\TokenList|\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError
+     */
+    public function listToken(string $contentType = self::contentTypes['listToken'][0])
+    {
+        list($response) = $this->listTokenWithHttpInfo($contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listTokenWithHttpInfo
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listToken'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\IamClient\Model\TokenList|\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listTokenWithHttpInfo(string $contentType = self::contentTypes['listToken'][0])
+    {
+        $request = $this->listTokenRequest($contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\IamClient\Model\TokenList' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\IamClient\Model\TokenList' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\TokenList', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\AffinidiTdk\Clients\IamClient\Model\UnexpectedError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\IamClient\Model\UnexpectedError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\UnexpectedError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\IamClient\Model\TokenList';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\IamClient\Model\TokenList',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\IamClient\Model\UnexpectedError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1392,7 +1976,7 @@ class TokensApi
      */
     public function listTokenAsyncWithHttpInfo(string $contentType = self::contentTypes['listToken'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\Iam\Model\TokenList';
+        $returnType = '\AffinidiTdk\Clients\IamClient\Model\TokenList';
         $request = $this->listTokenRequest($contentType);
 
         return $this->client
@@ -1516,12 +2100,12 @@ class TokensApi
      * Operation updateToken
      *
      * @param  string $token_id token_id (required)
-     * @param  \AffinidiTdk\Clients\Iam\Model\UpdateTokenInput $update_token_input UpdateToken (required)
+     * @param  \AffinidiTdk\Clients\IamClient\Model\UpdateTokenInput $update_token_input UpdateToken (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateToken'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iam\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\Iam\Model\TokenDto|\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError|\AffinidiTdk\Clients\Iam\Model\NotFoundError|\AffinidiTdk\Clients\Iam\Model\UnexpectedError
+     * @return \AffinidiTdk\Clients\IamClient\Model\TokenDto|\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\IamClient\Model\NotFoundError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError
      */
     public function updateToken($token_id, $update_token_input, string $contentType = self::contentTypes['updateToken'][0])
     {
@@ -1533,12 +2117,12 @@ class TokensApi
      * Operation updateTokenWithHttpInfo
      *
      * @param  string $token_id (required)
-     * @param  \AffinidiTdk\Clients\Iam\Model\UpdateTokenInput $update_token_input UpdateToken (required)
+     * @param  \AffinidiTdk\Clients\IamClient\Model\UpdateTokenInput $update_token_input UpdateToken (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateToken'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Iam\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\Iam\Model\TokenDto|\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError|\AffinidiTdk\Clients\Iam\Model\NotFoundError|\AffinidiTdk\Clients\Iam\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\IamClient\Model\TokenDto|\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\IamClient\Model\NotFoundError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateTokenWithHttpInfo($token_id, $update_token_input, string $contentType = self::contentTypes['updateToken'][0])
     {
@@ -1549,6 +2133,16 @@ class TokensApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1569,11 +2163,11 @@ class TokensApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\Iam\Model\TokenDto' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\TokenDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\TokenDto' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\TokenDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1591,16 +2185,16 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\TokenDto', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\TokenDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1618,16 +2212,16 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\Iam\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1645,16 +2239,16 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 500:
-                    if ('\AffinidiTdk\Clients\Iam\Model\UnexpectedError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\UnexpectedError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Iam\Model\UnexpectedError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\UnexpectedError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1672,7 +2266,7 @@ class TokensApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Iam\Model\UnexpectedError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\UnexpectedError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1691,7 +2285,7 @@ class TokensApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\Iam\Model\TokenDto';
+            $returnType = '\AffinidiTdk\Clients\IamClient\Model\TokenDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1724,7 +2318,7 @@ class TokensApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\TokenDto',
+                        '\AffinidiTdk\Clients\IamClient\Model\TokenDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1732,7 +2326,7 @@ class TokensApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\ActionForbiddenError',
+                        '\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1740,7 +2334,7 @@ class TokensApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\IamClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1748,7 +2342,7 @@ class TokensApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Iam\Model\UnexpectedError',
+                        '\AffinidiTdk\Clients\IamClient\Model\UnexpectedError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1762,7 +2356,7 @@ class TokensApi
      * Operation updateTokenAsync
      *
      * @param  string $token_id (required)
-     * @param  \AffinidiTdk\Clients\Iam\Model\UpdateTokenInput $update_token_input UpdateToken (required)
+     * @param  \AffinidiTdk\Clients\IamClient\Model\UpdateTokenInput $update_token_input UpdateToken (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1782,7 +2376,7 @@ class TokensApi
      * Operation updateTokenAsyncWithHttpInfo
      *
      * @param  string $token_id (required)
-     * @param  \AffinidiTdk\Clients\Iam\Model\UpdateTokenInput $update_token_input UpdateToken (required)
+     * @param  \AffinidiTdk\Clients\IamClient\Model\UpdateTokenInput $update_token_input UpdateToken (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1790,7 +2384,7 @@ class TokensApi
      */
     public function updateTokenAsyncWithHttpInfo($token_id, $update_token_input, string $contentType = self::contentTypes['updateToken'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\Iam\Model\TokenDto';
+        $returnType = '\AffinidiTdk\Clients\IamClient\Model\TokenDto';
         $request = $this->updateTokenRequest($token_id, $update_token_input, $contentType);
 
         return $this->client
@@ -1833,7 +2427,7 @@ class TokensApi
      * Create request for operation 'updateToken'
      *
      * @param  string $token_id (required)
-     * @param  \AffinidiTdk\Clients\Iam\Model\UpdateTokenInput $update_token_input UpdateToken (required)
+     * @param  \AffinidiTdk\Clients\IamClient\Model\UpdateTokenInput $update_token_input UpdateToken (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

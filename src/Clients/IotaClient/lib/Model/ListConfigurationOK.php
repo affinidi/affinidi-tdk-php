@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iota\Model;
+namespace AffinidiTdk\Clients\IotaClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iota\ObjectSerializer;
+use \AffinidiTdk\Clients\IotaClient\ObjectSerializer;
 
 /**
  * ListConfigurationOK Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class ListConfigurationOK implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'configurations' => '\AffinidiTdk\Clients\Iota\Model\IotaConfigurationDto[]'
+        'configurations' => '\AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDto[]'
     ];
 
     /**
@@ -296,7 +296,7 @@ class ListConfigurationOK implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets configurations
      *
-     * @return \AffinidiTdk\Clients\Iota\Model\IotaConfigurationDto[]
+     * @return \AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDto[]
      */
     public function getConfigurations()
     {
@@ -306,7 +306,7 @@ class ListConfigurationOK implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets configurations
      *
-     * @param \AffinidiTdk\Clients\Iota\Model\IotaConfigurationDto[] $configurations configurations
+     * @param \AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDto[] $configurations configurations
      *
      * @return self
      */

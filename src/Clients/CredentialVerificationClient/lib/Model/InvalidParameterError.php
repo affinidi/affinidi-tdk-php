@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialVerification\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialVerification\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
  * InvalidParameterError Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialVerification
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -62,7 +62,7 @@ class InvalidParameterError implements ModelInterface, ArrayAccess, \JsonSeriali
         'message' => 'string',
         'http_status_code' => 'float',
         'trace_id' => 'string',
-        'details' => '\AffinidiTdk\Clients\CredentialVerification\Model\NotFoundErrorDetailsInner[]'
+        'details' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\NotFoundErrorDetailsInner[]'
     ];
 
     /**
@@ -537,7 +537,7 @@ class InvalidParameterError implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets details
      *
-     * @return \AffinidiTdk\Clients\CredentialVerification\Model\NotFoundErrorDetailsInner[]|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\NotFoundErrorDetailsInner[]|null
      */
     public function getDetails()
     {
@@ -547,7 +547,7 @@ class InvalidParameterError implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets details
      *
-     * @param \AffinidiTdk\Clients\CredentialVerification\Model\NotFoundErrorDetailsInner[]|null $details details
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\NotFoundErrorDetailsInner[]|null $details details
      *
      * @return self
      */

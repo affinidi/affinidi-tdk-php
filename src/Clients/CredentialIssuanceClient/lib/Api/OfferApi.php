@@ -4,7 +4,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Api;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -35,16 +35,107 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use AffinidiTdk\Clients\CredentialIssuance\ApiException;
-use AffinidiTdk\Clients\CredentialIssuance\Configuration;
-use AffinidiTdk\Clients\CredentialIssuance\HeaderSelector;
-use AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use AffinidiTdk\Clients\CredentialIssuanceClient\ApiException;
+use AffinidiTdk\Clients\CredentialIssuanceClient\Configuration;
+use AffinidiTdk\Clients\CredentialIssuanceClient\HeaderSelector;
+use AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
+
+/**
+ * InvalidJwtTokenError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class InvalidJwtTokenError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'InvalidJwtTokenError';
+
+    /**
+     * @var string
+     */
+    protected $message = 'JWT token is invalid';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $issue, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $this->message,
+            'issue' => $issue,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 403);
+        $this->issue = $issue;
+        $this->traceId = $traceId;
+    }
+}
+
+/**
+ * NotFoundError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\Wallets
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class NotFoundError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'NotFoundError';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $message, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $message,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 404);
+        $this->traceId = $traceId;
+    }
+}
 
 /**
  * OfferApi Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -84,10 +175,10 @@ class OfferApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -130,9 +221,9 @@ class OfferApi
      * @param  string $issuance_id issuanceId from credential_offer_uri (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCredentialOffer'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\CredentialIssuance\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponse|\AffinidiTdk\Clients\CredentialIssuance\Model\GetCredentialOffer400Response
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponse|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\GetCredentialOffer400Response
      */
     public function getCredentialOffer($project_id, $issuance_id, string $contentType = self::contentTypes['getCredentialOffer'][0])
     {
@@ -147,9 +238,9 @@ class OfferApi
      * @param  string $issuance_id issuanceId from credential_offer_uri (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCredentialOffer'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\CredentialIssuance\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponse|\AffinidiTdk\Clients\CredentialIssuance\Model\GetCredentialOffer400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponse|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\GetCredentialOffer400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getCredentialOfferWithHttpInfo($project_id, $issuance_id, string $contentType = self::contentTypes['getCredentialOffer'][0])
     {
@@ -160,6 +251,16 @@ class OfferApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -180,11 +281,11 @@ class OfferApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponse' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponse' !== 'string') {
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -202,16 +303,16 @@ class OfferApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponse', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\CredentialIssuance\Model\GetCredentialOffer400Response' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\GetCredentialOffer400Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuance\Model\GetCredentialOffer400Response' !== 'string') {
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\GetCredentialOffer400Response' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -229,7 +330,7 @@ class OfferApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuance\Model\GetCredentialOffer400Response', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\GetCredentialOffer400Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -248,7 +349,7 @@ class OfferApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponse';
+            $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -281,7 +382,7 @@ class OfferApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponse',
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -289,7 +390,7 @@ class OfferApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuance\Model\GetCredentialOffer400Response',
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\GetCredentialOffer400Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -331,7 +432,7 @@ class OfferApi
      */
     public function getCredentialOfferAsyncWithHttpInfo($project_id, $issuance_id, string $contentType = self::contentTypes['getCredentialOffer'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\CredentialIssuance\Model\CredentialOfferResponse';
+        $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialOfferResponse';
         $request = $this->getCredentialOfferRequest($project_id, $issuance_id, $contentType);
 
         return $this->client

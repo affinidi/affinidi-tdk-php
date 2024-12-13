@@ -1,21 +1,24 @@
-# AffinidiTdk\Clients\Iota\ConfigurationsApi
+# AffinidiTdk\Clients\IotaClient\ConfigurationsApi
 
 All URIs are relative to https://apse1.api.affinidi.io/ais, except if the operation defines another base path.
 
-| Method                                                                                  | HTTP request                                                               | Description |
-| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------- |
-| [**createIotaConfiguration()**](ConfigurationsApi.md#createIotaConfiguration)           | **POST** /v1/configurations                                                |             |
-| [**deleteIotaConfigurationById()**](ConfigurationsApi.md#deleteIotaConfigurationById)   | **DELETE** /v1/configurations/{configurationId}                            |             |
-| [**getIotaConfigurationById()**](ConfigurationsApi.md#getIotaConfigurationById)         | **GET** /v1/configurations/{configurationId}                               |             |
-| [**getIotaConfigurationMetaData()**](ConfigurationsApi.md#getIotaConfigurationMetaData) | **GET** /v1/projects/{projectId}/configurations/{configurationId}/metadata |             |
-| [**listIotaConfigurations()**](ConfigurationsApi.md#listIotaConfigurations)             | **GET** /v1/configurations                                                 |             |
-| [**updateIotaConfigurationById()**](ConfigurationsApi.md#updateIotaConfigurationById)   | **PATCH** /v1/configurations/{configurationId}                             |             |
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**createIotaConfiguration()**](ConfigurationsApi.md#createIotaConfiguration) | **POST** /v1/configurations |  |
+| [**deleteIotaConfigurationById()**](ConfigurationsApi.md#deleteIotaConfigurationById) | **DELETE** /v1/configurations/{configurationId} |  |
+| [**getIotaConfigurationById()**](ConfigurationsApi.md#getIotaConfigurationById) | **GET** /v1/configurations/{configurationId} |  |
+| [**getIotaConfigurationMetaData()**](ConfigurationsApi.md#getIotaConfigurationMetaData) | **GET** /v1/projects/{projectId}/configurations/{configurationId}/metadata |  |
+| [**listIotaConfigurations()**](ConfigurationsApi.md#listIotaConfigurations) | **GET** /v1/configurations |  |
+| [**updateIotaConfigurationById()**](ConfigurationsApi.md#updateIotaConfigurationById) | **PATCH** /v1/configurations/{configurationId} |  |
+
 
 ## `createIotaConfiguration()`
 
 ```php
-createIotaConfiguration($create_iota_configuration_input): \AffinidiTdk\Clients\Iota\Model\IotaConfigurationDto
+createIotaConfiguration($create_iota_configuration_input): \AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDto
 ```
+
+
 
 Creates a new Affinidi Iota Framework configuration.
 
@@ -27,18 +30,18 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Iota\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IotaClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iota\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IotaClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iota\Api\ConfigurationsApi(
+$apiInstance = new AffinidiTdk\Clients\IotaClient\Api\ConfigurationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$create_iota_configuration_input = new \AffinidiTdk\Clients\Iota\Model\CreateIotaConfigurationInput(); // \AffinidiTdk\Clients\Iota\Model\CreateIotaConfigurationInput | CreateConfiguration
+$create_iota_configuration_input = new \AffinidiTdk\Clients\IotaClient\Model\CreateIotaConfigurationInput(); // \AffinidiTdk\Clients\IotaClient\Model\CreateIotaConfigurationInput | CreateConfiguration
 
 try {
     $result = $apiInstance->createIotaConfiguration($create_iota_configuration_input);
@@ -50,13 +53,13 @@ try {
 
 ### Parameters
 
-| Name                                | Type                                                                                                         | Description         | Notes |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------- | ----- |
-| **create_iota_configuration_input** | [**\AffinidiTdk\Clients\Iota\Model\CreateIotaConfigurationInput**](../Model/CreateIotaConfigurationInput.md) | CreateConfiguration |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **create_iota_configuration_input** | [**\AffinidiTdk\Clients\IotaClient\Model\CreateIotaConfigurationInput**](../Model/CreateIotaConfigurationInput.md)| CreateConfiguration | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iota\Model\IotaConfigurationDto**](../Model/IotaConfigurationDto.md)
+[**\AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDto**](../Model/IotaConfigurationDto.md)
 
 ### Authorization
 
@@ -77,6 +80,8 @@ try {
 deleteIotaConfigurationById($configuration_id)
 ```
 
+
+
 Deletes an Affinidi Iota Framework configuration by ID.
 
 ### Example
@@ -87,12 +92,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Iota\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IotaClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iota\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IotaClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iota\Api\ConfigurationsApi(
+$apiInstance = new AffinidiTdk\Clients\IotaClient\Api\ConfigurationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -109,9 +114,9 @@ try {
 
 ### Parameters
 
-| Name                 | Type       | Description                                      | Notes |
-| -------------------- | ---------- | ------------------------------------------------ | ----- |
-| **configuration_id** | **string** | ID of the Affinidi Iota Framework configuration. |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **configuration_id** | **string**| ID of the Affinidi Iota Framework configuration. | |
 
 ### Return type
 
@@ -133,8 +138,10 @@ void (empty response body)
 ## `getIotaConfigurationById()`
 
 ```php
-getIotaConfigurationById($configuration_id): \AffinidiTdk\Clients\Iota\Model\IotaConfigurationDto
+getIotaConfigurationById($configuration_id): \AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDto
 ```
+
+
 
 Retrieves the details of an Affinidi Iota Framework configuration.
 
@@ -146,12 +153,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Iota\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IotaClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iota\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IotaClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iota\Api\ConfigurationsApi(
+$apiInstance = new AffinidiTdk\Clients\IotaClient\Api\ConfigurationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -169,13 +176,13 @@ try {
 
 ### Parameters
 
-| Name                 | Type       | Description                                      | Notes |
-| -------------------- | ---------- | ------------------------------------------------ | ----- |
-| **configuration_id** | **string** | ID of the Affinidi Iota Framework configuration. |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **configuration_id** | **string**| ID of the Affinidi Iota Framework configuration. | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iota\Model\IotaConfigurationDto**](../Model/IotaConfigurationDto.md)
+[**\AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDto**](../Model/IotaConfigurationDto.md)
 
 ### Authorization
 
@@ -193,8 +200,10 @@ try {
 ## `getIotaConfigurationMetaData()`
 
 ```php
-getIotaConfigurationMetaData($project_id, $configuration_id): \AffinidiTdk\Clients\Iota\Model\GetIotaConfigurationMetaDataOK
+getIotaConfigurationMetaData($project_id, $configuration_id): \AffinidiTdk\Clients\IotaClient\Model\GetIotaConfigurationMetaDataOK
 ```
+
+
 
 Retrieves the client metadata of an Affinidi Iota Framework configuration.
 
@@ -206,7 +215,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-$apiInstance = new AffinidiTdk\Clients\Iota\Api\ConfigurationsApi(
+$apiInstance = new AffinidiTdk\Clients\IotaClient\Api\ConfigurationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -224,14 +233,14 @@ try {
 
 ### Parameters
 
-| Name                 | Type       | Description                                      | Notes |
-| -------------------- | ---------- | ------------------------------------------------ | ----- |
-| **project_id**       | **string** | The ID of the project.                           |       |
-| **configuration_id** | **string** | ID of the Affinidi Iota Framework configuration. |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**| The ID of the project. | |
+| **configuration_id** | **string**| ID of the Affinidi Iota Framework configuration. | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iota\Model\GetIotaConfigurationMetaDataOK**](../Model/GetIotaConfigurationMetaDataOK.md)
+[**\AffinidiTdk\Clients\IotaClient\Model\GetIotaConfigurationMetaDataOK**](../Model/GetIotaConfigurationMetaDataOK.md)
 
 ### Authorization
 
@@ -249,8 +258,10 @@ No authorization required
 ## `listIotaConfigurations()`
 
 ```php
-listIotaConfigurations(): \AffinidiTdk\Clients\Iota\Model\ListConfigurationOK
+listIotaConfigurations(): \AffinidiTdk\Clients\IotaClient\Model\ListConfigurationOK
 ```
+
+
 
 List all Affinidi Iota Framework configurations.
 
@@ -262,12 +273,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Iota\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IotaClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iota\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IotaClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iota\Api\ConfigurationsApi(
+$apiInstance = new AffinidiTdk\Clients\IotaClient\Api\ConfigurationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -288,7 +299,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iota\Model\ListConfigurationOK**](../Model/ListConfigurationOK.md)
+[**\AffinidiTdk\Clients\IotaClient\Model\ListConfigurationOK**](../Model/ListConfigurationOK.md)
 
 ### Authorization
 
@@ -306,8 +317,10 @@ This endpoint does not need any parameter.
 ## `updateIotaConfigurationById()`
 
 ```php
-updateIotaConfigurationById($configuration_id, $update_configuration_by_id_input): \AffinidiTdk\Clients\Iota\Model\IotaConfigurationDto
+updateIotaConfigurationById($configuration_id, $update_configuration_by_id_input): \AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDto
 ```
+
+
 
 Updates the details of an Affinidi Iota Framework configuration by ID.
 
@@ -319,19 +332,19 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure API key authorization: ProjectTokenAuth
-$config = AffinidiTdk\Clients\Iota\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+$config = AffinidiTdk\Clients\IotaClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = AffinidiTdk\Clients\Iota\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+// $config = AffinidiTdk\Clients\IotaClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
 
-$apiInstance = new AffinidiTdk\Clients\Iota\Api\ConfigurationsApi(
+$apiInstance = new AffinidiTdk\Clients\IotaClient\Api\ConfigurationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $configuration_id = 'configuration_id_example'; // string | ID of the Affinidi Iota Framework configuration.
-$update_configuration_by_id_input = new \AffinidiTdk\Clients\Iota\Model\UpdateConfigurationByIdInput(); // \AffinidiTdk\Clients\Iota\Model\UpdateConfigurationByIdInput | UpdateConfigurationById
+$update_configuration_by_id_input = new \AffinidiTdk\Clients\IotaClient\Model\UpdateConfigurationByIdInput(); // \AffinidiTdk\Clients\IotaClient\Model\UpdateConfigurationByIdInput | UpdateConfigurationById
 
 try {
     $result = $apiInstance->updateIotaConfigurationById($configuration_id, $update_configuration_by_id_input);
@@ -343,14 +356,14 @@ try {
 
 ### Parameters
 
-| Name                                 | Type                                                                                                         | Description                                      | Notes |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ | ----- |
-| **configuration_id**                 | **string**                                                                                                   | ID of the Affinidi Iota Framework configuration. |       |
-| **update_configuration_by_id_input** | [**\AffinidiTdk\Clients\Iota\Model\UpdateConfigurationByIdInput**](../Model/UpdateConfigurationByIdInput.md) | UpdateConfigurationById                          |       |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **configuration_id** | **string**| ID of the Affinidi Iota Framework configuration. | |
+| **update_configuration_by_id_input** | [**\AffinidiTdk\Clients\IotaClient\Model\UpdateConfigurationByIdInput**](../Model/UpdateConfigurationByIdInput.md)| UpdateConfigurationById | |
 
 ### Return type
 
-[**\AffinidiTdk\Clients\Iota\Model\IotaConfigurationDto**](../Model/IotaConfigurationDto.md)
+[**\AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDto**](../Model/IotaConfigurationDto.md)
 
 ### Authorization
 

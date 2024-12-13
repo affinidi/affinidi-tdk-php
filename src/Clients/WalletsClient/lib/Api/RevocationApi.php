@@ -4,7 +4,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Wallets
+ * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Wallets\Api;
+namespace AffinidiTdk\Clients\WalletsClient\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -35,16 +35,107 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use AffinidiTdk\Clients\Wallets\ApiException;
-use AffinidiTdk\Clients\Wallets\Configuration;
-use AffinidiTdk\Clients\Wallets\HeaderSelector;
-use AffinidiTdk\Clients\Wallets\ObjectSerializer;
+use AffinidiTdk\Clients\WalletsClient\ApiException;
+use AffinidiTdk\Clients\WalletsClient\Configuration;
+use AffinidiTdk\Clients\WalletsClient\HeaderSelector;
+use AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
+
+/**
+ * InvalidJwtTokenError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\WalletsClient
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class InvalidJwtTokenError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'InvalidJwtTokenError';
+
+    /**
+     * @var string
+     */
+    protected $message = 'JWT token is invalid';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $issue, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $this->message,
+            'issue' => $issue,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 403);
+        $this->issue = $issue;
+        $this->traceId = $traceId;
+    }
+}
+
+/**
+ * NotFoundError
+ *
+ * @category Class
+ * @package  AffinidiTdk\Clients\Wallets
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+class NotFoundError extends \Exception
+{
+    /**
+     * @var string
+     */
+    private $name = 'NotFoundError';
+
+    /**
+     * @var string
+     */
+    private $issue;
+
+    /**
+     * @var string
+     */
+    private $traceId;
+
+    /**
+     * @param string $issue
+     * @param string $traceId
+     */
+    public function __construct(string $message, string $traceId)
+    {
+        $message = [
+            'name' => $this->name,
+            'message' => $message,
+            'traceId' => $traceId
+        ];
+
+        parent::__construct(json_encode($message), 404);
+        $this->traceId = $traceId;
+    }
+}
 
 /**
  * RevocationApi Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Wallets
+ * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -90,10 +181,10 @@ class RevocationApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -137,9 +228,9 @@ class RevocationApi
      * @param  string $status_id Description for statusId. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRevocationCredentialStatus'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Wallets\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto|\AffinidiTdk\Clients\Wallets\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError
      */
     public function getRevocationCredentialStatus($project_id, $wallet_id, $status_id, string $contentType = self::contentTypes['getRevocationCredentialStatus'][0])
     {
@@ -155,9 +246,9 @@ class RevocationApi
      * @param  string $status_id Description for statusId. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRevocationCredentialStatus'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Wallets\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto|\AffinidiTdk\Clients\Wallets\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getRevocationCredentialStatusWithHttpInfo($project_id, $wallet_id, $status_id, string $contentType = self::contentTypes['getRevocationCredentialStatus'][0])
     {
@@ -168,6 +259,16 @@ class RevocationApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -188,11 +289,11 @@ class RevocationApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto' !== 'string') {
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -210,16 +311,16 @@ class RevocationApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\AffinidiTdk\Clients\Wallets\Model\NotFoundError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Wallets\Model\NotFoundError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -237,7 +338,7 @@ class RevocationApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Wallets\Model\NotFoundError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -256,7 +357,7 @@ class RevocationApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto';
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -289,7 +390,7 @@ class RevocationApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto',
+                        '\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -297,7 +398,7 @@ class RevocationApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Wallets\Model\NotFoundError',
+                        '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -341,7 +442,7 @@ class RevocationApi
      */
     public function getRevocationCredentialStatusAsyncWithHttpInfo($project_id, $wallet_id, $status_id, string $contentType = self::contentTypes['getRevocationCredentialStatus'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto';
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto';
         $request = $this->getRevocationCredentialStatusRequest($project_id, $wallet_id, $status_id, $contentType);
 
         return $this->client
@@ -518,9 +619,9 @@ class RevocationApi
      * @param  string $wallet_id id of the wallet (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRevocationListCredential'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Wallets\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto|\AffinidiTdk\Clients\Wallets\Model\InvalidParameterError|\AffinidiTdk\Clients\Wallets\Model\OperationForbiddenError
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError
      * @deprecated
      */
     public function getRevocationListCredential($list_id, $wallet_id, string $contentType = self::contentTypes['getRevocationListCredential'][0])
@@ -538,9 +639,9 @@ class RevocationApi
      * @param  string $wallet_id id of the wallet (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRevocationListCredential'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Wallets\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto|\AffinidiTdk\Clients\Wallets\Model\InvalidParameterError|\AffinidiTdk\Clients\Wallets\Model\OperationForbiddenError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError, HTTP status code, HTTP response headers (array of strings)
      * @deprecated
      */
     public function getRevocationListCredentialWithHttpInfo($list_id, $wallet_id, string $contentType = self::contentTypes['getRevocationListCredential'][0])
@@ -552,6 +653,16 @@ class RevocationApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -572,11 +683,11 @@ class RevocationApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto' !== 'string') {
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -594,16 +705,16 @@ class RevocationApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\Wallets\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Wallets\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -621,16 +732,16 @@ class RevocationApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Wallets\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\AffinidiTdk\Clients\Wallets\Model\OperationForbiddenError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\Wallets\Model\OperationForbiddenError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -648,7 +759,7 @@ class RevocationApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\Wallets\Model\OperationForbiddenError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -667,7 +778,7 @@ class RevocationApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto';
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -700,7 +811,7 @@ class RevocationApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto',
+                        '\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -708,7 +819,7 @@ class RevocationApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Wallets\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -716,7 +827,7 @@ class RevocationApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Wallets\Model\OperationForbiddenError',
+                        '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -764,7 +875,7 @@ class RevocationApi
      */
     public function getRevocationListCredentialAsyncWithHttpInfo($list_id, $wallet_id, string $contentType = self::contentTypes['getRevocationListCredential'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\Wallets\Model\GetRevocationListCredentialResultDto';
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\GetRevocationListCredentialResultDto';
         $request = $this->getRevocationListCredentialRequest($list_id, $wallet_id, $contentType);
 
         return $this->client
@@ -923,10 +1034,10 @@ class RevocationApi
      * Revoke Credential.
      *
      * @param  string $wallet_id id of the wallet (required)
-     * @param  \AffinidiTdk\Clients\Wallets\Model\RevokeCredentialInput $revoke_credential_input RevokeCredential (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\RevokeCredentialInput $revoke_credential_input RevokeCredential (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['revokeCredential'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Wallets\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -941,10 +1052,10 @@ class RevocationApi
      * Revoke Credential.
      *
      * @param  string $wallet_id id of the wallet (required)
-     * @param  \AffinidiTdk\Clients\Wallets\Model\RevokeCredentialInput $revoke_credential_input RevokeCredential (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\RevokeCredentialInput $revoke_credential_input RevokeCredential (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['revokeCredential'] to see the possible values for this operation
      *
-     * @throws \AffinidiTdk\Clients\Wallets\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -957,6 +1068,16 @@ class RevocationApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -982,7 +1103,7 @@ class RevocationApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Wallets\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -990,7 +1111,7 @@ class RevocationApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Wallets\Model\OperationForbiddenError',
+                        '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -998,7 +1119,7 @@ class RevocationApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\Wallets\Model\EntityNotFoundError',
+                        '\AffinidiTdk\Clients\WalletsClient\Model\EntityNotFoundError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1014,7 +1135,7 @@ class RevocationApi
      * Revoke Credential.
      *
      * @param  string $wallet_id id of the wallet (required)
-     * @param  \AffinidiTdk\Clients\Wallets\Model\RevokeCredentialInput $revoke_credential_input RevokeCredential (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\RevokeCredentialInput $revoke_credential_input RevokeCredential (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['revokeCredential'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1036,7 +1157,7 @@ class RevocationApi
      * Revoke Credential.
      *
      * @param  string $wallet_id id of the wallet (required)
-     * @param  \AffinidiTdk\Clients\Wallets\Model\RevokeCredentialInput $revoke_credential_input RevokeCredential (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\RevokeCredentialInput $revoke_credential_input RevokeCredential (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['revokeCredential'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1074,7 +1195,7 @@ class RevocationApi
      * Create request for operation 'revokeCredential'
      *
      * @param  string $wallet_id id of the wallet (required)
-     * @param  \AffinidiTdk\Clients\Wallets\Model\RevokeCredentialInput $revoke_credential_input RevokeCredential (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\RevokeCredentialInput $revoke_credential_input RevokeCredential (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['revokeCredential'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

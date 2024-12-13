@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iam\Model;
+namespace AffinidiTdk\Clients\IamClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iam\ObjectSerializer;
+use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
 
 /**
  * UpdateTokenInput Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iam
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -59,7 +59,7 @@ class UpdateTokenInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'name' => 'string',
-        'authentication_method' => '\AffinidiTdk\Clients\Iam\Model\UpdateTokenPrivateKeyAuthenticationMethodDto'
+        'authentication_method' => '\AffinidiTdk\Clients\IamClient\Model\UpdateTokenPrivateKeyAuthenticationMethodDto'
     ];
 
     /**
@@ -336,7 +336,7 @@ class UpdateTokenInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets authentication_method
      *
-     * @return \AffinidiTdk\Clients\Iam\Model\UpdateTokenPrivateKeyAuthenticationMethodDto|null
+     * @return \AffinidiTdk\Clients\IamClient\Model\UpdateTokenPrivateKeyAuthenticationMethodDto|null
      */
     public function getAuthenticationMethod()
     {
@@ -346,7 +346,7 @@ class UpdateTokenInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets authentication_method
      *
-     * @param \AffinidiTdk\Clients\Iam\Model\UpdateTokenPrivateKeyAuthenticationMethodDto|null $authentication_method authentication_method
+     * @param \AffinidiTdk\Clients\IamClient\Model\UpdateTokenPrivateKeyAuthenticationMethodDto|null $authentication_method authentication_method
      *
      * @return self
      */

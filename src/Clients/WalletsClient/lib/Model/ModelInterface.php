@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Wallets\Model
+ * @package  AffinidiTdk\Clients\WalletsClient\Model
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,12 +27,12 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Wallets\Model;
+namespace AffinidiTdk\Clients\WalletsClient\Model;
 
 /**
  * Interface abstracting model access.
  *
- * @package AffinidiTdk\Clients\Wallets\Model
+ * @package AffinidiTdk\Clients\WalletsClient\Model
  * @author  OpenAPI Generator team
  */
 interface ModelInterface

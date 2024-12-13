@@ -1,8 +1,6 @@
 .gitignore
 .php-cs-fixer.dist.php
-.travis.yml
 README.md
-composer.json
 docs/Api/ConfigurationApi.md
 docs/Api/CredentialsApi.md
 docs/Api/DefaultApi.md
@@ -38,7 +36,6 @@ docs/Model/FlowData.md
 docs/Model/FlowDataStatusListsDetailsInner.md
 docs/Model/GenerateCredentials400Response.md
 docs/Model/GetCredentialOffer400Response.md
-docs/Model/GetStatusListResultDto.md
 docs/Model/InvalidCredentialRequestError.md
 docs/Model/InvalidCredentialTypeError.md
 docs/Model/InvalidIssuerWalletError.md
@@ -107,7 +104,6 @@ lib/Model/FlowData.php
 lib/Model/FlowDataStatusListsDetailsInner.php
 lib/Model/GenerateCredentials400Response.php
 lib/Model/GetCredentialOffer400Response.php
-lib/Model/GetStatusListResultDto.php
 lib/Model/InvalidCredentialRequestError.php
 lib/Model/InvalidCredentialTypeError.php
 lib/Model/InvalidIssuerWalletError.php

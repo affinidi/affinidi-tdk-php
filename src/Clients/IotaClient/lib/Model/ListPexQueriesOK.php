@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,16 +27,16 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\Iota\Model;
+namespace AffinidiTdk\Clients\IotaClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\Iota\ObjectSerializer;
+use \AffinidiTdk\Clients\IotaClient\ObjectSerializer;
 
 /**
  * ListPexQueriesOK Class Doc Comment
  *
  * @category Class
- * @package  AffinidiTdk\Clients\Iota
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -58,7 +58,7 @@ class ListPexQueriesOK implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'pex_queries' => '\AffinidiTdk\Clients\Iota\Model\PexQueryDto[]',
+        'pex_queries' => '\AffinidiTdk\Clients\IotaClient\Model\PexQueryDto[]',
         'last_evaluated_key' => 'string'
     ];
 
@@ -303,7 +303,7 @@ class ListPexQueriesOK implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets pex_queries
      *
-     * @return \AffinidiTdk\Clients\Iota\Model\PexQueryDto[]
+     * @return \AffinidiTdk\Clients\IotaClient\Model\PexQueryDto[]
      */
     public function getPexQueries()
     {
@@ -313,7 +313,7 @@ class ListPexQueriesOK implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets pex_queries
      *
-     * @param \AffinidiTdk\Clients\Iota\Model\PexQueryDto[] $pex_queries pex_queries
+     * @param \AffinidiTdk\Clients\IotaClient\Model\PexQueryDto[] $pex_queries pex_queries
      *
      * @return self
      */
