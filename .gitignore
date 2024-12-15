@@ -38,3 +38,8 @@ testem.log
 Thumbs.db
 
 .vscode
+
+.env
+
+# test
+.phpunit.result.cache
