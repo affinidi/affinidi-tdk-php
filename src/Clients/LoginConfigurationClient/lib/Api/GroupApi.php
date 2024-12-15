@@ -41,97 +41,6 @@ use AffinidiTdk\Clients\LoginConfigurationClient\HeaderSelector;
 use AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
 
 /**
- * InvalidJwtTokenError
- *
- * @category Class
- * @package  AffinidiTdk\Clients\LoginConfigurationClient
- * @author   OpenAPI Generator team
- * @link     https://openapi-generator.tech
- */
-class InvalidJwtTokenError extends \Exception
-{
-    /**
-     * @var string
-     */
-    private $name = 'InvalidJwtTokenError';
-
-    /**
-     * @var string
-     */
-    protected $message = 'JWT token is invalid';
-
-    /**
-     * @var string
-     */
-    private $issue;
-
-    /**
-     * @var string
-     */
-    private $traceId;
-
-    /**
-     * @param string $issue
-     * @param string $traceId
-     */
-    public function __construct(string $issue, string $traceId)
-    {
-        $message = [
-            'name' => $this->name,
-            'message' => $this->message,
-            'issue' => $issue,
-            'traceId' => $traceId
-        ];
-
-        parent::__construct(json_encode($message), 403);
-        $this->issue = $issue;
-        $this->traceId = $traceId;
-    }
-}
-
-/**
- * NotFoundError
- *
- * @category Class
- * @package  AffinidiTdk\Clients\Wallets
- * @author   OpenAPI Generator team
- * @link     https://openapi-generator.tech
- */
-class NotFoundError extends \Exception
-{
-    /**
-     * @var string
-     */
-    private $name = 'NotFoundError';
-
-    /**
-     * @var string
-     */
-    private $issue;
-
-    /**
-     * @var string
-     */
-    private $traceId;
-
-    /**
-     * @param string $issue
-     * @param string $traceId
-     */
-    public function __construct(string $message, string $traceId)
-    {
-        $message = [
-            'name' => $this->name,
-            'message' => $message,
-            'traceId' => $traceId
-        ];
-
-        parent::__construct(json_encode($message), 404);
-        $this->traceId = $traceId;
-    }
-}
-
-/**
  * GroupApi Class Doc Comment
  *
  * @category Class
@@ -193,10 +102,10 @@ class GroupApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ?ClientInterface $client = null,
-        ?Configuration $config = null,
-        ?HeaderSelector $selector = null,
-        int $hostIndex = 0
+        ClientInterface $client = null,
+        Configuration $config = null,
+        HeaderSelector $selector = null,
+        $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -269,16 +178,6 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                $jsonResponse = json_decode($e->getResponse()->getBody());
-                if ($jsonResponse->name === 'InvalidJwtTokenError') {
-                    $issue = $jsonResponse->details[0]->issue;
-                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
-                }
-
-                if ($jsonResponse->name === 'NotFoundError') {
-                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
-                }
-
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -706,16 +605,6 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                $jsonResponse = json_decode($e->getResponse()->getBody());
-                if ($jsonResponse->name === 'InvalidJwtTokenError') {
-                    $issue = $jsonResponse->details[0]->issue;
-                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
-                }
-
-                if ($jsonResponse->name === 'NotFoundError') {
-                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
-                }
-
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1124,16 +1013,6 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                $jsonResponse = json_decode($e->getResponse()->getBody());
-                if ($jsonResponse->name === 'InvalidJwtTokenError') {
-                    $issue = $jsonResponse->details[0]->issue;
-                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
-                }
-
-                if ($jsonResponse->name === 'NotFoundError') {
-                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
-                }
-
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1365,16 +1244,6 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                $jsonResponse = json_decode($e->getResponse()->getBody());
-                if ($jsonResponse->name === 'InvalidJwtTokenError') {
-                    $issue = $jsonResponse->details[0]->issue;
-                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
-                }
-
-                if ($jsonResponse->name === 'NotFoundError') {
-                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
-                }
-
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1754,9 +1623,9 @@ class GroupApi
      * Operation listGroupUserMappings
      *
      * @param  string $group_name group_name (required)
-     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
-     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
-     * @param  string|null $sort_order sort response in specific order. By default it is in desc order (optional)
+     * @param  int $limit Maximum number of records to fetch in a list (optional)
+     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string $sort_order sort response in specific order. By default it is in desc order (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUserMappings'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1773,9 +1642,9 @@ class GroupApi
      * Operation listGroupUserMappingsWithHttpInfo
      *
      * @param  string $group_name (required)
-     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
-     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
-     * @param  string|null $sort_order sort response in specific order. By default it is in desc order (optional)
+     * @param  int $limit Maximum number of records to fetch in a list (optional)
+     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string $sort_order sort response in specific order. By default it is in desc order (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUserMappings'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1791,16 +1660,6 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                $jsonResponse = json_decode($e->getResponse()->getBody());
-                if ($jsonResponse->name === 'InvalidJwtTokenError') {
-                    $issue = $jsonResponse->details[0]->issue;
-                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
-                }
-
-                if ($jsonResponse->name === 'NotFoundError') {
-                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
-                }
-
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -2014,9 +1873,9 @@ class GroupApi
      * Operation listGroupUserMappingsAsync
      *
      * @param  string $group_name (required)
-     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
-     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
-     * @param  string|null $sort_order sort response in specific order. By default it is in desc order (optional)
+     * @param  int $limit Maximum number of records to fetch in a list (optional)
+     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string $sort_order sort response in specific order. By default it is in desc order (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUserMappings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2036,9 +1895,9 @@ class GroupApi
      * Operation listGroupUserMappingsAsyncWithHttpInfo
      *
      * @param  string $group_name (required)
-     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
-     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
-     * @param  string|null $sort_order sort response in specific order. By default it is in desc order (optional)
+     * @param  int $limit Maximum number of records to fetch in a list (optional)
+     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string $sort_order sort response in specific order. By default it is in desc order (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUserMappings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2089,9 +1948,9 @@ class GroupApi
      * Create request for operation 'listGroupUserMappings'
      *
      * @param  string $group_name (required)
-     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
-     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
-     * @param  string|null $sort_order sort response in specific order. By default it is in desc order (optional)
+     * @param  int $limit Maximum number of records to fetch in a list (optional)
+     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  string $sort_order sort response in specific order. By default it is in desc order (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupUserMappings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2257,16 +2116,6 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                $jsonResponse = json_decode($e->getResponse()->getBody());
-                if ($jsonResponse->name === 'InvalidJwtTokenError') {
-                    $issue = $jsonResponse->details[0]->issue;
-                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
-                }
-
-                if ($jsonResponse->name === 'NotFoundError') {
-                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
-                }
-
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -2660,16 +2509,6 @@ class GroupApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                $jsonResponse = json_decode($e->getResponse()->getBody());
-                if ($jsonResponse->name === 'InvalidJwtTokenError') {
-                    $issue = $jsonResponse->details[0]->issue;
-                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
-                }
-
-                if ($jsonResponse->name === 'NotFoundError') {
-                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
-                }
-
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
