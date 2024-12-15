@@ -107,5 +107,3 @@ lib/Model/UserList.php
 lib/Model/WhoamiDto.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Model/ProjectWithPolicyDtoTest.php
-test/Model/ProjectWithPolicyListTest.php

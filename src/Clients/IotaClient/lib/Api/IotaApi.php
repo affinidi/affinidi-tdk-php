@@ -41,97 +41,6 @@ use AffinidiTdk\Clients\IotaClient\HeaderSelector;
 use AffinidiTdk\Clients\IotaClient\ObjectSerializer;
 
 /**
- * InvalidJwtTokenError
- *
- * @category Class
- * @package  AffinidiTdk\Clients\IotaClient
- * @author   OpenAPI Generator team
- * @link     https://openapi-generator.tech
- */
-class InvalidJwtTokenError extends \Exception
-{
-    /**
-     * @var string
-     */
-    private $name = 'InvalidJwtTokenError';
-
-    /**
-     * @var string
-     */
-    protected $message = 'JWT token is invalid';
-
-    /**
-     * @var string
-     */
-    private $issue;
-
-    /**
-     * @var string
-     */
-    private $traceId;
-
-    /**
-     * @param string $issue
-     * @param string $traceId
-     */
-    public function __construct(string $issue, string $traceId)
-    {
-        $message = [
-            'name' => $this->name,
-            'message' => $this->message,
-            'issue' => $issue,
-            'traceId' => $traceId
-        ];
-
-        parent::__construct(json_encode($message), 403);
-        $this->issue = $issue;
-        $this->traceId = $traceId;
-    }
-}
-
-/**
- * NotFoundError
- *
- * @category Class
- * @package  AffinidiTdk\Clients\Wallets
- * @author   OpenAPI Generator team
- * @link     https://openapi-generator.tech
- */
-class NotFoundError extends \Exception
-{
-    /**
-     * @var string
-     */
-    private $name = 'NotFoundError';
-
-    /**
-     * @var string
-     */
-    private $issue;
-
-    /**
-     * @var string
-     */
-    private $traceId;
-
-    /**
-     * @param string $issue
-     * @param string $traceId
-     */
-    public function __construct(string $message, string $traceId)
-    {
-        $message = [
-            'name' => $this->name,
-            'message' => $message,
-            'traceId' => $traceId
-        ];
-
-        parent::__construct(json_encode($message), 404);
-        $this->traceId = $traceId;
-    }
-}
-
-/**
  * IotaApi Class Doc Comment
  *
  * @category Class
@@ -187,10 +96,10 @@ class IotaApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ?ClientInterface $client = null,
-        ?Configuration $config = null,
-        ?HeaderSelector $selector = null,
-        int $hostIndex = 0
+        ClientInterface $client = null,
+        Configuration $config = null,
+        HeaderSelector $selector = null,
+        $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -261,16 +170,6 @@ class IotaApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                $jsonResponse = json_decode($e->getResponse()->getBody());
-                if ($jsonResponse->name === 'InvalidJwtTokenError') {
-                    $issue = $jsonResponse->details[0]->issue;
-                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
-                }
-
-                if ($jsonResponse->name === 'NotFoundError') {
-                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
-                }
-
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -640,16 +539,6 @@ class IotaApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                $jsonResponse = json_decode($e->getResponse()->getBody());
-                if ($jsonResponse->name === 'InvalidJwtTokenError') {
-                    $issue = $jsonResponse->details[0]->issue;
-                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
-                }
-
-                if ($jsonResponse->name === 'NotFoundError') {
-                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
-                }
-
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1024,16 +913,6 @@ class IotaApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                $jsonResponse = json_decode($e->getResponse()->getBody());
-                if ($jsonResponse->name === 'InvalidJwtTokenError') {
-                    $issue = $jsonResponse->details[0]->issue;
-                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
-                }
-
-                if ($jsonResponse->name === 'NotFoundError') {
-                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
-                }
-
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1443,16 +1322,6 @@ class IotaApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                $jsonResponse = json_decode($e->getResponse()->getBody());
-                if ($jsonResponse->name === 'InvalidJwtTokenError') {
-                    $issue = $jsonResponse->details[0]->issue;
-                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
-                }
-
-                if ($jsonResponse->name === 'NotFoundError') {
-                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
-                }
-
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1827,16 +1696,6 @@ class IotaApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                $jsonResponse = json_decode($e->getResponse()->getBody());
-                if ($jsonResponse->name === 'InvalidJwtTokenError') {
-                    $issue = $jsonResponse->details[0]->issue;
-                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
-                }
-
-                if ($jsonResponse->name === 'NotFoundError') {
-                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
-                }
-
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
