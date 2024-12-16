@@ -17,6 +17,8 @@ class LoginConfigurationClientIntegrationTest extends TestCase
         $result = $api->listLoginConfigurations();
         $resultJson = json_decode($result, true);
 
+        debugMessage('Login Configuration Client List Login Configurations Response', ['result' => $result], true);
+
         // Assert that 'configurations' key exists
         $this->assertArrayHasKey('configurations', $resultJson, 'The response does not contain a "configurations" key.');
 

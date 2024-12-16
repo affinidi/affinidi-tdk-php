@@ -21,6 +21,8 @@ class IotaClientIntegrationTest extends TestCase
         $result = $api->listIotaConfigurations();
         $resultJson = json_decode($result, true);
 
+        debugMessage('Iota Client List Configurations Response', ['result' => $result], true);
+
         // Assert that 'configurations' key exists
         $this->assertArrayHasKey('configurations', $resultJson, 'The response does not contain a "configurations" key.');
 
@@ -53,10 +55,12 @@ class IotaClientIntegrationTest extends TestCase
             'nonce' => substr(Uuid::uuid4()->toString(), 0, 10)
         ]);
 
+        debugMessage('Iota Redirect Flow Data Sharing Request Params', ['input' => $dataSharingRequestInput]);
         $result = $api->initiateDataSharingRequest($dataSharingRequestInput);
         $resultJson = json_decode($result, true);
 
         $dataSharingRequestResponse = $resultJson['data'];
+        debugMessage('Iota Redirect Flow Data Sharing Response', $dataSharingRequestResponse);
 
         $this->assertArrayHasKey('jwt', $dataSharingRequestResponse, 'The response does not contain a "jwt" key.');
 
@@ -81,8 +85,12 @@ class IotaClientIntegrationTest extends TestCase
             'vp_token' => getConfiguration()['vpToken']
         ]);
 
+        debugMessage('Iota Redirect Flow OIDC4VP Callback Params', ['input' => $iotaOIDC4VPCallbackInput]);
+
         $result = $apiCallback->iotOIDC4VPCallback($iotaOIDC4VPCallbackInput);
         $resultJson = json_decode($result, true);
+
+        debugMessage('Iota Redirect Flow OIDC4VP Callback Response', ['result' => $result]);
 
         $fetchIotaVpResponseInput = new FetchIOTAVPResponseInput([
             'configuration_id' => getConfiguration()['iotaConfigId'],
@@ -91,8 +99,12 @@ class IotaClientIntegrationTest extends TestCase
             'response_code' => $resultJson['response_code']
         ]);
 
+        debugMessage('Iota Redirect Flow VP Response Params', ['input' => $fetchIotaVpResponseInput]);
+
         $result = $api->fetchIotaVpResponse($fetchIotaVpResponseInput);
         $resultJson = json_decode($result, true);
+
+        debugMessage('Iota Redirect Flow VP Response', $resultJson, true);
 
         $this->assertNotEmpty($resultJson);
 

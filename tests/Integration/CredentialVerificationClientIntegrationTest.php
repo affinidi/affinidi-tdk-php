@@ -12,6 +12,7 @@ class CredentialVerificationClientIntegrationTest extends TestCase
         $credential = getConfiguration()['vc'];
         $credentials = json_encode(['verifiableCredentials' => [json_decode($credential)]]);
 
+        debugMessage('Credential Verification (valid)', ['credentials' => $credentials]);
         $api = new CredentialVerificationClient\Api\DefaultApi(
             new GuzzleHttp\Client(),
             $config
@@ -20,6 +21,7 @@ class CredentialVerificationClientIntegrationTest extends TestCase
         $result = $api->verifycredentials(json_decode($credentials));
         $resultJson = json_decode($result, true);
 
+        debugMessage('Credential Verification (valid) Response', ['result' => $result], true);
         // Assert that verification succeeded, no errors
         $errorsCount = count($resultJson['errors']);
         $this->assertEquals(0, $errorsCount, 'Failed to verify VC.');
@@ -34,6 +36,7 @@ class CredentialVerificationClientIntegrationTest extends TestCase
         $credential = getConfiguration()['vcInvalid'];
         $credentials = json_encode(['verifiableCredentials' => [json_decode($credential)]]);
 
+        debugMessage('Credential Verification (invalid)', ['credentials' => $credentials]);
         $api = new CredentialVerificationClient\Api\DefaultApi(
             new GuzzleHttp\Client(),
             $config
@@ -41,6 +44,8 @@ class CredentialVerificationClientIntegrationTest extends TestCase
 
         $result = $api->verifycredentials(json_decode($credentials));
         $resultJson = json_decode($result, true);
+
+        debugMessage('Credential Verification (invalid) Response', ['result' => $result], true);
 
         // Assert that verification failed
         $errorsCount = count($resultJson['errors']);

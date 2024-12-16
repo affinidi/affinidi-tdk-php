@@ -17,6 +17,8 @@ class IamClientIntegrationTest extends TestCase
         $result = $api->getPolicies(getConfiguration()['tokenId'], 'token');
         $resultJson = json_decode($result, true);
 
+        debugMessage('IAM Get Policies Result', ['result' => $result], true);
+
         // Assert that 'statement' key exists
         $this->assertArrayHasKey('statement', $resultJson, 'The response does not contain a "statement" key.');
 

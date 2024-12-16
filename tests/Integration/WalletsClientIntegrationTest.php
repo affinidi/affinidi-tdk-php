@@ -17,6 +17,8 @@ class WalletsClientIntegrationTest extends TestCase
         $result = $api->listWallets();
         $resultJson = json_decode($result, true);
 
+        debugMessage('Wallets Client List Wallets Response', ['result' => $result], true);
+
         // Assert that 'wallets' key exists
         $this->assertArrayHasKey('wallets', $resultJson, 'The response does not contain a "wallets" key.');
 

@@ -17,8 +17,11 @@ class CredentialIssuanceClientIntegrationTest extends TestCase
         $projectId = getConfiguration()['projectId'];
         $issuanceData = getConfiguration()['issuanceData'];
 
+        debugMessage('Start Credential Issuance', ['projectId' => $projectId, 'issuanceData' => $issuanceData]);
         $result = $api->startissuance($projectId, json_decode($issuanceData));
         $resultJson = json_decode($result, true);
+
+        debugMessage('Credential Issuance Response', ['result' => $result], true);
 
         // Assert that 'credentialOfferUri' key exists
         $this->assertArrayHasKey('credentialOfferUri', $resultJson, 'The response does not contain a "credentialOfferUri" key.');
