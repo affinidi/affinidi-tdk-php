@@ -10,8 +10,8 @@ class IamClientIntegrationTest extends TestCase
         $config = IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
 
         $api = new IamClient\Api\PoliciesApi(
-          new GuzzleHttp\Client(),
-          $config
+            new GuzzleHttp\Client(),
+            $config
         );
 
         $result = $api->getPolicies(getConfiguration()['tokenId'], 'token');

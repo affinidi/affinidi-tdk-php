@@ -10,8 +10,8 @@ class CredentialIssuanceClientIntegrationTest extends TestCase
         $config = CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
 
         $api = new CredentialIssuanceClient\Api\IssuanceApi(
-          new GuzzleHttp\Client(),
-          $config
+            new GuzzleHttp\Client(),
+            $config
         );
 
         $projectId = getConfiguration()['projectId'];

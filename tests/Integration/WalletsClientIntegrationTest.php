@@ -10,8 +10,8 @@ class WalletsClientIntegrationTest extends TestCase
         $config = WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
 
         $api = new WalletsClient\Api\WalletApi(
-          new GuzzleHttp\Client(),
-          $config
+            new GuzzleHttp\Client(),
+            $config
         );
 
         $result = $api->listWallets();

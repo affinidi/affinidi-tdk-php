@@ -10,8 +10,8 @@ class LoginConfigurationClientIntegrationTest extends TestCase
         $config = LoginConfigurationClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
 
         $api = new LoginConfigurationClient\Api\ConfigurationApi(
-          new GuzzleHttp\Client(),
-          $config
+            new GuzzleHttp\Client(),
+            $config
         );
 
         $result = $api->listLoginConfigurations();

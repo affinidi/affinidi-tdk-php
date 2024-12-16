@@ -3,6 +3,9 @@
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 use AffinidiTdk\Clients\IotaClient;
+use AffinidiTdk\Clients\IotaClient\Model\CallbackInput;
+use AffinidiTdk\Clients\IotaClient\Model\FetchIOTAVPResponseInput;
+use AffinidiTdk\Clients\IotaClient\Model\InitiateDataSharingRequestInput;
 
 class IotaClientIntegrationTest extends TestCase
 {
@@ -11,8 +14,8 @@ class IotaClientIntegrationTest extends TestCase
         $config = IotaClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
 
         $api = new IotaClient\Api\ConfigurationsApi(
-          new GuzzleHttp\Client(),
-          $config
+            new GuzzleHttp\Client(),
+            $config
         );
 
         $result = $api->listIotaConfigurations();
@@ -32,25 +35,25 @@ class IotaClientIntegrationTest extends TestCase
         $configCallback = IotaClient\Configuration::getDefaultConfiguration();
 
         $api = new IotaClient\Api\IotaApi(
-          new GuzzleHttp\Client(),
-          $config
+            new GuzzleHttp\Client(),
+            $config
         );
 
         $apiCallback = new IotaClient\Api\CallbackApi(
-          new GuzzleHttp\Client(),
-          $configCallback
+            new GuzzleHttp\Client(),
+            $configCallback
         );
 
-        $dataSharingRequestParams = [
-            'queryId' => getConfiguration()['queryId'],
-            'redirectUri' => getConfiguration()['redirectUri'],
-            'configurationId' => getConfiguration()['iotaConfigId'],
+        $dataSharingRequestInput = new InitiateDataSharingRequestInput([
+            'query_id' => getConfiguration()['queryId'],
+            'redirect_uri' => getConfiguration()['redirectUri'],
+            'configuration_id' => getConfiguration()['iotaConfigId'],
             'mode' => 'redirect',
-            'correlationId' => Uuid::uuid4()->toString(),
+            'correlation_id' => Uuid::uuid4()->toString(),
             'nonce' => substr(Uuid::uuid4()->toString(), 0, 10)
-        ];
+        ]);
 
-        $result = $api->initiateDataSharingRequest($dataSharingRequestParams);
+        $result = $api->initiateDataSharingRequest($dataSharingRequestInput);
         $resultJson = json_decode($result, true);
 
         $dataSharingRequestResponse = $resultJson['data'];
@@ -72,23 +75,23 @@ class IotaClientIntegrationTest extends TestCase
         $payloadJson = base64_decode(strtr($payloadBase64Url, '-_', '+/'));
         $payload = json_decode($payloadJson, true); // Convert JSON to an associative array
 
-        $iotOIDC4VPCallbackParams = [
+        $iotaOIDC4VPCallbackInput = new CallbackInput([
             'state' => $payload['state'],
             'presentation_submission' => getConfiguration()['presentationSubmission'],
             'vp_token' => getConfiguration()['vpToken']
-        ];
+        ]);
 
-        $result = $apiCallback->iotOIDC4VPCallback($iotOIDC4VPCallbackParams);
+        $result = $apiCallback->iotOIDC4VPCallback($iotaOIDC4VPCallbackInput);
         $resultJson = json_decode($result, true);
 
-        $fetchIotaVpResponseParams = [
-            'configurationId' => getConfiguration()['iotaConfigId'],
-            'correlationId' => $dataSharingRequestResponse['correlationId'],
-            'transactionId' => $dataSharingRequestResponse['transactionId'],
-            'responseCode' => $resultJson['response_code']
-        ];
+        $fetchIotaVpResponseInput = new FetchIOTAVPResponseInput([
+            'configuration_id' => getConfiguration()['iotaConfigId'],
+            'correlation_id' => $dataSharingRequestResponse['correlationId'],
+            'transaction_id' => $dataSharingRequestResponse['transactionId'],
+            'response_code' => $resultJson['response_code']
+        ]);
 
-        $result = $api->fetchIotaVpResponse($fetchIotaVpResponseParams);
+        $result = $api->fetchIotaVpResponse($fetchIotaVpResponseInput);
         $resultJson = json_decode($result, true);
 
         $this->assertNotEmpty($resultJson);

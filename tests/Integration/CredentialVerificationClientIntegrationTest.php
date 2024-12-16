@@ -13,8 +13,8 @@ class CredentialVerificationClientIntegrationTest extends TestCase
         $credentials = json_encode(['verifiableCredentials' => [json_decode($credential)]]);
 
         $api = new CredentialVerificationClient\Api\DefaultApi(
-          new GuzzleHttp\Client(),
-          $config
+            new GuzzleHttp\Client(),
+            $config
         );
 
         $result = $api->verifycredentials(json_decode($credentials));
@@ -35,8 +35,8 @@ class CredentialVerificationClientIntegrationTest extends TestCase
         $credentials = json_encode(['verifiableCredentials' => [json_decode($credential)]]);
 
         $api = new CredentialVerificationClient\Api\DefaultApi(
-          new GuzzleHttp\Client(),
-          $config
+            new GuzzleHttp\Client(),
+            $config
         );
 
         $result = $api->verifycredentials(json_decode($credentials));
@@ -44,10 +44,6 @@ class CredentialVerificationClientIntegrationTest extends TestCase
 
         // Assert that verification failed
         $errorsCount = count($resultJson['errors']);
-        $errorMessage = $resultJson['errors'][0];
-
-        echo "\nAssertion passed: VC verification failed with message: \n" . $errorMessage . "\n";
-
         $this->assertEquals($errorsCount, 1);
     }
 }
