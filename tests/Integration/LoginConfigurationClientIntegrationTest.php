@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use AffinidiTdk\Clients\LoginConfigurationClient;
 
-class LoginConfigurationsIntegrationTest extends TestCase
+class LoginConfigurationClientIntegrationTest extends TestCase
 {
     public function testListLoginConfigurations()
     {

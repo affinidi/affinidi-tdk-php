@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use AffinidiTdk\Clients\CredentialIssuanceClient;
 
-class CredentialIssuanceIntegrationTest extends TestCase
+class CredentialIssuanceClientIntegrationTest extends TestCase
 {
     public function testIssuance()
     {
