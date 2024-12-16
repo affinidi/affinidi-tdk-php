@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use AffinidiTdk\Clients\IamClient;
 
-class IamIntegrationTest extends TestCase
+class IamClientIntegrationTest extends TestCase
 {
     public function testGetPolicies()
     {

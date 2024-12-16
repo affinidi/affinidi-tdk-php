@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use AffinidiTdk\Clients\CredentialVerificationClient;
 
-class CredentialVerificationIntegrationTest extends TestCase
+class CredentialVerificationClientIntegrationTest extends TestCase
 {
     public function testVerifyCredentials()
     {
