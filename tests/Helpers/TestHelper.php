@@ -41,3 +41,17 @@ function getTokenCallback()
     return $tokenCallback;
 }
 
+function debugMessage(string $subject, array $details, bool $end = false)
+{
+    global $argv;
+    if (!in_array('--debug', $argv))
+        return;
+
+    echo "\n\n\033[0;34m", $subject, ":\033[0m";
+    foreach ($details as $key => $value) {
+        echo "\n - ", $key, ": ", $value, "";
+    }
+
+    if ($end)
+        echo "\n\n\033[0;34m================================================================================\033[0m\n\n";
+}

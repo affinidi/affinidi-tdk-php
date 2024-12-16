@@ -29,6 +29,10 @@
             "homepage": "https://affinidi.com"
         }
     ],
+    "scripts": {
+        "test": "phpunit",
+        "test:debug": "phpunit --debug"
+    },
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-curl": "*",

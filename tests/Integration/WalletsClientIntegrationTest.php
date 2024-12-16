@@ -10,12 +10,14 @@ class WalletsClientIntegrationTest extends TestCase
         $config = WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
 
         $api = new WalletsClient\Api\WalletApi(
-          new GuzzleHttp\Client(),
-          $config
+            new GuzzleHttp\Client(),
+            $config
         );
 
         $result = $api->listWallets();
         $resultJson = json_decode($result, true);
+
+        debugMessage('Wallets Client List Wallets Response', ['result' => $result], true);
 
         // Assert that 'wallets' key exists
         $this->assertArrayHasKey('wallets', $resultJson, 'The response does not contain a "wallets" key.');
