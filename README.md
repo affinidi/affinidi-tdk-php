@@ -27,13 +27,32 @@ To learn how to integrate Affinidi TDK and use the different modules into your a
 - [Affinidi TDK Libraries](https://docs.affinidi.com/dev-tools/affinidi-tdk/libraries/)
 - [Affinidi TDK Packages](https://docs.affinidi.com/dev-tools/affinidi-tdk/packages/)
 
-## Install
+## Requirements
+
+- PHP version 7.4 or higher
+- [Composer](https://getcomposer.org/download/) package manager
+
+## Installation
+
+### Setting up a New Project
+
+If you're starting a new project, first create a new directory and initialize it:
 
 ```bash
-composer install affinidi-tdk/affinidi-tdk-php
+mkdir my-affinidi-project
+cd my-affinidi-project
+composer init
 ```
 
-## Usage
+Install the Affinidi TDK via Composer:
+
+```bash
+composer require affinidi-tdk/affinidi-tdk-php
+```
+
+## Quick Start
+
+Here's a basic example of using the TDK to list wallets:
 
 ```php
 <?php
@@ -43,14 +62,16 @@ require_once 'vendor/autoload.php';
 use AuthProvider\AuthProvider;
 use AffinidiTdk\Clients\WalletsClient;
 
+// Configuration parameters
 $params = [
-  'privateKey' => "",
-  // 'apiGatewayUrl' => 'https://apse1.api.affinidi.io',
-  // 'tokenEndpoint' => 'https://apse1.auth.developer.affinidi.io/auth/oauth2/token',
-  'keyId' => '',
-  'passphrase' => '',
-  'projectId' => '',
-  'tokenId' => ''
+    'privateKey' => "",     // Your private key
+    'keyId' => '',         // Your key ID
+    'passphrase' => '',    // Your passphrase
+    'projectId' => '',     // Your project ID
+    'tokenId' => ''       // Your token ID
+    // Optional parameters:
+    // 'apiGatewayUrl' => 'https://apse1.api.affinidi.io',
+    // 'tokenEndpoint' => 'https://apse1.auth.developer.affinidi.io/auth/oauth2/token',
 ];
 
 $authProvider = new AuthProvider($params);
@@ -77,6 +98,20 @@ try {
   print_r($e->getMessage());
 }
 ```
+
+## Testing
+
+To run the test suite, use one of the following commands:
+
+```bash
+# Run all tests
+composer run-script test
+
+# Run tests with debug information
+composer run-script test:debug
+```
+
+The debug mode provides additional information that can be helpful when troubleshooting failing tests.
 
 ## Support & feedback
 
