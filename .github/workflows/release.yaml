@@ -41,6 +41,14 @@ jobs:
         path: .
         options: --exclude=vendor
 
+    - name: Prepare environment file
+      env:
+        TESTING_ENV_FILE_CONTENT: ${{ secrets.TESTING_ENV_FILE_CONTENT }}
+      run: echo $TESTING_ENV_FILE_CONTENT | base64 --decode > tests/Helpers/.env
+
+    - name: Integration tests
+      run: composer run-script test
+
   release:
     environment: release
     needs: 
