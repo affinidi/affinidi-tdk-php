@@ -1,6 +1,6 @@
 <?php
 /**
- * ProjectList
+ * TypedPrincipalId
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
 
 /**
- * ProjectList Class Doc Comment
+ * TypedPrincipalId Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\IamClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
+class TypedPrincipalId implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ProjectList';
+    protected static $openAPIModelName = 'TypedPrincipalId';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +58,7 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'projects' => '\AffinidiTdk\Clients\IamClient\Model\ProjectDto[]',
-        'last_evaluated_key' => 'string'
+        'principal_id' => 'string'
     ];
 
     /**
@@ -70,8 +69,7 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'projects' => null,
-        'last_evaluated_key' => null
+        'principal_id' => null
     ];
 
     /**
@@ -80,8 +78,7 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'projects' => false,
-        'last_evaluated_key' => false
+        'principal_id' => false
     ];
 
     /**
@@ -170,8 +167,7 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'projects' => 'projects',
-        'last_evaluated_key' => 'lastEvaluatedKey'
+        'principal_id' => 'principalId'
     ];
 
     /**
@@ -180,8 +176,7 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'projects' => 'setProjects',
-        'last_evaluated_key' => 'setLastEvaluatedKey'
+        'principal_id' => 'setPrincipalId'
     ];
 
     /**
@@ -190,8 +185,7 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'projects' => 'getProjects',
-        'last_evaluated_key' => 'getLastEvaluatedKey'
+        'principal_id' => 'getPrincipalId'
     ];
 
     /**
@@ -251,8 +245,7 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('projects', $data ?? [], null);
-        $this->setIfExists('last_evaluated_key', $data ?? [], null);
+        $this->setIfExists('principal_id', $data ?? [], null);
     }
 
     /**
@@ -282,8 +275,8 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['projects'] === null) {
-            $invalidProperties[] = "'projects' can't be null";
+        if ($this->container['principal_id'] === null) {
+            $invalidProperties[] = "'principal_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -301,55 +294,28 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets projects
+     * Gets principal_id
      *
-     * @return \AffinidiTdk\Clients\IamClient\Model\ProjectDto[]
+     * @return string
      */
-    public function getProjects()
+    public function getPrincipalId()
     {
-        return $this->container['projects'];
+        return $this->container['principal_id'];
     }
 
     /**
-     * Sets projects
+     * Sets principal_id
      *
-     * @param \AffinidiTdk\Clients\IamClient\Model\ProjectDto[] $projects projects
+     * @param string $principal_id principal_id
      *
      * @return self
      */
-    public function setProjects($projects)
+    public function setPrincipalId($principal_id)
     {
-        if (is_null($projects)) {
-            throw new \InvalidArgumentException('non-nullable projects cannot be null');
+        if (is_null($principal_id)) {
+            throw new \InvalidArgumentException('non-nullable principal_id cannot be null');
         }
-        $this->container['projects'] = $projects;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_evaluated_key
-     *
-     * @return string|null
-     */
-    public function getLastEvaluatedKey()
-    {
-        return $this->container['last_evaluated_key'];
-    }
-
-    /**
-     * Sets last_evaluated_key
-     *
-     * @param string|null $last_evaluated_key last_evaluated_key
-     *
-     * @return self
-     */
-    public function setLastEvaluatedKey($last_evaluated_key)
-    {
-        if (is_null($last_evaluated_key)) {
-            throw new \InvalidArgumentException('non-nullable last_evaluated_key cannot be null');
-        }
-        $this->container['last_evaluated_key'] = $last_evaluated_key;
+        $this->container['principal_id'] = $principal_id;
 
         return $this;
     }
