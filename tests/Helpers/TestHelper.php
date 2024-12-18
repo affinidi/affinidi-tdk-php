@@ -24,8 +24,6 @@ function getConfiguration()
         'vpToken' => $_ENV['VP_TOKEN'],
         'vc' => $_ENV['VERIFIABLE_CREDENTIAL'],
         'vcInvalid' => $_ENV['VERIFIABLE_CREDENTIAL_INVALID'],
-        'expiredJwt' => $_ENV['EXPIRED_JWT'],
-        'invalidJwt' => $_ENV['INVALID_JWT'],
         'issuanceData' => $_ENV['CREDENTIAL_ISSUANCE_DATA']
     ];
 }
