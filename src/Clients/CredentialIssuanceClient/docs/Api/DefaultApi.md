@@ -11,7 +11,7 @@ All URIs are relative to https://apse1.api.affinidi.io/cis, except if the operat
 ## `changeCredentialStatus()`
 
 ```php
-changeCredentialStatus($project_id, $configuration_id): \AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData
+changeCredentialStatus($project_id, $configuration_id, $change_credential_status_input): \AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData
 ```
 
 change credential status.
@@ -39,9 +39,10 @@ $apiInstance = new AffinidiTdk\Clients\CredentialIssuanceClient\Api\DefaultApi(
 );
 $project_id = 'project_id_example'; // string | project id
 $configuration_id = 'configuration_id_example'; // string | configuration id
+$change_credential_status_input = new \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatusInput(); // \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatusInput | Request body for changing credential status
 
 try {
-    $result = $apiInstance->changeCredentialStatus($project_id, $configuration_id);
+    $result = $apiInstance->changeCredentialStatus($project_id, $configuration_id, $change_credential_status_input);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->changeCredentialStatus: ', $e->getMessage(), PHP_EOL;
@@ -54,6 +55,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **project_id** | **string**| project id | |
 | **configuration_id** | **string**| configuration id | |
+| **change_credential_status_input** | [**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatusInput**](../Model/ChangeCredentialStatusInput.md)| Request body for changing credential status | |
 
 ### Return type
 
@@ -65,7 +67,7 @@ try {
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
