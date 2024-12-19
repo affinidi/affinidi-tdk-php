@@ -61,6 +61,6 @@ jobs:
 
     - uses: php-actions/phpstan@v3
       with:
-        path: src/AuthProvider,src/Common
+        path: src/AuthProvider src/Common
         level: 5
         memory_limit: 2048m
