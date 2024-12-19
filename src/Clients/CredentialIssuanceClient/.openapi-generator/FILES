@@ -75,6 +75,8 @@ lib/Api/WellKnownApi.php
 lib/ApiException.php
 lib/Configuration.php
 lib/HeaderSelector.php
+lib/InvalidJwtTokenError.php
+lib/InvalidParameterError.php
 lib/Model/ActionForbiddenError.php
 lib/Model/ActionForbiddenErrorDetailsInner.php
 lib/Model/ChangeCredentialStatusInput.php
@@ -135,5 +137,6 @@ lib/Model/UpdateIssuanceConfigInput.php
 lib/Model/VcClaimedError.php
 lib/Model/WellKnownOpenIdCredentialIssuerResponse.php
 lib/Model/WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner.php
+lib/NotFoundError.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
