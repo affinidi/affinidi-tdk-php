@@ -48,6 +48,8 @@ lib/Api/DefaultApi.php
 lib/ApiException.php
 lib/Configuration.php
 lib/HeaderSelector.php
+lib/InvalidJwtTokenError.php
+lib/InvalidParameterError.php
 lib/Model/Constraints.php
 lib/Model/ConstraintsStatuses.php
 lib/Model/CredentialRequirements.php
@@ -91,5 +93,6 @@ lib/Model/W3cPresentation.php
 lib/Model/W3cPresentationContext.php
 lib/Model/W3cPresentationContextOneOfInner.php
 lib/Model/W3cProof.php
+lib/NotFoundError.php
 lib/ObjectSerializer.php
 phpunit.xml.dist

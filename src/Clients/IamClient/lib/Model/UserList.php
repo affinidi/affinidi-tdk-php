@@ -58,7 +58,8 @@ class UserList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'records' => '\AffinidiTdk\Clients\IamClient\Model\UserDto[]'
+        'records' => '\AffinidiTdk\Clients\IamClient\Model\UserDto[]',
+        'last_evaluated_key' => 'string'
     ];
 
     /**
@@ -69,7 +70,8 @@ class UserList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'records' => null
+        'records' => null,
+        'last_evaluated_key' => null
     ];
 
     /**
@@ -78,7 +80,8 @@ class UserList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'records' => false
+        'records' => false,
+        'last_evaluated_key' => false
     ];
 
     /**
@@ -167,7 +170,8 @@ class UserList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'records' => 'records'
+        'records' => 'records',
+        'last_evaluated_key' => 'lastEvaluatedKey'
     ];
 
     /**
@@ -176,7 +180,8 @@ class UserList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'records' => 'setRecords'
+        'records' => 'setRecords',
+        'last_evaluated_key' => 'setLastEvaluatedKey'
     ];
 
     /**
@@ -185,7 +190,8 @@ class UserList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'records' => 'getRecords'
+        'records' => 'getRecords',
+        'last_evaluated_key' => 'getLastEvaluatedKey'
     ];
 
     /**
@@ -246,6 +252,7 @@ class UserList implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('records', $data ?? [], null);
+        $this->setIfExists('last_evaluated_key', $data ?? [], null);
     }
 
     /**
@@ -316,6 +323,33 @@ class UserList implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable records cannot be null');
         }
         $this->container['records'] = $records;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_evaluated_key
+     *
+     * @return string|null
+     */
+    public function getLastEvaluatedKey()
+    {
+        return $this->container['last_evaluated_key'];
+    }
+
+    /**
+     * Sets last_evaluated_key
+     *
+     * @param string|null $last_evaluated_key last_evaluated_key
+     *
+     * @return self
+     */
+    public function setLastEvaluatedKey($last_evaluated_key)
+    {
+        if (is_null($last_evaluated_key)) {
+            throw new \InvalidArgumentException('non-nullable last_evaluated_key cannot be null');
+        }
+        $this->container['last_evaluated_key'] = $last_evaluated_key;
 
         return $this;
     }
