@@ -60,6 +60,9 @@ jobs:
           app_id: ${{ secrets.RELEASE_BOT_APP_ID }}
           private_key: ${{ secrets.RELEASE_BOT_PKEY }}      
       - uses: actions/checkout@v4
+        with:  
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
