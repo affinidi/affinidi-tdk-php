@@ -108,21 +108,14 @@ class IotaClientIntegrationTest extends TestCase
 
         $this->assertNotEmpty($resultJson);
 
-        // TODO: uncomment the below, once iota-service is fixed and clients are regenerated:
-        //       FetchIOTAVPResponseOK Model should have vpToken and presentationSubmission instead of vp_token and presentation_submission
-
         // // Assert that 'vpToken' key exists
-        // $this->assertArrayHasKey('vpToken', $resultJson, 'The response does not contain a "vpToken" key.');
+        $this->assertArrayHasKey('vpToken', $resultJson, 'The response does not contain a "vpToken" key.');
 
-        // $vp = $resultJson['vpToken'];
-        // $vpJson = json_decode($vp, true);
+        $vp = $resultJson['vpToken'];
+        $vpJson = json_decode($vp, true);
 
-        // // Assert that the count of credentials is greater than 0
-        // $credentialsCount = count($vpJson['verifiableCredential']);
-        // $this->assertGreaterThan(0, $credentialsCount, 'No VCs were returned in the response.');
-
-        // // NOTE: for debugging, no need printing email
-        // $email = $vpJson['verifiableCredential'][0]['credentialSubject']['email'];
-        // echo $email;
+        // Assert that the count of credentials is greater than 0
+        $credentialsCount = count($vpJson['verifiableCredential']);
+        $this->assertGreaterThan(0, $credentialsCount, 'No VCs were returned in the response.');
     }
 }
