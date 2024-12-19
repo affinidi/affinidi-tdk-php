@@ -55,6 +55,10 @@ jobs:
       with:
         path: .
         options: --exclude=vendor
+
+    - name: create empty .env file.
+      run: echo "" > tests/Helpers/.env
+
     - uses: php-actions/phpstan@v3
       with:
         path: src/AuthProvider,src/Common
