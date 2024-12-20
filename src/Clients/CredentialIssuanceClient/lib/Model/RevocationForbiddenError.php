@@ -1,6 +1,6 @@
 <?php
 /**
- * ChangeCredentialStatusInput
+ * RevocationForbiddenError
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
- * ChangeCredentialStatusInput Class Doc Comment
+ * RevocationForbiddenError Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\CredentialIssuanceClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class RevocationForbiddenError implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ChangeCredentialStatusInput';
+    protected static $openAPIModelName = 'RevocationForbiddenError';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +58,11 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'change_reason' => 'string',
-        'issuance_record_id' => 'string'
+        'name' => 'string',
+        'message' => 'string',
+        'http_status_code' => 'float',
+        'trace_id' => 'string',
+        'details' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]'
     ];
 
     /**
@@ -70,8 +73,11 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'change_reason' => null,
-        'issuance_record_id' => null
+        'name' => null,
+        'message' => null,
+        'http_status_code' => null,
+        'trace_id' => null,
+        'details' => null
     ];
 
     /**
@@ -80,8 +86,11 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'change_reason' => false,
-        'issuance_record_id' => false
+        'name' => false,
+        'message' => false,
+        'http_status_code' => false,
+        'trace_id' => false,
+        'details' => false
     ];
 
     /**
@@ -170,8 +179,11 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'change_reason' => 'changeReason',
-        'issuance_record_id' => 'issuanceRecordId'
+        'name' => 'name',
+        'message' => 'message',
+        'http_status_code' => 'httpStatusCode',
+        'trace_id' => 'traceId',
+        'details' => 'details'
     ];
 
     /**
@@ -180,8 +192,11 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'change_reason' => 'setChangeReason',
-        'issuance_record_id' => 'setIssuanceRecordId'
+        'name' => 'setName',
+        'message' => 'setMessage',
+        'http_status_code' => 'setHttpStatusCode',
+        'trace_id' => 'setTraceId',
+        'details' => 'setDetails'
     ];
 
     /**
@@ -190,8 +205,11 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'change_reason' => 'getChangeReason',
-        'issuance_record_id' => 'getIssuanceRecordId'
+        'name' => 'getName',
+        'message' => 'getMessage',
+        'http_status_code' => 'getHttpStatusCode',
+        'trace_id' => 'getTraceId',
+        'details' => 'getDetails'
     ];
 
     /**
@@ -235,19 +253,43 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
         return self::$openAPIModelName;
     }
 
-    public const CHANGE_REASON_INVALID_CREDENTIAL = 'INVALID_CREDENTIAL';
-    public const CHANGE_REASON_COMPROMISED_ISSUER = 'COMPROMISED_ISSUER';
+    public const NAME_REVOCATION_FORBIDDEN_ERROR = 'RevocationForbiddenError';
+    public const MESSAGE_RELATED_VC_HAS_NOT_BEEN_CLAIMED_YET = 'Related VC has not been claimed yet';
+    public const HTTP_STATUS_CODE_NUMBER_400 = 400;
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getChangeReasonAllowableValues()
+    public function getNameAllowableValues()
     {
         return [
-            self::CHANGE_REASON_INVALID_CREDENTIAL,
-            self::CHANGE_REASON_COMPROMISED_ISSUER,
+            self::NAME_REVOCATION_FORBIDDEN_ERROR,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getMessageAllowableValues()
+    {
+        return [
+            self::MESSAGE_RELATED_VC_HAS_NOT_BEEN_CLAIMED_YET,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getHttpStatusCodeAllowableValues()
+    {
+        return [
+            self::HTTP_STATUS_CODE_NUMBER_400,
         ];
     }
 
@@ -266,8 +308,11 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('change_reason', $data ?? [], null);
-        $this->setIfExists('issuance_record_id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('http_status_code', $data ?? [], null);
+        $this->setIfExists('trace_id', $data ?? [], null);
+        $this->setIfExists('details', $data ?? [], null);
     }
 
     /**
@@ -297,15 +342,45 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getChangeReasonAllowableValues();
-        if (!is_null($this->container['change_reason']) && !in_array($this->container['change_reason'], $allowedValues, true)) {
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        $allowedValues = $this->getNameAllowableValues();
+        if (!is_null($this->container['name']) && !in_array($this->container['name'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'change_reason', must be one of '%s'",
-                $this->container['change_reason'],
+                "invalid value '%s' for 'name', must be one of '%s'",
+                $this->container['name'],
                 implode("', '", $allowedValues)
             );
         }
 
+        if ($this->container['message'] === null) {
+            $invalidProperties[] = "'message' can't be null";
+        }
+        $allowedValues = $this->getMessageAllowableValues();
+        if (!is_null($this->container['message']) && !in_array($this->container['message'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'message', must be one of '%s'",
+                $this->container['message'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['http_status_code'] === null) {
+            $invalidProperties[] = "'http_status_code' can't be null";
+        }
+        $allowedValues = $this->getHttpStatusCodeAllowableValues();
+        if (!is_null($this->container['http_status_code']) && !in_array($this->container['http_status_code'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'http_status_code', must be one of '%s'",
+                $this->container['http_status_code'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['trace_id'] === null) {
+            $invalidProperties[] = "'trace_id' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -322,65 +397,166 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets change_reason
+     * Gets name
      *
-     * @return string|null
+     * @return string
      */
-    public function getChangeReason()
+    public function getName()
     {
-        return $this->container['change_reason'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets change_reason
+     * Sets name
      *
-     * @param string|null $change_reason reason for revocation
+     * @param string $name name
      *
      * @return self
      */
-    public function setChangeReason($change_reason)
+    public function setName($name)
     {
-        if (is_null($change_reason)) {
-            throw new \InvalidArgumentException('non-nullable change_reason cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $allowedValues = $this->getChangeReasonAllowableValues();
-        if (!in_array($change_reason, $allowedValues, true)) {
+        $allowedValues = $this->getNameAllowableValues();
+        if (!in_array($name, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'change_reason', must be one of '%s'",
-                    $change_reason,
+                    "Invalid value '%s' for 'name', must be one of '%s'",
+                    $name,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['change_reason'] = $change_reason;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets issuance_record_id
+     * Gets message
      *
-     * @return string|null
+     * @return string
      */
-    public function getIssuanceRecordId()
+    public function getMessage()
     {
-        return $this->container['issuance_record_id'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets issuance_record_id
+     * Sets message
      *
-     * @param string|null $issuance_record_id issuance_record_id
+     * @param string $message message
      *
      * @return self
      */
-    public function setIssuanceRecordId($issuance_record_id)
+    public function setMessage($message)
     {
-        if (is_null($issuance_record_id)) {
-            throw new \InvalidArgumentException('non-nullable issuance_record_id cannot be null');
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
-        $this->container['issuance_record_id'] = $issuance_record_id;
+        $allowedValues = $this->getMessageAllowableValues();
+        if (!in_array($message, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'message', must be one of '%s'",
+                    $message,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets http_status_code
+     *
+     * @return float
+     */
+    public function getHttpStatusCode()
+    {
+        return $this->container['http_status_code'];
+    }
+
+    /**
+     * Sets http_status_code
+     *
+     * @param float $http_status_code http_status_code
+     *
+     * @return self
+     */
+    public function setHttpStatusCode($http_status_code)
+    {
+        if (is_null($http_status_code)) {
+            throw new \InvalidArgumentException('non-nullable http_status_code cannot be null');
+        }
+        $allowedValues = $this->getHttpStatusCodeAllowableValues();
+        if (!in_array($http_status_code, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'http_status_code', must be one of '%s'",
+                    $http_status_code,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['http_status_code'] = $http_status_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets trace_id
+     *
+     * @return string
+     */
+    public function getTraceId()
+    {
+        return $this->container['trace_id'];
+    }
+
+    /**
+     * Sets trace_id
+     *
+     * @param string $trace_id trace_id
+     *
+     * @return self
+     */
+    public function setTraceId($trace_id)
+    {
+        if (is_null($trace_id)) {
+            throw new \InvalidArgumentException('non-nullable trace_id cannot be null');
+        }
+        $this->container['trace_id'] = $trace_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets details
+     *
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]|null
+     */
+    public function getDetails()
+    {
+        return $this->container['details'];
+    }
+
+    /**
+     * Sets details
+     *
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]|null $details details
+     *
+     * @return self
+     */
+    public function setDetails($details)
+    {
+        if (is_null($details)) {
+            throw new \InvalidArgumentException('non-nullable details cannot be null');
+        }
+        $this->container['details'] = $details;
 
         return $this;
     }
