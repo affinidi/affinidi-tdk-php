@@ -56,11 +56,16 @@ jobs:
         path: .
         options: --exclude=vendor
 
-    - name: create empty .env file.
-      run: echo "" > tests/Helpers/.env
+    - name: Prepare environment file
+      env:
+        TESTING_ENV_FILE_CONTENT: ${{ secrets.TESTING_ENV_FILE_CONTENT }}
+      run: echo $TESTING_ENV_FILE_CONTENT | base64 --decode > tests/Helpers/.env
 
     - uses: php-actions/phpstan@v3
       with:
         path: src/AuthProvider src/Common
         level: 5
         memory_limit: 2048m
+
+    - name: Integration tests
+      run: composer run-script test
