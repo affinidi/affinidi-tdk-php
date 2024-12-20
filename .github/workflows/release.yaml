@@ -41,6 +41,22 @@ jobs:
         path: .
         options: --exclude=vendor
 
+    - name: Cache testing env file
+      uses: actions/cache@v4
+      id: testing-env-cache
+      with:
+        path: tests/Helpers/.env
+        key: ${{ runner.os }}-testing-env-${{ hashFiles('tests/Helpers/.env') }}
+
+    - if: ${{ steps.testing-env-cache.outputs.cache-hit != 'true' }}
+      name: Prepare environment file
+      env:
+        TESTING_ENV_FILE_CONTENT: ${{ secrets.TESTING_ENV_FILE_CONTENT }}
+      run: echo $TESTING_ENV_FILE_CONTENT | base64 --decode > tests/Helpers/.env
+
+    - name: Integration tests
+      run: composer run-script test
+
   release:
     environment: release
     needs: 
