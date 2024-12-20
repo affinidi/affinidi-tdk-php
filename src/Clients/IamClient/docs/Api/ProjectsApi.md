@@ -195,7 +195,7 @@ void (empty response body)
 ## `listPrincipalsOfProject()`
 
 ```php
-listPrincipalsOfProject(): \AffinidiTdk\Clients\IamClient\Model\UserList
+listPrincipalsOfProject($limit, $exclusive_start_key): \AffinidiTdk\Clients\IamClient\Model\UserList
 ```
 
 
@@ -219,9 +219,11 @@ $apiInstance = new AffinidiTdk\Clients\IamClient\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
+$limit = 100; // int | Maximum number of records to fetch in a list
+$exclusive_start_key = 'exclusive_start_key_example'; // string | The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation.
 
 try {
-    $result = $apiInstance->listPrincipalsOfProject();
+    $result = $apiInstance->listPrincipalsOfProject($limit, $exclusive_start_key);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProjectsApi->listPrincipalsOfProject: ', $e->getMessage(), PHP_EOL;
@@ -230,7 +232,10 @@ try {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **limit** | **int**| Maximum number of records to fetch in a list | [optional] [default to 100] |
+| **exclusive_start_key** | **string**| The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. | [optional] |
 
 ### Return type
 
@@ -252,7 +257,7 @@ This endpoint does not need any parameter.
 ## `listProject()`
 
 ```php
-listProject(): \AffinidiTdk\Clients\IamClient\Model\ProjectList
+listProject($limit, $exclusive_start_key): \AffinidiTdk\Clients\IamClient\Model\ProjectList
 ```
 
 
@@ -276,9 +281,11 @@ $apiInstance = new AffinidiTdk\Clients\IamClient\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
+$limit = 100; // int | Maximum number of records to fetch in a list
+$exclusive_start_key = 'exclusive_start_key_example'; // string | The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation.
 
 try {
-    $result = $apiInstance->listProject();
+    $result = $apiInstance->listProject($limit, $exclusive_start_key);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProjectsApi->listProject: ', $e->getMessage(), PHP_EOL;
@@ -287,7 +294,10 @@ try {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **limit** | **int**| Maximum number of records to fetch in a list | [optional] [default to 100] |
+| **exclusive_start_key** | **string**| The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. | [optional] |
 
 ### Return type
 

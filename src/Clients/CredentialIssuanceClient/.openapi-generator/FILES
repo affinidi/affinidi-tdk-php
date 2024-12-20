@@ -9,7 +9,9 @@ docs/Api/OfferApi.md
 docs/Api/WellKnownApi.md
 docs/Model/ActionForbiddenError.md
 docs/Model/ActionForbiddenErrorDetailsInner.md
+docs/Model/ChangeCredentialStatus400Response.md
 docs/Model/ChangeCredentialStatusInput.md
+docs/Model/ChangeStatusForbiddenError.md
 docs/Model/CorsGenerateCredentialsOK.md
 docs/Model/CorsGetCredentialOfferOK.md
 docs/Model/CorsGetWellKnownOpenIdCredentialIssuerOK.md
@@ -53,6 +55,7 @@ docs/Model/MissingHolderDidError.md
 docs/Model/NotFoundError.md
 docs/Model/ProjectCredentialConfigExistError.md
 docs/Model/ProjectCredentialConfigNotExistError.md
+docs/Model/RevocationForbiddenError.md
 docs/Model/StartIssuance400Response.md
 docs/Model/StartIssuanceInput.md
 docs/Model/StartIssuanceInputDataInner.md
@@ -75,9 +78,13 @@ lib/Api/WellKnownApi.php
 lib/ApiException.php
 lib/Configuration.php
 lib/HeaderSelector.php
+lib/InvalidJwtTokenError.php
+lib/InvalidParameterError.php
 lib/Model/ActionForbiddenError.php
 lib/Model/ActionForbiddenErrorDetailsInner.php
+lib/Model/ChangeCredentialStatus400Response.php
 lib/Model/ChangeCredentialStatusInput.php
+lib/Model/ChangeStatusForbiddenError.php
 lib/Model/CorsGenerateCredentialsOK.php
 lib/Model/CorsGetCredentialOfferOK.php
 lib/Model/CorsGetWellKnownOpenIdCredentialIssuerOK.php
@@ -122,6 +129,7 @@ lib/Model/ModelInterface.php
 lib/Model/NotFoundError.php
 lib/Model/ProjectCredentialConfigExistError.php
 lib/Model/ProjectCredentialConfigNotExistError.php
+lib/Model/RevocationForbiddenError.php
 lib/Model/StartIssuance400Response.php
 lib/Model/StartIssuanceInput.php
 lib/Model/StartIssuanceInputDataInner.php
@@ -135,5 +143,9 @@ lib/Model/UpdateIssuanceConfigInput.php
 lib/Model/VcClaimedError.php
 lib/Model/WellKnownOpenIdCredentialIssuerResponse.php
 lib/Model/WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner.php
+lib/NotFoundError.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/ChangeCredentialStatus400ResponseTest.php
+test/Model/ChangeStatusForbiddenErrorTest.php
+test/Model/RevocationForbiddenErrorTest.php
