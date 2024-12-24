@@ -62,6 +62,8 @@ lib/Api/PexQueryApi.php
 lib/ApiException.php
 lib/Configuration.php
 lib/HeaderSelector.php
+lib/InvalidJwtTokenError.php
+lib/InvalidParameterError.php
 lib/Model/AlreadyExistsError.php
 lib/Model/AwsExchangeCredentials.php
 lib/Model/AwsExchangeCredentialsOK.php
@@ -111,5 +113,6 @@ lib/Model/UpdateConfigurationByIdInput.php
 lib/Model/UpdateConfigurationByIdOK.php
 lib/Model/UpdatePexQueryInput.php
 lib/Model/VPTokenValidationError.php
+lib/NotFoundError.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
