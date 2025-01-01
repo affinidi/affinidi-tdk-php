@@ -42,7 +42,7 @@ docs/Model/TokenPrivateKeyAuthenticationMethodDto.md
 docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo.md
 docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf.md
 docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf1.md
-docs/Model/TypedPricipalId.md
+docs/Model/TypedPrincipalId.md
 docs/Model/UnauthorizedError.md
 docs/Model/UnexpectedError.md
 docs/Model/UpdateProjectInput.md
@@ -61,6 +61,8 @@ lib/Api/WellKnownApi.php
 lib/ApiException.php
 lib/Configuration.php
 lib/HeaderSelector.php
+lib/InvalidJwtTokenError.php
+lib/InvalidParameterError.php
 lib/Model/ActionForbiddenError.php
 lib/Model/AddUserToProjectInput.php
 lib/Model/ConsumerAuthTokenEndpointInput.php
@@ -96,7 +98,7 @@ lib/Model/TokenPrivateKeyAuthenticationMethodDto.php
 lib/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo.php
 lib/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf.php
 lib/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf1.php
-lib/Model/TypedPricipalId.php
+lib/Model/TypedPrincipalId.php
 lib/Model/UnauthorizedError.php
 lib/Model/UnexpectedError.php
 lib/Model/UpdateProjectInput.php
@@ -105,5 +107,7 @@ lib/Model/UpdateTokenPrivateKeyAuthenticationMethodDto.php
 lib/Model/UserDto.php
 lib/Model/UserList.php
 lib/Model/WhoamiDto.php
+lib/NotFoundError.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Model/TypedPrincipalIdTest.php
