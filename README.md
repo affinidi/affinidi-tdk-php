@@ -7,36 +7,24 @@ The Affinidi Trust Development Kit (Affinidi TDK) is a modern interface that all
 
 ## How do I use Affinidi TDK?
 
-The Affinidi TDK provides three type of modules:
+The Affinidi TDK for PHP is published on [packagist.org](https://packagist.org/packages/affinidi-tdk/affinidi-tdk-php) and provides the following libraries:
 
 - [Clients](src/Clients), which offer methods to access Affinidi Elements services like Credential Issuance, Credential Verification, and Login Configurations, among others.
-- [Packages](src/), which are commonly used utilities/helpers that are self-contained and composable.
-- [Libraries](src/Libs/), which are high-level abstractions that combine logic and data to perform necessary business logic functionalities.
+- [AuthProvider](src/AuthProvider/), a library that provides a method to authenticate Personal Access Tokens (PATs) and generates access token call clients and access the Affinidi Elements services.
+- [Commons](src/Common/), a list of libraries that provides common methods like generation of claim and share links for Credential Issuance and Affinidi Iota Framework.
 
 Each module has its own README that you can check to better understand how to integrate it into your application.
 
-## Documentation
-
-Head over to our [Documentation site](https://docs.affinidi.com/dev-tools/affinidi-tdk) to know how to get started with Affinidi TDK.
-
-Use [this document](https://docs.affinidi.com/dev-tools/affinidi-tdk/#working-with-the-affinidi-tdk) to learn more about how to work with Affinidi TDK, including generating the Authorisation Token and calling the methods.
-
-To learn how to integrate Affinidi TDK and use the different modules into your application, you can explore the following:
-
-- [Affinidi TDK Clients](https://docs.affinidi.com/dev-tools/affinidi-tdk/clients/)
-- [Affinidi TDK Libraries](https://docs.affinidi.com/dev-tools/affinidi-tdk/libraries/)
-- [Affinidi TDK Packages](https://docs.affinidi.com/dev-tools/affinidi-tdk/packages/)
-
 ## Requirements
 
-- PHP version 7.4 or higher
-- [Composer](https://getcomposer.org/download/) package manager
+- PHP version 7.4 or higher.
+- [Composer](https://getcomposer.org/download/) package manager.
 
 ## Installation
 
 ### Setting up a New Project
 
-If you're starting a new project, first create a new directory and initialize it:
+If you're starting a new project, first create a new directory and initialise it.
 
 ```bash
 mkdir my-affinidi-project
@@ -44,7 +32,7 @@ cd my-affinidi-project
 composer init
 ```
 
-Install the Affinidi TDK via Composer:
+Install the Affinidi TDK via Composer.
 
 ```bash
 composer require affinidi-tdk/affinidi-tdk-php
@@ -112,6 +100,18 @@ composer run-script test:debug
 ```
 
 The debug mode provides additional information that can be helpful when troubleshooting failing tests.
+
+## Documentation
+
+Head over to our [Documentation site](https://docs.affinidi.com/dev-tools/affinidi-tdk) to know how to get started with Affinidi TDK.
+
+Use [this document](https://docs.affinidi.com/dev-tools/affinidi-tdk/#working-with-the-affinidi-tdk) to learn more about how to work with Affinidi TDK, including generating the Authorisation Token and calling the methods.
+
+To learn how to integrate Affinidi TDK and use the different modules into your application, you can explore the following:
+
+- [Affinidi TDK Clients](https://docs.affinidi.com/dev-tools/affinidi-tdk/clients/)
+- [Affinidi TDK Libraries](https://docs.affinidi.com/dev-tools/affinidi-tdk/libraries/)
+- [Affinidi TDK Packages](https://docs.affinidi.com/dev-tools/affinidi-tdk/packages/)
 
 ## Support & feedback
 
