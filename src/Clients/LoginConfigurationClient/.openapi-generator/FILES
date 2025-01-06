@@ -71,6 +71,8 @@ lib/Api/IdpApi.php
 lib/ApiException.php
 lib/Configuration.php
 lib/HeaderSelector.php
+lib/InvalidJwtTokenError.php
+lib/InvalidParameterError.php
 lib/Model/ActionForbiddenError.php
 lib/Model/AddUserToGroupInput.php
 lib/Model/BlockedUsers.php
@@ -129,5 +131,6 @@ lib/Model/TokenEndpointAuthMethod.php
 lib/Model/UnauthorizedError.php
 lib/Model/UpdateLoginConfigurationInput.php
 lib/Model/VPTokenValidationError.php
+lib/NotFoundError.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
