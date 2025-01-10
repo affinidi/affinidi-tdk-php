@@ -126,7 +126,7 @@ Class | Method | HTTP request | Description
 - [TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo](docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo.md)
 - [TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf](docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf.md)
 - [TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf1](docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf1.md)
-- [TypedPricipalId](docs/Model/TypedPricipalId.md)
+- [TypedPrincipalId](docs/Model/TypedPrincipalId.md)
 - [UnauthorizedError](docs/Model/UnauthorizedError.md)
 - [UnexpectedError](docs/Model/UnexpectedError.md)
 - [UpdateProjectInput](docs/Model/UpdateProjectInput.md)
