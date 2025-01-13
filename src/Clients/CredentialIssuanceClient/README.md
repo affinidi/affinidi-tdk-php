@@ -84,7 +84,9 @@ Class | Method | HTTP request | Description
 
 - [ActionForbiddenError](docs/Model/ActionForbiddenError.md)
 - [ActionForbiddenErrorDetailsInner](docs/Model/ActionForbiddenErrorDetailsInner.md)
+- [ChangeCredentialStatus400Response](docs/Model/ChangeCredentialStatus400Response.md)
 - [ChangeCredentialStatusInput](docs/Model/ChangeCredentialStatusInput.md)
+- [ChangeStatusForbiddenError](docs/Model/ChangeStatusForbiddenError.md)
 - [CorsGenerateCredentialsOK](docs/Model/CorsGenerateCredentialsOK.md)
 - [CorsGetCredentialOfferOK](docs/Model/CorsGetCredentialOfferOK.md)
 - [CorsGetWellKnownOpenIdCredentialIssuerOK](docs/Model/CorsGetWellKnownOpenIdCredentialIssuerOK.md)
@@ -128,6 +130,7 @@ Class | Method | HTTP request | Description
 - [NotFoundError](docs/Model/NotFoundError.md)
 - [ProjectCredentialConfigExistError](docs/Model/ProjectCredentialConfigExistError.md)
 - [ProjectCredentialConfigNotExistError](docs/Model/ProjectCredentialConfigNotExistError.md)
+- [RevocationForbiddenError](docs/Model/RevocationForbiddenError.md)
 - [StartIssuance400Response](docs/Model/StartIssuance400Response.md)
 - [StartIssuanceInput](docs/Model/StartIssuanceInput.md)
 - [StartIssuanceInputDataInner](docs/Model/StartIssuanceInputDataInner.md)

@@ -35,6 +35,8 @@ lib/Api/WalletApi.php
 lib/ApiException.php
 lib/Configuration.php
 lib/HeaderSelector.php
+lib/InvalidJwtTokenError.php
+lib/InvalidParameterError.php
 lib/Model/CreateWalletInput.php
 lib/Model/CreateWalletResponse.php
 lib/Model/DidKeyInputParams.php
@@ -63,5 +65,6 @@ lib/Model/UpdateWalletInput.php
 lib/Model/WalletDto.php
 lib/Model/WalletDtoKeysInner.php
 lib/Model/WalletsListDto.php
+lib/NotFoundError.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
