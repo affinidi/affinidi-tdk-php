@@ -59,7 +59,7 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPITypes = [
         'change_reason' => 'string',
-        'issuance_flow_data_id' => 'string'
+        'issuance_record_id' => 'string'
     ];
 
     /**
@@ -71,7 +71,7 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPIFormats = [
         'change_reason' => null,
-        'issuance_flow_data_id' => null
+        'issuance_record_id' => null
     ];
 
     /**
@@ -81,7 +81,7 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static array $openAPINullables = [
         'change_reason' => false,
-        'issuance_flow_data_id' => false
+        'issuance_record_id' => false
     ];
 
     /**
@@ -171,7 +171,7 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $attributeMap = [
         'change_reason' => 'changeReason',
-        'issuance_flow_data_id' => 'issuanceFlowDataId'
+        'issuance_record_id' => 'issuanceRecordId'
     ];
 
     /**
@@ -181,7 +181,7 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $setters = [
         'change_reason' => 'setChangeReason',
-        'issuance_flow_data_id' => 'setIssuanceFlowDataId'
+        'issuance_record_id' => 'setIssuanceRecordId'
     ];
 
     /**
@@ -191,7 +191,7 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $getters = [
         'change_reason' => 'getChangeReason',
-        'issuance_flow_data_id' => 'getIssuanceFlowDataId'
+        'issuance_record_id' => 'getIssuanceRecordId'
     ];
 
     /**
@@ -235,6 +235,21 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
         return self::$openAPIModelName;
     }
 
+    public const CHANGE_REASON_INVALID_CREDENTIAL = 'INVALID_CREDENTIAL';
+    public const CHANGE_REASON_COMPROMISED_ISSUER = 'COMPROMISED_ISSUER';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getChangeReasonAllowableValues()
+    {
+        return [
+            self::CHANGE_REASON_INVALID_CREDENTIAL,
+            self::CHANGE_REASON_COMPROMISED_ISSUER,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -252,7 +267,7 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
     public function __construct(array $data = null)
     {
         $this->setIfExists('change_reason', $data ?? [], null);
-        $this->setIfExists('issuance_flow_data_id', $data ?? [], null);
+        $this->setIfExists('issuance_record_id', $data ?? [], null);
     }
 
     /**
@@ -282,6 +297,15 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getChangeReasonAllowableValues();
+        if (!is_null($this->container['change_reason']) && !in_array($this->container['change_reason'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'change_reason', must be one of '%s'",
+                $this->container['change_reason'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -310,7 +334,7 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets change_reason
      *
-     * @param string|null $change_reason change_reason
+     * @param string|null $change_reason reason for revocation
      *
      * @return self
      */
@@ -319,34 +343,44 @@ class ChangeCredentialStatusInput implements ModelInterface, ArrayAccess, \JsonS
         if (is_null($change_reason)) {
             throw new \InvalidArgumentException('non-nullable change_reason cannot be null');
         }
+        $allowedValues = $this->getChangeReasonAllowableValues();
+        if (!in_array($change_reason, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'change_reason', must be one of '%s'",
+                    $change_reason,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
         $this->container['change_reason'] = $change_reason;
 
         return $this;
     }
 
     /**
-     * Gets issuance_flow_data_id
+     * Gets issuance_record_id
      *
      * @return string|null
      */
-    public function getIssuanceFlowDataId()
+    public function getIssuanceRecordId()
     {
-        return $this->container['issuance_flow_data_id'];
+        return $this->container['issuance_record_id'];
     }
 
     /**
-     * Sets issuance_flow_data_id
+     * Sets issuance_record_id
      *
-     * @param string|null $issuance_flow_data_id issuance_flow_data_id
+     * @param string|null $issuance_record_id issuance_record_id
      *
      * @return self
      */
-    public function setIssuanceFlowDataId($issuance_flow_data_id)
+    public function setIssuanceRecordId($issuance_record_id)
     {
-        if (is_null($issuance_flow_data_id)) {
-            throw new \InvalidArgumentException('non-nullable issuance_flow_data_id cannot be null');
+        if (is_null($issuance_record_id)) {
+            throw new \InvalidArgumentException('non-nullable issuance_record_id cannot be null');
         }
-        $this->container['issuance_flow_data_id'] = $issuance_flow_data_id;
+        $this->container['issuance_record_id'] = $issuance_record_id;
 
         return $this;
     }
