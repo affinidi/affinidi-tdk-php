@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,7 +27,7 @@
  * Please update the test case below to test the model.
  */
 
-namespace OpenAPI\Client\Test\Model;
+namespace AffinidiTdk\Clients\IotaClient\Test\Model;
 
 use PHPUnit\Framework\TestCase;
 
@@ -36,7 +36,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @category    Class
  * @description FetchIOTAVPResponseOK
- * @package     OpenAPI\Client
+ * @package     AffinidiTdk\Clients\IotaClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
@@ -84,6 +84,24 @@ class FetchIOTAVPResponseOKTest extends TestCase
      * Test attribute "correlation_id"
      */
     public function testPropertyCorrelationId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "presentation_submission"
+     */
+    public function testPropertyPresentationSubmission()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "vp_token"
+     */
+    public function testPropertyVpToken()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
