@@ -1,6 +1,6 @@
 <?php
 /**
- * SupportedCredentialMetadataDisplayInner
+ * SupportedCredentialMetadataItemLogo
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
- * SupportedCredentialMetadataDisplayInner Class Doc Comment
+ * SupportedCredentialMetadataItemLogo Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\CredentialIssuanceClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class SupportedCredentialMetadataItemLogo implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SupportedCredentialMetadata_display_inner';
+    protected static $openAPIModelName = 'SupportedCredentialMetadataItemLogo';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,8 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'locale' => 'string',
-        'logo' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataItemLogo',
-        'background_color' => 'string',
-        'text_color' => 'string'
+        'url' => 'string',
+        'alt_text' => 'string'
     ];
 
     /**
@@ -73,11 +70,8 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'locale' => null,
-        'logo' => null,
-        'background_color' => null,
-        'text_color' => null
+        'url' => null,
+        'alt_text' => null
     ];
 
     /**
@@ -86,11 +80,8 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'locale' => false,
-        'logo' => false,
-        'background_color' => false,
-        'text_color' => false
+        'url' => false,
+        'alt_text' => false
     ];
 
     /**
@@ -179,11 +170,8 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'locale' => 'locale',
-        'logo' => 'logo',
-        'background_color' => 'backgroundColor',
-        'text_color' => 'textColor'
+        'url' => 'url',
+        'alt_text' => 'altText'
     ];
 
     /**
@@ -192,11 +180,8 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'locale' => 'setLocale',
-        'logo' => 'setLogo',
-        'background_color' => 'setBackgroundColor',
-        'text_color' => 'setTextColor'
+        'url' => 'setUrl',
+        'alt_text' => 'setAltText'
     ];
 
     /**
@@ -205,11 +190,8 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'locale' => 'getLocale',
-        'logo' => 'getLogo',
-        'background_color' => 'getBackgroundColor',
-        'text_color' => 'getTextColor'
+        'url' => 'getUrl',
+        'alt_text' => 'getAltText'
     ];
 
     /**
@@ -269,11 +251,8 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('locale', $data ?? [], null);
-        $this->setIfExists('logo', $data ?? [], null);
-        $this->setIfExists('background_color', $data ?? [], null);
-        $this->setIfExists('text_color', $data ?? [], null);
+        $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('alt_text', $data ?? [], null);
     }
 
     /**
@@ -303,17 +282,9 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
+        if ($this->container['url'] === null) {
+            $invalidProperties[] = "'url' can't be null";
         }
-        if ((mb_strlen($this->container['name']) > 64)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 64.";
-        }
-
-        if (!is_null($this->container['locale']) && (mb_strlen($this->container['locale']) > 16)) {
-            $invalidProperties[] = "invalid value for 'locale', the character length must be smaller than or equal to 16.";
-        }
-
         return $invalidProperties;
     }
 
@@ -330,144 +301,55 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
 
 
     /**
-     * Gets name
+     * Gets url
      *
      * @return string
      */
-    public function getName()
+    public function getUrl()
     {
-        return $this->container['name'];
+        return $this->container['url'];
     }
 
     /**
-     * Sets name
+     * Sets url
      *
-     * @param string $name name
+     * @param string $url url
      *
      * @return self
      */
-    public function setName($name)
+    public function setUrl($url)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($url)) {
+            throw new \InvalidArgumentException('non-nullable url cannot be null');
         }
-        if ((mb_strlen($name) > 64)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling SupportedCredentialMetadataDisplayInner., must be smaller than or equal to 64.');
-        }
-
-        $this->container['name'] = $name;
+        $this->container['url'] = $url;
 
         return $this;
     }
 
     /**
-     * Gets locale
+     * Gets alt_text
      *
      * @return string|null
      */
-    public function getLocale()
+    public function getAltText()
     {
-        return $this->container['locale'];
+        return $this->container['alt_text'];
     }
 
     /**
-     * Sets locale
+     * Sets alt_text
      *
-     * @param string|null $locale locale
+     * @param string|null $alt_text alt_text
      *
      * @return self
      */
-    public function setLocale($locale)
+    public function setAltText($alt_text)
     {
-        if (is_null($locale)) {
-            throw new \InvalidArgumentException('non-nullable locale cannot be null');
+        if (is_null($alt_text)) {
+            throw new \InvalidArgumentException('non-nullable alt_text cannot be null');
         }
-        if ((mb_strlen($locale) > 16)) {
-            throw new \InvalidArgumentException('invalid length for $locale when calling SupportedCredentialMetadataDisplayInner., must be smaller than or equal to 16.');
-        }
-
-        $this->container['locale'] = $locale;
-
-        return $this;
-    }
-
-    /**
-     * Gets logo
-     *
-     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataItemLogo|null
-     */
-    public function getLogo()
-    {
-        return $this->container['logo'];
-    }
-
-    /**
-     * Sets logo
-     *
-     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataItemLogo|null $logo logo
-     *
-     * @return self
-     */
-    public function setLogo($logo)
-    {
-        if (is_null($logo)) {
-            throw new \InvalidArgumentException('non-nullable logo cannot be null');
-        }
-        $this->container['logo'] = $logo;
-
-        return $this;
-    }
-
-    /**
-     * Gets background_color
-     *
-     * @return string|null
-     */
-    public function getBackgroundColor()
-    {
-        return $this->container['background_color'];
-    }
-
-    /**
-     * Sets background_color
-     *
-     * @param string|null $background_color background_color
-     *
-     * @return self
-     */
-    public function setBackgroundColor($background_color)
-    {
-        if (is_null($background_color)) {
-            throw new \InvalidArgumentException('non-nullable background_color cannot be null');
-        }
-        $this->container['background_color'] = $background_color;
-
-        return $this;
-    }
-
-    /**
-     * Gets text_color
-     *
-     * @return string|null
-     */
-    public function getTextColor()
-    {
-        return $this->container['text_color'];
-    }
-
-    /**
-     * Sets text_color
-     *
-     * @param string|null $text_color text_color
-     *
-     * @return self
-     */
-    public function setTextColor($text_color)
-    {
-        if (is_null($text_color)) {
-            throw new \InvalidArgumentException('non-nullable text_color cannot be null');
-        }
-        $this->container['text_color'] = $text_color;
+        $this->container['alt_text'] = $alt_text;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * InvalidCredentialTypeErrorTest
+ * ChangeCredentialStatus400ResponseTest
  *
  * PHP version 7.4
  *
@@ -32,15 +32,15 @@ namespace AffinidiTdk\Clients\CredentialIssuanceClient\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * InvalidCredentialTypeErrorTest Class Doc Comment
+ * ChangeCredentialStatus400ResponseTest Class Doc Comment
  *
  * @category    Class
- * @description InvalidCredentialTypeError
+ * @description ChangeCredentialStatus400Response
  * @package     AffinidiTdk\Clients\CredentialIssuanceClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class InvalidCredentialTypeErrorTest extends TestCase
+class ChangeCredentialStatus400ResponseTest extends TestCase
 {
 
     /**
@@ -72,9 +72,9 @@ class InvalidCredentialTypeErrorTest extends TestCase
     }
 
     /**
-     * Test "InvalidCredentialTypeError"
+     * Test "ChangeCredentialStatus400Response"
      */
-    public function testInvalidCredentialTypeError()
+    public function testChangeCredentialStatus400Response()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

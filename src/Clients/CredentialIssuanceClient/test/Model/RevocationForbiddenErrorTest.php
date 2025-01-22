@@ -1,11 +1,11 @@
 <?php
 /**
- * GetStatusListResultDtoTest
+ * RevocationForbiddenErrorTest
  *
  * PHP version 7.4
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,20 +27,20 @@
  * Please update the test case below to test the model.
  */
 
-namespace OpenAPI\Client\Test\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Test\Model;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * GetStatusListResultDtoTest Class Doc Comment
+ * RevocationForbiddenErrorTest Class Doc Comment
  *
  * @category    Class
- * @description DTO contains revocation list credential
- * @package     OpenAPI\Client
+ * @description RevocationForbiddenError
+ * @package     AffinidiTdk\Clients\CredentialIssuanceClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class GetStatusListResultDtoTest extends TestCase
+class RevocationForbiddenErrorTest extends TestCase
 {
 
     /**
@@ -72,18 +72,54 @@ class GetStatusListResultDtoTest extends TestCase
     }
 
     /**
-     * Test "GetStatusListResultDto"
+     * Test "RevocationForbiddenError"
      */
-    public function testGetStatusListResultDto()
+    public function testRevocationForbiddenError()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "revocation_list_credential"
+     * Test attribute "name"
      */
-    public function testPropertyRevocationListCredential()
+    public function testPropertyName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "message"
+     */
+    public function testPropertyMessage()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "http_status_code"
+     */
+    public function testPropertyHttpStatusCode()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "trace_id"
+     */
+    public function testPropertyTraceId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "details"
+     */
+    public function testPropertyDetails()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -1,6 +1,6 @@
 <?php
 /**
- * SupportedCredentialMetadataDisplayInner
+ * RevocationForbiddenError
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
- * SupportedCredentialMetadataDisplayInner Class Doc Comment
+ * RevocationForbiddenError Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\CredentialIssuanceClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class RevocationForbiddenError implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SupportedCredentialMetadata_display_inner';
+    protected static $openAPIModelName = 'RevocationForbiddenError';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,10 +59,10 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
       */
     protected static $openAPITypes = [
         'name' => 'string',
-        'locale' => 'string',
-        'logo' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataItemLogo',
-        'background_color' => 'string',
-        'text_color' => 'string'
+        'message' => 'string',
+        'http_status_code' => 'float',
+        'trace_id' => 'string',
+        'details' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]'
     ];
 
     /**
@@ -74,10 +74,10 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
       */
     protected static $openAPIFormats = [
         'name' => null,
-        'locale' => null,
-        'logo' => null,
-        'background_color' => null,
-        'text_color' => null
+        'message' => null,
+        'http_status_code' => null,
+        'trace_id' => null,
+        'details' => null
     ];
 
     /**
@@ -87,10 +87,10 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'locale' => false,
-        'logo' => false,
-        'background_color' => false,
-        'text_color' => false
+        'message' => false,
+        'http_status_code' => false,
+        'trace_id' => false,
+        'details' => false
     ];
 
     /**
@@ -180,10 +180,10 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
      */
     protected static $attributeMap = [
         'name' => 'name',
-        'locale' => 'locale',
-        'logo' => 'logo',
-        'background_color' => 'backgroundColor',
-        'text_color' => 'textColor'
+        'message' => 'message',
+        'http_status_code' => 'httpStatusCode',
+        'trace_id' => 'traceId',
+        'details' => 'details'
     ];
 
     /**
@@ -193,10 +193,10 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
      */
     protected static $setters = [
         'name' => 'setName',
-        'locale' => 'setLocale',
-        'logo' => 'setLogo',
-        'background_color' => 'setBackgroundColor',
-        'text_color' => 'setTextColor'
+        'message' => 'setMessage',
+        'http_status_code' => 'setHttpStatusCode',
+        'trace_id' => 'setTraceId',
+        'details' => 'setDetails'
     ];
 
     /**
@@ -206,10 +206,10 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
      */
     protected static $getters = [
         'name' => 'getName',
-        'locale' => 'getLocale',
-        'logo' => 'getLogo',
-        'background_color' => 'getBackgroundColor',
-        'text_color' => 'getTextColor'
+        'message' => 'getMessage',
+        'http_status_code' => 'getHttpStatusCode',
+        'trace_id' => 'getTraceId',
+        'details' => 'getDetails'
     ];
 
     /**
@@ -253,6 +253,45 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
         return self::$openAPIModelName;
     }
 
+    public const NAME_REVOCATION_FORBIDDEN_ERROR = 'RevocationForbiddenError';
+    public const MESSAGE_RELATED_VC_HAS_NOT_BEEN_CLAIMED_YET = 'Related VC has not been claimed yet';
+    public const HTTP_STATUS_CODE_NUMBER_400 = 400;
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getNameAllowableValues()
+    {
+        return [
+            self::NAME_REVOCATION_FORBIDDEN_ERROR,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getMessageAllowableValues()
+    {
+        return [
+            self::MESSAGE_RELATED_VC_HAS_NOT_BEEN_CLAIMED_YET,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getHttpStatusCodeAllowableValues()
+    {
+        return [
+            self::HTTP_STATUS_CODE_NUMBER_400,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -270,10 +309,10 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
     public function __construct(array $data = null)
     {
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('locale', $data ?? [], null);
-        $this->setIfExists('logo', $data ?? [], null);
-        $this->setIfExists('background_color', $data ?? [], null);
-        $this->setIfExists('text_color', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('http_status_code', $data ?? [], null);
+        $this->setIfExists('trace_id', $data ?? [], null);
+        $this->setIfExists('details', $data ?? [], null);
     }
 
     /**
@@ -306,14 +345,42 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if ((mb_strlen($this->container['name']) > 64)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 64.";
+        $allowedValues = $this->getNameAllowableValues();
+        if (!is_null($this->container['name']) && !in_array($this->container['name'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'name', must be one of '%s'",
+                $this->container['name'],
+                implode("', '", $allowedValues)
+            );
         }
 
-        if (!is_null($this->container['locale']) && (mb_strlen($this->container['locale']) > 16)) {
-            $invalidProperties[] = "invalid value for 'locale', the character length must be smaller than or equal to 16.";
+        if ($this->container['message'] === null) {
+            $invalidProperties[] = "'message' can't be null";
+        }
+        $allowedValues = $this->getMessageAllowableValues();
+        if (!is_null($this->container['message']) && !in_array($this->container['message'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'message', must be one of '%s'",
+                $this->container['message'],
+                implode("', '", $allowedValues)
+            );
         }
 
+        if ($this->container['http_status_code'] === null) {
+            $invalidProperties[] = "'http_status_code' can't be null";
+        }
+        $allowedValues = $this->getHttpStatusCodeAllowableValues();
+        if (!is_null($this->container['http_status_code']) && !in_array($this->container['http_status_code'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'http_status_code', must be one of '%s'",
+                $this->container['http_status_code'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['trace_id'] === null) {
+            $invalidProperties[] = "'trace_id' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -351,123 +418,145 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
         if (is_null($name)) {
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        if ((mb_strlen($name) > 64)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling SupportedCredentialMetadataDisplayInner., must be smaller than or equal to 64.');
+        $allowedValues = $this->getNameAllowableValues();
+        if (!in_array($name, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'name', must be one of '%s'",
+                    $name,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
-
         $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets locale
+     * Gets message
      *
-     * @return string|null
+     * @return string
      */
-    public function getLocale()
+    public function getMessage()
     {
-        return $this->container['locale'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets locale
+     * Sets message
      *
-     * @param string|null $locale locale
+     * @param string $message message
      *
      * @return self
      */
-    public function setLocale($locale)
+    public function setMessage($message)
     {
-        if (is_null($locale)) {
-            throw new \InvalidArgumentException('non-nullable locale cannot be null');
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
-        if ((mb_strlen($locale) > 16)) {
-            throw new \InvalidArgumentException('invalid length for $locale when calling SupportedCredentialMetadataDisplayInner., must be smaller than or equal to 16.');
+        $allowedValues = $this->getMessageAllowableValues();
+        if (!in_array($message, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'message', must be one of '%s'",
+                    $message,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
-
-        $this->container['locale'] = $locale;
+        $this->container['message'] = $message;
 
         return $this;
     }
 
     /**
-     * Gets logo
+     * Gets http_status_code
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataItemLogo|null
+     * @return float
      */
-    public function getLogo()
+    public function getHttpStatusCode()
     {
-        return $this->container['logo'];
+        return $this->container['http_status_code'];
     }
 
     /**
-     * Sets logo
+     * Sets http_status_code
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataItemLogo|null $logo logo
+     * @param float $http_status_code http_status_code
      *
      * @return self
      */
-    public function setLogo($logo)
+    public function setHttpStatusCode($http_status_code)
     {
-        if (is_null($logo)) {
-            throw new \InvalidArgumentException('non-nullable logo cannot be null');
+        if (is_null($http_status_code)) {
+            throw new \InvalidArgumentException('non-nullable http_status_code cannot be null');
         }
-        $this->container['logo'] = $logo;
+        $allowedValues = $this->getHttpStatusCodeAllowableValues();
+        if (!in_array($http_status_code, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'http_status_code', must be one of '%s'",
+                    $http_status_code,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['http_status_code'] = $http_status_code;
 
         return $this;
     }
 
     /**
-     * Gets background_color
+     * Gets trace_id
      *
-     * @return string|null
+     * @return string
      */
-    public function getBackgroundColor()
+    public function getTraceId()
     {
-        return $this->container['background_color'];
+        return $this->container['trace_id'];
     }
 
     /**
-     * Sets background_color
+     * Sets trace_id
      *
-     * @param string|null $background_color background_color
+     * @param string $trace_id trace_id
      *
      * @return self
      */
-    public function setBackgroundColor($background_color)
+    public function setTraceId($trace_id)
     {
-        if (is_null($background_color)) {
-            throw new \InvalidArgumentException('non-nullable background_color cannot be null');
+        if (is_null($trace_id)) {
+            throw new \InvalidArgumentException('non-nullable trace_id cannot be null');
         }
-        $this->container['background_color'] = $background_color;
+        $this->container['trace_id'] = $trace_id;
 
         return $this;
     }
 
     /**
-     * Gets text_color
+     * Gets details
      *
-     * @return string|null
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]|null
      */
-    public function getTextColor()
+    public function getDetails()
     {
-        return $this->container['text_color'];
+        return $this->container['details'];
     }
 
     /**
-     * Sets text_color
+     * Sets details
      *
-     * @param string|null $text_color text_color
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]|null $details details
      *
      * @return self
      */
-    public function setTextColor($text_color)
+    public function setDetails($details)
     {
-        if (is_null($text_color)) {
-            throw new \InvalidArgumentException('non-nullable text_color cannot be null');
+        if (is_null($details)) {
+            throw new \InvalidArgumentException('non-nullable details cannot be null');
         }
-        $this->container['text_color'] = $text_color;
+        $this->container['details'] = $details;
 
         return $this;
     }
