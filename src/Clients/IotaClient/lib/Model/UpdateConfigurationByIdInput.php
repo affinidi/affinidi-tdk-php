@@ -65,7 +65,7 @@ class UpdateConfigurationByIdInput implements ModelInterface, ArrayAccess, \Json
         'enable_consent_audit_log' => 'bool',
         'token_max_age' => 'float',
         'description' => 'string',
-        'client_metadata' => '\AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDtoClientMetadata',
+        'client_metadata' => '\AffinidiTdk\Clients\IotaClient\Model\UpdateConfigurationByIdInputClientMetadata',
         'mode' => 'string',
         'redirect_uris' => 'string[]',
         'enable_idv_providers' => 'bool'
@@ -576,7 +576,7 @@ class UpdateConfigurationByIdInput implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets client_metadata
      *
-     * @return \AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDtoClientMetadata|null
+     * @return \AffinidiTdk\Clients\IotaClient\Model\UpdateConfigurationByIdInputClientMetadata|null
      */
     public function getClientMetadata()
     {
@@ -586,7 +586,7 @@ class UpdateConfigurationByIdInput implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets client_metadata
      *
-     * @param \AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDtoClientMetadata|null $client_metadata client_metadata
+     * @param \AffinidiTdk\Clients\IotaClient\Model\UpdateConfigurationByIdInputClientMetadata|null $client_metadata client_metadata
      *
      * @return self
      */

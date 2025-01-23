@@ -128,6 +128,7 @@ Class | Method | HTTP request | Description
 - [SavePexQueriesUpdateInput](docs/Model/SavePexQueriesUpdateInput.md)
 - [SavePexQueriesUpdateInputQueriesInner](docs/Model/SavePexQueriesUpdateInputQueriesInner.md)
 - [UpdateConfigurationByIdInput](docs/Model/UpdateConfigurationByIdInput.md)
+- [UpdateConfigurationByIdInputClientMetadata](docs/Model/UpdateConfigurationByIdInputClientMetadata.md)
 - [UpdateConfigurationByIdOK](docs/Model/UpdateConfigurationByIdOK.md)
 - [UpdatePexQueryInput](docs/Model/UpdatePexQueryInput.md)
 - [VPTokenValidationError](docs/Model/VPTokenValidationError.md)
