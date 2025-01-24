@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,7 +27,7 @@
  * Please update the test case below to test the model.
  */
 
-namespace OpenAPI\Client\Test\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Test\Model;
 
 use PHPUnit\Framework\TestCase;
 
@@ -36,7 +36,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @category    Class
  * @description ChangeCredentialStatusInput
- * @package     OpenAPI\Client
+ * @package     AffinidiTdk\Clients\CredentialIssuanceClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
@@ -90,9 +90,9 @@ class ChangeCredentialStatusInputTest extends TestCase
     }
 
     /**
-     * Test attribute "issuance_flow_data_id"
+     * Test attribute "issuance_record_id"
      */
-    public function testPropertyIssuanceFlowDataId()
+    public function testPropertyIssuanceRecordId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

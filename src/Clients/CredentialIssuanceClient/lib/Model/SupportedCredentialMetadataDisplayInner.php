@@ -60,7 +60,7 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
     protected static $openAPITypes = [
         'name' => 'string',
         'locale' => 'string',
-        'logo' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataDisplayInnerLogo',
+        'logo' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataItemLogo',
         'background_color' => 'string',
         'text_color' => 'string'
     ];
@@ -394,7 +394,7 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
     /**
      * Gets logo
      *
-     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataDisplayInnerLogo|null
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataItemLogo|null
      */
     public function getLogo()
     {
@@ -404,7 +404,7 @@ class SupportedCredentialMetadataDisplayInner implements ModelInterface, ArrayAc
     /**
      * Sets logo
      *
-     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataDisplayInnerLogo|null $logo logo
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataItemLogo|null $logo logo
      *
      * @return self
      */
