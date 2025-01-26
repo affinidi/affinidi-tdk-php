@@ -5,6 +5,8 @@ All URIs are relative to https://apse1.api.affinidi.io/cis, except if the operat
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**generateCredentials()**](CredentialsApi.md#generateCredentials) | **POST** /v1/{projectId}/credential |  |
+| [**getClaimedCredentials()**](CredentialsApi.md#getClaimedCredentials) | **GET** /v1/{projectId}/configurations/{configurationId}/credentials | Get claimed credential in the specified range |
+| [**getIssuanceIdClaimedCredential()**](CredentialsApi.md#getIssuanceIdClaimedCredential) | **GET** /v1/{projectId}/configurations/{configurationId}/issuances/{issuanceId}/credentials | Get claimed VC linked to the issuanceId |
 
 
 ## `generateCredentials()`
@@ -63,6 +65,142 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getClaimedCredentials()`
+
+```php
+getClaimedCredentials($project_id, $configuration_id, $range_start_time, $range_end_time, $next): \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialListResponse
+```
+
+Get claimed credential in the specified range
+
+Get claimed credential in the specified range
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ProjectTokenAuth
+$config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\CredentialIssuanceClient\Api\CredentialsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$project_id = 'project_id_example'; // string | project id
+$configuration_id = 'configuration_id_example'; // string | configuration id
+$range_start_time = 'range_start_time_example'; // string
+$range_end_time = 'range_end_time_example'; // string
+$next = 'next_example'; // string
+
+try {
+    $result = $apiInstance->getClaimedCredentials($project_id, $configuration_id, $range_start_time, $range_end_time, $next);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling CredentialsApi->getClaimedCredentials: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**| project id | |
+| **configuration_id** | **string**| configuration id | |
+| **range_start_time** | **string**|  | |
+| **range_end_time** | **string**|  | [optional] |
+| **next** | **string**|  | [optional] |
+
+### Return type
+
+[**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialListResponse**](../Model/ClaimedCredentialListResponse.md)
+
+### Authorization
+
+[ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getIssuanceIdClaimedCredential()`
+
+```php
+getIssuanceIdClaimedCredential($project_id, $configuration_id, $issuance_id): \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialResponse
+```
+
+Get claimed VC linked to the issuanceId
+
+Get claimed VC linked to the issuanceId
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ProjectTokenAuth
+$config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\CredentialIssuanceClient\Api\CredentialsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$project_id = 'project_id_example'; // string | project id
+$configuration_id = 'configuration_id_example'; // string | configuration id
+$issuance_id = 'issuance_id_example'; // string | issuance id
+
+try {
+    $result = $apiInstance->getIssuanceIdClaimedCredential($project_id, $configuration_id, $issuance_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling CredentialsApi->getIssuanceIdClaimedCredential: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**| project id | |
+| **configuration_id** | **string**| configuration id | |
+| **issuance_id** | **string**| issuance id | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialResponse**](../Model/ClaimedCredentialResponse.md)
+
+### Authorization
+
+[ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
