@@ -70,7 +70,8 @@ class IssuanceConfigDto implements ModelInterface, ArrayAccess, \JsonSerializabl
         'credential_supported' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialSupportedObject[]',
         'issuer_metadata' => 'array<string,mixed>',
         'version' => 'float',
-        'return_uris' => 'string[]'
+        'return_uris' => 'string[]',
+        'webhook' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CisConfigurationWebhookSetting'
     ];
 
     /**
@@ -93,7 +94,8 @@ class IssuanceConfigDto implements ModelInterface, ArrayAccess, \JsonSerializabl
         'credential_supported' => null,
         'issuer_metadata' => null,
         'version' => null,
-        'return_uris' => null
+        'return_uris' => null,
+        'webhook' => null
     ];
 
     /**
@@ -114,7 +116,8 @@ class IssuanceConfigDto implements ModelInterface, ArrayAccess, \JsonSerializabl
         'credential_supported' => false,
         'issuer_metadata' => false,
         'version' => false,
-        'return_uris' => false
+        'return_uris' => false,
+        'webhook' => false
     ];
 
     /**
@@ -215,7 +218,8 @@ class IssuanceConfigDto implements ModelInterface, ArrayAccess, \JsonSerializabl
         'credential_supported' => 'credentialSupported',
         'issuer_metadata' => 'issuerMetadata',
         'version' => 'version',
-        'return_uris' => 'returnUris'
+        'return_uris' => 'returnUris',
+        'webhook' => 'webhook'
     ];
 
     /**
@@ -236,7 +240,8 @@ class IssuanceConfigDto implements ModelInterface, ArrayAccess, \JsonSerializabl
         'credential_supported' => 'setCredentialSupported',
         'issuer_metadata' => 'setIssuerMetadata',
         'version' => 'setVersion',
-        'return_uris' => 'setReturnUris'
+        'return_uris' => 'setReturnUris',
+        'webhook' => 'setWebhook'
     ];
 
     /**
@@ -257,7 +262,8 @@ class IssuanceConfigDto implements ModelInterface, ArrayAccess, \JsonSerializabl
         'credential_supported' => 'getCredentialSupported',
         'issuer_metadata' => 'getIssuerMetadata',
         'version' => 'getVersion',
-        'return_uris' => 'getReturnUris'
+        'return_uris' => 'getReturnUris',
+        'webhook' => 'getWebhook'
     ];
 
     /**
@@ -347,6 +353,7 @@ class IssuanceConfigDto implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('issuer_metadata', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
         $this->setIfExists('return_uris', $data ?? [], null);
+        $this->setIfExists('webhook', $data ?? [], null);
     }
 
     /**
@@ -766,6 +773,33 @@ class IssuanceConfigDto implements ModelInterface, ArrayAccess, \JsonSerializabl
             throw new \InvalidArgumentException('non-nullable return_uris cannot be null');
         }
         $this->container['return_uris'] = $return_uris;
+
+        return $this;
+    }
+
+    /**
+     * Gets webhook
+     *
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CisConfigurationWebhookSetting|null
+     */
+    public function getWebhook()
+    {
+        return $this->container['webhook'];
+    }
+
+    /**
+     * Sets webhook
+     *
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CisConfigurationWebhookSetting|null $webhook webhook
+     *
+     * @return self
+     */
+    public function setWebhook($webhook)
+    {
+        if (is_null($webhook)) {
+            throw new \InvalidArgumentException('non-nullable webhook cannot be null');
+        }
+        $this->container['webhook'] = $webhook;
 
         return $this;
     }

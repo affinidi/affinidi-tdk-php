@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **string** |  |
 **locale** | **string** |  | [optional]
-**logo** | [**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataDisplayInnerLogo**](SupportedCredentialMetadataDisplayInnerLogo.md) |  | [optional]
+**logo** | [**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\SupportedCredentialMetadataItemLogo**](SupportedCredentialMetadataItemLogo.md) |  | [optional]
 **background_color** | **string** |  | [optional]
 **text_color** | **string** |  | [optional]
 
