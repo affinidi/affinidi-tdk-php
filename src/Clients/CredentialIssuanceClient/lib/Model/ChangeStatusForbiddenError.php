@@ -1,11 +1,11 @@
 <?php
 /**
- * GetStatusListResultDto
+ * ChangeStatusForbiddenError
  *
  * PHP version 7.4
  *
  * @category Class
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,22 +27,21 @@
  * Do not edit the class manually.
  */
 
-namespace AffinidiTdk\Clients\CredentialIssuance\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Model;
 
 use \ArrayAccess;
-use \AffinidiTdk\Clients\CredentialIssuance\ObjectSerializer;
+use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
- * GetStatusListResultDto Class Doc Comment
+ * ChangeStatusForbiddenError Class Doc Comment
  *
  * @category Class
- * @description DTO contains revocation list credential
- * @package  AffinidiTdk\Clients\CredentialIssuance
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class GetStatusListResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class ChangeStatusForbiddenError implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class GetStatusListResultDto implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'GetStatusListResultDto';
+    protected static $openAPIModelName = 'ChangeStatusForbiddenError';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +58,11 @@ class GetStatusListResultDto implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'revocation_list_credential' => 'object'
+        'name' => 'string',
+        'message' => 'string',
+        'http_status_code' => 'float',
+        'trace_id' => 'string',
+        'details' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]'
     ];
 
     /**
@@ -70,7 +73,11 @@ class GetStatusListResultDto implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'revocation_list_credential' => null
+        'name' => null,
+        'message' => null,
+        'http_status_code' => null,
+        'trace_id' => null,
+        'details' => null
     ];
 
     /**
@@ -79,7 +86,11 @@ class GetStatusListResultDto implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'revocation_list_credential' => false
+        'name' => false,
+        'message' => false,
+        'http_status_code' => false,
+        'trace_id' => false,
+        'details' => false
     ];
 
     /**
@@ -168,7 +179,11 @@ class GetStatusListResultDto implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'revocation_list_credential' => 'revocationListCredential'
+        'name' => 'name',
+        'message' => 'message',
+        'http_status_code' => 'httpStatusCode',
+        'trace_id' => 'traceId',
+        'details' => 'details'
     ];
 
     /**
@@ -177,7 +192,11 @@ class GetStatusListResultDto implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'revocation_list_credential' => 'setRevocationListCredential'
+        'name' => 'setName',
+        'message' => 'setMessage',
+        'http_status_code' => 'setHttpStatusCode',
+        'trace_id' => 'setTraceId',
+        'details' => 'setDetails'
     ];
 
     /**
@@ -186,7 +205,11 @@ class GetStatusListResultDto implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'revocation_list_credential' => 'getRevocationListCredential'
+        'name' => 'getName',
+        'message' => 'getMessage',
+        'http_status_code' => 'getHttpStatusCode',
+        'trace_id' => 'getTraceId',
+        'details' => 'getDetails'
     ];
 
     /**
@@ -230,6 +253,45 @@ class GetStatusListResultDto implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
+    public const NAME_CHANGE_STATUS_FORBIDDEN_ERROR = 'ChangeStatusForbiddenError';
+    public const MESSAGE_RELATED_VC_STATUS_CANNOT_BE_CHANGED = 'Related VC status cannot be changed';
+    public const HTTP_STATUS_CODE_NUMBER_400 = 400;
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getNameAllowableValues()
+    {
+        return [
+            self::NAME_CHANGE_STATUS_FORBIDDEN_ERROR,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getMessageAllowableValues()
+    {
+        return [
+            self::MESSAGE_RELATED_VC_STATUS_CANNOT_BE_CHANGED,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getHttpStatusCodeAllowableValues()
+    {
+        return [
+            self::HTTP_STATUS_CODE_NUMBER_400,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -246,7 +308,11 @@ class GetStatusListResultDto implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('revocation_list_credential', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('http_status_code', $data ?? [], null);
+        $this->setIfExists('trace_id', $data ?? [], null);
+        $this->setIfExists('details', $data ?? [], null);
     }
 
     /**
@@ -276,8 +342,44 @@ class GetStatusListResultDto implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['revocation_list_credential'] === null) {
-            $invalidProperties[] = "'revocation_list_credential' can't be null";
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        $allowedValues = $this->getNameAllowableValues();
+        if (!is_null($this->container['name']) && !in_array($this->container['name'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'name', must be one of '%s'",
+                $this->container['name'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['message'] === null) {
+            $invalidProperties[] = "'message' can't be null";
+        }
+        $allowedValues = $this->getMessageAllowableValues();
+        if (!is_null($this->container['message']) && !in_array($this->container['message'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'message', must be one of '%s'",
+                $this->container['message'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['http_status_code'] === null) {
+            $invalidProperties[] = "'http_status_code' can't be null";
+        }
+        $allowedValues = $this->getHttpStatusCodeAllowableValues();
+        if (!is_null($this->container['http_status_code']) && !in_array($this->container['http_status_code'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'http_status_code', must be one of '%s'",
+                $this->container['http_status_code'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['trace_id'] === null) {
+            $invalidProperties[] = "'trace_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -295,28 +397,166 @@ class GetStatusListResultDto implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets revocation_list_credential
+     * Gets name
      *
-     * @return object
+     * @return string
      */
-    public function getRevocationListCredential()
+    public function getName()
     {
-        return $this->container['revocation_list_credential'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets revocation_list_credential
+     * Sets name
      *
-     * @param object $revocation_list_credential revocation_list_credential
+     * @param string $name name
      *
      * @return self
      */
-    public function setRevocationListCredential($revocation_list_credential)
+    public function setName($name)
     {
-        if (is_null($revocation_list_credential)) {
-            throw new \InvalidArgumentException('non-nullable revocation_list_credential cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['revocation_list_credential'] = $revocation_list_credential;
+        $allowedValues = $this->getNameAllowableValues();
+        if (!in_array($name, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'name', must be one of '%s'",
+                    $name,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->container['message'];
+    }
+
+    /**
+     * Sets message
+     *
+     * @param string $message message
+     *
+     * @return self
+     */
+    public function setMessage($message)
+    {
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        }
+        $allowedValues = $this->getMessageAllowableValues();
+        if (!in_array($message, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'message', must be one of '%s'",
+                    $message,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets http_status_code
+     *
+     * @return float
+     */
+    public function getHttpStatusCode()
+    {
+        return $this->container['http_status_code'];
+    }
+
+    /**
+     * Sets http_status_code
+     *
+     * @param float $http_status_code http_status_code
+     *
+     * @return self
+     */
+    public function setHttpStatusCode($http_status_code)
+    {
+        if (is_null($http_status_code)) {
+            throw new \InvalidArgumentException('non-nullable http_status_code cannot be null');
+        }
+        $allowedValues = $this->getHttpStatusCodeAllowableValues();
+        if (!in_array($http_status_code, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'http_status_code', must be one of '%s'",
+                    $http_status_code,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['http_status_code'] = $http_status_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets trace_id
+     *
+     * @return string
+     */
+    public function getTraceId()
+    {
+        return $this->container['trace_id'];
+    }
+
+    /**
+     * Sets trace_id
+     *
+     * @param string $trace_id trace_id
+     *
+     * @return self
+     */
+    public function setTraceId($trace_id)
+    {
+        if (is_null($trace_id)) {
+            throw new \InvalidArgumentException('non-nullable trace_id cannot be null');
+        }
+        $this->container['trace_id'] = $trace_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets details
+     *
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]|null
+     */
+    public function getDetails()
+    {
+        return $this->container['details'];
+    }
+
+    /**
+     * Sets details
+     *
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]|null $details details
+     *
+     * @return self
+     */
+    public function setDetails($details)
+    {
+        if (is_null($details)) {
+            throw new \InvalidArgumentException('non-nullable details cannot be null');
+        }
+        $this->container['details'] = $details;
 
         return $this;
     }

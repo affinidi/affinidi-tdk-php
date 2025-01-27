@@ -1,6 +1,6 @@
 <?php
 /**
- * SupportedCredentialMetadataDisplayInnerLogo
+ * ClaimedCredentialListResponse
  *
  * PHP version 7.4
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
- * SupportedCredentialMetadataDisplayInnerLogo Class Doc Comment
+ * ClaimedCredentialListResponse Class Doc Comment
  *
  * @category Class
+ * @description List of claimed credential
  * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SupportedCredentialMetadataDisplayInnerLogo implements ModelInterface, ArrayAccess, \JsonSerializable
+class ClaimedCredentialListResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class SupportedCredentialMetadataDisplayInnerLogo implements ModelInterface, Arr
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SupportedCredentialMetadata_display_inner_logo';
+    protected static $openAPIModelName = 'ClaimedCredentialListResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +59,8 @@ class SupportedCredentialMetadataDisplayInnerLogo implements ModelInterface, Arr
       * @var string[]
       */
     protected static $openAPITypes = [
-        'url' => 'string',
-        'alt_text' => 'string'
+        'credentials' => 'array<string,mixed>[]',
+        'next' => 'string'
     ];
 
     /**
@@ -70,8 +71,8 @@ class SupportedCredentialMetadataDisplayInnerLogo implements ModelInterface, Arr
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'url' => null,
-        'alt_text' => null
+        'credentials' => null,
+        'next' => null
     ];
 
     /**
@@ -80,8 +81,8 @@ class SupportedCredentialMetadataDisplayInnerLogo implements ModelInterface, Arr
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'url' => false,
-        'alt_text' => false
+        'credentials' => false,
+        'next' => false
     ];
 
     /**
@@ -170,8 +171,8 @@ class SupportedCredentialMetadataDisplayInnerLogo implements ModelInterface, Arr
      * @var string[]
      */
     protected static $attributeMap = [
-        'url' => 'url',
-        'alt_text' => 'altText'
+        'credentials' => 'credentials',
+        'next' => 'next'
     ];
 
     /**
@@ -180,8 +181,8 @@ class SupportedCredentialMetadataDisplayInnerLogo implements ModelInterface, Arr
      * @var string[]
      */
     protected static $setters = [
-        'url' => 'setUrl',
-        'alt_text' => 'setAltText'
+        'credentials' => 'setCredentials',
+        'next' => 'setNext'
     ];
 
     /**
@@ -190,8 +191,8 @@ class SupportedCredentialMetadataDisplayInnerLogo implements ModelInterface, Arr
      * @var string[]
      */
     protected static $getters = [
-        'url' => 'getUrl',
-        'alt_text' => 'getAltText'
+        'credentials' => 'getCredentials',
+        'next' => 'getNext'
     ];
 
     /**
@@ -251,8 +252,8 @@ class SupportedCredentialMetadataDisplayInnerLogo implements ModelInterface, Arr
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('url', $data ?? [], null);
-        $this->setIfExists('alt_text', $data ?? [], null);
+        $this->setIfExists('credentials', $data ?? [], null);
+        $this->setIfExists('next', $data ?? [], null);
     }
 
     /**
@@ -282,9 +283,6 @@ class SupportedCredentialMetadataDisplayInnerLogo implements ModelInterface, Arr
     {
         $invalidProperties = [];
 
-        if ($this->container['url'] === null) {
-            $invalidProperties[] = "'url' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -301,55 +299,55 @@ class SupportedCredentialMetadataDisplayInnerLogo implements ModelInterface, Arr
 
 
     /**
-     * Gets url
+     * Gets credentials
      *
-     * @return string
+     * @return array<string,mixed>[]|null
      */
-    public function getUrl()
+    public function getCredentials()
     {
-        return $this->container['url'];
+        return $this->container['credentials'];
     }
 
     /**
-     * Sets url
+     * Sets credentials
      *
-     * @param string $url url
+     * @param array<string,mixed>[]|null $credentials list of credentials
      *
      * @return self
      */
-    public function setUrl($url)
+    public function setCredentials($credentials)
     {
-        if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        if (is_null($credentials)) {
+            throw new \InvalidArgumentException('non-nullable credentials cannot be null');
         }
-        $this->container['url'] = $url;
+        $this->container['credentials'] = $credentials;
 
         return $this;
     }
 
     /**
-     * Gets alt_text
+     * Gets next
      *
      * @return string|null
      */
-    public function getAltText()
+    public function getNext()
     {
-        return $this->container['alt_text'];
+        return $this->container['next'];
     }
 
     /**
-     * Sets alt_text
+     * Sets next
      *
-     * @param string|null $alt_text alt_text
+     * @param string|null $next for pagination to fetch next set of records
      *
      * @return self
      */
-    public function setAltText($alt_text)
+    public function setNext($next)
     {
-        if (is_null($alt_text)) {
-            throw new \InvalidArgumentException('non-nullable alt_text cannot be null');
+        if (is_null($next)) {
+            throw new \InvalidArgumentException('non-nullable next cannot be null');
         }
-        $this->container['alt_text'] = $alt_text;
+        $this->container['next'] = $next;
 
         return $this;
     }
