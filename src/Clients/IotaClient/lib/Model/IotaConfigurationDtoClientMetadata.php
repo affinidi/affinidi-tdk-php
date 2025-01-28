@@ -51,7 +51,7 @@ class IotaConfigurationDtoClientMetadata implements ModelInterface, ArrayAccess,
       *
       * @var string
       */
-    protected static $openAPIModelName = 'IotaConfigurationDto_clientMetadata';
+    protected static $openAPIModelName = 'IotaConfigurationDtoClientMetadata';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

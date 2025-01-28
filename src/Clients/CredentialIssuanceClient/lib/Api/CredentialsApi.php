@@ -36,6 +36,9 @@ use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use AffinidiTdk\Clients\CredentialIssuanceClient\ApiException;
+use AffinidiTdk\Clients\CredentialIssuanceClient\InvalidJwtTokenError;
+use AffinidiTdk\Clients\CredentialIssuanceClient\InvalidParameterError;
+use AffinidiTdk\Clients\CredentialIssuanceClient\NotFoundError;
 use AffinidiTdk\Clients\CredentialIssuanceClient\Configuration;
 use AffinidiTdk\Clients\CredentialIssuanceClient\HeaderSelector;
 use AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
@@ -75,6 +78,12 @@ class CredentialsApi
         'generateCredentials' => [
             'application/json',
         ],
+        'getClaimedCredentials' => [
+            'application/json',
+        ],
+        'getIssuanceIdClaimedCredential' => [
+            'application/json',
+        ],
     ];
 
     /**
@@ -84,10 +93,10 @@ class CredentialsApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -160,6 +169,20 @@ class CredentialsApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -510,6 +533,911 @@ class CredentialsApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getClaimedCredentials
+     *
+     * Get claimed credential in the specified range
+     *
+     * @param  string $project_id project id (required)
+     * @param  string $configuration_id configuration id (required)
+     * @param  string $range_start_time range_start_time (required)
+     * @param  string|null $range_end_time range_end_time (optional)
+     * @param  string|null $next next (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClaimedCredentials'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialListResponse|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError
+     */
+    public function getClaimedCredentials($project_id, $configuration_id, $range_start_time, $range_end_time = null, $next = null, string $contentType = self::contentTypes['getClaimedCredentials'][0])
+    {
+        list($response) = $this->getClaimedCredentialsWithHttpInfo($project_id, $configuration_id, $range_start_time, $range_end_time, $next, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getClaimedCredentialsWithHttpInfo
+     *
+     * Get claimed credential in the specified range
+     *
+     * @param  string $project_id project id (required)
+     * @param  string $configuration_id configuration id (required)
+     * @param  string $range_start_time (required)
+     * @param  string|null $range_end_time (optional)
+     * @param  string|null $next (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClaimedCredentials'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialListResponse|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getClaimedCredentialsWithHttpInfo($project_id, $configuration_id, $range_start_time, $range_end_time = null, $next = null, string $contentType = self::contentTypes['getClaimedCredentials'][0])
+    {
+        $request = $this->getClaimedCredentialsRequest($project_id, $configuration_id, $range_start_time, $range_end_time, $next, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialListResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialListResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialListResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialListResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialListResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getClaimedCredentialsAsync
+     *
+     * Get claimed credential in the specified range
+     *
+     * @param  string $project_id project id (required)
+     * @param  string $configuration_id configuration id (required)
+     * @param  string $range_start_time (required)
+     * @param  string|null $range_end_time (optional)
+     * @param  string|null $next (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClaimedCredentials'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getClaimedCredentialsAsync($project_id, $configuration_id, $range_start_time, $range_end_time = null, $next = null, string $contentType = self::contentTypes['getClaimedCredentials'][0])
+    {
+        return $this->getClaimedCredentialsAsyncWithHttpInfo($project_id, $configuration_id, $range_start_time, $range_end_time, $next, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getClaimedCredentialsAsyncWithHttpInfo
+     *
+     * Get claimed credential in the specified range
+     *
+     * @param  string $project_id project id (required)
+     * @param  string $configuration_id configuration id (required)
+     * @param  string $range_start_time (required)
+     * @param  string|null $range_end_time (optional)
+     * @param  string|null $next (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClaimedCredentials'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getClaimedCredentialsAsyncWithHttpInfo($project_id, $configuration_id, $range_start_time, $range_end_time = null, $next = null, string $contentType = self::contentTypes['getClaimedCredentials'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialListResponse';
+        $request = $this->getClaimedCredentialsRequest($project_id, $configuration_id, $range_start_time, $range_end_time, $next, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getClaimedCredentials'
+     *
+     * @param  string $project_id project id (required)
+     * @param  string $configuration_id configuration id (required)
+     * @param  string $range_start_time (required)
+     * @param  string|null $range_end_time (optional)
+     * @param  string|null $next (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClaimedCredentials'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getClaimedCredentialsRequest($project_id, $configuration_id, $range_start_time, $range_end_time = null, $next = null, string $contentType = self::contentTypes['getClaimedCredentials'][0])
+    {
+
+        // verify the required parameter 'project_id' is set
+        if ($project_id === null || (is_array($project_id) && count($project_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $project_id when calling getClaimedCredentials'
+            );
+        }
+
+        // verify the required parameter 'configuration_id' is set
+        if ($configuration_id === null || (is_array($configuration_id) && count($configuration_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $configuration_id when calling getClaimedCredentials'
+            );
+        }
+
+        // verify the required parameter 'range_start_time' is set
+        if ($range_start_time === null || (is_array($range_start_time) && count($range_start_time) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $range_start_time when calling getClaimedCredentials'
+            );
+        }
+
+
+
+
+        $resourcePath = '/v1/{projectId}/configurations/{configurationId}/credentials';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $range_start_time,
+            'rangeStartTime', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $range_end_time,
+            'rangeEndTime', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $next,
+            'next', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($project_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'projectId' . '}',
+                ObjectSerializer::toPathValue($project_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($configuration_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'configurationId' . '}',
+                ObjectSerializer::toPathValue($configuration_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getIssuanceIdClaimedCredential
+     *
+     * Get claimed VC linked to the issuanceId
+     *
+     * @param  string $project_id project id (required)
+     * @param  string $configuration_id configuration id (required)
+     * @param  string $issuance_id issuance id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIssuanceIdClaimedCredential'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialResponse|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError
+     */
+    public function getIssuanceIdClaimedCredential($project_id, $configuration_id, $issuance_id, string $contentType = self::contentTypes['getIssuanceIdClaimedCredential'][0])
+    {
+        list($response) = $this->getIssuanceIdClaimedCredentialWithHttpInfo($project_id, $configuration_id, $issuance_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getIssuanceIdClaimedCredentialWithHttpInfo
+     *
+     * Get claimed VC linked to the issuanceId
+     *
+     * @param  string $project_id project id (required)
+     * @param  string $configuration_id configuration id (required)
+     * @param  string $issuance_id issuance id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIssuanceIdClaimedCredential'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialResponse|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getIssuanceIdClaimedCredentialWithHttpInfo($project_id, $configuration_id, $issuance_id, string $contentType = self::contentTypes['getIssuanceIdClaimedCredential'][0])
+    {
+        $request = $this->getIssuanceIdClaimedCredentialRequest($project_id, $configuration_id, $issuance_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getIssuanceIdClaimedCredentialAsync
+     *
+     * Get claimed VC linked to the issuanceId
+     *
+     * @param  string $project_id project id (required)
+     * @param  string $configuration_id configuration id (required)
+     * @param  string $issuance_id issuance id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIssuanceIdClaimedCredential'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getIssuanceIdClaimedCredentialAsync($project_id, $configuration_id, $issuance_id, string $contentType = self::contentTypes['getIssuanceIdClaimedCredential'][0])
+    {
+        return $this->getIssuanceIdClaimedCredentialAsyncWithHttpInfo($project_id, $configuration_id, $issuance_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getIssuanceIdClaimedCredentialAsyncWithHttpInfo
+     *
+     * Get claimed VC linked to the issuanceId
+     *
+     * @param  string $project_id project id (required)
+     * @param  string $configuration_id configuration id (required)
+     * @param  string $issuance_id issuance id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIssuanceIdClaimedCredential'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getIssuanceIdClaimedCredentialAsyncWithHttpInfo($project_id, $configuration_id, $issuance_id, string $contentType = self::contentTypes['getIssuanceIdClaimedCredential'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ClaimedCredentialResponse';
+        $request = $this->getIssuanceIdClaimedCredentialRequest($project_id, $configuration_id, $issuance_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getIssuanceIdClaimedCredential'
+     *
+     * @param  string $project_id project id (required)
+     * @param  string $configuration_id configuration id (required)
+     * @param  string $issuance_id issuance id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIssuanceIdClaimedCredential'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getIssuanceIdClaimedCredentialRequest($project_id, $configuration_id, $issuance_id, string $contentType = self::contentTypes['getIssuanceIdClaimedCredential'][0])
+    {
+
+        // verify the required parameter 'project_id' is set
+        if ($project_id === null || (is_array($project_id) && count($project_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $project_id when calling getIssuanceIdClaimedCredential'
+            );
+        }
+
+        // verify the required parameter 'configuration_id' is set
+        if ($configuration_id === null || (is_array($configuration_id) && count($configuration_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $configuration_id when calling getIssuanceIdClaimedCredential'
+            );
+        }
+
+        // verify the required parameter 'issuance_id' is set
+        if ($issuance_id === null || (is_array($issuance_id) && count($issuance_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $issuance_id when calling getIssuanceIdClaimedCredential'
+            );
+        }
+
+
+        $resourcePath = '/v1/{projectId}/configurations/{configurationId}/issuances/{issuanceId}/credentials';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($project_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'projectId' . '}',
+                ObjectSerializer::toPathValue($project_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($configuration_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'configurationId' . '}',
+                ObjectSerializer::toPathValue($configuration_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($issuance_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'issuanceId' . '}',
+                ObjectSerializer::toPathValue($issuance_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
