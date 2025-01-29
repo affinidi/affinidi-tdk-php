@@ -36,6 +36,9 @@ use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use AffinidiTdk\Clients\CredentialIssuanceClient\ApiException;
+use AffinidiTdk\Clients\CredentialIssuanceClient\InvalidJwtTokenError;
+use AffinidiTdk\Clients\CredentialIssuanceClient\InvalidParameterError;
+use AffinidiTdk\Clients\CredentialIssuanceClient\NotFoundError;
 use AffinidiTdk\Clients\CredentialIssuanceClient\Configuration;
 use AffinidiTdk\Clients\CredentialIssuanceClient\HeaderSelector;
 use AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
@@ -87,10 +90,10 @@ class DefaultApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -133,15 +136,16 @@ class DefaultApi
      *
      * @param  string $project_id project id (required)
      * @param  string $configuration_id configuration id (required)
+     * @param  \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatusInput $change_credential_status_input Request body for changing credential status (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialStatus'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatus400Response|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError
      */
-    public function changeCredentialStatus($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialStatus'][0])
+    public function changeCredentialStatus($project_id, $configuration_id, $change_credential_status_input, string $contentType = self::contentTypes['changeCredentialStatus'][0])
     {
-        list($response) = $this->changeCredentialStatusWithHttpInfo($project_id, $configuration_id, $contentType);
+        list($response) = $this->changeCredentialStatusWithHttpInfo($project_id, $configuration_id, $change_credential_status_input, $contentType);
         return $response;
     }
 
@@ -152,21 +156,36 @@ class DefaultApi
      *
      * @param  string $project_id project id (required)
      * @param  string $configuration_id configuration id (required)
+     * @param  \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatusInput $change_credential_status_input Request body for changing credential status (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialStatus'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatus400Response|\AffinidiTdk\Clients\CredentialIssuanceClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function changeCredentialStatusWithHttpInfo($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialStatus'][0])
+    public function changeCredentialStatusWithHttpInfo($project_id, $configuration_id, $change_credential_status_input, string $contentType = self::contentTypes['changeCredentialStatus'][0])
     {
-        $request = $this->changeCredentialStatusRequest($project_id, $configuration_id, $contentType);
+        $request = $this->changeCredentialStatusRequest($project_id, $configuration_id, $change_credential_status_input, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -214,11 +233,11 @@ class DefaultApi
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatus400Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError' !== 'string') {
+                        if ('\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatus400Response' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -236,7 +255,7 @@ class DefaultApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatus400Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -323,7 +342,7 @@ class DefaultApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\InvalidParameterError',
+                        '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatus400Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -348,14 +367,15 @@ class DefaultApi
      *
      * @param  string $project_id project id (required)
      * @param  string $configuration_id configuration id (required)
+     * @param  \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatusInput $change_credential_status_input Request body for changing credential status (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialStatus'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function changeCredentialStatusAsync($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialStatus'][0])
+    public function changeCredentialStatusAsync($project_id, $configuration_id, $change_credential_status_input, string $contentType = self::contentTypes['changeCredentialStatus'][0])
     {
-        return $this->changeCredentialStatusAsyncWithHttpInfo($project_id, $configuration_id, $contentType)
+        return $this->changeCredentialStatusAsyncWithHttpInfo($project_id, $configuration_id, $change_credential_status_input, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -370,15 +390,16 @@ class DefaultApi
      *
      * @param  string $project_id project id (required)
      * @param  string $configuration_id configuration id (required)
+     * @param  \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatusInput $change_credential_status_input Request body for changing credential status (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialStatus'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function changeCredentialStatusAsyncWithHttpInfo($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialStatus'][0])
+    public function changeCredentialStatusAsyncWithHttpInfo($project_id, $configuration_id, $change_credential_status_input, string $contentType = self::contentTypes['changeCredentialStatus'][0])
     {
         $returnType = '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\FlowData';
-        $request = $this->changeCredentialStatusRequest($project_id, $configuration_id, $contentType);
+        $request = $this->changeCredentialStatusRequest($project_id, $configuration_id, $change_credential_status_input, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -421,12 +442,13 @@ class DefaultApi
      *
      * @param  string $project_id project id (required)
      * @param  string $configuration_id configuration id (required)
+     * @param  \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ChangeCredentialStatusInput $change_credential_status_input Request body for changing credential status (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeCredentialStatus'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function changeCredentialStatusRequest($project_id, $configuration_id, string $contentType = self::contentTypes['changeCredentialStatus'][0])
+    public function changeCredentialStatusRequest($project_id, $configuration_id, $change_credential_status_input, string $contentType = self::contentTypes['changeCredentialStatus'][0])
     {
 
         // verify the required parameter 'project_id' is set
@@ -440,6 +462,13 @@ class DefaultApi
         if ($configuration_id === null || (is_array($configuration_id) && count($configuration_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $configuration_id when calling changeCredentialStatus'
+            );
+        }
+
+        // verify the required parameter 'change_credential_status_input' is set
+        if ($change_credential_status_input === null || (is_array($change_credential_status_input) && count($change_credential_status_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $change_credential_status_input when calling changeCredentialStatus'
             );
         }
 
@@ -478,7 +507,14 @@ class DefaultApi
         );
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($change_credential_status_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($change_credential_status_input));
+            } else {
+                $httpBody = $change_credential_status_input;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -536,8 +572,8 @@ class DefaultApi
      *
      * @param  string $project_id Affinidi project id (required)
      * @param  string $configuration_id The id of the issuance configuration (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional, default to 10)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 10)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIssuanceDataRecords'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -557,8 +593,8 @@ class DefaultApi
      *
      * @param  string $project_id Affinidi project id (required)
      * @param  string $configuration_id The id of the issuance configuration (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional, default to 10)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 10)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIssuanceDataRecords'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\CredentialIssuanceClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -574,6 +610,20 @@ class DefaultApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -755,8 +805,8 @@ class DefaultApi
      *
      * @param  string $project_id Affinidi project id (required)
      * @param  string $configuration_id The id of the issuance configuration (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional, default to 10)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 10)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIssuanceDataRecords'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -779,8 +829,8 @@ class DefaultApi
      *
      * @param  string $project_id Affinidi project id (required)
      * @param  string $configuration_id The id of the issuance configuration (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional, default to 10)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 10)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIssuanceDataRecords'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -832,8 +882,8 @@ class DefaultApi
      *
      * @param  string $project_id Affinidi project id (required)
      * @param  string $configuration_id The id of the issuance configuration (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional, default to 10)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 10)
+     * @param  string|null $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIssuanceDataRecords'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
