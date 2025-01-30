@@ -72,9 +72,12 @@ Class | Method | HTTP request | Description
 *ConfigurationApi* | [**getIssuanceConfigList**](docs/Api/ConfigurationApi.md#getissuanceconfiglist) | **GET** /v1/configurations | 
 *ConfigurationApi* | [**updateIssuanceConfigById**](docs/Api/ConfigurationApi.md#updateissuanceconfigbyid) | **PUT** /v1/configurations/{configurationId} | 
 *CredentialsApi* | [**generateCredentials**](docs/Api/CredentialsApi.md#generatecredentials) | **POST** /v1/{projectId}/credential | 
+*CredentialsApi* | [**getClaimedCredentials**](docs/Api/CredentialsApi.md#getclaimedcredentials) | **GET** /v1/{projectId}/configurations/{configurationId}/credentials | Get claimed credential in the specified range
+*CredentialsApi* | [**getIssuanceIdClaimedCredential**](docs/Api/CredentialsApi.md#getissuanceidclaimedcredential) | **GET** /v1/{projectId}/configurations/{configurationId}/issuances/{issuanceId}/credentials | Get claimed VC linked to the issuanceId
 *DefaultApi* | [**changeCredentialStatus**](docs/Api/DefaultApi.md#changecredentialstatus) | **POST** /v1/{projectId}/configurations/{configurationId}/issuance/change-status | change credential status.
 *DefaultApi* | [**listIssuanceDataRecords**](docs/Api/DefaultApi.md#listissuancedatarecords) | **GET** /v1/{projectId}/configurations/{configurationId}/issuance/issuance-data-records | List records
 *IssuanceApi* | [**issuanceState**](docs/Api/IssuanceApi.md#issuancestate) | **GET** /v1/{projectId}/issuance/state/{issuanceId} | 
+*IssuanceApi* | [**issueCredentials**](docs/Api/IssuanceApi.md#issuecredentials) | **POST** /v1/{projectId}/credential/issue | 
 *IssuanceApi* | [**listIssuance**](docs/Api/IssuanceApi.md#listissuance) | **GET** /v1/{projectId}/issuance | 
 *IssuanceApi* | [**startIssuance**](docs/Api/IssuanceApi.md#startissuance) | **POST** /v1/{projectId}/issuance/start | 
 *OfferApi* | [**getCredentialOffer**](docs/Api/OfferApi.md#getcredentialoffer) | **GET** /v1/{projectId}/offers/{issuanceId} | 
@@ -84,9 +87,17 @@ Class | Method | HTTP request | Description
 
 - [ActionForbiddenError](docs/Model/ActionForbiddenError.md)
 - [ActionForbiddenErrorDetailsInner](docs/Model/ActionForbiddenErrorDetailsInner.md)
+- [ChangeCredentialStatus400Response](docs/Model/ChangeCredentialStatus400Response.md)
 - [ChangeCredentialStatusInput](docs/Model/ChangeCredentialStatusInput.md)
+- [ChangeStatusForbiddenError](docs/Model/ChangeStatusForbiddenError.md)
+- [CisConfigurationWebhookSetting](docs/Model/CisConfigurationWebhookSetting.md)
+- [CisConfigurationWebhookSettingEndpoint](docs/Model/CisConfigurationWebhookSettingEndpoint.md)
+- [ClaimedCredentialListResponse](docs/Model/ClaimedCredentialListResponse.md)
+- [ClaimedCredentialResponse](docs/Model/ClaimedCredentialResponse.md)
 - [CorsGenerateCredentialsOK](docs/Model/CorsGenerateCredentialsOK.md)
+- [CorsGetClaimedCredentialsOK](docs/Model/CorsGetClaimedCredentialsOK.md)
 - [CorsGetCredentialOfferOK](docs/Model/CorsGetCredentialOfferOK.md)
+- [CorsGetIssuanceIdClaimedCredentialOK](docs/Model/CorsGetIssuanceIdClaimedCredentialOK.md)
 - [CorsGetWellKnownOpenIdCredentialIssuerOK](docs/Model/CorsGetWellKnownOpenIdCredentialIssuerOK.md)
 - [CreateCredentialInput](docs/Model/CreateCredentialInput.md)
 - [CreateIssuanceConfig400Response](docs/Model/CreateIssuanceConfig400Response.md)
@@ -128,6 +139,7 @@ Class | Method | HTTP request | Description
 - [NotFoundError](docs/Model/NotFoundError.md)
 - [ProjectCredentialConfigExistError](docs/Model/ProjectCredentialConfigExistError.md)
 - [ProjectCredentialConfigNotExistError](docs/Model/ProjectCredentialConfigNotExistError.md)
+- [RevocationForbiddenError](docs/Model/RevocationForbiddenError.md)
 - [StartIssuance400Response](docs/Model/StartIssuance400Response.md)
 - [StartIssuanceInput](docs/Model/StartIssuanceInput.md)
 - [StartIssuanceInputDataInner](docs/Model/StartIssuanceInputDataInner.md)
@@ -136,7 +148,7 @@ Class | Method | HTTP request | Description
 - [StartIssuanceResponse](docs/Model/StartIssuanceResponse.md)
 - [SupportedCredentialMetadata](docs/Model/SupportedCredentialMetadata.md)
 - [SupportedCredentialMetadataDisplayInner](docs/Model/SupportedCredentialMetadataDisplayInner.md)
-- [SupportedCredentialMetadataDisplayInnerLogo](docs/Model/SupportedCredentialMetadataDisplayInnerLogo.md)
+- [SupportedCredentialMetadataItemLogo](docs/Model/SupportedCredentialMetadataItemLogo.md)
 - [UpdateIssuanceConfigInput](docs/Model/UpdateIssuanceConfigInput.md)
 - [VcClaimedError](docs/Model/VcClaimedError.md)
 - [WellKnownOpenIdCredentialIssuerResponse](docs/Model/WellKnownOpenIdCredentialIssuerResponse.md)
