@@ -7,6 +7,8 @@ class CredentialIssuanceClientIntegrationTest extends TestCase
 {
     public function testIssuance()
     {
+        $this->markTestSkipped('Enable as soon as dedicated project + configuration has been created.');
+
         $config = CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
 
         $api = new CredentialIssuanceClient\Api\IssuanceApi(
