@@ -1,11 +1,11 @@
 <?php
 /**
- * GetStatusListResultDtoTest
+ * CorsGetClaimedCredentialsOKTest
  *
  * PHP version 7.4
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,20 +27,20 @@
  * Please update the test case below to test the model.
  */
 
-namespace OpenAPI\Client\Test\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Test\Model;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * GetStatusListResultDtoTest Class Doc Comment
+ * CorsGetClaimedCredentialsOKTest Class Doc Comment
  *
  * @category    Class
- * @description DTO contains revocation list credential
- * @package     OpenAPI\Client
+ * @description CorsGetClaimedCredentialsOK
+ * @package     AffinidiTdk\Clients\CredentialIssuanceClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class GetStatusListResultDtoTest extends TestCase
+class CorsGetClaimedCredentialsOKTest extends TestCase
 {
 
     /**
@@ -72,18 +72,18 @@ class GetStatusListResultDtoTest extends TestCase
     }
 
     /**
-     * Test "GetStatusListResultDto"
+     * Test "CorsGetClaimedCredentialsOK"
      */
-    public function testGetStatusListResultDto()
+    public function testCorsGetClaimedCredentialsOK()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "revocation_list_credential"
+     * Test attribute "cors_get_claimed_credentials_ok"
      */
-    public function testPropertyRevocationListCredential()
+    public function testPropertyCorsGetClaimedCredentialsOk()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

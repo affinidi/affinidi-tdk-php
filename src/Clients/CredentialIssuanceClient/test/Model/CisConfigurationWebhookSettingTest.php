@@ -1,11 +1,11 @@
 <?php
 /**
- * SupportedCredentialMetadataDisplayInnerLogoTest
+ * CisConfigurationWebhookSettingTest
  *
  * PHP version 7.4
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,20 +27,20 @@
  * Please update the test case below to test the model.
  */
 
-namespace OpenAPI\Client\Test\Model;
+namespace AffinidiTdk\Clients\CredentialIssuanceClient\Test\Model;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * SupportedCredentialMetadataDisplayInnerLogoTest Class Doc Comment
+ * CisConfigurationWebhookSettingTest Class Doc Comment
  *
  * @category    Class
- * @description SupportedCredentialMetadataDisplayInnerLogo
- * @package     OpenAPI\Client
+ * @description Webhook setting to notify developers for claimed VC
+ * @package     AffinidiTdk\Clients\CredentialIssuanceClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class SupportedCredentialMetadataDisplayInnerLogoTest extends TestCase
+class CisConfigurationWebhookSettingTest extends TestCase
 {
 
     /**
@@ -72,27 +72,27 @@ class SupportedCredentialMetadataDisplayInnerLogoTest extends TestCase
     }
 
     /**
-     * Test "SupportedCredentialMetadataDisplayInnerLogo"
+     * Test "CisConfigurationWebhookSetting"
      */
-    public function testSupportedCredentialMetadataDisplayInnerLogo()
+    public function testCisConfigurationWebhookSetting()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "url"
+     * Test attribute "enabled"
      */
-    public function testPropertyUrl()
+    public function testPropertyEnabled()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "alt_text"
+     * Test attribute "endpoint"
      */
-    public function testPropertyAltText()
+    public function testPropertyEndpoint()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
