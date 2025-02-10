@@ -13,5 +13,6 @@ Name | Type | Description | Notes
 **credential_supported** | [**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialSupportedObject[]**](CredentialSupportedObject.md) |  | [optional]
 **issuer_metadata** | **array<string,mixed>** | Issuer public information wallet may want to show to user during consent confirmation | [optional]
 **return_uris** | **string[]** | List of allowed URIs to be returned to after issuance | [optional]
+**webhook** | [**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CisConfigurationWebhookSetting**](CisConfigurationWebhookSetting.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
