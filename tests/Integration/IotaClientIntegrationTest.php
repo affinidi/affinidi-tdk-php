@@ -33,7 +33,7 @@ class IotaClientIntegrationTest extends TestCase
 
     public function testRedirectFlow()
     {
-        $this->markTestSkipped('Enable as soon as dedicated project + configuration has been created.');
+        // $this->markTestSkipped('Enable as soon as dedicated project + configuration has been created.');
 
         $config = IotaClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
         $configCallback = IotaClient\Configuration::getDefaultConfiguration();
