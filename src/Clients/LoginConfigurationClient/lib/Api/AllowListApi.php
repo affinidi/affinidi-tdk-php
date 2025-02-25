@@ -36,6 +36,9 @@ use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use AffinidiTdk\Clients\LoginConfigurationClient\ApiException;
+use AffinidiTdk\Clients\LoginConfigurationClient\InvalidJwtTokenError;
+use AffinidiTdk\Clients\LoginConfigurationClient\InvalidParameterError;
+use AffinidiTdk\Clients\LoginConfigurationClient\NotFoundError;
 use AffinidiTdk\Clients\LoginConfigurationClient\Configuration;
 use AffinidiTdk\Clients\LoginConfigurationClient\HeaderSelector;
 use AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
@@ -90,10 +93,10 @@ class AllowListApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -132,7 +135,7 @@ class AllowListApi
     /**
      * Operation allowGroups
      *
-     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput $group_names_input List of group names as input (optional)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput|null $group_names_input List of group names as input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['allowGroups'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -147,7 +150,7 @@ class AllowListApi
     /**
      * Operation allowGroupsWithHttpInfo
      *
-     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput $group_names_input List of group names as input (optional)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput|null $group_names_input List of group names as input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['allowGroups'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -163,6 +166,20 @@ class AllowListApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -201,7 +218,7 @@ class AllowListApi
     /**
      * Operation allowGroupsAsync
      *
-     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput $group_names_input List of group names as input (optional)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput|null $group_names_input List of group names as input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['allowGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -220,7 +237,7 @@ class AllowListApi
     /**
      * Operation allowGroupsAsyncWithHttpInfo
      *
-     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput $group_names_input List of group names as input (optional)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput|null $group_names_input List of group names as input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['allowGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -257,7 +274,7 @@ class AllowListApi
     /**
      * Create request for operation 'allowGroups'
      *
-     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput $group_names_input List of group names as input (optional)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput|null $group_names_input List of group names as input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['allowGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -347,7 +364,7 @@ class AllowListApi
     /**
      * Operation disallowGroups
      *
-     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput $group_names_input List of group names as input (optional)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput|null $group_names_input List of group names as input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disallowGroups'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -362,7 +379,7 @@ class AllowListApi
     /**
      * Operation disallowGroupsWithHttpInfo
      *
-     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput $group_names_input List of group names as input (optional)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput|null $group_names_input List of group names as input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disallowGroups'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -378,6 +395,20 @@ class AllowListApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -416,7 +447,7 @@ class AllowListApi
     /**
      * Operation disallowGroupsAsync
      *
-     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput $group_names_input List of group names as input (optional)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput|null $group_names_input List of group names as input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disallowGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -435,7 +466,7 @@ class AllowListApi
     /**
      * Operation disallowGroupsAsyncWithHttpInfo
      *
-     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput $group_names_input List of group names as input (optional)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput|null $group_names_input List of group names as input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disallowGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -472,7 +503,7 @@ class AllowListApi
     /**
      * Create request for operation 'disallowGroups'
      *
-     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput $group_names_input List of group names as input (optional)
+     * @param  \AffinidiTdk\Clients\LoginConfigurationClient\Model\GroupNamesInput|null $group_names_input List of group names as input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disallowGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -562,7 +593,7 @@ class AllowListApi
     /**
      * Operation listAllowedGroups
      *
-     * @param  string $page_token page_token (optional)
+     * @param  string|null $page_token page_token (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllowedGroups'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -578,7 +609,7 @@ class AllowListApi
     /**
      * Operation listAllowedGroupsWithHttpInfo
      *
-     * @param  string $page_token (optional)
+     * @param  string|null $page_token (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllowedGroups'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\LoginConfigurationClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -594,6 +625,20 @@ class AllowListApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -701,7 +746,7 @@ class AllowListApi
     /**
      * Operation listAllowedGroupsAsync
      *
-     * @param  string $page_token (optional)
+     * @param  string|null $page_token (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllowedGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -720,7 +765,7 @@ class AllowListApi
     /**
      * Operation listAllowedGroupsAsyncWithHttpInfo
      *
-     * @param  string $page_token (optional)
+     * @param  string|null $page_token (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllowedGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -770,7 +815,7 @@ class AllowListApi
     /**
      * Create request for operation 'listAllowedGroups'
      *
-     * @param  string $page_token (optional)
+     * @param  string|null $page_token (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAllowedGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

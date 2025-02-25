@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **creation_date** | **string** | OAuth 2.0 Client Creation Date |
 **vp_definition** | **string** | VP definition in JSON stringify format |
 **presentation_definition** | **object** | Presentation Definition | [optional]
-**id_token_mapping** | [**\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping**](IdTokenMapping.md) |  |
+**id_token_mapping** | [**\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]**](IdTokenMappingItem.md) | Fields name/path mapping between the vp_token and the id_token |
 **client_metadata** | [**\AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataOutput**](LoginConfigurationClientMetadataOutput.md) |  |
 **token_endpoint_auth_method** | [**\AffinidiTdk\Clients\LoginConfigurationClient\Model\TokenEndpointAuthMethod**](TokenEndpointAuthMethod.md) |  |
 

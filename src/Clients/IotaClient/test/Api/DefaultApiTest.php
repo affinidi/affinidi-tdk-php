@@ -4,7 +4,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,18 +26,18 @@
  * Please update the test case below to test the endpoint.
  */
 
-namespace OpenAPI\Client\Test\Api;
+namespace AffinidiTdk\Clients\IotaClient\Test\Api;
 
-use \OpenAPI\Client\Configuration;
-use \OpenAPI\Client\ApiException;
-use \OpenAPI\Client\ObjectSerializer;
+use \AffinidiTdk\Clients\IotaClient\Configuration;
+use \AffinidiTdk\Clients\IotaClient\ApiException;
+use \AffinidiTdk\Clients\IotaClient\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
  * DefaultApiTest Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  AffinidiTdk\Clients\IotaClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
