@@ -36,6 +36,9 @@ use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use AffinidiTdk\Clients\WalletsClient\ApiException;
+use AffinidiTdk\Clients\WalletsClient\InvalidJwtTokenError;
+use AffinidiTdk\Clients\WalletsClient\InvalidParameterError;
+use AffinidiTdk\Clients\WalletsClient\NotFoundError;
 use AffinidiTdk\Clients\WalletsClient\Configuration;
 use AffinidiTdk\Clients\WalletsClient\HeaderSelector;
 use AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
@@ -102,10 +105,10 @@ class WalletApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -144,7 +147,7 @@ class WalletApi
     /**
      * Operation createWallet
      *
-     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput $create_wallet_input CreateWallet (optional)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput|null $create_wallet_input CreateWallet (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWallet'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -160,7 +163,7 @@ class WalletApi
     /**
      * Operation createWalletWithHttpInfo
      *
-     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput $create_wallet_input CreateWallet (optional)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput|null $create_wallet_input CreateWallet (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWallet'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -176,6 +179,20 @@ class WalletApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -318,7 +335,7 @@ class WalletApi
     /**
      * Operation createWalletAsync
      *
-     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput $create_wallet_input CreateWallet (optional)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput|null $create_wallet_input CreateWallet (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWallet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -337,7 +354,7 @@ class WalletApi
     /**
      * Operation createWalletAsyncWithHttpInfo
      *
-     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput $create_wallet_input CreateWallet (optional)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput|null $create_wallet_input CreateWallet (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWallet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -387,7 +404,7 @@ class WalletApi
     /**
      * Create request for operation 'createWallet'
      *
-     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput $create_wallet_input CreateWallet (optional)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput|null $create_wallet_input CreateWallet (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWallet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -508,6 +525,20 @@ class WalletApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -723,6 +754,20 @@ class WalletApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1101,7 +1146,7 @@ class WalletApi
     /**
      * Operation listWallets
      *
-     * @param  string $did_type did_type (optional)
+     * @param  string|null $did_type did_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWallets'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1117,7 +1162,7 @@ class WalletApi
     /**
      * Operation listWalletsWithHttpInfo
      *
-     * @param  string $did_type (optional)
+     * @param  string|null $did_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWallets'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1133,6 +1178,20 @@ class WalletApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1310,7 +1369,7 @@ class WalletApi
     /**
      * Operation listWalletsAsync
      *
-     * @param  string $did_type (optional)
+     * @param  string|null $did_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWallets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1329,7 +1388,7 @@ class WalletApi
     /**
      * Operation listWalletsAsyncWithHttpInfo
      *
-     * @param  string $did_type (optional)
+     * @param  string|null $did_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWallets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1379,7 +1438,7 @@ class WalletApi
     /**
      * Create request for operation 'listWallets'
      *
-     * @param  string $did_type (optional)
+     * @param  string|null $did_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWallets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1505,6 +1564,20 @@ class WalletApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1934,6 +2007,20 @@ class WalletApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -2363,6 +2450,20 @@ class WalletApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
