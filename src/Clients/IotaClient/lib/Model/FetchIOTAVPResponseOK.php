@@ -59,8 +59,7 @@ class FetchIOTAVPResponseOK implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static $openAPITypes = [
         'correlation_id' => 'string',
-        'presentation_submission' => 'string',
-        'vp_token' => 'string'
+        
     ];
 
     /**
@@ -72,8 +71,7 @@ class FetchIOTAVPResponseOK implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static $openAPIFormats = [
         'correlation_id' => null,
-        'presentation_submission' => null,
-        'vp_token' => null
+        
     ];
 
     /**
@@ -83,8 +81,7 @@ class FetchIOTAVPResponseOK implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static array $openAPINullables = [
         'correlation_id' => false,
-        'presentation_submission' => false,
-        'vp_token' => false
+        
     ];
 
     /**
@@ -174,8 +171,8 @@ class FetchIOTAVPResponseOK implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $attributeMap = [
         'correlation_id' => 'correlationId',
-        'presentation_submission' => 'presentationSubmission',
-        'vp_token' => 'vpToken'
+        'presentation_submission' => 'presentation_submission',
+        'vp_token' => 'vp_token'
     ];
 
     /**
@@ -185,8 +182,7 @@ class FetchIOTAVPResponseOK implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $setters = [
         'correlation_id' => 'setCorrelationId',
-        'presentation_submission' => 'setPresentationSubmission',
-        'vp_token' => 'setVpToken'
+        
     ];
 
     /**
@@ -196,8 +192,7 @@ class FetchIOTAVPResponseOK implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $getters = [
         'correlation_id' => 'getCorrelationId',
-        'presentation_submission' => 'getPresentationSubmission',
-        'vp_token' => 'getVpToken'
+        
     ];
 
     /**
@@ -327,60 +322,6 @@ class FetchIOTAVPResponseOK implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable correlation_id cannot be null');
         }
         $this->container['correlation_id'] = $correlation_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets presentation_submission
-     *
-     * @return string|null
-     */
-    public function getPresentationSubmission()
-    {
-        return $this->container['presentation_submission'];
-    }
-
-    /**
-     * Sets presentation_submission
-     *
-     * @param string|null $presentation_submission A JSON string format that describes the link between the Verifiable Presentation and Presentation Definition for the verifier. The presentation submission follows the OID4VP standard.
-     *
-     * @return self
-     */
-    public function setPresentationSubmission($presentation_submission)
-    {
-        if (is_null($presentation_submission)) {
-            throw new \InvalidArgumentException('non-nullable presentation_submission cannot be null');
-        }
-        $this->container['presentation_submission'] = $presentation_submission;
-
-        return $this;
-    }
-
-    /**
-     * Gets vp_token
-     *
-     * @return string|null
-     */
-    public function getVpToken()
-    {
-        return $this->container['vp_token'];
-    }
-
-    /**
-     * Sets vp_token
-     *
-     * @param string|null $vp_token A JSON string format containing the data the user consented to share in a Verifiable Presentation format. The VP Token follows the OID4VP standard.
-     *
-     * @return self
-     */
-    public function setVpToken($vp_token)
-    {
-        if (is_null($vp_token)) {
-            throw new \InvalidArgumentException('non-nullable vp_token cannot be null');
-        }
-        $this->container['vp_token'] = $vp_token;
 
         return $this;
     }
