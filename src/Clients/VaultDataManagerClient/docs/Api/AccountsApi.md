@@ -1,0 +1,130 @@
+# AffinidiTdk\Clients\VaultDataManagerClient\AccountsApi
+
+All URIs are relative to https://api.vault.affinidi.com/vfs, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**deleteAccount()**](AccountsApi.md#deleteAccount) | **DELETE** /v1/accounts/{accountNumber} |  |
+| [**listAccounts()**](AccountsApi.md#listAccounts) | **GET** /v1/accounts |  |
+
+
+## `deleteAccount()`
+
+```php
+deleteAccount($account_number): \AffinidiTdk\Clients\VaultDataManagerClient\Model\DeleteAccountDto
+```
+
+
+
+Delete account.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ConsumerTokenAuth
+$config = AffinidiTdk\Clients\VaultDataManagerClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\VaultDataManagerClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\VaultDataManagerClient\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_number = 'account_number_example'; // string
+
+try {
+    $result = $apiInstance->deleteAccount($account_number);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->deleteAccount: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_number** | **string**|  | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\VaultDataManagerClient\Model\DeleteAccountDto**](../Model/DeleteAccountDto.md)
+
+### Authorization
+
+[ConsumerTokenAuth](../../README.md#ConsumerTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAccounts()`
+
+```php
+listAccounts(): \AffinidiTdk\Clients\VaultDataManagerClient\Model\ListAccountsDto
+```
+
+
+
+List accounts of associated profiles.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ConsumerTokenAuth
+$config = AffinidiTdk\Clients\VaultDataManagerClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\VaultDataManagerClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\VaultDataManagerClient\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+
+try {
+    $result = $apiInstance->listAccounts();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->listAccounts: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**\AffinidiTdk\Clients\VaultDataManagerClient\Model\ListAccountsDto**](../Model/ListAccountsDto.md)
+
+### Authorization
+
+[ConsumerTokenAuth](../../README.md#ConsumerTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
