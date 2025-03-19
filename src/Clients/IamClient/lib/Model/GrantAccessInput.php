@@ -1,6 +1,6 @@
 <?php
 /**
- * ProjectList
+ * GrantAccessInput
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
 
 /**
- * ProjectList Class Doc Comment
+ * GrantAccessInput Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\IamClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
+class GrantAccessInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ProjectList';
+    protected static $openAPIModelName = 'GrantAccessInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +58,8 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'projects' => '\AffinidiTdk\Clients\IamClient\Model\ProjectDto[]',
-        'last_evaluated_key' => 'string'
+        'subject_did' => 'string',
+        'rights' => 'string[]'
     ];
 
     /**
@@ -70,8 +70,8 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'projects' => null,
-        'last_evaluated_key' => null
+        'subject_did' => null,
+        'rights' => null
     ];
 
     /**
@@ -80,8 +80,8 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'projects' => false,
-        'last_evaluated_key' => false
+        'subject_did' => false,
+        'rights' => false
     ];
 
     /**
@@ -170,8 +170,8 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'projects' => 'projects',
-        'last_evaluated_key' => 'lastEvaluatedKey'
+        'subject_did' => 'subjectDID',
+        'rights' => 'rights'
     ];
 
     /**
@@ -180,8 +180,8 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'projects' => 'setProjects',
-        'last_evaluated_key' => 'setLastEvaluatedKey'
+        'subject_did' => 'setSubjectDid',
+        'rights' => 'setRights'
     ];
 
     /**
@@ -190,8 +190,8 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'projects' => 'getProjects',
-        'last_evaluated_key' => 'getLastEvaluatedKey'
+        'subject_did' => 'getSubjectDid',
+        'rights' => 'getRights'
     ];
 
     /**
@@ -235,6 +235,21 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const RIGHTS_READ = 'vfs-read';
+    public const RIGHTS_WRITE = 'vfs-write';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getRightsAllowableValues()
+    {
+        return [
+            self::RIGHTS_READ,
+            self::RIGHTS_WRITE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -251,8 +266,8 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('projects', $data ?? [], null);
-        $this->setIfExists('last_evaluated_key', $data ?? [], null);
+        $this->setIfExists('subject_did', $data ?? [], null);
+        $this->setIfExists('rights', $data ?? [], null);
     }
 
     /**
@@ -282,8 +297,11 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['projects'] === null) {
-            $invalidProperties[] = "'projects' can't be null";
+        if ($this->container['subject_did'] === null) {
+            $invalidProperties[] = "'subject_did' can't be null";
+        }
+        if ($this->container['rights'] === null) {
+            $invalidProperties[] = "'rights' can't be null";
         }
         return $invalidProperties;
     }
@@ -301,55 +319,64 @@ class ProjectList implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets projects
+     * Gets subject_did
      *
-     * @return \AffinidiTdk\Clients\IamClient\Model\ProjectDto[]
+     * @return string
      */
-    public function getProjects()
+    public function getSubjectDid()
     {
-        return $this->container['projects'];
+        return $this->container['subject_did'];
     }
 
     /**
-     * Sets projects
+     * Sets subject_did
      *
-     * @param \AffinidiTdk\Clients\IamClient\Model\ProjectDto[] $projects projects
+     * @param string $subject_did DID of the subject being granted access
      *
      * @return self
      */
-    public function setProjects($projects)
+    public function setSubjectDid($subject_did)
     {
-        if (is_null($projects)) {
-            throw new \InvalidArgumentException('non-nullable projects cannot be null');
+        if (is_null($subject_did)) {
+            throw new \InvalidArgumentException('non-nullable subject_did cannot be null');
         }
-        $this->container['projects'] = $projects;
+        $this->container['subject_did'] = $subject_did;
 
         return $this;
     }
 
     /**
-     * Gets last_evaluated_key
+     * Gets rights
      *
-     * @return string|null
+     * @return string[]
      */
-    public function getLastEvaluatedKey()
+    public function getRights()
     {
-        return $this->container['last_evaluated_key'];
+        return $this->container['rights'];
     }
 
     /**
-     * Sets last_evaluated_key
+     * Sets rights
      *
-     * @param string|null $last_evaluated_key last_evaluated_key
+     * @param string[] $rights List of rights to grant to the subject
      *
      * @return self
      */
-    public function setLastEvaluatedKey($last_evaluated_key)
+    public function setRights($rights)
     {
-        if (is_null($last_evaluated_key)) {
-            throw new \InvalidArgumentException('non-nullable last_evaluated_key cannot be null');
+        if (is_null($rights)) {
+            throw new \InvalidArgumentException('non-nullable rights cannot be null');
         }
-        $this->container['last_evaluated_key'] = $last_evaluated_key;
+        $allowedValues = $this->getRightsAllowableValues();
+        if (array_diff($rights, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'rights', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['rights'] = $rights;
 
         return $this;
     }

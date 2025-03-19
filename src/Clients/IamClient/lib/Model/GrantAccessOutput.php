@@ -1,6 +1,6 @@
 <?php
 /**
- * TypedPricipalId
+ * GrantAccessOutput
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
 
 /**
- * TypedPricipalId Class Doc Comment
+ * GrantAccessOutput Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\IamClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class TypedPricipalId implements ModelInterface, ArrayAccess, \JsonSerializable
+class GrantAccessOutput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class TypedPricipalId implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'TypedPricipalId';
+    protected static $openAPIModelName = 'GrantAccessOutput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,7 +58,8 @@ class TypedPricipalId implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'principal_id' => 'string'
+        'success' => 'bool',
+        'grant_id' => 'string'
     ];
 
     /**
@@ -69,7 +70,8 @@ class TypedPricipalId implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'principal_id' => null
+        'success' => null,
+        'grant_id' => 'uuid'
     ];
 
     /**
@@ -78,7 +80,8 @@ class TypedPricipalId implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'principal_id' => false
+        'success' => false,
+        'grant_id' => false
     ];
 
     /**
@@ -167,7 +170,8 @@ class TypedPricipalId implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'principal_id' => 'principalId'
+        'success' => 'success',
+        'grant_id' => 'grantId'
     ];
 
     /**
@@ -176,7 +180,8 @@ class TypedPricipalId implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'principal_id' => 'setPrincipalId'
+        'success' => 'setSuccess',
+        'grant_id' => 'setGrantId'
     ];
 
     /**
@@ -185,7 +190,8 @@ class TypedPricipalId implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'principal_id' => 'getPrincipalId'
+        'success' => 'getSuccess',
+        'grant_id' => 'getGrantId'
     ];
 
     /**
@@ -245,7 +251,8 @@ class TypedPricipalId implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('principal_id', $data ?? [], null);
+        $this->setIfExists('success', $data ?? [], null);
+        $this->setIfExists('grant_id', $data ?? [], null);
     }
 
     /**
@@ -275,8 +282,8 @@ class TypedPricipalId implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['principal_id'] === null) {
-            $invalidProperties[] = "'principal_id' can't be null";
+        if ($this->container['success'] === null) {
+            $invalidProperties[] = "'success' can't be null";
         }
         return $invalidProperties;
     }
@@ -294,28 +301,55 @@ class TypedPricipalId implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets principal_id
+     * Gets success
      *
-     * @return string
+     * @return bool
      */
-    public function getPrincipalId()
+    public function getSuccess()
     {
-        return $this->container['principal_id'];
+        return $this->container['success'];
     }
 
     /**
-     * Sets principal_id
+     * Sets success
      *
-     * @param string $principal_id principal_id
+     * @param bool $success success
      *
      * @return self
      */
-    public function setPrincipalId($principal_id)
+    public function setSuccess($success)
     {
-        if (is_null($principal_id)) {
-            throw new \InvalidArgumentException('non-nullable principal_id cannot be null');
+        if (is_null($success)) {
+            throw new \InvalidArgumentException('non-nullable success cannot be null');
         }
-        $this->container['principal_id'] = $principal_id;
+        $this->container['success'] = $success;
+
+        return $this;
+    }
+
+    /**
+     * Gets grant_id
+     *
+     * @return string|null
+     */
+    public function getGrantId()
+    {
+        return $this->container['grant_id'];
+    }
+
+    /**
+     * Sets grant_id
+     *
+     * @param string|null $grant_id Unique identifier for the access grant
+     *
+     * @return self
+     */
+    public function setGrantId($grant_id)
+    {
+        if (is_null($grant_id)) {
+            throw new \InvalidArgumentException('non-nullable grant_id cannot be null');
+        }
+        $this->container['grant_id'] = $grant_id;
 
         return $this;
     }

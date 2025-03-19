@@ -1,6 +1,6 @@
 <?php
 /**
- * WhoamiDtoTest
+ * TypedPrincipalIdTest
  *
  * PHP version 7.4
  *
@@ -32,15 +32,15 @@ namespace AffinidiTdk\Clients\IamClient\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * WhoamiDtoTest Class Doc Comment
+ * TypedPrincipalIdTest Class Doc Comment
  *
  * @category    Class
- * @description WhoamiDto
+ * @description TypedPrincipalId
  * @package     AffinidiTdk\Clients\IamClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class WhoamiDtoTest extends TestCase
+class TypedPrincipalIdTest extends TestCase
 {
 
     /**
@@ -72,9 +72,9 @@ class WhoamiDtoTest extends TestCase
     }
 
     /**
-     * Test "WhoamiDto"
+     * Test "TypedPrincipalId"
      */
-    public function testWhoamiDto()
+    public function testTypedPrincipalId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -84,15 +84,6 @@ class WhoamiDtoTest extends TestCase
      * Test attribute "principal_id"
      */
     public function testPropertyPrincipalId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "principal_type"
-     */
-    public function testPropertyPrincipalType()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

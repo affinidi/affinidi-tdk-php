@@ -1,4 +1,4 @@
-# # TypedPricipalId
+# # TypedPrincipalId
 
 ## Properties
 
