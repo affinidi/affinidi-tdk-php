@@ -1,6 +1,6 @@
 <?php
 /**
- * JsonWebKeyDtoTest
+ * GrantAccessOutputTest
  *
  * PHP version 7.4
  *
@@ -32,15 +32,15 @@ namespace AffinidiTdk\Clients\IamClient\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * JsonWebKeyDtoTest Class Doc Comment
+ * GrantAccessOutputTest Class Doc Comment
  *
  * @category    Class
- * @description JsonWebKeyDto
+ * @description GrantAccessOutput
  * @package     AffinidiTdk\Clients\IamClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class JsonWebKeyDtoTest extends TestCase
+class GrantAccessOutputTest extends TestCase
 {
 
     /**
@@ -72,90 +72,27 @@ class JsonWebKeyDtoTest extends TestCase
     }
 
     /**
-     * Test "JsonWebKeyDto"
+     * Test "GrantAccessOutput"
      */
-    public function testJsonWebKeyDto()
+    public function testGrantAccessOutput()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "kid"
+     * Test attribute "success"
      */
-    public function testPropertyKid()
+    public function testPropertySuccess()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "kty"
+     * Test attribute "grant_id"
      */
-    public function testPropertyKty()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "n"
-     */
-    public function testPropertyN()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "e"
-     */
-    public function testPropertyE()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "x"
-     */
-    public function testPropertyX()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "y"
-     */
-    public function testPropertyY()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "crv"
-     */
-    public function testPropertyCrv()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "alg"
-     */
-    public function testPropertyAlg()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "use"
-     */
-    public function testPropertyUse()
+    public function testPropertyGrantId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

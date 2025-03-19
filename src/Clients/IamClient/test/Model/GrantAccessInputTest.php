@@ -1,11 +1,11 @@
 <?php
 /**
- * TypedPricipalIdTest
+ * GrantAccessInputTest
  *
  * PHP version 7.4
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,20 +27,20 @@
  * Please update the test case below to test the model.
  */
 
-namespace OpenAPI\Client\Test\Model;
+namespace AffinidiTdk\Clients\IamClient\Test\Model;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * TypedPricipalIdTest Class Doc Comment
+ * GrantAccessInputTest Class Doc Comment
  *
  * @category    Class
- * @description TypedPricipalId
- * @package     OpenAPI\Client
+ * @description GrantAccessInput
+ * @package     AffinidiTdk\Clients\IamClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class TypedPricipalIdTest extends TestCase
+class GrantAccessInputTest extends TestCase
 {
 
     /**
@@ -72,18 +72,27 @@ class TypedPricipalIdTest extends TestCase
     }
 
     /**
-     * Test "TypedPricipalId"
+     * Test "GrantAccessInput"
      */
-    public function testTypedPricipalId()
+    public function testGrantAccessInput()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "principal_id"
+     * Test attribute "subject_did"
      */
-    public function testPropertyPrincipalId()
+    public function testPropertySubjectDid()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "rights"
+     */
+    public function testPropertyRights()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

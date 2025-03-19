@@ -37,19 +37,25 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
+// Configure API key authorization: ConsumerTokenAuth
+$config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
-$apiInstance = new AffinidiTdk\Clients\IamClient\Api\ConsumerAuthApi(
+
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\AuthzApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
-$consumer_auth_token_endpoint_input = new \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointInput(); // \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointInput | ConsumerAuthTokenEndpoint
+$grant_access_input = new \AffinidiTdk\Clients\IamClient\Model\GrantAccessInput(); // \AffinidiTdk\Clients\IamClient\Model\GrantAccessInput | Grant access to virtual file system
 
 try {
-    $result = $apiInstance->consumerAuthTokenEndpoint($consumer_auth_token_endpoint_input);
+    $result = $apiInstance->grantAccessVfs($grant_access_input);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling ConsumerAuthApi->consumerAuthTokenEndpoint: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AuthzApi->grantAccessVfs: ', $e->getMessage(), PHP_EOL;
 }
 
 ```
@@ -60,6 +66,7 @@ All URIs are relative to *https://apse1.api.affinidi.io/iam*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AuthzApi* | [**grantAccessVfs**](docs/Api/AuthzApi.md#grantaccessvfs) | **POST** /v1/authz/vfs/access | Grant access to the virtual file system
 *ConsumerAuthApi* | [**consumerAuthTokenEndpoint**](docs/Api/ConsumerAuthApi.md#consumerauthtokenendpoint) | **POST** /v1/consumer/oauth2/token | The Consumer OAuth 2.0 Token Endpoint
 *DefaultApi* | [**v1AuthProxyDelete**](docs/Api/DefaultApi.md#v1authproxydelete) | **DELETE** /v1/auth/{proxy+} | 
 *DefaultApi* | [**v1AuthProxyGet**](docs/Api/DefaultApi.md#v1authproxyget) | **GET** /v1/auth/{proxy+} | 
@@ -102,6 +109,8 @@ Class | Method | HTTP request | Description
 - [CreateProjectScopedTokenOutput](docs/Model/CreateProjectScopedTokenOutput.md)
 - [CreateTokenInput](docs/Model/CreateTokenInput.md)
 - [GetWellKnownDidOK](docs/Model/GetWellKnownDidOK.md)
+- [GrantAccessInput](docs/Model/GrantAccessInput.md)
+- [GrantAccessOutput](docs/Model/GrantAccessOutput.md)
 - [InvalidDIDError](docs/Model/InvalidDIDError.md)
 - [InvalidJwtTokenError](docs/Model/InvalidJwtTokenError.md)
 - [InvalidParameterError](docs/Model/InvalidParameterError.md)
@@ -126,7 +135,7 @@ Class | Method | HTTP request | Description
 - [TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo](docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo.md)
 - [TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf](docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf.md)
 - [TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf1](docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf1.md)
-- [TypedPricipalId](docs/Model/TypedPricipalId.md)
+- [TypedPrincipalId](docs/Model/TypedPrincipalId.md)
 - [UnauthorizedError](docs/Model/UnauthorizedError.md)
 - [UnexpectedError](docs/Model/UnexpectedError.md)
 - [UpdateProjectInput](docs/Model/UpdateProjectInput.md)

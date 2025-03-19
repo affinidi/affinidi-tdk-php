@@ -1,6 +1,6 @@
 <?php
 /**
- * ConsumerAuthApi
+ * AuthzApi
  * PHP version 7.4
  *
  * @category Class
@@ -44,14 +44,14 @@ use AffinidiTdk\Clients\IamClient\HeaderSelector;
 use AffinidiTdk\Clients\IamClient\ObjectSerializer;
 
 /**
- * ConsumerAuthApi Class Doc Comment
+ * AuthzApi Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ConsumerAuthApi
+class AuthzApi
 {
     /**
      * @var ClientInterface
@@ -75,7 +75,7 @@ class ConsumerAuthApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'consumerAuthTokenEndpoint' => [
+        'grantAccessVfs' => [
             'application/json',
         ],
     ];
@@ -127,38 +127,38 @@ class ConsumerAuthApi
     }
 
     /**
-     * Operation consumerAuthTokenEndpoint
+     * Operation grantAccessVfs
      *
-     * The Consumer OAuth 2.0 Token Endpoint
+     * Grant access to the virtual file system
      *
-     * @param  \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointInput $consumer_auth_token_endpoint_input ConsumerAuthTokenEndpoint (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['consumerAuthTokenEndpoint'] to see the possible values for this operation
+     * @param  \AffinidiTdk\Clients\IamClient\Model\GrantAccessInput $grant_access_input Grant access to virtual file system (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['grantAccessVfs'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointOutput|\AffinidiTdk\Clients\IamClient\Model\InvalidDIDError|\AffinidiTdk\Clients\IamClient\Model\UnauthorizedError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError
+     * @return \AffinidiTdk\Clients\IamClient\Model\GrantAccessOutput|\AffinidiTdk\Clients\IamClient\Model\UnauthorizedError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError
      */
-    public function consumerAuthTokenEndpoint($consumer_auth_token_endpoint_input, string $contentType = self::contentTypes['consumerAuthTokenEndpoint'][0])
+    public function grantAccessVfs($grant_access_input, string $contentType = self::contentTypes['grantAccessVfs'][0])
     {
-        list($response) = $this->consumerAuthTokenEndpointWithHttpInfo($consumer_auth_token_endpoint_input, $contentType);
+        list($response) = $this->grantAccessVfsWithHttpInfo($grant_access_input, $contentType);
         return $response;
     }
 
     /**
-     * Operation consumerAuthTokenEndpointWithHttpInfo
+     * Operation grantAccessVfsWithHttpInfo
      *
-     * The Consumer OAuth 2.0 Token Endpoint
+     * Grant access to the virtual file system
      *
-     * @param  \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointInput $consumer_auth_token_endpoint_input ConsumerAuthTokenEndpoint (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['consumerAuthTokenEndpoint'] to see the possible values for this operation
+     * @param  \AffinidiTdk\Clients\IamClient\Model\GrantAccessInput $grant_access_input Grant access to virtual file system (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['grantAccessVfs'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointOutput|\AffinidiTdk\Clients\IamClient\Model\InvalidDIDError|\AffinidiTdk\Clients\IamClient\Model\UnauthorizedError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\IamClient\Model\GrantAccessOutput|\AffinidiTdk\Clients\IamClient\Model\UnauthorizedError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function consumerAuthTokenEndpointWithHttpInfo($consumer_auth_token_endpoint_input, string $contentType = self::contentTypes['consumerAuthTokenEndpoint'][0])
+    public function grantAccessVfsWithHttpInfo($grant_access_input, string $contentType = self::contentTypes['grantAccessVfs'][0])
     {
-        $request = $this->consumerAuthTokenEndpointRequest($consumer_auth_token_endpoint_input, $contentType);
+        $request = $this->grantAccessVfsRequest($grant_access_input, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -199,11 +199,11 @@ class ConsumerAuthApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointOutput' === '\SplFileObject') {
+                    if ('\AffinidiTdk\Clients\IamClient\Model\GrantAccessOutput' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointOutput' !== 'string') {
+                        if ('\AffinidiTdk\Clients\IamClient\Model\GrantAccessOutput' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -221,34 +221,7 @@ class ConsumerAuthApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointOutput', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 400:
-                    if ('\AffinidiTdk\Clients\IamClient\Model\InvalidDIDError' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\IamClient\Model\InvalidDIDError' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\InvalidDIDError', []),
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\GrantAccessOutput', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -321,7 +294,7 @@ class ConsumerAuthApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointOutput';
+            $returnType = '\AffinidiTdk\Clients\IamClient\Model\GrantAccessOutput';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -354,15 +327,7 @@ class ConsumerAuthApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointOutput',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\IamClient\Model\InvalidDIDError',
+                        '\AffinidiTdk\Clients\IamClient\Model\GrantAccessOutput',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -389,19 +354,19 @@ class ConsumerAuthApi
     }
 
     /**
-     * Operation consumerAuthTokenEndpointAsync
+     * Operation grantAccessVfsAsync
      *
-     * The Consumer OAuth 2.0 Token Endpoint
+     * Grant access to the virtual file system
      *
-     * @param  \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointInput $consumer_auth_token_endpoint_input ConsumerAuthTokenEndpoint (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['consumerAuthTokenEndpoint'] to see the possible values for this operation
+     * @param  \AffinidiTdk\Clients\IamClient\Model\GrantAccessInput $grant_access_input Grant access to virtual file system (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['grantAccessVfs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function consumerAuthTokenEndpointAsync($consumer_auth_token_endpoint_input, string $contentType = self::contentTypes['consumerAuthTokenEndpoint'][0])
+    public function grantAccessVfsAsync($grant_access_input, string $contentType = self::contentTypes['grantAccessVfs'][0])
     {
-        return $this->consumerAuthTokenEndpointAsyncWithHttpInfo($consumer_auth_token_endpoint_input, $contentType)
+        return $this->grantAccessVfsAsyncWithHttpInfo($grant_access_input, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -410,20 +375,20 @@ class ConsumerAuthApi
     }
 
     /**
-     * Operation consumerAuthTokenEndpointAsyncWithHttpInfo
+     * Operation grantAccessVfsAsyncWithHttpInfo
      *
-     * The Consumer OAuth 2.0 Token Endpoint
+     * Grant access to the virtual file system
      *
-     * @param  \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointInput $consumer_auth_token_endpoint_input ConsumerAuthTokenEndpoint (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['consumerAuthTokenEndpoint'] to see the possible values for this operation
+     * @param  \AffinidiTdk\Clients\IamClient\Model\GrantAccessInput $grant_access_input Grant access to virtual file system (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['grantAccessVfs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function consumerAuthTokenEndpointAsyncWithHttpInfo($consumer_auth_token_endpoint_input, string $contentType = self::contentTypes['consumerAuthTokenEndpoint'][0])
+    public function grantAccessVfsAsyncWithHttpInfo($grant_access_input, string $contentType = self::contentTypes['grantAccessVfs'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointOutput';
-        $request = $this->consumerAuthTokenEndpointRequest($consumer_auth_token_endpoint_input, $contentType);
+        $returnType = '\AffinidiTdk\Clients\IamClient\Model\GrantAccessOutput';
+        $request = $this->grantAccessVfsRequest($grant_access_input, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -462,26 +427,26 @@ class ConsumerAuthApi
     }
 
     /**
-     * Create request for operation 'consumerAuthTokenEndpoint'
+     * Create request for operation 'grantAccessVfs'
      *
-     * @param  \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointInput $consumer_auth_token_endpoint_input ConsumerAuthTokenEndpoint (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['consumerAuthTokenEndpoint'] to see the possible values for this operation
+     * @param  \AffinidiTdk\Clients\IamClient\Model\GrantAccessInput $grant_access_input Grant access to virtual file system (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['grantAccessVfs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function consumerAuthTokenEndpointRequest($consumer_auth_token_endpoint_input, string $contentType = self::contentTypes['consumerAuthTokenEndpoint'][0])
+    public function grantAccessVfsRequest($grant_access_input, string $contentType = self::contentTypes['grantAccessVfs'][0])
     {
 
-        // verify the required parameter 'consumer_auth_token_endpoint_input' is set
-        if ($consumer_auth_token_endpoint_input === null || (is_array($consumer_auth_token_endpoint_input) && count($consumer_auth_token_endpoint_input) === 0)) {
+        // verify the required parameter 'grant_access_input' is set
+        if ($grant_access_input === null || (is_array($grant_access_input) && count($grant_access_input) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $consumer_auth_token_endpoint_input when calling consumerAuthTokenEndpoint'
+                'Missing the required parameter $grant_access_input when calling grantAccessVfs'
             );
         }
 
 
-        $resourcePath = '/v1/consumer/oauth2/token';
+        $resourcePath = '/v1/authz/vfs/access';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -499,12 +464,12 @@ class ConsumerAuthApi
         );
 
         // for model (json/xml)
-        if (isset($consumer_auth_token_endpoint_input)) {
+        if (isset($grant_access_input)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($consumer_auth_token_endpoint_input));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($grant_access_input));
             } else {
-                $httpBody = $consumer_auth_token_endpoint_input;
+                $httpBody = $grant_access_input;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -530,6 +495,11 @@ class ConsumerAuthApi
             }
         }
 
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
