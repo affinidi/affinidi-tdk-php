@@ -100,7 +100,6 @@ Class | Method | HTTP request | Description
 - [SignCredentialInputDto](docs/Model/SignCredentialInputDto.md)
 - [SignCredentialInputDtoUnsignedCredentialParams](docs/Model/SignCredentialInputDtoUnsignedCredentialParams.md)
 - [SignCredentialResultDto](docs/Model/SignCredentialResultDto.md)
-- [SignCredentialResultDtoSignedCredential](docs/Model/SignCredentialResultDtoSignedCredential.md)
 - [SignJwtToken](docs/Model/SignJwtToken.md)
 - [SignJwtTokenOK](docs/Model/SignJwtTokenOK.md)
 - [SigningFailedError](docs/Model/SigningFailedError.md)
