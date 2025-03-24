@@ -59,7 +59,7 @@ class SignCredentialResultDto implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'signed_credential' => '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialResultDtoSignedCredential'
+        'signed_credential' => 'array<string,mixed>'
     ];
 
     /**
@@ -297,7 +297,7 @@ class SignCredentialResultDto implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets signed_credential
      *
-     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialResultDtoSignedCredential
+     * @return array<string,mixed>
      */
     public function getSignedCredential()
     {
@@ -307,7 +307,7 @@ class SignCredentialResultDto implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets signed_credential
      *
-     * @param \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialResultDtoSignedCredential $signed_credential signed_credential
+     * @param array<string,mixed> $signed_credential signed_credential
      *
      * @return self
      */
