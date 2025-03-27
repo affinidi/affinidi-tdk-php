@@ -84,7 +84,6 @@ Class | Method | HTTP request | Description
 - [FilterConst](docs/Model/FilterConst.md)
 - [FilterItems](docs/Model/FilterItems.md)
 - [Format](docs/Model/Format.md)
-- [FreeFormObject](docs/Model/FreeFormObject.md)
 - [HolderSubject](docs/Model/HolderSubject.md)
 - [InputDescriptor](docs/Model/InputDescriptor.md)
 - [InvalidParameterError](docs/Model/InvalidParameterError.md)
