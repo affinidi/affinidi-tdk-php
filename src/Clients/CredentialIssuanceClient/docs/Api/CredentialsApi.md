@@ -4,10 +4,73 @@ All URIs are relative to https://apse1.api.affinidi.io/cis, except if the operat
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**batchCredential()**](CredentialsApi.md#batchCredential) | **POST** /v1/{projectId}/batch_credential | Batch credential |
 | [**generateCredentials()**](CredentialsApi.md#generateCredentials) | **POST** /v1/{projectId}/credential |  |
 | [**getClaimedCredentials()**](CredentialsApi.md#getClaimedCredentials) | **GET** /v1/{projectId}/configurations/{configurationId}/credentials | Get claimed credential in the specified range |
 | [**getIssuanceIdClaimedCredential()**](CredentialsApi.md#getIssuanceIdClaimedCredential) | **GET** /v1/{projectId}/configurations/{configurationId}/issuances/{issuanceId}/credentials | Get claimed VC linked to the issuanceId |
 
+
+## `batchCredential()`
+
+```php
+batchCredential($project_id, $batch_credential_input): \AffinidiTdk\Clients\CredentialIssuanceClient\Model\BatchCredentialResponse
+```
+
+Batch credential
+
+Allows wallet's to claim multiple credentials at once, For authentication it use token from  authorization server (hydra),and token is validated internally in th function
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: bearerAuth
+$config = AffinidiTdk\Clients\CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new AffinidiTdk\Clients\CredentialIssuanceClient\Api\CredentialsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$project_id = 'project_id_example'; // string | Affinidi project id
+$batch_credential_input = new \AffinidiTdk\Clients\CredentialIssuanceClient\Model\BatchCredentialInput(); // \AffinidiTdk\Clients\CredentialIssuanceClient\Model\BatchCredentialInput | Request body for batch credential
+
+try {
+    $result = $apiInstance->batchCredential($project_id, $batch_credential_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling CredentialsApi->batchCredential: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**| Affinidi project id | |
+| **batch_credential_input** | [**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\BatchCredentialInput**](../Model/BatchCredentialInput.md)| Request body for batch credential | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\BatchCredentialResponse**](../Model/BatchCredentialResponse.md)
+
+### Authorization
+
+[bearerAuth](../../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `generateCredentials()`
 
