@@ -87,6 +87,10 @@ Class | Method | HTTP request | Description
 
 - [ActionForbiddenError](docs/Model/ActionForbiddenError.md)
 - [ActionForbiddenErrorDetailsInner](docs/Model/ActionForbiddenErrorDetailsInner.md)
+- [BatchCredentialInput](docs/Model/BatchCredentialInput.md)
+- [BatchCredentialInputCredentialRequestsInner](docs/Model/BatchCredentialInputCredentialRequestsInner.md)
+- [BatchCredentialResponse](docs/Model/BatchCredentialResponse.md)
+- [BatchCredentialResponseCredentialResponsesInner](docs/Model/BatchCredentialResponseCredentialResponsesInner.md)
 - [ChangeCredentialStatus400Response](docs/Model/ChangeCredentialStatus400Response.md)
 - [ChangeCredentialStatusInput](docs/Model/ChangeCredentialStatusInput.md)
 - [ChangeStatusForbiddenError](docs/Model/ChangeStatusForbiddenError.md)
