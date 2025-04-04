@@ -88,4 +88,13 @@ class ClaimedCredentialResponseTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "credentials"
+     */
+    public function testPropertyCredentials()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }
