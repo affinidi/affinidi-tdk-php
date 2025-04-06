@@ -4,7 +4,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,18 +26,18 @@
  * Please update the test case below to test the endpoint.
  */
 
-namespace OpenAPI\Client\Test\Api;
+namespace AffinidiTdk\Clients\IamClient\Test\Api;
 
-use \OpenAPI\Client\Configuration;
-use \OpenAPI\Client\ApiException;
-use \OpenAPI\Client\ObjectSerializer;
+use \AffinidiTdk\Clients\IamClient\Configuration;
+use \AffinidiTdk\Clients\IamClient\ApiException;
+use \AffinidiTdk\Clients\IamClient\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
  * TokensApiTest Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -103,6 +103,18 @@ class TokensApiTest extends TestCase
      *
      */
     public function testGetToken()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listProjectsOfToken
+     *
+     * .
+     *
+     */
+    public function testListProjectsOfToken()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
