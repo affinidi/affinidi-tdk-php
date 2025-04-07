@@ -219,8 +219,8 @@ $apiInstance = new AffinidiTdk\Clients\IamClient\Api\TokensApi(
     $config
 );
 $token_id = 'token_id_example'; // string
-$limit = 56; // int | Maximum number of records to fetch in a list
-$exclusive_start_key = 'exclusive_start_key_example'; // string | exclusiveStartKey for retrieving the next batch of data.
+$limit = 100; // int | Maximum number of records to fetch in a list
+$exclusive_start_key = 'exclusive_start_key_example'; // string | The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation.
 
 try {
     $result = $apiInstance->listProjectsOfToken($token_id, $limit, $exclusive_start_key);
@@ -235,8 +235,8 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **token_id** | **string**|  | |
-| **limit** | **int**| Maximum number of records to fetch in a list | [optional] |
-| **exclusive_start_key** | **string**| exclusiveStartKey for retrieving the next batch of data. | [optional] |
+| **limit** | **int**| Maximum number of records to fetch in a list | [optional] [default to 100] |
+| **exclusive_start_key** | **string**| The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. | [optional] |
 
 ### Return type
 
@@ -258,7 +258,7 @@ try {
 ## `listToken()`
 
 ```php
-listToken(): \AffinidiTdk\Clients\IamClient\Model\TokenList
+listToken($limit, $exclusive_start_key): \AffinidiTdk\Clients\IamClient\Model\TokenList
 ```
 
 
@@ -282,9 +282,11 @@ $apiInstance = new AffinidiTdk\Clients\IamClient\Api\TokensApi(
     new GuzzleHttp\Client(),
     $config
 );
+$limit = 100; // int | Maximum number of records to fetch in a list
+$exclusive_start_key = 'exclusive_start_key_example'; // string | The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation.
 
 try {
-    $result = $apiInstance->listToken();
+    $result = $apiInstance->listToken($limit, $exclusive_start_key);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TokensApi->listToken: ', $e->getMessage(), PHP_EOL;
@@ -293,7 +295,10 @@ try {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **limit** | **int**| Maximum number of records to fetch in a list | [optional] [default to 100] |
+| **exclusive_start_key** | **string**| The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. | [optional] |
 
 ### Return type
 
