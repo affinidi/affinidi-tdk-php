@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **authorization_endpoint** | **string** |  | [optional]
 **credential_endpoint** | **string** |  | [optional]
 **credential_issuer** | **string** |  | [optional]
+**batch_credential_endpoint** | **string** |  | [optional]
 **credentials_supported** | [**\AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner[]**](WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner.md) |  | [optional]
 **deferred_credential_endpoint** | **string** |  | [optional]
 **grant_types_supported** | **string[]** |  | [optional]
