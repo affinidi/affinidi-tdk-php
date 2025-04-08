@@ -1,6 +1,6 @@
 <?php
 /**
- * ClaimedCredentialResponse
+ * BatchCredentialInput
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
- * ClaimedCredentialResponse Class Doc Comment
+ * BatchCredentialInput Class Doc Comment
  *
  * @category Class
- * @description Response for getting the claimed VC
  * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class BatchCredentialInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ClaimedCredentialResponse';
+    protected static $openAPIModelName = 'BatchCredentialInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +58,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credentials' => 'array<string,mixed>[]'
+        'credential_requests' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\BatchCredentialInputCredentialRequestsInner[]'
     ];
 
     /**
@@ -70,7 +69,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credentials' => null
+        'credential_requests' => null
     ];
 
     /**
@@ -79,7 +78,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credentials' => false
+        'credential_requests' => false
     ];
 
     /**
@@ -168,8 +167,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'credential' => 'credential',
-        'credentials' => 'credentials'
+        'credential_requests' => 'credential_requests'
     ];
 
     /**
@@ -178,7 +176,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'credentials' => 'setCredentials'
+        'credential_requests' => 'setCredentialRequests'
     ];
 
     /**
@@ -187,7 +185,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'credentials' => 'getCredentials'
+        'credential_requests' => 'getCredentialRequests'
     ];
 
     /**
@@ -247,8 +245,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credential', $data ?? [], null);
-        $this->setIfExists('credentials', $data ?? [], null);
+        $this->setIfExists('credential_requests', $data ?? [], null);
     }
 
     /**
@@ -278,6 +275,9 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
+        if ($this->container['credential_requests'] === null) {
+            $invalidProperties[] = "'credential_requests' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -294,28 +294,28 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets credentials
+     * Gets credential_requests
      *
-     * @return array<string,mixed>[]|null
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\BatchCredentialInputCredentialRequestsInner[]
      */
-    public function getCredentials()
+    public function getCredentialRequests()
     {
-        return $this->container['credentials'];
+        return $this->container['credential_requests'];
     }
 
     /**
-     * Sets credentials
+     * Sets credential_requests
      *
-     * @param array<string,mixed>[]|null $credentials claimed credentials for batch issuances
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\BatchCredentialInputCredentialRequestsInner[] $credential_requests Array that contains Credential Request objects.
      *
      * @return self
      */
-    public function setCredentials($credentials)
+    public function setCredentialRequests($credential_requests)
     {
-        if (is_null($credentials)) {
-            throw new \InvalidArgumentException('non-nullable credentials cannot be null');
+        if (is_null($credential_requests)) {
+            throw new \InvalidArgumentException('non-nullable credential_requests cannot be null');
         }
-        $this->container['credentials'] = $credentials;
+        $this->container['credential_requests'] = $credential_requests;
 
         return $this;
     }

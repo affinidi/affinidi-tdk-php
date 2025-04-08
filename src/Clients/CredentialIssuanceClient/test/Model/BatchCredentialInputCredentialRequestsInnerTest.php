@@ -1,6 +1,6 @@
 <?php
 /**
- * ClaimedCredentialResponseTest
+ * BatchCredentialInputCredentialRequestsInnerTest
  *
  * PHP version 7.4
  *
@@ -32,15 +32,15 @@ namespace AffinidiTdk\Clients\CredentialIssuanceClient\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ClaimedCredentialResponseTest Class Doc Comment
+ * BatchCredentialInputCredentialRequestsInnerTest Class Doc Comment
  *
  * @category    Class
- * @description Response for getting the claimed VC
+ * @description BatchCredentialInputCredentialRequestsInner
  * @package     AffinidiTdk\Clients\CredentialIssuanceClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class ClaimedCredentialResponseTest extends TestCase
+class BatchCredentialInputCredentialRequestsInnerTest extends TestCase
 {
 
     /**
@@ -72,27 +72,27 @@ class ClaimedCredentialResponseTest extends TestCase
     }
 
     /**
-     * Test "ClaimedCredentialResponse"
+     * Test "BatchCredentialInputCredentialRequestsInner"
      */
-    public function testClaimedCredentialResponse()
+    public function testBatchCredentialInputCredentialRequestsInner()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "credential"
+     * Test attribute "credential_identifier"
      */
-    public function testPropertyCredential()
+    public function testPropertyCredentialIdentifier()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "credentials"
+     * Test attribute "proof"
      */
-    public function testPropertyCredentials()
+    public function testPropertyProof()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
