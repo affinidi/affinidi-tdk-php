@@ -1,6 +1,6 @@
 <?php
 /**
- * ClaimedCredentialResponse
+ * BatchCredentialResponse
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
- * ClaimedCredentialResponse Class Doc Comment
+ * BatchCredentialResponse Class Doc Comment
  *
  * @category Class
- * @description Response for getting the claimed VC
  * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class BatchCredentialResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ClaimedCredentialResponse';
+    protected static $openAPIModelName = 'BatchCredentialResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +58,9 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credentials' => 'array<string,mixed>[]'
+        'credential_responses' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\BatchCredentialResponseCredentialResponsesInner[]',
+        'c_nonce' => 'string',
+        'c_nonce_expires_in' => 'int'
     ];
 
     /**
@@ -70,7 +71,9 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credentials' => null
+        'credential_responses' => null,
+        'c_nonce' => null,
+        'c_nonce_expires_in' => null
     ];
 
     /**
@@ -79,7 +82,9 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credentials' => false
+        'credential_responses' => false,
+        'c_nonce' => false,
+        'c_nonce_expires_in' => false
     ];
 
     /**
@@ -168,8 +173,9 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'credential' => 'credential',
-        'credentials' => 'credentials'
+        'credential_responses' => 'credential_responses',
+        'c_nonce' => 'c_nonce',
+        'c_nonce_expires_in' => 'c_nonce_expires_in'
     ];
 
     /**
@@ -178,7 +184,9 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'credentials' => 'setCredentials'
+        'credential_responses' => 'setCredentialResponses',
+        'c_nonce' => 'setCNonce',
+        'c_nonce_expires_in' => 'setCNonceExpiresIn'
     ];
 
     /**
@@ -187,7 +195,9 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'credentials' => 'getCredentials'
+        'credential_responses' => 'getCredentialResponses',
+        'c_nonce' => 'getCNonce',
+        'c_nonce_expires_in' => 'getCNonceExpiresIn'
     ];
 
     /**
@@ -247,8 +257,9 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credential', $data ?? [], null);
-        $this->setIfExists('credentials', $data ?? [], null);
+        $this->setIfExists('credential_responses', $data ?? [], null);
+        $this->setIfExists('c_nonce', $data ?? [], null);
+        $this->setIfExists('c_nonce_expires_in', $data ?? [], null);
     }
 
     /**
@@ -278,6 +289,9 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
+        if ($this->container['credential_responses'] === null) {
+            $invalidProperties[] = "'credential_responses' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -294,28 +308,82 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets credentials
+     * Gets credential_responses
      *
-     * @return array<string,mixed>[]|null
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\BatchCredentialResponseCredentialResponsesInner[]
      */
-    public function getCredentials()
+    public function getCredentialResponses()
     {
-        return $this->container['credentials'];
+        return $this->container['credential_responses'];
     }
 
     /**
-     * Sets credentials
+     * Sets credential_responses
      *
-     * @param array<string,mixed>[]|null $credentials claimed credentials for batch issuances
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\BatchCredentialResponseCredentialResponsesInner[] $credential_responses credential_responses
      *
      * @return self
      */
-    public function setCredentials($credentials)
+    public function setCredentialResponses($credential_responses)
     {
-        if (is_null($credentials)) {
-            throw new \InvalidArgumentException('non-nullable credentials cannot be null');
+        if (is_null($credential_responses)) {
+            throw new \InvalidArgumentException('non-nullable credential_responses cannot be null');
         }
-        $this->container['credentials'] = $credentials;
+        $this->container['credential_responses'] = $credential_responses;
+
+        return $this;
+    }
+
+    /**
+     * Gets c_nonce
+     *
+     * @return string|null
+     */
+    public function getCNonce()
+    {
+        return $this->container['c_nonce'];
+    }
+
+    /**
+     * Sets c_nonce
+     *
+     * @param string|null $c_nonce c_nonce
+     *
+     * @return self
+     */
+    public function setCNonce($c_nonce)
+    {
+        if (is_null($c_nonce)) {
+            throw new \InvalidArgumentException('non-nullable c_nonce cannot be null');
+        }
+        $this->container['c_nonce'] = $c_nonce;
+
+        return $this;
+    }
+
+    /**
+     * Gets c_nonce_expires_in
+     *
+     * @return int|null
+     */
+    public function getCNonceExpiresIn()
+    {
+        return $this->container['c_nonce_expires_in'];
+    }
+
+    /**
+     * Sets c_nonce_expires_in
+     *
+     * @param int|null $c_nonce_expires_in Expiration time in seconds
+     *
+     * @return self
+     */
+    public function setCNonceExpiresIn($c_nonce_expires_in)
+    {
+        if (is_null($c_nonce_expires_in)) {
+            throw new \InvalidArgumentException('non-nullable c_nonce_expires_in cannot be null');
+        }
+        $this->container['c_nonce_expires_in'] = $c_nonce_expires_in;
 
         return $this;
     }

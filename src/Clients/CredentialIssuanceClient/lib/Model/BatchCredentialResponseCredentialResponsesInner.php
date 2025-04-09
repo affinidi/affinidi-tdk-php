@@ -1,6 +1,6 @@
 <?php
 /**
- * ClaimedCredentialResponse
+ * BatchCredentialResponseCredentialResponsesInner
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
- * ClaimedCredentialResponse Class Doc Comment
+ * BatchCredentialResponseCredentialResponsesInner Class Doc Comment
  *
  * @category Class
- * @description Response for getting the claimed VC
  * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class BatchCredentialResponseCredentialResponsesInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ClaimedCredentialResponse';
+    protected static $openAPIModelName = 'BatchCredentialResponse_credential_responses_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +58,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credentials' => 'array<string,mixed>[]'
+        'credential' => 'mixed'
     ];
 
     /**
@@ -70,7 +69,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credentials' => null
+        'credential' => null
     ];
 
     /**
@@ -79,7 +78,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credentials' => false
+        'credential' => true
     ];
 
     /**
@@ -168,8 +167,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'credential' => 'credential',
-        'credentials' => 'credentials'
+        'credential' => 'credential'
     ];
 
     /**
@@ -178,7 +176,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'credentials' => 'setCredentials'
+        'credential' => 'setCredential'
     ];
 
     /**
@@ -187,7 +185,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'credentials' => 'getCredentials'
+        'credential' => 'getCredential'
     ];
 
     /**
@@ -248,7 +246,6 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
     public function __construct(array $data = null)
     {
         $this->setIfExists('credential', $data ?? [], null);
-        $this->setIfExists('credentials', $data ?? [], null);
     }
 
     /**
@@ -278,6 +275,9 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
+        if ($this->container['credential'] === null) {
+            $invalidProperties[] = "'credential' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -294,28 +294,35 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets credentials
+     * Gets credential
      *
-     * @return array<string,mixed>[]|null
+     * @return mixed
      */
-    public function getCredentials()
+    public function getCredential()
     {
-        return $this->container['credentials'];
+        return $this->container['credential'];
     }
 
     /**
-     * Sets credentials
+     * Sets credential
      *
-     * @param array<string,mixed>[]|null $credentials claimed credentials for batch issuances
+     * @param mixed $credential Issued Credential, It can be a string or an object, depending on the Credential format. default format  is `ldp_vc`.
      *
      * @return self
      */
-    public function setCredentials($credentials)
+    public function setCredential($credential)
     {
-        if (is_null($credentials)) {
-            throw new \InvalidArgumentException('non-nullable credentials cannot be null');
+        if (is_null($credential)) {
+            array_push($this->openAPINullablesSetToNull, 'credential');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('credential', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['credentials'] = $credentials;
+        $this->container['credential'] = $credential;
 
         return $this;
     }
