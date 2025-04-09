@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **post_logout_redirect_uris** | **string[]** | Post Logout Redirect URIs, Used to redirect the user&#39;s browser to a specified URL after the logout process is complete. Must match the domain, port, scheme of at least one of the registered redirect URIs | [optional]
 **vp_definition** | **string** | VP definition in JSON stringify format | [optional]
 **presentation_definition** | **object** | Presentation Definition | [optional]
-**id_token_mapping** | [**\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping**](IdTokenMapping.md) |  | [optional]
+**id_token_mapping** | [**\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]**](IdTokenMappingItem.md) | Fields name/path mapping between the vp_token and the id_token | [optional]
 **client_metadata** | [**\AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataInput**](LoginConfigurationClientMetadataInput.md) |  | [optional]
 **claim_format** | **string** | ID token claims output format. Default is array. | [optional]
 **fail_on_mapping_conflict** | **bool** | Interrupts login process if duplications of data fields names will be found | [optional] [default to true]
