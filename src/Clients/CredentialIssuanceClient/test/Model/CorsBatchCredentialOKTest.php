@@ -1,6 +1,6 @@
 <?php
 /**
- * ClaimedCredentialResponseTest
+ * CorsBatchCredentialOKTest
  *
  * PHP version 7.4
  *
@@ -32,15 +32,15 @@ namespace AffinidiTdk\Clients\CredentialIssuanceClient\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ClaimedCredentialResponseTest Class Doc Comment
+ * CorsBatchCredentialOKTest Class Doc Comment
  *
  * @category    Class
- * @description Response for getting the claimed VC
+ * @description CorsBatchCredentialOK
  * @package     AffinidiTdk\Clients\CredentialIssuanceClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class ClaimedCredentialResponseTest extends TestCase
+class CorsBatchCredentialOKTest extends TestCase
 {
 
     /**
@@ -72,27 +72,18 @@ class ClaimedCredentialResponseTest extends TestCase
     }
 
     /**
-     * Test "ClaimedCredentialResponse"
+     * Test "CorsBatchCredentialOK"
      */
-    public function testClaimedCredentialResponse()
+    public function testCorsBatchCredentialOK()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "credential"
+     * Test attribute "cors_batch_credential_ok"
      */
-    public function testPropertyCredential()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "credentials"
-     */
-    public function testPropertyCredentials()
+    public function testPropertyCorsBatchCredentialOk()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

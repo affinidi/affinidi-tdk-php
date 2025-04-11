@@ -1,6 +1,6 @@
 <?php
 /**
- * ClaimedCredentialResponse
+ * CorsBatchCredentialOK
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
- * ClaimedCredentialResponse Class Doc Comment
+ * CorsBatchCredentialOK Class Doc Comment
  *
  * @category Class
- * @description Response for getting the claimed VC
  * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class CorsBatchCredentialOK implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ClaimedCredentialResponse';
+    protected static $openAPIModelName = 'CorsBatchCredentialOK';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +58,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credentials' => 'array<string,mixed>[]'
+        'cors_batch_credential_ok' => 'string'
     ];
 
     /**
@@ -70,7 +69,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credentials' => null
+        'cors_batch_credential_ok' => null
     ];
 
     /**
@@ -79,7 +78,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credentials' => false
+        'cors_batch_credential_ok' => false
     ];
 
     /**
@@ -168,8 +167,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'credential' => 'credential',
-        'credentials' => 'credentials'
+        'cors_batch_credential_ok' => 'corsBatchCredentialOk'
     ];
 
     /**
@@ -178,7 +176,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'credentials' => 'setCredentials'
+        'cors_batch_credential_ok' => 'setCorsBatchCredentialOk'
     ];
 
     /**
@@ -187,7 +185,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'credentials' => 'getCredentials'
+        'cors_batch_credential_ok' => 'getCorsBatchCredentialOk'
     ];
 
     /**
@@ -247,8 +245,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credential', $data ?? [], null);
-        $this->setIfExists('credentials', $data ?? [], null);
+        $this->setIfExists('cors_batch_credential_ok', $data ?? [], null);
     }
 
     /**
@@ -294,28 +291,28 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets credentials
+     * Gets cors_batch_credential_ok
      *
-     * @return array<string,mixed>[]|null
+     * @return string|null
      */
-    public function getCredentials()
+    public function getCorsBatchCredentialOk()
     {
-        return $this->container['credentials'];
+        return $this->container['cors_batch_credential_ok'];
     }
 
     /**
-     * Sets credentials
+     * Sets cors_batch_credential_ok
      *
-     * @param array<string,mixed>[]|null $credentials claimed credentials for batch issuances
+     * @param string|null $cors_batch_credential_ok cors_batch_credential_ok
      *
      * @return self
      */
-    public function setCredentials($credentials)
+    public function setCorsBatchCredentialOk($cors_batch_credential_ok)
     {
-        if (is_null($credentials)) {
-            throw new \InvalidArgumentException('non-nullable credentials cannot be null');
+        if (is_null($cors_batch_credential_ok)) {
+            throw new \InvalidArgumentException('non-nullable cors_batch_credential_ok cannot be null');
         }
-        $this->container['credentials'] = $credentials;
+        $this->container['cors_batch_credential_ok'] = $cors_batch_credential_ok;
 
         return $this;
     }
