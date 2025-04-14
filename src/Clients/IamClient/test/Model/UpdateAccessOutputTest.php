@@ -1,11 +1,11 @@
 <?php
 /**
- * TypedPricipalIdTest
+ * UpdateAccessOutputTest
  *
  * PHP version 7.4
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  AffinidiTdk\Clients\IamClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,20 +27,20 @@
  * Please update the test case below to test the model.
  */
 
-namespace OpenAPI\Client\Test\Model;
+namespace AffinidiTdk\Clients\IamClient\Test\Model;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * TypedPricipalIdTest Class Doc Comment
+ * UpdateAccessOutputTest Class Doc Comment
  *
  * @category    Class
- * @description TypedPricipalId
- * @package     OpenAPI\Client
+ * @description UpdateAccessOutput
+ * @package     AffinidiTdk\Clients\IamClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class TypedPricipalIdTest extends TestCase
+class UpdateAccessOutputTest extends TestCase
 {
 
     /**
@@ -72,18 +72,18 @@ class TypedPricipalIdTest extends TestCase
     }
 
     /**
-     * Test "TypedPricipalId"
+     * Test "UpdateAccessOutput"
      */
-    public function testTypedPricipalId()
+    public function testUpdateAccessOutput()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "principal_id"
+     * Test attribute "success"
      */
-    public function testPropertyPrincipalId()
+    public function testPropertySuccess()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
