@@ -59,7 +59,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credential' => 'array<string,mixed>'
+        'credentials' => 'array<string,mixed>[]'
     ];
 
     /**
@@ -70,7 +70,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credential' => null
+        'credentials' => null
     ];
 
     /**
@@ -79,7 +79,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credential' => false
+        'credentials' => false
     ];
 
     /**
@@ -168,7 +168,8 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'credential' => 'credential'
+        'credential' => 'credential',
+        'credentials' => 'credentials'
     ];
 
     /**
@@ -177,7 +178,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'credential' => 'setCredential'
+        'credentials' => 'setCredentials'
     ];
 
     /**
@@ -186,7 +187,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'credential' => 'getCredential'
+        'credentials' => 'getCredentials'
     ];
 
     /**
@@ -247,6 +248,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
     public function __construct(array $data = null)
     {
         $this->setIfExists('credential', $data ?? [], null);
+        $this->setIfExists('credentials', $data ?? [], null);
     }
 
     /**
@@ -292,28 +294,28 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets credential
+     * Gets credentials
      *
-     * @return array<string,mixed>|null
+     * @return array<string,mixed>[]|null
      */
-    public function getCredential()
+    public function getCredentials()
     {
-        return $this->container['credential'];
+        return $this->container['credentials'];
     }
 
     /**
-     * Sets credential
+     * Sets credentials
      *
-     * @param array<string,mixed>|null $credential claimed credential
+     * @param array<string,mixed>[]|null $credentials claimed credentials for batch issuances
      *
      * @return self
      */
-    public function setCredential($credential)
+    public function setCredentials($credentials)
     {
-        if (is_null($credential)) {
-            throw new \InvalidArgumentException('non-nullable credential cannot be null');
+        if (is_null($credentials)) {
+            throw new \InvalidArgumentException('non-nullable credentials cannot be null');
         }
-        $this->container['credential'] = $credential;
+        $this->container['credentials'] = $credentials;
 
         return $this;
     }
