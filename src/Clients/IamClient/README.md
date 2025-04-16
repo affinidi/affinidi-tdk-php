@@ -37,19 +37,24 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
+// Configure API key authorization: ConsumerTokenAuth
+$config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
-$apiInstance = new AffinidiTdk\Clients\IamClient\Api\ConsumerAuthApi(
+
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\AuthzApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
-$consumer_auth_token_endpoint_input = new \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointInput(); // \AffinidiTdk\Clients\IamClient\Model\ConsumerAuthTokenEndpointInput | ConsumerAuthTokenEndpoint
+$grantee_did = 'grantee_did_example'; // string
 
 try {
-    $result = $apiInstance->consumerAuthTokenEndpoint($consumer_auth_token_endpoint_input);
-    print_r($result);
+    $apiInstance->deleteAccessVfs($grantee_did);
 } catch (Exception $e) {
-    echo 'Exception when calling ConsumerAuthApi->consumerAuthTokenEndpoint: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AuthzApi->deleteAccessVfs: ', $e->getMessage(), PHP_EOL;
 }
 
 ```
@@ -60,6 +65,9 @@ All URIs are relative to *https://apse1.api.affinidi.io/iam*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AuthzApi* | [**deleteAccessVfs**](docs/Api/AuthzApi.md#deleteaccessvfs) | **DELETE** /v1/authz/vfs/access/{granteeDid} | delete access of granteeDid
+*AuthzApi* | [**grantAccessVfs**](docs/Api/AuthzApi.md#grantaccessvfs) | **POST** /v1/authz/vfs/access | Grant access to the virtual file system
+*AuthzApi* | [**updateAccessVfs**](docs/Api/AuthzApi.md#updateaccessvfs) | **PUT** /v1/authz/vfs/access/{granteeDid} | Update access of granteeDid
 *ConsumerAuthApi* | [**consumerAuthTokenEndpoint**](docs/Api/ConsumerAuthApi.md#consumerauthtokenendpoint) | **POST** /v1/consumer/oauth2/token | The Consumer OAuth 2.0 Token Endpoint
 *DefaultApi* | [**v1AuthProxyDelete**](docs/Api/DefaultApi.md#v1authproxydelete) | **DELETE** /v1/auth/{proxy+} | 
 *DefaultApi* | [**v1AuthProxyGet**](docs/Api/DefaultApi.md#v1authproxyget) | **GET** /v1/auth/{proxy+} | 
@@ -101,7 +109,10 @@ Class | Method | HTTP request | Description
 - [CreateProjectScopedTokenInput](docs/Model/CreateProjectScopedTokenInput.md)
 - [CreateProjectScopedTokenOutput](docs/Model/CreateProjectScopedTokenOutput.md)
 - [CreateTokenInput](docs/Model/CreateTokenInput.md)
+- [DeleteAccessOutput](docs/Model/DeleteAccessOutput.md)
 - [GetWellKnownDidOK](docs/Model/GetWellKnownDidOK.md)
+- [GrantAccessInput](docs/Model/GrantAccessInput.md)
+- [GrantAccessOutput](docs/Model/GrantAccessOutput.md)
 - [InvalidDIDError](docs/Model/InvalidDIDError.md)
 - [InvalidJwtTokenError](docs/Model/InvalidJwtTokenError.md)
 - [InvalidParameterError](docs/Model/InvalidParameterError.md)
@@ -117,6 +128,7 @@ Class | Method | HTTP request | Description
 - [ProjectWithPolicyDto](docs/Model/ProjectWithPolicyDto.md)
 - [ProjectWithPolicyList](docs/Model/ProjectWithPolicyList.md)
 - [PublicKeyCannotBeResolvedFromDidError](docs/Model/PublicKeyCannotBeResolvedFromDidError.md)
+- [RightsEnum](docs/Model/RightsEnum.md)
 - [ServiceErrorResponse](docs/Model/ServiceErrorResponse.md)
 - [ServiceErrorResponseDetailsInner](docs/Model/ServiceErrorResponseDetailsInner.md)
 - [TokenAuthenticationMethodDto](docs/Model/TokenAuthenticationMethodDto.md)
@@ -126,9 +138,11 @@ Class | Method | HTTP request | Description
 - [TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo](docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo.md)
 - [TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf](docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf.md)
 - [TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf1](docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf1.md)
-- [TypedPricipalId](docs/Model/TypedPricipalId.md)
+- [TypedPrincipalId](docs/Model/TypedPrincipalId.md)
 - [UnauthorizedError](docs/Model/UnauthorizedError.md)
 - [UnexpectedError](docs/Model/UnexpectedError.md)
+- [UpdateAccessInput](docs/Model/UpdateAccessInput.md)
+- [UpdateAccessOutput](docs/Model/UpdateAccessOutput.md)
 - [UpdateProjectInput](docs/Model/UpdateProjectInput.md)
 - [UpdateTokenInput](docs/Model/UpdateTokenInput.md)
 - [UpdateTokenPrivateKeyAuthenticationMethodDto](docs/Model/UpdateTokenPrivateKeyAuthenticationMethodDto.md)
