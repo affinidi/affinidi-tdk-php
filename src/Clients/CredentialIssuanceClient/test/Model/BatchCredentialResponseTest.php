@@ -1,6 +1,6 @@
 <?php
 /**
- * ClaimedCredentialResponseTest
+ * BatchCredentialResponseTest
  *
  * PHP version 7.4
  *
@@ -32,15 +32,15 @@ namespace AffinidiTdk\Clients\CredentialIssuanceClient\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ClaimedCredentialResponseTest Class Doc Comment
+ * BatchCredentialResponseTest Class Doc Comment
  *
  * @category    Class
- * @description Response for getting the claimed VC
+ * @description BatchCredentialResponse
  * @package     AffinidiTdk\Clients\CredentialIssuanceClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class ClaimedCredentialResponseTest extends TestCase
+class BatchCredentialResponseTest extends TestCase
 {
 
     /**
@@ -72,27 +72,36 @@ class ClaimedCredentialResponseTest extends TestCase
     }
 
     /**
-     * Test "ClaimedCredentialResponse"
+     * Test "BatchCredentialResponse"
      */
-    public function testClaimedCredentialResponse()
+    public function testBatchCredentialResponse()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "credential"
+     * Test attribute "credential_responses"
      */
-    public function testPropertyCredential()
+    public function testPropertyCredentialResponses()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "credentials"
+     * Test attribute "c_nonce"
      */
-    public function testPropertyCredentials()
+    public function testPropertyCNonce()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "c_nonce_expires_in"
+     */
+    public function testPropertyCNonceExpiresIn()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

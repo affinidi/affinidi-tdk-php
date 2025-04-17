@@ -71,6 +71,7 @@ Class | Method | HTTP request | Description
 *ConfigurationApi* | [**getIssuanceConfigById**](docs/Api/ConfigurationApi.md#getissuanceconfigbyid) | **GET** /v1/configurations/{configurationId} | 
 *ConfigurationApi* | [**getIssuanceConfigList**](docs/Api/ConfigurationApi.md#getissuanceconfiglist) | **GET** /v1/configurations | 
 *ConfigurationApi* | [**updateIssuanceConfigById**](docs/Api/ConfigurationApi.md#updateissuanceconfigbyid) | **PUT** /v1/configurations/{configurationId} | 
+*CredentialsApi* | [**batchCredential**](docs/Api/CredentialsApi.md#batchcredential) | **POST** /v1/{projectId}/batch_credential | Batch credential
 *CredentialsApi* | [**generateCredentials**](docs/Api/CredentialsApi.md#generatecredentials) | **POST** /v1/{projectId}/credential | 
 *CredentialsApi* | [**getClaimedCredentials**](docs/Api/CredentialsApi.md#getclaimedcredentials) | **GET** /v1/{projectId}/configurations/{configurationId}/credentials | Get claimed credential in the specified range
 *CredentialsApi* | [**getIssuanceIdClaimedCredential**](docs/Api/CredentialsApi.md#getissuanceidclaimedcredential) | **GET** /v1/{projectId}/configurations/{configurationId}/issuances/{issuanceId}/credentials | Get claimed VC linked to the issuanceId
@@ -87,6 +88,10 @@ Class | Method | HTTP request | Description
 
 - [ActionForbiddenError](docs/Model/ActionForbiddenError.md)
 - [ActionForbiddenErrorDetailsInner](docs/Model/ActionForbiddenErrorDetailsInner.md)
+- [BatchCredentialInput](docs/Model/BatchCredentialInput.md)
+- [BatchCredentialInputCredentialRequestsInner](docs/Model/BatchCredentialInputCredentialRequestsInner.md)
+- [BatchCredentialResponse](docs/Model/BatchCredentialResponse.md)
+- [BatchCredentialResponseCredentialResponsesInner](docs/Model/BatchCredentialResponseCredentialResponsesInner.md)
 - [ChangeCredentialStatus400Response](docs/Model/ChangeCredentialStatus400Response.md)
 - [ChangeCredentialStatusInput](docs/Model/ChangeCredentialStatusInput.md)
 - [ChangeStatusForbiddenError](docs/Model/ChangeStatusForbiddenError.md)
@@ -94,6 +99,7 @@ Class | Method | HTTP request | Description
 - [CisConfigurationWebhookSettingEndpoint](docs/Model/CisConfigurationWebhookSettingEndpoint.md)
 - [ClaimedCredentialListResponse](docs/Model/ClaimedCredentialListResponse.md)
 - [ClaimedCredentialResponse](docs/Model/ClaimedCredentialResponse.md)
+- [CorsBatchCredentialOK](docs/Model/CorsBatchCredentialOK.md)
 - [CorsGenerateCredentialsOK](docs/Model/CorsGenerateCredentialsOK.md)
 - [CorsGetClaimedCredentialsOK](docs/Model/CorsGetClaimedCredentialsOK.md)
 - [CorsGetCredentialOfferOK](docs/Model/CorsGetCredentialOfferOK.md)
