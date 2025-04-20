@@ -108,6 +108,15 @@ class WellKnownOpenIdCredentialIssuerResponseTest extends TestCase
     }
 
     /**
+     * Test attribute "batch_credential_endpoint"
+     */
+    public function testPropertyBatchCredentialEndpoint()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "credentials_supported"
      */
     public function testPropertyCredentialsSupported()

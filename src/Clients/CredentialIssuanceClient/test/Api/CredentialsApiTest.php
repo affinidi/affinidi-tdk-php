@@ -73,6 +73,18 @@ class CredentialsApiTest extends TestCase
     }
 
     /**
+     * Test case for batchCredential
+     *
+     * Batch credential.
+     *
+     */
+    public function testBatchCredential()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for generateCredentials
      *
      * .
