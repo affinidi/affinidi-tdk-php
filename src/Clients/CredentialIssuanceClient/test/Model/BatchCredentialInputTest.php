@@ -1,6 +1,6 @@
 <?php
 /**
- * ClaimedCredentialResponseTest
+ * BatchCredentialInputTest
  *
  * PHP version 7.4
  *
@@ -32,15 +32,15 @@ namespace AffinidiTdk\Clients\CredentialIssuanceClient\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ClaimedCredentialResponseTest Class Doc Comment
+ * BatchCredentialInputTest Class Doc Comment
  *
  * @category    Class
- * @description Response for getting the claimed VC
+ * @description BatchCredentialInput
  * @package     AffinidiTdk\Clients\CredentialIssuanceClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class ClaimedCredentialResponseTest extends TestCase
+class BatchCredentialInputTest extends TestCase
 {
 
     /**
@@ -72,27 +72,18 @@ class ClaimedCredentialResponseTest extends TestCase
     }
 
     /**
-     * Test "ClaimedCredentialResponse"
+     * Test "BatchCredentialInput"
      */
-    public function testClaimedCredentialResponse()
+    public function testBatchCredentialInput()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "credential"
+     * Test attribute "credential_requests"
      */
-    public function testPropertyCredential()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "credentials"
-     */
-    public function testPropertyCredentials()
+    public function testPropertyCredentialRequests()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

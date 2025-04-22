@@ -1,6 +1,6 @@
 <?php
 /**
- * ClaimedCredentialResponse
+ * BatchCredentialInputCredentialRequestsInner
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
- * ClaimedCredentialResponse Class Doc Comment
+ * BatchCredentialInputCredentialRequestsInner Class Doc Comment
  *
  * @category Class
- * @description Response for getting the claimed VC
  * @package  AffinidiTdk\Clients\CredentialIssuanceClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class BatchCredentialInputCredentialRequestsInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ClaimedCredentialResponse';
+    protected static $openAPIModelName = 'BatchCredentialInput_credential_requests_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +58,8 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credentials' => 'array<string,mixed>[]'
+        'credential_identifier' => 'string',
+        'proof' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialProof'
     ];
 
     /**
@@ -70,7 +70,8 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credentials' => null
+        'credential_identifier' => null,
+        'proof' => null
     ];
 
     /**
@@ -79,7 +80,8 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credentials' => false
+        'credential_identifier' => false,
+        'proof' => false
     ];
 
     /**
@@ -168,8 +170,8 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'credential' => 'credential',
-        'credentials' => 'credentials'
+        'credential_identifier' => 'credential_identifier',
+        'proof' => 'proof'
     ];
 
     /**
@@ -178,7 +180,8 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'credentials' => 'setCredentials'
+        'credential_identifier' => 'setCredentialIdentifier',
+        'proof' => 'setProof'
     ];
 
     /**
@@ -187,7 +190,8 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'credentials' => 'getCredentials'
+        'credential_identifier' => 'getCredentialIdentifier',
+        'proof' => 'getProof'
     ];
 
     /**
@@ -247,8 +251,8 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credential', $data ?? [], null);
-        $this->setIfExists('credentials', $data ?? [], null);
+        $this->setIfExists('credential_identifier', $data ?? [], null);
+        $this->setIfExists('proof', $data ?? [], null);
     }
 
     /**
@@ -278,6 +282,9 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
+        if ($this->container['proof'] === null) {
+            $invalidProperties[] = "'proof' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -294,28 +301,55 @@ class ClaimedCredentialResponse implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets credentials
+     * Gets credential_identifier
      *
-     * @return array<string,mixed>[]|null
+     * @return string|null
      */
-    public function getCredentials()
+    public function getCredentialIdentifier()
     {
-        return $this->container['credentials'];
+        return $this->container['credential_identifier'];
     }
 
     /**
-     * Sets credentials
+     * Sets credential_identifier
      *
-     * @param array<string,mixed>[]|null $credentials claimed credentials for batch issuances
+     * @param string|null $credential_identifier It is a String that identifies a Credential that is being requested to be issued.
      *
      * @return self
      */
-    public function setCredentials($credentials)
+    public function setCredentialIdentifier($credential_identifier)
     {
-        if (is_null($credentials)) {
-            throw new \InvalidArgumentException('non-nullable credentials cannot be null');
+        if (is_null($credential_identifier)) {
+            throw new \InvalidArgumentException('non-nullable credential_identifier cannot be null');
         }
-        $this->container['credentials'] = $credentials;
+        $this->container['credential_identifier'] = $credential_identifier;
+
+        return $this;
+    }
+
+    /**
+     * Gets proof
+     *
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialProof
+     */
+    public function getProof()
+    {
+        return $this->container['proof'];
+    }
+
+    /**
+     * Sets proof
+     *
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\CredentialProof $proof proof
+     *
+     * @return self
+     */
+    public function setProof($proof)
+    {
+        if (is_null($proof)) {
+            throw new \InvalidArgumentException('non-nullable proof cannot be null');
+        }
+        $this->container['proof'] = $proof;
 
         return $this;
     }
