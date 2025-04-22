@@ -61,6 +61,7 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'authorization_endpoint' => 'string',
         'credential_endpoint' => 'string',
         'credential_issuer' => 'string',
+        'batch_credential_endpoint' => 'string',
         'credentials_supported' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner[]',
         'deferred_credential_endpoint' => 'string',
         'grant_types_supported' => 'string[]',
@@ -81,6 +82,7 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'authorization_endpoint' => null,
         'credential_endpoint' => null,
         'credential_issuer' => null,
+        'batch_credential_endpoint' => null,
         'credentials_supported' => null,
         'deferred_credential_endpoint' => null,
         'grant_types_supported' => null,
@@ -99,6 +101,7 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'authorization_endpoint' => false,
         'credential_endpoint' => false,
         'credential_issuer' => false,
+        'batch_credential_endpoint' => false,
         'credentials_supported' => false,
         'deferred_credential_endpoint' => false,
         'grant_types_supported' => false,
@@ -197,6 +200,7 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'authorization_endpoint' => 'authorization_endpoint',
         'credential_endpoint' => 'credential_endpoint',
         'credential_issuer' => 'credential_issuer',
+        'batch_credential_endpoint' => 'batch_credential_endpoint',
         'credentials_supported' => 'credentials_supported',
         'deferred_credential_endpoint' => 'deferred_credential_endpoint',
         'grant_types_supported' => 'grant_types_supported',
@@ -215,6 +219,7 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'authorization_endpoint' => 'setAuthorizationEndpoint',
         'credential_endpoint' => 'setCredentialEndpoint',
         'credential_issuer' => 'setCredentialIssuer',
+        'batch_credential_endpoint' => 'setBatchCredentialEndpoint',
         'credentials_supported' => 'setCredentialsSupported',
         'deferred_credential_endpoint' => 'setDeferredCredentialEndpoint',
         'grant_types_supported' => 'setGrantTypesSupported',
@@ -233,6 +238,7 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'authorization_endpoint' => 'getAuthorizationEndpoint',
         'credential_endpoint' => 'getCredentialEndpoint',
         'credential_issuer' => 'getCredentialIssuer',
+        'batch_credential_endpoint' => 'getBatchCredentialEndpoint',
         'credentials_supported' => 'getCredentialsSupported',
         'deferred_credential_endpoint' => 'getDeferredCredentialEndpoint',
         'grant_types_supported' => 'getGrantTypesSupported',
@@ -347,6 +353,7 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         $this->setIfExists('authorization_endpoint', $data ?? [], null);
         $this->setIfExists('credential_endpoint', $data ?? [], null);
         $this->setIfExists('credential_issuer', $data ?? [], null);
+        $this->setIfExists('batch_credential_endpoint', $data ?? [], null);
         $this->setIfExists('credentials_supported', $data ?? [], null);
         $this->setIfExists('deferred_credential_endpoint', $data ?? [], null);
         $this->setIfExists('grant_types_supported', $data ?? [], null);
@@ -475,6 +482,33 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
             throw new \InvalidArgumentException('non-nullable credential_issuer cannot be null');
         }
         $this->container['credential_issuer'] = $credential_issuer;
+
+        return $this;
+    }
+
+    /**
+     * Gets batch_credential_endpoint
+     *
+     * @return string|null
+     */
+    public function getBatchCredentialEndpoint()
+    {
+        return $this->container['batch_credential_endpoint'];
+    }
+
+    /**
+     * Sets batch_credential_endpoint
+     *
+     * @param string|null $batch_credential_endpoint batch_credential_endpoint
+     *
+     * @return self
+     */
+    public function setBatchCredentialEndpoint($batch_credential_endpoint)
+    {
+        if (is_null($batch_credential_endpoint)) {
+            throw new \InvalidArgumentException('non-nullable batch_credential_endpoint cannot be null');
+        }
+        $this->container['batch_credential_endpoint'] = $batch_credential_endpoint;
 
         return $this;
     }

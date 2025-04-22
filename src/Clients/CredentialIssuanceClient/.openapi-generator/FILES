@@ -9,6 +9,10 @@ docs/Api/OfferApi.md
 docs/Api/WellKnownApi.md
 docs/Model/ActionForbiddenError.md
 docs/Model/ActionForbiddenErrorDetailsInner.md
+docs/Model/BatchCredentialInput.md
+docs/Model/BatchCredentialInputCredentialRequestsInner.md
+docs/Model/BatchCredentialResponse.md
+docs/Model/BatchCredentialResponseCredentialResponsesInner.md
 docs/Model/ChangeCredentialStatus400Response.md
 docs/Model/ChangeCredentialStatusInput.md
 docs/Model/ChangeStatusForbiddenError.md
@@ -16,6 +20,7 @@ docs/Model/CisConfigurationWebhookSetting.md
 docs/Model/CisConfigurationWebhookSettingEndpoint.md
 docs/Model/ClaimedCredentialListResponse.md
 docs/Model/ClaimedCredentialResponse.md
+docs/Model/CorsBatchCredentialOK.md
 docs/Model/CorsGenerateCredentialsOK.md
 docs/Model/CorsGetClaimedCredentialsOK.md
 docs/Model/CorsGetCredentialOfferOK.md
@@ -88,6 +93,10 @@ lib/InvalidJwtTokenError.php
 lib/InvalidParameterError.php
 lib/Model/ActionForbiddenError.php
 lib/Model/ActionForbiddenErrorDetailsInner.php
+lib/Model/BatchCredentialInput.php
+lib/Model/BatchCredentialInputCredentialRequestsInner.php
+lib/Model/BatchCredentialResponse.php
+lib/Model/BatchCredentialResponseCredentialResponsesInner.php
 lib/Model/ChangeCredentialStatus400Response.php
 lib/Model/ChangeCredentialStatusInput.php
 lib/Model/ChangeStatusForbiddenError.php
@@ -95,6 +104,7 @@ lib/Model/CisConfigurationWebhookSetting.php
 lib/Model/CisConfigurationWebhookSettingEndpoint.php
 lib/Model/ClaimedCredentialListResponse.php
 lib/Model/ClaimedCredentialResponse.php
+lib/Model/CorsBatchCredentialOK.php
 lib/Model/CorsGenerateCredentialsOK.php
 lib/Model/CorsGetClaimedCredentialsOK.php
 lib/Model/CorsGetCredentialOfferOK.php
@@ -166,6 +176,10 @@ test/Api/OfferApiTest.php
 test/Api/WellKnownApiTest.php
 test/Model/ActionForbiddenErrorDetailsInnerTest.php
 test/Model/ActionForbiddenErrorTest.php
+test/Model/BatchCredentialInputCredentialRequestsInnerTest.php
+test/Model/BatchCredentialInputTest.php
+test/Model/BatchCredentialResponseCredentialResponsesInnerTest.php
+test/Model/BatchCredentialResponseTest.php
 test/Model/ChangeCredentialStatus400ResponseTest.php
 test/Model/ChangeCredentialStatusInputTest.php
 test/Model/ChangeStatusForbiddenErrorTest.php
@@ -173,6 +187,7 @@ test/Model/CisConfigurationWebhookSettingEndpointTest.php
 test/Model/CisConfigurationWebhookSettingTest.php
 test/Model/ClaimedCredentialListResponseTest.php
 test/Model/ClaimedCredentialResponseTest.php
+test/Model/CorsBatchCredentialOKTest.php
 test/Model/CorsGenerateCredentialsOKTest.php
 test/Model/CorsGetClaimedCredentialsOKTest.php
 test/Model/CorsGetCredentialOfferOKTest.php
