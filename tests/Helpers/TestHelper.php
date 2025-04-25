@@ -47,7 +47,8 @@ function debugMessage(string $subject, array $details, bool $end = false)
 
     echo "\n\n\033[0;34m", $subject, ":\033[0m";
     foreach ($details as $key => $value) {
-        echo "\n - ", $key, ": ", $value, "";
+        $formattedValue = is_array($value) ? json_encode($value, JSON_PRETTY_PRINT) : $value;
+        echo "\n - ", $key, ": ", $formattedValue;
     }
 
     if ($end)
