@@ -84,7 +84,6 @@ Class | Method | HTTP request | Description
 - [FilterConst](docs/Model/FilterConst.md)
 - [FilterItems](docs/Model/FilterItems.md)
 - [Format](docs/Model/Format.md)
-- [FreeFormObject](docs/Model/FreeFormObject.md)
 - [HolderSubject](docs/Model/HolderSubject.md)
 - [InputDescriptor](docs/Model/InputDescriptor.md)
 - [InvalidParameterError](docs/Model/InvalidParameterError.md)
@@ -106,12 +105,8 @@ Class | Method | HTTP request | Description
 - [VerifyPresentationOutputErrors](docs/Model/VerifyPresentationOutputErrors.md)
 - [W3cCredential](docs/Model/W3cCredential.md)
 - [W3cCredentialCredentialSchema](docs/Model/W3cCredentialCredentialSchema.md)
-- [W3cCredentialCredentialSubject](docs/Model/W3cCredentialCredentialSubject.md)
-- [W3cCredentialHolder](docs/Model/W3cCredentialHolder.md)
 - [W3cCredentialStatus](docs/Model/W3cCredentialStatus.md)
 - [W3cPresentation](docs/Model/W3cPresentation.md)
-- [W3cPresentationContext](docs/Model/W3cPresentationContext.md)
-- [W3cPresentationContextOneOfInner](docs/Model/W3cPresentationContextOneOfInner.md)
 - [W3cProof](docs/Model/W3cProof.md)
 
 ## Authorization
