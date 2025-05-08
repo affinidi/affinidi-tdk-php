@@ -58,11 +58,8 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'at_context' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentationContext',
         'id' => 'string',
         'type' => 'string[]',
-        'holder' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialHolder',
-        'credential_subject' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialCredentialSubject',
         'credential_status' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialStatus',
         'issuance_date' => 'string',
         'issuer' => 'string',
@@ -79,11 +76,8 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'at_context' => null,
         'id' => null,
         'type' => null,
-        'holder' => null,
-        'credential_subject' => null,
         'credential_status' => null,
         'issuance_date' => null,
         'issuer' => null,
@@ -98,11 +92,8 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'at_context' => false,
         'id' => true,
         'type' => false,
-        'holder' => false,
-        'credential_subject' => false,
         'credential_status' => false,
         'issuance_date' => false,
         'issuer' => false,
@@ -197,11 +188,8 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'at_context' => '@context',
         'id' => 'id',
         'type' => 'type',
-        'holder' => 'holder',
-        'credential_subject' => 'credentialSubject',
         'credential_status' => 'credentialStatus',
         'issuance_date' => 'issuanceDate',
         'issuer' => 'issuer',
@@ -216,11 +204,8 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'at_context' => 'setAtContext',
         'id' => 'setId',
         'type' => 'setType',
-        'holder' => 'setHolder',
-        'credential_subject' => 'setCredentialSubject',
         'credential_status' => 'setCredentialStatus',
         'issuance_date' => 'setIssuanceDate',
         'issuer' => 'setIssuer',
@@ -235,11 +220,8 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'at_context' => 'getAtContext',
         'id' => 'getId',
         'type' => 'getType',
-        'holder' => 'getHolder',
-        'credential_subject' => 'getCredentialSubject',
         'credential_status' => 'getCredentialStatus',
         'issuance_date' => 'getIssuanceDate',
         'issuer' => 'getIssuer',
@@ -305,11 +287,8 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('at_context', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('holder', $data ?? [], null);
-        $this->setIfExists('credential_subject', $data ?? [], null);
         $this->setIfExists('credential_status', $data ?? [], null);
         $this->setIfExists('issuance_date', $data ?? [], null);
         $this->setIfExists('issuer', $data ?? [], null);
@@ -345,14 +324,8 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['at_context'] === null) {
-            $invalidProperties[] = "'at_context' can't be null";
-        }
         if ($this->container['type'] === null) {
             $invalidProperties[] = "'type' can't be null";
-        }
-        if ($this->container['credential_subject'] === null) {
-            $invalidProperties[] = "'credential_subject' can't be null";
         }
         if ($this->container['issuance_date'] === null) {
             $invalidProperties[] = "'issuance_date' can't be null";
@@ -377,33 +350,6 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets at_context
-     *
-     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentationContext
-     */
-    public function getAtContext()
-    {
-        return $this->container['at_context'];
-    }
-
-    /**
-     * Sets at_context
-     *
-     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentationContext $at_context at_context
-     *
-     * @return self
-     */
-    public function setAtContext($at_context)
-    {
-        if (is_null($at_context)) {
-            throw new \InvalidArgumentException('non-nullable at_context cannot be null');
-        }
-        $this->container['at_context'] = $at_context;
-
-        return $this;
-    }
 
     /**
      * Gets id
@@ -462,60 +408,6 @@ class W3cCredential implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
         $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets holder
-     *
-     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialHolder|null
-     */
-    public function getHolder()
-    {
-        return $this->container['holder'];
-    }
-
-    /**
-     * Sets holder
-     *
-     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialHolder|null $holder holder
-     *
-     * @return self
-     */
-    public function setHolder($holder)
-    {
-        if (is_null($holder)) {
-            throw new \InvalidArgumentException('non-nullable holder cannot be null');
-        }
-        $this->container['holder'] = $holder;
-
-        return $this;
-    }
-
-    /**
-     * Gets credential_subject
-     *
-     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialCredentialSubject
-     */
-    public function getCredentialSubject()
-    {
-        return $this->container['credential_subject'];
-    }
-
-    /**
-     * Sets credential_subject
-     *
-     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredentialCredentialSubject $credential_subject credential_subject
-     *
-     * @return self
-     */
-    public function setCredentialSubject($credential_subject)
-    {
-        if (is_null($credential_subject)) {
-            throw new \InvalidArgumentException('non-nullable credential_subject cannot be null');
-        }
-        $this->container['credential_subject'] = $credential_subject;
 
         return $this;
     }
