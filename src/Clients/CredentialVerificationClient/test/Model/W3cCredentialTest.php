@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,7 +27,7 @@
  * Please update the test case below to test the model.
  */
 
-namespace OpenAPI\Client\Test\Model;
+namespace AffinidiTdk\Clients\CredentialVerificationClient\Test\Model;
 
 use PHPUnit\Framework\TestCase;
 
@@ -36,7 +36,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @category    Class
  * @description W3cCredential
- * @package     OpenAPI\Client
+ * @package     AffinidiTdk\Clients\CredentialVerificationClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
@@ -81,15 +81,6 @@ class W3cCredentialTest extends TestCase
     }
 
     /**
-     * Test attribute "at_context"
-     */
-    public function testPropertyAtContext()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "id"
      */
     public function testPropertyId()
@@ -102,24 +93,6 @@ class W3cCredentialTest extends TestCase
      * Test attribute "type"
      */
     public function testPropertyType()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "holder"
-     */
-    public function testPropertyHolder()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "credential_subject"
-     */
-    public function testPropertyCredentialSubject()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
