@@ -58,10 +58,8 @@ class W3cPresentation implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'at_context' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentationContext',
         'id' => 'string',
         'type' => 'string[]',
-        'holder' => 'object',
         'verifiable_credential' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredential[]',
         'presentation_submission' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\PresentationSubmission',
         'proof' => 'object'
@@ -75,10 +73,8 @@ class W3cPresentation implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'at_context' => null,
         'id' => null,
         'type' => null,
-        'holder' => null,
         'verifiable_credential' => null,
         'presentation_submission' => null,
         'proof' => null
@@ -90,10 +86,8 @@ class W3cPresentation implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'at_context' => false,
         'id' => true,
         'type' => false,
-        'holder' => false,
         'verifiable_credential' => false,
         'presentation_submission' => false,
         'proof' => false
@@ -185,10 +179,8 @@ class W3cPresentation implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'at_context' => '@context',
         'id' => 'id',
         'type' => 'type',
-        'holder' => 'holder',
         'verifiable_credential' => 'verifiableCredential',
         'presentation_submission' => 'presentation_submission',
         'proof' => 'proof'
@@ -200,10 +192,8 @@ class W3cPresentation implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'at_context' => 'setAtContext',
         'id' => 'setId',
         'type' => 'setType',
-        'holder' => 'setHolder',
         'verifiable_credential' => 'setVerifiableCredential',
         'presentation_submission' => 'setPresentationSubmission',
         'proof' => 'setProof'
@@ -215,10 +205,8 @@ class W3cPresentation implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'at_context' => 'getAtContext',
         'id' => 'getId',
         'type' => 'getType',
-        'holder' => 'getHolder',
         'verifiable_credential' => 'getVerifiableCredential',
         'presentation_submission' => 'getPresentationSubmission',
         'proof' => 'getProof'
@@ -281,10 +269,8 @@ class W3cPresentation implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('at_context', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('holder', $data ?? [], null);
         $this->setIfExists('verifiable_credential', $data ?? [], null);
         $this->setIfExists('presentation_submission', $data ?? [], null);
         $this->setIfExists('proof', $data ?? [], null);
@@ -317,14 +303,8 @@ class W3cPresentation implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['at_context'] === null) {
-            $invalidProperties[] = "'at_context' can't be null";
-        }
         if ($this->container['type'] === null) {
             $invalidProperties[] = "'type' can't be null";
-        }
-        if ($this->container['holder'] === null) {
-            $invalidProperties[] = "'holder' can't be null";
         }
         if ($this->container['verifiable_credential'] === null) {
             $invalidProperties[] = "'verifiable_credential' can't be null";
@@ -346,33 +326,6 @@ class W3cPresentation implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets at_context
-     *
-     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentationContext
-     */
-    public function getAtContext()
-    {
-        return $this->container['at_context'];
-    }
-
-    /**
-     * Sets at_context
-     *
-     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentationContext $at_context at_context
-     *
-     * @return self
-     */
-    public function setAtContext($at_context)
-    {
-        if (is_null($at_context)) {
-            throw new \InvalidArgumentException('non-nullable at_context cannot be null');
-        }
-        $this->container['at_context'] = $at_context;
-
-        return $this;
-    }
 
     /**
      * Gets id
@@ -431,33 +384,6 @@ class W3cPresentation implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
         $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets holder
-     *
-     * @return object
-     */
-    public function getHolder()
-    {
-        return $this->container['holder'];
-    }
-
-    /**
-     * Sets holder
-     *
-     * @param object $holder holder
-     *
-     * @return self
-     */
-    public function setHolder($holder)
-    {
-        if (is_null($holder)) {
-            throw new \InvalidArgumentException('non-nullable holder cannot be null');
-        }
-        $this->container['holder'] = $holder;
 
         return $this;
     }
