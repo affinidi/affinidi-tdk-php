@@ -24,7 +24,12 @@ function getConfiguration()
         'vpToken' => $_ENV['VP_TOKEN'],
         'vc' => $_ENV['VERIFIABLE_CREDENTIAL'],
         'vcInvalid' => $_ENV['VERIFIABLE_CREDENTIAL_INVALID'],
-        'issuanceData' => $_ENV['CREDENTIAL_ISSUANCE_DATA']
+        'issuanceData' => $_ENV['CREDENTIAL_ISSUANCE_DATA'],
+        'walletId' => $_ENV['WALLET_ID'],
+        'holderDID' => $_ENV['HOLDER_DID'],
+        'schemaJson' => $_ENV['SCHEMA_JSON'],
+        'schemaJsonLd' => $_ENV['SCHEMA_JSONLD'],
+        'schemaJsonTypeId' => $_ENV['SCHEMA_JSON_TYPE_ID'],
     ];
 }
 
