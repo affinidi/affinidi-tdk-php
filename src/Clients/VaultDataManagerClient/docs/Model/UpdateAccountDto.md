@@ -1,0 +1,11 @@
+# # UpdateAccountDto
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**account_index** | **float** |  |
+**account_did** | **string** | Profile DID that is associated with the account number |
+**metadata** | **object** |  | [optional]
+
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -36,6 +36,9 @@ use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use AffinidiTdk\Clients\IotaClient\ApiException;
+use AffinidiTdk\Clients\IotaClient\InvalidJwtTokenError;
+use AffinidiTdk\Clients\IotaClient\InvalidParameterError;
+use AffinidiTdk\Clients\IotaClient\NotFoundError;
 use AffinidiTdk\Clients\IotaClient\Configuration;
 use AffinidiTdk\Clients\IotaClient\HeaderSelector;
 use AffinidiTdk\Clients\IotaClient\ObjectSerializer;
@@ -102,10 +105,10 @@ class PexQueryApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -178,6 +181,20 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -644,36 +661,53 @@ class PexQueryApi
      * Operation deletePexQueries
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\DeletePexQueriesInput $delete_pex_queries_input DeletePexQueriesInput (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePexQueries'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return object|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError
      */
-    public function deletePexQueries($configuration_id, string $contentType = self::contentTypes['deletePexQueries'][0])
+    public function deletePexQueries($configuration_id, $delete_pex_queries_input, string $contentType = self::contentTypes['deletePexQueries'][0])
     {
-        $this->deletePexQueriesWithHttpInfo($configuration_id, $contentType);
+        list($response) = $this->deletePexQueriesWithHttpInfo($configuration_id, $delete_pex_queries_input, $contentType);
+        return $response;
     }
 
     /**
      * Operation deletePexQueriesWithHttpInfo
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\DeletePexQueriesInput $delete_pex_queries_input DeletePexQueriesInput (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePexQueries'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object|\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deletePexQueriesWithHttpInfo($configuration_id, string $contentType = self::contentTypes['deletePexQueries'][0])
+    public function deletePexQueriesWithHttpInfo($configuration_id, $delete_pex_queries_input, string $contentType = self::contentTypes['deletePexQueries'][0])
     {
-        $request = $this->deletePexQueriesRequest($configuration_id, $contentType);
+        $request = $this->deletePexQueriesRequest($configuration_id, $delete_pex_queries_input, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -692,10 +726,141 @@ class PexQueryApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    if ('object' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IotaClient\Model\OperationForbiddenError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = 'object';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -721,14 +886,15 @@ class PexQueryApi
      * Operation deletePexQueriesAsync
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\DeletePexQueriesInput $delete_pex_queries_input DeletePexQueriesInput (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePexQueries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deletePexQueriesAsync($configuration_id, string $contentType = self::contentTypes['deletePexQueries'][0])
+    public function deletePexQueriesAsync($configuration_id, $delete_pex_queries_input, string $contentType = self::contentTypes['deletePexQueries'][0])
     {
-        return $this->deletePexQueriesAsyncWithHttpInfo($configuration_id, $contentType)
+        return $this->deletePexQueriesAsyncWithHttpInfo($configuration_id, $delete_pex_queries_input, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -740,21 +906,35 @@ class PexQueryApi
      * Operation deletePexQueriesAsyncWithHttpInfo
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\DeletePexQueriesInput $delete_pex_queries_input DeletePexQueriesInput (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePexQueries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deletePexQueriesAsyncWithHttpInfo($configuration_id, string $contentType = self::contentTypes['deletePexQueries'][0])
+    public function deletePexQueriesAsyncWithHttpInfo($configuration_id, $delete_pex_queries_input, string $contentType = self::contentTypes['deletePexQueries'][0])
     {
-        $returnType = '';
-        $request = $this->deletePexQueriesRequest($configuration_id, $contentType);
+        $returnType = 'object';
+        $request = $this->deletePexQueriesRequest($configuration_id, $delete_pex_queries_input, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -777,18 +957,26 @@ class PexQueryApi
      * Create request for operation 'deletePexQueries'
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
+     * @param  \AffinidiTdk\Clients\IotaClient\Model\DeletePexQueriesInput $delete_pex_queries_input DeletePexQueriesInput (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePexQueries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function deletePexQueriesRequest($configuration_id, string $contentType = self::contentTypes['deletePexQueries'][0])
+    public function deletePexQueriesRequest($configuration_id, $delete_pex_queries_input, string $contentType = self::contentTypes['deletePexQueries'][0])
     {
 
         // verify the required parameter 'configuration_id' is set
         if ($configuration_id === null || (is_array($configuration_id) && count($configuration_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $configuration_id when calling deletePexQueries'
+            );
+        }
+
+        // verify the required parameter 'delete_pex_queries_input' is set
+        if ($delete_pex_queries_input === null || (is_array($delete_pex_queries_input) && count($delete_pex_queries_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $delete_pex_queries_input when calling deletePexQueries'
             );
         }
 
@@ -819,7 +1007,14 @@ class PexQueryApi
         );
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($delete_pex_queries_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($delete_pex_queries_input));
+            } else {
+                $httpBody = $delete_pex_queries_input;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -906,6 +1101,20 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1165,6 +1374,20 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1562,8 +1785,8 @@ class PexQueryApi
      * Operation listPexQueries
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPexQueries'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1580,8 +1803,8 @@ class PexQueryApi
      * Operation listPexQueriesWithHttpInfo
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPexQueries'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\IotaClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1597,6 +1820,20 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1810,8 +2047,8 @@ class PexQueryApi
      * Operation listPexQueriesAsync
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPexQueries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1831,8 +2068,8 @@ class PexQueryApi
      * Operation listPexQueriesAsyncWithHttpInfo
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPexQueries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1883,8 +2120,8 @@ class PexQueryApi
      * Create request for operation 'listPexQueries'
      *
      * @param  string $configuration_id ID of the Affinidi Iota Framework configuration. (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPexQueries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2044,6 +2281,20 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -2440,6 +2691,20 @@ class PexQueryApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),

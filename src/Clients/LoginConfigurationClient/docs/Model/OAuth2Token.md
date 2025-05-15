@@ -10,5 +10,6 @@ Name | Type | Description | Notes
 **refresh_token** | **string** | The refresh token, which can be used to obtain new access tokens. To retrieve it add the scope \&quot;offline\&quot; to your access token request. | [optional]
 **scope** | **string** | The scope of the access token | [optional]
 **token_type** | **string** | The type of the token issued | [optional]
+**authorization_details** | [**\AffinidiTdk\Clients\LoginConfigurationClient\Model\OAuth2TokenAuthorizationDetailsInner[]**](OAuth2TokenAuthorizationDetailsInner.md) | is used to request issuance of a certain Credential type. This optional field is only applicable in batch credential operations. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -63,7 +63,8 @@ class OAuth2Token implements ModelInterface, ArrayAccess, \JsonSerializable
         'id_token' => 'int',
         'refresh_token' => 'string',
         'scope' => 'string',
-        'token_type' => 'string'
+        'token_type' => 'string',
+        'authorization_details' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\OAuth2TokenAuthorizationDetailsInner[]'
     ];
 
     /**
@@ -79,7 +80,8 @@ class OAuth2Token implements ModelInterface, ArrayAccess, \JsonSerializable
         'id_token' => null,
         'refresh_token' => null,
         'scope' => null,
-        'token_type' => null
+        'token_type' => null,
+        'authorization_details' => null
     ];
 
     /**
@@ -93,7 +95,8 @@ class OAuth2Token implements ModelInterface, ArrayAccess, \JsonSerializable
         'id_token' => false,
         'refresh_token' => false,
         'scope' => false,
-        'token_type' => false
+        'token_type' => false,
+        'authorization_details' => false
     ];
 
     /**
@@ -187,7 +190,8 @@ class OAuth2Token implements ModelInterface, ArrayAccess, \JsonSerializable
         'id_token' => 'id_token',
         'refresh_token' => 'refresh_token',
         'scope' => 'scope',
-        'token_type' => 'token_type'
+        'token_type' => 'token_type',
+        'authorization_details' => 'authorization_details'
     ];
 
     /**
@@ -201,7 +205,8 @@ class OAuth2Token implements ModelInterface, ArrayAccess, \JsonSerializable
         'id_token' => 'setIdToken',
         'refresh_token' => 'setRefreshToken',
         'scope' => 'setScope',
-        'token_type' => 'setTokenType'
+        'token_type' => 'setTokenType',
+        'authorization_details' => 'setAuthorizationDetails'
     ];
 
     /**
@@ -215,7 +220,8 @@ class OAuth2Token implements ModelInterface, ArrayAccess, \JsonSerializable
         'id_token' => 'getIdToken',
         'refresh_token' => 'getRefreshToken',
         'scope' => 'getScope',
-        'token_type' => 'getTokenType'
+        'token_type' => 'getTokenType',
+        'authorization_details' => 'getAuthorizationDetails'
     ];
 
     /**
@@ -281,6 +287,7 @@ class OAuth2Token implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('refresh_token', $data ?? [], null);
         $this->setIfExists('scope', $data ?? [], null);
         $this->setIfExists('token_type', $data ?? [], null);
+        $this->setIfExists('authorization_details', $data ?? [], null);
     }
 
     /**
@@ -483,6 +490,33 @@ class OAuth2Token implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable token_type cannot be null');
         }
         $this->container['token_type'] = $token_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorization_details
+     *
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\OAuth2TokenAuthorizationDetailsInner[]|null
+     */
+    public function getAuthorizationDetails()
+    {
+        return $this->container['authorization_details'];
+    }
+
+    /**
+     * Sets authorization_details
+     *
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\OAuth2TokenAuthorizationDetailsInner[]|null $authorization_details is used to request issuance of a certain Credential type. This optional field is only applicable in batch credential operations.
+     *
+     * @return self
+     */
+    public function setAuthorizationDetails($authorization_details)
+    {
+        if (is_null($authorization_details)) {
+            throw new \InvalidArgumentException('non-nullable authorization_details cannot be null');
+        }
+        $this->container['authorization_details'] = $authorization_details;
 
         return $this;
     }

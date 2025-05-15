@@ -80,7 +80,7 @@ try {
 ## `deletePexQueries()`
 
 ```php
-deletePexQueries($configuration_id)
+deletePexQueries($configuration_id, $delete_pex_queries_input): object
 ```
 
 
@@ -107,9 +107,11 @@ $apiInstance = new AffinidiTdk\Clients\IotaClient\Api\PexQueryApi(
     $config
 );
 $configuration_id = 'configuration_id_example'; // string | ID of the Affinidi Iota Framework configuration.
+$delete_pex_queries_input = new \AffinidiTdk\Clients\IotaClient\Model\DeletePexQueriesInput(); // \AffinidiTdk\Clients\IotaClient\Model\DeletePexQueriesInput | DeletePexQueriesInput
 
 try {
-    $apiInstance->deletePexQueries($configuration_id);
+    $result = $apiInstance->deletePexQueries($configuration_id, $delete_pex_queries_input);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PexQueryApi->deletePexQueries: ', $e->getMessage(), PHP_EOL;
 }
@@ -120,10 +122,11 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **configuration_id** | **string**| ID of the Affinidi Iota Framework configuration. | |
+| **delete_pex_queries_input** | [**\AffinidiTdk\Clients\IotaClient\Model\DeletePexQueriesInput**](../Model/DeletePexQueriesInput.md)| DeletePexQueriesInput | |
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -131,7 +134,7 @@ void (empty response body)
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
