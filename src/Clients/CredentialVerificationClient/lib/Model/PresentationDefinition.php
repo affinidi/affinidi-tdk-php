@@ -65,7 +65,7 @@ class PresentationDefinition implements ModelInterface, ArrayAccess, \JsonSerial
         'format' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\Format',
         'submission_requirements' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\SubmissionRequirement[]',
         'input_descriptors' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\InputDescriptor[]',
-        'frame' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\FreeFormObject'
+        'frame' => 'array<string,mixed>'
     ];
 
     /**
@@ -504,7 +504,7 @@ class PresentationDefinition implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets frame
      *
-     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\FreeFormObject|null
+     * @return array<string,mixed>|null
      */
     public function getFrame()
     {
@@ -514,7 +514,7 @@ class PresentationDefinition implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets frame
      *
-     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\FreeFormObject|null $frame frame
+     * @param array<string,mixed>|null $frame Dynamic model
      *
      * @return self
      */
