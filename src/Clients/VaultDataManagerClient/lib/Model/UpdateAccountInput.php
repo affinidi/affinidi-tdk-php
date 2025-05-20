@@ -310,12 +310,6 @@ class UpdateAccountInput implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['description'] === null) {
-            $invalidProperties[] = "'description' can't be null";
-        }
         if ($this->container['did_proof'] === null) {
             $invalidProperties[] = "'did_proof' can't be null";
         }
@@ -340,7 +334,7 @@ class UpdateAccountInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets name
      *
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
@@ -350,7 +344,7 @@ class UpdateAccountInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets name
      *
-     * @param string $name Name of the account
+     * @param string|null $name Name of the account
      *
      * @return self
      */
@@ -367,7 +361,7 @@ class UpdateAccountInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets description
      *
-     * @return string
+     * @return string|null
      */
     public function getDescription()
     {
@@ -377,7 +371,7 @@ class UpdateAccountInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets description
      *
-     * @param string $description Description of the account
+     * @param string|null $description Description of the account
      *
      * @return self
      */
