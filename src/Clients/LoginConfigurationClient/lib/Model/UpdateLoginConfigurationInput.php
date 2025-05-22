@@ -64,7 +64,7 @@ class UpdateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
         'client_secret' => 'string',
         'vp_definition' => 'string',
         'presentation_definition' => 'object',
-        'id_token_mapping' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping',
+        'id_token_mapping' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]',
         'client_metadata' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataInput',
         'token_endpoint_auth_method' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\TokenEndpointAuthMethod',
         'fail_on_mapping_conflict' => 'bool'
@@ -338,6 +338,10 @@ class UpdateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['id_token_mapping']) && (count($this->container['id_token_mapping']) < 1)) {
+            $invalidProperties[] = "invalid value for 'id_token_mapping', number of items must be greater than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -518,7 +522,7 @@ class UpdateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
     /**
      * Gets id_token_mapping
      *
-     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping|null
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]|null
      */
     public function getIdTokenMapping()
     {
@@ -528,7 +532,7 @@ class UpdateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets id_token_mapping
      *
-     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping|null $id_token_mapping id_token_mapping
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]|null $id_token_mapping Fields name/path mapping between the vp_token and the id_token
      *
      * @return self
      */
@@ -536,6 +540,11 @@ class UpdateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
     {
         if (is_null($id_token_mapping)) {
             throw new \InvalidArgumentException('non-nullable id_token_mapping cannot be null');
+        }
+
+
+        if ((count($id_token_mapping) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $id_token_mapping when calling UpdateLoginConfigurationInput., number of items must be greater than or equal to 1.');
         }
         $this->container['id_token_mapping'] = $id_token_mapping;
 
