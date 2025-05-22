@@ -59,8 +59,8 @@ class VerifyCredentialInput implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'verifiable_credentials' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredential[]',
-        'issuer_did_document' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\FreeFormObject'
+        'verifiable_credentials' => 'object[]',
+        'issuer_did_document' => 'array<string,mixed>'
     ];
 
     /**
@@ -308,7 +308,7 @@ class VerifyCredentialInput implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets verifiable_credentials
      *
-     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredential[]
+     * @return object[]
      */
     public function getVerifiableCredentials()
     {
@@ -318,7 +318,7 @@ class VerifyCredentialInput implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets verifiable_credentials
      *
-     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredential[] $verifiable_credentials List of VCs
+     * @param object[] $verifiable_credentials List of VCs
      *
      * @return self
      */
@@ -340,7 +340,7 @@ class VerifyCredentialInput implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets issuer_did_document
      *
-     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\FreeFormObject|null
+     * @return array<string,mixed>|null
      */
     public function getIssuerDidDocument()
     {
@@ -350,7 +350,7 @@ class VerifyCredentialInput implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets issuer_did_document
      *
-     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\FreeFormObject|null $issuer_did_document issuer_did_document
+     * @param array<string,mixed>|null $issuer_did_document Dynamic model
      *
      * @return self
      */
