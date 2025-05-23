@@ -15,7 +15,7 @@ class CredentialIssuanceClientIntegrationTest extends TestCase
         );
 
         $projectId = getConfiguration()['projectId'];
-        $issuanceData = getConfiguration()['issuanceData'];
+        $issuanceData = getConfiguration()['credentialIssuanceData'];
 
         debugMessage('Start Credential Issuance', ['projectId' => $projectId, 'issuanceData' => $issuanceData]);
         $result = $api->startissuance($projectId, json_decode($issuanceData));
@@ -99,7 +99,6 @@ class CredentialIssuanceClientIntegrationTest extends TestCase
         $this->assertArrayHasKey('url', $resultJson['webhook']['endpoint'], 'The response does not contain a "url" key.');
     }
 
-
     private function batchCredentialStartIssuance(): array
     {
         $config = CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
@@ -110,13 +109,14 @@ class CredentialIssuanceClientIntegrationTest extends TestCase
             $config
         );
         $projectId = getConfiguration()['projectId'];
-        $issuanceData = getConfiguration()['issuanceData'];
+        $issuanceData = getConfiguration()['credentialIssuanceData'];
 
         $result = $api->startissuance($projectId, json_decode($issuanceData));
         $resultJson = json_decode($result, true);
         debugMessage('Start Credential Issuance Response', ['result' => $resultJson], true);
         return $resultJson;
     }
+
     // function to getOfferUri and return preAuthCode
     private function batchCredentialGetOfferUri($issuanceId): array
     {
@@ -145,8 +145,6 @@ class CredentialIssuanceClientIntegrationTest extends TestCase
             'credentialIssuer' => $credentialIssuer
         ];
     }
-
-
 
     private function batchCredentialExchangeToken($preAuthCode, $credentialIssuer): array
     {
@@ -201,7 +199,7 @@ class CredentialIssuanceClientIntegrationTest extends TestCase
 
         $preAuthCode = $offerInfo['preAuthCode'];
         $credentialIssuer = $offerInfo['credentialIssuer'];
-        $tokenInfo = $this->batchCredentialExchangeToken($preAuthCode,$credentialIssuer);
+        $tokenInfo = $this->batchCredentialExchangeToken($preAuthCode, $credentialIssuer);
 
         // Assert token info response
         $this->assertArrayHasKey('access_token', $tokenInfo, 'The response does not contain a "access_token" key.');

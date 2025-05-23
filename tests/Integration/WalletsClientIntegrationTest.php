@@ -5,7 +5,39 @@ use AffinidiTdk\Clients\WalletsClient;
 
 class WalletsClientIntegrationTest extends TestCase
 {
-    public function testListWallets()
+    private static $walletApi;
+    private static $revocationApi;
+
+    private static string $walletDid;
+    private static string $walletId;
+    private static string $walletIdDidWeb;
+
+    public static function setUpBeforeClass(): void
+    {
+        $wallet = createWallet();
+        self::$walletId = $wallet['id'];
+
+        $wallet = createWallet('web');
+        self::$walletIdDidWeb = $wallet['id'];
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        // Delete wallet
+        if (!empty(self::$walletId)) {
+            deleteWallet(self::$walletId);
+        }
+
+        if (!empty(self::$walletIdDidWeb)) {
+            deleteWallet(self::$walletIdDidWeb);
+        }
+    }
+
+    public function testSigningCredentials(): void
+    {
+    }
+
+    public function testWallets(): void
     {
         $config = WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
 
