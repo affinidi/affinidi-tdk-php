@@ -105,13 +105,14 @@ function createWallet(string $didMethod = 'key'): array
     }
 
     $input = new CreateWalletInput($data);
-    $response = json_decode($api->createWallet($input), true);
+    $createWalletResponse = $api->createWallet($input);
+    $data = json_decode($createWalletResponse, true);
 
-    if (!isset($response['wallet'])) {
+    if (!isset($data['wallet'])) {
         throw new RuntimeException("Failed to create wallet. Response missing 'wallet' key.");
     }
 
-    return $response['wallet'];
+    return $data['wallet'];
 }
 
 /**

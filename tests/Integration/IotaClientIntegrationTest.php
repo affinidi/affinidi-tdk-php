@@ -60,7 +60,7 @@ class IotaClientIntegrationTest extends TestCase
 
     private static function createIotaConfiguration(): void
     {
-        $input = decodeJson(getConfiguration()['iotaConfiguration']);
+        $input = json_decode(getConfiguration()['iotaConfiguration'], true);
         $input['walletAri'] = self::$walletAri;
 
         $createConfigResponse = self::$configurationsApi->createIotaConfiguration($input);

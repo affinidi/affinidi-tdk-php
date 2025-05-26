@@ -20,9 +20,9 @@ class WalletsClientIntegrationTest extends TestCase
         self::$walletApi = new WalletsClient\Api\WalletApi(config: $config);
         self::$revocationApi = new WalletsClient\Api\RevocationApi(config: $config);
 
-        $walletKey = createWallet();
-        self::$walletId = $walletKey['id'];
-        self::$walletDid = $walletKey['did'];
+        $wallet = createWallet();
+        self::$walletId = $wallet['id'];
+        self::$walletDid = $wallet['did'];
 
         $walletWeb = createWallet('web');
         self::$walletIdDidWeb = $walletWeb['id'];
@@ -46,7 +46,8 @@ class WalletsClientIntegrationTest extends TestCase
     public function testSignAndRevokeCredential(): void
     {
         $expiresAt = (new DateTime('+10 minutes'))->format(DateTime::ATOM);
-        $params = decodeJson(getConfiguration()['unsignedCredentialParams']);
+        $params = json_decode(getConfiguration()['unsignedCredentialParams'], true);
+
         $params['holderDid'] = self::$walletDid;
         $params['expiresAt'] = $expiresAt;
 
@@ -94,7 +95,7 @@ class WalletsClientIntegrationTest extends TestCase
     public function testSignInvalidCredential(): void
     {
         $expiresAt = (new DateTime())->format(DateTime::ATOM);
-        $params = decodeJson(getConfiguration()['unsignedCredentialParams']);
+        $params = json_decode(getConfiguration()['unsignedCredentialParams'], true);
 
         $params['holderDid'] = self::$walletDid;
         $params['expiresAt'] = $expiresAt;

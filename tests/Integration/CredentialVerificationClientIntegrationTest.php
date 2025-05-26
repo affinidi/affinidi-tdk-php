@@ -17,8 +17,8 @@ class CredentialVerificationClientIntegrationTest extends TestCase
 
     public function testVerifyCredential(): void
     {
-        $credentialJson = getConfiguration()['verifiableCredential'];
-        $credentials = ['verifiableCredentials' => [decodeJson($credentialJson)]];
+        $credential = json_decode(getConfiguration()['verifiableCredential']);
+        $credentials = ['verifiableCredentials' => [$credential]];
 
         $verifyCredentialsResponse = self::$api->verifyCredentials($credentials);
         $data = decodeJson($verifyCredentialsResponse);
@@ -28,8 +28,8 @@ class CredentialVerificationClientIntegrationTest extends TestCase
 
     public function testVerifyPresentation(): void
     {
-        $presentationJson = getConfiguration()['verifiablePresentation'];
-        $input = ['verifiablePresentation' => decodeJson($presentationJson)];
+        $presentation = json_decode(getConfiguration()['verifiablePresentation']);
+        $input = ['verifiablePresentation' => $presentation];
 
         $verifyPresentationResponse = self::$api->verifyPresentation($input);
         $data = decodeJson($verifyPresentationResponse);
