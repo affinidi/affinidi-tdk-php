@@ -5,50 +5,35 @@ use AffinidiTdk\Clients\CredentialVerificationClient;
 
 class CredentialVerificationClientIntegrationTest extends TestCase
 {
-    public function testVerifyCredentials()
+    private static CredentialVerificationClient\Api\DefaultApi $api;
+
+    public static function setUpBeforeClass(): void
     {
-        $config = CredentialVerificationClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
+        $config = CredentialVerificationClient\Configuration::getDefaultConfiguration()
+            ->setApiKey('authorization', '', getTokenCallback());
 
-        $credential = getConfiguration()['verifiableCredential'];
-        $credentials = ['verifiableCredentials' => [json_decode($credential)]];
-
-        debugMessage('Credential Verification (valid)', ['credentials' => $credentials]);
-        $api = new CredentialVerificationClient\Api\DefaultApi(
-            new GuzzleHttp\Client(),
-            $config
-        );
-
-        $result = $api->verifycredentials($credentials);
-        $resultJson = json_decode($result, true);
-
-        debugMessage('Credential Verification (valid) Response', ['result' => $result], true);
-        // Assert that verification succeeded, no errors
-        $errorsCount = count($resultJson['errors']);
-        $this->assertEquals(0, $errorsCount, 'Failed to verify VC.');
-
-        $this->assertEquals($resultJson['isValid'], 1);
+        self::$api = new CredentialVerificationClient\Api\DefaultApi(config: $config);
     }
 
-    // public function testVerifyCredentialsInvalid()
-    // {
-    //     $config = CredentialVerificationClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
+    public function testVerifyCredential(): void
+    {
+        $credentialJson = getConfiguration()['verifiableCredential'];
+        $credentials = ['verifiableCredentials' => [decodeJson($credentialJson)]];
 
-    //     $credential = getConfiguration()['vcInvalid'];
-    //     $credentials = json_encode(['verifiableCredentials' => [json_decode($credential)]]);
+        $verifyCredentialsResponse = self::$api->verifyCredentials($credentials);
+        $data = decodeJson($verifyCredentialsResponse);
+        $this->assertEquals(0, count($data['errors'] ?? []), 'Credential verification returned errors.');
+        $this->assertTrue((bool)($data['isValid'] ?? false), 'Credential is not valid.');
+    }
 
-    //     debugMessage('Credential Verification (invalid)', ['credentials' => $credentials]);
-    //     $api = new CredentialVerificationClient\Api\DefaultApi(
-    //         new GuzzleHttp\Client(),
-    //         $config
-    //     );
+    public function testVerifyPresentation(): void
+    {
+        $presentationJson = getConfiguration()['verifiablePresentation'];
+        $input = ['verifiablePresentation' => decodeJson($presentationJson)];
 
-    //     $result = $api->verifycredentials(json_decode($credentials));
-    //     $resultJson = json_decode($result, true);
-
-    //     debugMessage('Credential Verification (invalid) Response', ['result' => $result], true);
-
-    //     // Assert that verification failed
-    //     $errorsCount = count($resultJson['errors']);
-    //     $this->assertEquals($errorsCount, 1);
-    // }
+        $verifyPresentationResponse = self::$api->verifyPresentation($input);
+        $data = decodeJson($verifyPresentationResponse);
+        $this->assertEquals(0, count($data['errors'] ?? []), 'Presentation verification returned errors.');
+        $this->assertTrue((bool)($data['isValid'] ?? false), 'Presentation is not valid.');
+    }
 }

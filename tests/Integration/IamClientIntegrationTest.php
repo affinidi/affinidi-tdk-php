@@ -1,29 +1,58 @@
 <?php
 
+use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 use AffinidiTdk\Clients\IamClient;
 
 class IamClientIntegrationTest extends TestCase
 {
-    public function testGetPolicies()
+    private static string $principalId;
+    private static string $principalType = 'token';
+
+    private static IamClient\Api\PoliciesApi $policiesApi;
+    private static IamClient\Api\ProjectsApi $projectsApi;
+
+    public static function setUpBeforeClass(): void
     {
-        $config = IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
+        self::$principalId = Uuid::uuid4()->toString();
 
-        $api = new IamClient\Api\PoliciesApi(
-            new GuzzleHttp\Client(),
-            $config
-        );
+        $config = IamClient\Configuration::getDefaultConfiguration()
+            ->setApiKey('authorization', '', getTokenCallback());
 
-        $result = $api->getPolicies(getConfiguration()['tokenId'], 'token');
-        $resultJson = json_decode($result, true);
+        self::$policiesApi = new IamClient\Api\PoliciesApi(config: $config);
+        self::$projectsApi = new IamClient\Api\ProjectsApi(config: $config);
+    }
 
-        debugMessage('IAM Get Policies Result', ['result' => $result], true);
+    public function testPrincipalManagement(): void
+    {
+        // Add principal to project
+        $input = [
+            'principalId'   => self::$principalId,
+            'principalType' => self::$principalType
+        ];
 
-        // Assert that 'statement' key exists
-        $this->assertArrayHasKey('statement', $resultJson, 'The response does not contain a "statement" key.');
+        [, $statusCode] = self::$projectsApi->addPrincipalToProjectWithHttpInfo($input);
+        $this->assertEquals(204, $statusCode, 'Expected status code 204 when adding principal to project.');
 
-        // Assert that the count of policies is greater than 0
-        $policiesCount = count($resultJson['statement']);
-        $this->assertGreaterThan(0, $policiesCount, 'No policies were returned in the response.');
+        // List principals
+        $listPrincipalsResponse = self::$projectsApi->listPrincipalsOfProject();
+        $principals = decodeJson($listPrincipalsResponse);
+        $this->assertArrayHasKey('records', $principals);
+        $this->assertGreaterThan(0, count($principals['records']), 'No principals found in project.');
+
+        // Remove principal from project
+        [, $statusCode] = self::$projectsApi->deletePrincipalFromProjectWithHttpInfo(self::$principalId, self::$principalType);
+        $this->assertEquals(204, $statusCode, 'Expected status code 204 when deleting principal from project.');
+
+    }
+
+    public function testPolicies(): void
+    {
+        $tokenId = getConfiguration()['tokenId'];
+        $policiesResponse = self::$policiesApi->getPolicies($tokenId, self::$principalType);
+        $policies = decodeJson($policiesResponse);
+
+        $this->assertArrayHasKey('statement', $policies);
+        $this->assertGreaterThan(0, count($policies['statement']), 'No policies were returned in the response.');
     }
 }
