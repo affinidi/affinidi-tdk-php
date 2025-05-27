@@ -3,119 +3,200 @@
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 use AffinidiTdk\Clients\IotaClient;
-use AffinidiTdk\Clients\IotaClient\Model\CallbackInput;
-use AffinidiTdk\Clients\IotaClient\Model\FetchIOTAVPResponseInput;
-use AffinidiTdk\Clients\IotaClient\Model\InitiateDataSharingRequestInput;
+use AffinidiTdk\Clients\IotaClient\Model\{
+    CallbackInput,
+    FetchIOTAVPResponseInput,
+    UpdateConfigurationByIdInput,
+    InitiateDataSharingRequestInput
+};
 
 class IotaClientIntegrationTest extends TestCase
 {
-    public function testListConfigurations()
+    private static IotaClient\Api\PexQueryApi $pexQueryApi;
+    private static IotaClient\Api\ConfigurationsApi $configurationsApi;
+
+    private static string $walletId;
+    private static string $walletAri;
+    private static string $configurationId;
+    private static string $queryId;
+    private static string $iotaRedirectUri;
+
+    public static function setUpBeforeClass(): void
     {
-        $config = IotaClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
+        checkWalletLimitExceeded();
 
-        $api = new IotaClient\Api\ConfigurationsApi(
-            new GuzzleHttp\Client(),
-            $config
-        );
+        $wallet = createWallet();
+        self::$walletId = $wallet['id'];
+        self::$walletAri = $wallet['ari'];
 
-        $result = $api->listIotaConfigurations();
-        $resultJson = json_decode($result, true);
+        $config = self::getApiConfig();
+        self::$configurationsApi = new IotaClient\Api\ConfigurationsApi(config: $config);
+        self::$pexQueryApi = new IotaClient\Api\PexQueryApi(config: $config);
 
-        debugMessage('Iota Client List Configurations Response', ['result' => $result], true);
-
-        // Assert that 'configurations' key exists
-        $this->assertArrayHasKey('configurations', $resultJson, 'The response does not contain a "configurations" key.');
-
-        // Assert that the count of configurations is greater than 0
-        $configurationsCount = count($resultJson['configurations']);
-        $this->assertGreaterThan(0, $configurationsCount, 'No wallets were returned in the response.');
+        self::createIotaConfiguration();
+        self::createPexQuery();
     }
 
-    public function testRedirectFlow()
+    public static function tearDownAfterClass(): void
     {
-        $config = IotaClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
-        $configCallback = IotaClient\Configuration::getDefaultConfiguration();
-
-        $api = new IotaClient\Api\IotaApi(
-            new GuzzleHttp\Client(),
-            $config
-        );
-
-        $apiCallback = new IotaClient\Api\CallbackApi(
-            new GuzzleHttp\Client(),
-            $configCallback
-        );
-
-        $dataSharingRequestInput = new InitiateDataSharingRequestInput([
-            'query_id' => getConfiguration()['queryId'],
-            'redirect_uri' => getConfiguration()['redirectUri'],
-            'configuration_id' => getConfiguration()['iotaConfigId'],
-            'mode' => 'redirect',
-            'correlation_id' => Uuid::uuid4()->toString(),
-            'nonce' => substr(Uuid::uuid4()->toString(), 0, 10)
-        ]);
-
-        debugMessage('Iota Redirect Flow Data Sharing Request Params', ['input' => $dataSharingRequestInput]);
-        $result = $api->initiateDataSharingRequest($dataSharingRequestInput);
-        $resultJson = json_decode($result, true);
-
-        $dataSharingRequestResponse = $resultJson['data'];
-        debugMessage('Iota Redirect Flow Data Sharing Response', $dataSharingRequestResponse);
-
-        $this->assertArrayHasKey('jwt', $dataSharingRequestResponse, 'The response does not contain a "jwt" key.');
-
-        $jwt = $dataSharingRequestResponse['jwt'];
-
-        // Split the JWT into its components
-        $jwtParts = explode('.', $jwt);
-
-        if (count($jwtParts) !== 3) {
-            echo "Invalid JWT format.";
-            exit;
+        if (!empty(self::$queryId)) {
+            [, $statusCode] = self::$pexQueryApi->deletePexQueryByIdWithHttpInfo(self::$configurationId, self::$queryId);
+            assert($statusCode === 204);
         }
 
-        // Decode the payload (second part of the JWT)
-        $payloadBase64Url = $jwtParts[1];
-        $payloadJson = base64_decode(strtr($payloadBase64Url, '-_', '+/'));
-        $payload = json_decode($payloadJson, true); // Convert JSON to an associative array
+        if (!empty(self::$configurationId)) {
+            [, $statusCode] = self::$configurationsApi->deleteIotaConfigurationByIdWithHttpInfo(self::$configurationId);
+            assert($statusCode === 204);
+        }
 
-        $iotaOIDC4VPCallbackInput = new CallbackInput([
-            'state' => $payload['state'],
-            'presentation_submission' => getConfiguration()['presentationSubmission'],
-            'vp_token' => getConfiguration()['vpToken']
+        if (!empty(self::$walletId)) {
+            deleteWallet(self::$walletId);
+        }
+    }
+
+    private static function getApiConfig(): IotaClient\Configuration
+    {
+        return IotaClient\Configuration::getDefaultConfiguration()
+            ->setApiKey('authorization', '', getTokenCallback());
+    }
+
+    private static function createIotaConfiguration(): void
+    {
+        $input = json_decode(getConfiguration()['iotaConfiguration'], true);
+        $input['walletAri'] = self::$walletAri;
+
+        $createConfigResponse = self::$configurationsApi->createIotaConfiguration($input);
+        $iotaConfig = decodeJson($createConfigResponse);
+
+        self::$configurationId = $iotaConfig['configurationId'];
+        self::$iotaRedirectUri = $iotaConfig['redirectUris'][0] ?? '';
+    }
+
+    private static function createPexQuery(): void
+    {
+        $input = [
+            'name' => 'TestQuery',
+            'vpDefinition' => getConfiguration()['iotaPresentationDefinition'],
+        ];
+
+        $createQueryResponse = self::$pexQueryApi->createPexQuery(self::$configurationId, $input);
+        $query = decodeJson($createQueryResponse);
+
+        self::$queryId = $query['queryId'];
+    }
+
+    public function testIotaConfiguration(): void
+    {
+        $this->assertNotEmpty(self::$configurationId);
+        $this->assertNotEmpty(self::$walletAri);
+
+        $configsResponse = self::$configurationsApi->listIotaConfigurations();
+        $configs = decodeJson($configsResponse);
+        $this->assertArrayHasKey('configurations', $configs);
+        $this->assertGreaterThan(0, count($configs['configurations']));
+
+        $input = (new UpdateConfigurationByIdInput())->setName('Updated name');
+        $updateConfigResponse = self::$configurationsApi->updateIotaConfigurationById(self::$configurationId, $input);
+        $updatedConfig = decodeJson($updateConfigResponse);
+        $this->assertEquals('Updated name', $updatedConfig['name']);
+
+        $getConfigResponse = self::$configurationsApi->getIotaConfigurationById(self::$configurationId);
+        $config = decodeJson($getConfigResponse);
+        $this->assertEquals('redirect', $config['mode']);
+    }
+
+    public function testIotaQuery(): void
+    {
+        $this->assertNotEmpty(self::$configurationId);
+        $this->assertNotEmpty(self::$queryId);
+
+        $listResponse = self::$pexQueryApi->listPexQueries(self::$configurationId);
+        $queries = decodeJson($listResponse);
+        $this->assertArrayHasKey('pexQueries', $queries);
+        $this->assertGreaterThan(0, count($queries['pexQueries']));
+
+        $input = (new UpdateConfigurationByIdInput())->setDescription('UpdatedDescription');
+        $updateQueriesResponse = self::$pexQueryApi->updatePexQueryById(self::$configurationId, self::$queryId, $input);
+        $updatedQuery = decodeJson($updateQueriesResponse);
+        $this->assertEquals('UpdatedDescription', $updatedQuery['description']);
+
+        $getQueryResponse = self::$pexQueryApi->getPexQueryById(self::$configurationId, self::$queryId);
+        $query = decodeJson($getQueryResponse);
+        $this->assertArrayHasKey('configurationAri', $query);
+    }
+
+    public function testRedirectFlow(): void
+    {
+        $this->assertNotEmpty(self::$configurationId);
+        $this->assertNotEmpty(self::$queryId);
+        $this->assertNotEmpty(self::$iotaRedirectUri);
+
+        $config = self::getApiConfig();
+        $iotaApi = new IotaClient\Api\IotaApi(config: $config);
+        $callbackApi = new IotaClient\Api\CallbackApi(config: $config);
+
+        $correlationId = Uuid::uuid4()->toString();
+        $nonce = substr(Uuid::uuid4()->toString(), 0, 10);
+
+        $requestInput = new InitiateDataSharingRequestInput([
+            'query_id' => self::$queryId,
+            'redirect_uri' => self::$iotaRedirectUri,
+            'configuration_id' => self::$configurationId,
+            'mode' => 'redirect',
+            'correlation_id' => $correlationId,
+            'nonce' => $nonce
         ]);
 
-        debugMessage('Iota Redirect Flow OIDC4VP Callback Params', ['input' => $iotaOIDC4VPCallbackInput]);
+        debugMessage('Iota Redirect Flow Request', ['input' => $requestInput]);
 
-        $result = $apiCallback->iotOIDC4VPCallback($iotaOIDC4VPCallbackInput);
-        $resultJson = json_decode($result, true);
+        $initResponseRaw = $iotaApi->initiateDataSharingRequest($requestInput);
+        $initResponse = decodeJson($initResponseRaw);
+        $this->assertArrayHasKey('data', $initResponse);
 
-        debugMessage('Iota Redirect Flow OIDC4VP Callback Response', ['result' => $result]);
+        $jwt = $initResponse['data']['jwt'];
+        $this->assertNotEmpty($jwt);
 
-        $fetchIotaVpResponseInput = new FetchIOTAVPResponseInput([
-            'configuration_id' => getConfiguration()['iotaConfigId'],
-            'correlation_id' => $dataSharingRequestResponse['correlationId'],
-            'transaction_id' => $dataSharingRequestResponse['transactionId'],
-            'response_code' => $resultJson['response_code']
+        $payload = $this->decodeJwtPayload($jwt);
+        $state = $payload['state'] ?? null;
+        $this->assertNotEmpty($state);
+
+        $callbackInput = new CallbackInput([
+            'state' => $state,
+            'presentation_submission' => getConfiguration()['iotaPresentationSubmission'],
+            'vp_token' => getConfiguration()['verifiablePresentation'],
         ]);
 
-        debugMessage('Iota Redirect Flow VP Response Params', ['input' => $fetchIotaVpResponseInput]);
+        debugMessage('OIDC4VP Callback', ['input' => $callbackInput]);
 
-        $result = $api->fetchIotaVpResponse($fetchIotaVpResponseInput);
-        $resultJson = json_decode($result, true);
+        $callbackRaw = $callbackApi->iotOIDC4VPCallback($callbackInput);
+        $callbackResponse = decodeJson($callbackRaw);
 
-        debugMessage('Iota Redirect Flow VP Response', $resultJson, true);
+        $vpInput = new FetchIOTAVPResponseInput([
+            'configuration_id' => self::$configurationId,
+            'correlation_id' => $initResponse['data']['correlationId'],
+            'transaction_id' => $initResponse['data']['transactionId'],
+            'response_code' => $callbackResponse['response_code']
+        ]);
 
-        $this->assertNotEmpty($resultJson);
+        debugMessage('Fetching VP Response', ['input' => $vpInput]);
 
-        // // Assert that 'vpToken' key exists
-        $this->assertArrayHasKey('vpToken', $resultJson, 'The response does not contain a "vpToken" key.');
+        $vpRaw = $iotaApi->fetchIotaVpResponse($vpInput);
+        $vpResponse = decodeJson($vpRaw);
+        $this->assertArrayHasKey('vpToken', $vpResponse);
 
-        $vp = $resultJson['vpToken'];
-        $vpJson = json_decode($vp, true);
+        $vp = decodeJson($vpResponse['vpToken']);
+        $this->assertGreaterThan(0, count($vp['verifiableCredential']), 'No VCs were returned.');
+    }
 
-        // Assert that the count of credentials is greater than 0
-        $credentialsCount = count($vpJson['verifiableCredential']);
-        $this->assertGreaterThan(0, $credentialsCount, 'No VCs were returned in the response.');
+    private function decodeJwtPayload(string $jwt): array
+    {
+        $parts = explode('.', $jwt);
+        if (count($parts) !== 3) {
+            $this->fail('Invalid JWT structure.');
+        }
+
+        $payloadBase64 = strtr($parts[1], '-_', '+/');
+        $decoded = base64_decode($payloadBase64);
+        return decodeJson($decoded);
     }
 }

@@ -1,29 +1,165 @@
 <?php
 
+use Hidehalo\Nanoid\Client;
 use PHPUnit\Framework\TestCase;
 use AffinidiTdk\Clients\LoginConfigurationClient;
 
 class LoginConfigurationClientIntegrationTest extends TestCase
 {
-    public function testListLoginConfigurations()
+    private static LoginConfigurationClient\Api\ConfigurationApi $configurationApi;
+    private static LoginConfigurationClient\Api\AllowListApi $allowListApi;
+    private static LoginConfigurationClient\Api\DenyListApi $denyListApi;
+    private static LoginConfigurationClient\Api\GroupApi $groupApi;
+
+    private static array $loginConfiguration;
+    private static string $loginConfigurationId;
+    private static string $groupName;
+
+    public static function setUpBeforeClass(): void
     {
-        $config = LoginConfigurationClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', '', getTokenCallback());
+        $config = self::getApiConfig();
 
-        $api = new LoginConfigurationClient\Api\ConfigurationApi(
-            new GuzzleHttp\Client(),
-            $config
-        );
+        self::$configurationApi = new LoginConfigurationClient\Api\ConfigurationApi(config: $config);
+        self::$allowListApi = new LoginConfigurationClient\Api\AllowListApi(config: $config);
+        self::$denyListApi = new LoginConfigurationClient\Api\DenyListApi(config: $config);
+        self::$groupApi = new LoginConfigurationClient\Api\GroupApi(config: $config);
 
-        $result = $api->listLoginConfigurations();
-        $resultJson = json_decode($result, true);
+        self::createLoginConfiguration();
+        self::createGroup();
+    }
 
-        debugMessage('Login Configuration Client List Login Configurations Response', ['result' => $result], true);
+    public static function tearDownAfterClass(): void
+    {
+        self::deleteGroup(self::$groupName);
+        self::deleteLoginConfiguration(self::$loginConfigurationId);
+    }
 
-        // Assert that 'configurations' key exists
-        $this->assertArrayHasKey('configurations', $resultJson, 'The response does not contain a "configurations" key.');
+    private static function getApiConfig(): LoginConfigurationClient\Configuration
+    {
+        return LoginConfigurationClient\Configuration::getDefaultConfiguration()
+            ->setApiKey('authorization', '', getTokenCallback());
+    }
 
-        // Assert that the count of login configurations is greater than 0
-        $configurationsCount = count($resultJson['configurations']);
-        $this->assertGreaterThan(0, $configurationsCount, 'No login configurations were returned in the response.');
+    private static function createLoginConfiguration(): void
+    {
+        $input = [
+            'name' => 'TestConfig',
+            'redirectUris' => ['http://localhost:3000/api/auth/callback/affinidi']
+        ];
+
+        $response = self::$configurationApi->createLoginConfigurations($input);
+        $data = decodeJson($response);
+
+        self::$loginConfiguration = $data;
+        self::$loginConfigurationId = $data['configurationId'];
+    }
+
+    private static function createGroup(): void
+    {
+        $nanoid = new Client();
+        self::$groupName = $nanoid->formattedId('abcdefghijklmnopqrstuvwxyz_', 12);
+
+        $input = [
+            'name' => 'TestGroup',
+            'groupName' => self::$groupName
+        ];
+
+        [, $statusCode] = self::$groupApi->createGroupWithHttpInfo($input);
+        assert($statusCode === 201);
+    }
+
+    private static function deleteGroup(string $groupName): void
+    {
+        [, $statusCode] = self::$groupApi->deleteGroupWithHttpInfo($groupName);
+        assert($statusCode === 204);
+    }
+
+    private static function deleteLoginConfiguration(string $configId): void
+    {
+        [, $statusCode] = self::$configurationApi->deleteLoginConfigurationsByIdWithHttpInfo($configId);
+        assert($statusCode === 204);
+    }
+
+    public function testLoginConfiguration(): void
+    {
+        $loginConfigurationsResponse = self::$configurationApi->listLoginConfigurations();
+        $data = decodeJson($loginConfigurationsResponse);
+        $this->assertArrayHasKey('configurations', $data);
+        $this->assertGreaterThan(0, count($data['configurations']));
+
+        $updatedName = 'UpdatedName';
+        $update = ['name' => $updatedName];
+
+        $updateConfigsResponse = self::$configurationApi->updateLoginConfigurationsById(self::$loginConfigurationId, $update);
+        $updatedConfiguration = decodeJson($updateConfigsResponse);
+        $this->assertEquals($updatedName, $updatedConfiguration['name']);
+
+        $loginConfigurationResponse = self::$configurationApi->getLoginConfigurationsById(self::$loginConfigurationId);
+        $loginConfiguration = decodeJson($loginConfigurationResponse);
+        $this->assertEquals(self::$loginConfigurationId, $loginConfiguration['configurationId']);
+    }
+
+    public function testUserGroup(): void
+    {
+        $groupsResponse = self::$groupApi->listGroups();
+        $groups = decodeJson($groupsResponse);
+
+        $this->assertArrayHasKey('groups', $groups);
+        $this->assertGreaterThan(0, count($groups['groups']));
+
+        $groupResponse = self::$groupApi->getGroupById(self::$groupName);
+        $group = decodeJson($groupResponse);
+        $this->assertEquals(self::$groupName, $group['groupName']);
+    }
+
+    public function testAllowList(): void
+    {
+        $this->assertNotEmpty(self::$groupName);
+
+        $input = ['groupNames' => [self::$groupName]];
+
+        [, $statusCode] = self::$allowListApi->allowGroupsWithHttpInfo($input);
+        $this->assertEquals(200, $statusCode);
+
+        $listAllowedGroupsResponse = self::$allowListApi->listAllowedGroups();
+        $allowedGroups = decodeJson($listAllowedGroupsResponse);
+
+        $this->assertArrayHasKey('groupNames', $allowedGroups);
+        $this->assertContains(self::$groupName, $allowedGroups['groupNames']);
+
+        [, $statusCode] = self::$allowListApi->disallowGroupsWithHttpInfo($input);
+        $this->assertEquals(200, $statusCode);
+    }
+
+    public function testDenyList(): void
+    {
+        $this->assertNotEmpty(self::$groupName);
+
+        $groupInput = ['groupNames' => [self::$groupName]];
+        $userId = 'test';
+
+        [, $statusCode] = self::$denyListApi->blockGroupsWithHttpInfo($groupInput);
+        $this->assertEquals(200, $statusCode);
+
+        $listBlockedGroupsResponse = self::$denyListApi->listBlockedGroups();
+        $blockedGroups = decodeJson($listBlockedGroupsResponse);
+        $this->assertArrayHasKey('groupNames', $blockedGroups);
+        $this->assertContains(self::$groupName, $blockedGroups['groupNames']);
+
+        [, $statusCode] = self::$denyListApi->unblockGroupsWithHttpInfo($groupInput);
+        $this->assertEquals(200, $statusCode);
+
+        $userInput = ['userIds' => [$userId]];
+
+        [, $statusCode] = self::$denyListApi->blockUsersWithHttpInfo($userInput);
+        $this->assertEquals(200, $statusCode);
+
+        $listBlockedUsersResponse = self::$denyListApi->listBlockedUsers();
+        $blockedUsers = decodeJson($listBlockedUsersResponse);
+        $this->assertArrayHasKey('userIds', $blockedUsers);
+        $this->assertContains($userId, $blockedUsers['userIds']);
+
+        [, $statusCode] = self::$denyListApi->unblockUsersWithHttpInfo($userInput);
+        $this->assertEquals(200, $statusCode);
     }
 }
