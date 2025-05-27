@@ -15,6 +15,8 @@ class WalletsClientIntegrationTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
+        checkWalletLimitExceeded();
+
         $config = self::getApiConfig();
 
         self::$walletApi = new WalletsClient\Api\WalletApi(config: $config);

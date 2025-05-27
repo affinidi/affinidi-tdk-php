@@ -23,6 +23,8 @@ class IotaClientIntegrationTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
+        checkWalletLimitExceeded();
+
         $wallet = createWallet();
         self::$walletId = $wallet['id'];
         self::$walletAri = $wallet['ari'];

@@ -21,18 +21,17 @@ $dotenv->load();
  */
 function getConfiguration(): array
 {
-    // NOTE: Fix check - failing on CI
-    // $requiredKeys = [
-    //     'PRIVATE_KEY', 'PROJECT_ID', 'TOKEN_ID', 'IOTA_CONFIGURATION',
-    //     'IOTA_PRESENTATION_DEFINITION', 'IOTA_PRESENTATION_SUBMISSION',
-    //     'VERIFIABLE_PRESENTATION', 'VERIFIABLE_CREDENTIAL',
-    //     'UNSIGNED_CREDENTIAL_PARAMS', 'CREDENTIAL_ISSUANCE_DATA',
-    // ];
+    $requiredKeys = [
+        'PRIVATE_KEY', 'PROJECT_ID', 'TOKEN_ID', 'IOTA_CONFIGURATION',
+        'IOTA_PRESENTATION_DEFINITION', 'IOTA_PRESENTATION_SUBMISSION',
+        'VERIFIABLE_PRESENTATION', 'VERIFIABLE_CREDENTIAL',
+        'UNSIGNED_CREDENTIAL_PARAMS', 'CREDENTIAL_ISSUANCE_DATA',
+    ];
 
-    // $missing = array_filter($requiredKeys, fn($key) => empty($_ENV[$key]));
-    // if (!empty($missing)) {
-    //     throw new RuntimeException("Missing required environment variables: " . implode(', ', $missing));
-    // }
+    $missing = array_filter($requiredKeys, fn($key) => empty($_ENV[$key]));
+    if (!empty($missing)) {
+        throw new RuntimeException("Missing required environment variables: " . implode(', ', $missing));
+    }
 
     return [
         'privateKey' => $_ENV['PRIVATE_KEY'],
@@ -168,4 +167,23 @@ function decodeJson(string $json): array
 {
     $data = json_decode($json, true);
     return $data;
+}
+
+function checkWalletLimitExceeded(): void
+{
+    $config = WalletsClient\Configuration::getDefaultConfiguration()
+        ->setApiKey('authorization', '', getTokenCallback());
+
+    $api = new WalletsClient\Api\WalletApi(config: $config);
+
+    $response = $api->listWallets();
+    $data = decodeJson($response);
+
+    if (!isset($data['wallets'])) {
+        throw new RuntimeException("Failed to get wallets. Response missing 'wallets' key.");
+    }
+
+    if (count($data['wallets']) == 10) {
+        throw new RuntimeException("❗️Max wallets limit exceeded (10). Delete unused wallets and try again.");
+    }
 }
