@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**verifiable_presentation** | [**\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentation**](W3cPresentation.md) |  | [optional]
-**signed_presentation** | [**\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentation**](W3cPresentation.md) |  | [optional]
+**verifiable_presentation** | **object** |  | [optional]
+**signed_presentation** | **object** |  | [optional]
 **presentation_definition** | **object** |  | [optional]
 **presentation_submission** | **object** |  | [optional]
 **challenge** | **string** |  | [optional]
