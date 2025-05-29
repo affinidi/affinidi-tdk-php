@@ -69,7 +69,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
         'creation_date' => 'string',
         'vp_definition' => 'string',
         'presentation_definition' => 'object',
-        'id_token_mapping' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping',
+        'id_token_mapping' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]',
         'client_metadata' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataOutput',
         'token_endpoint_auth_method' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\TokenEndpointAuthMethod'
     ];
@@ -387,6 +387,10 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
         if ($this->container['id_token_mapping'] === null) {
             $invalidProperties[] = "'id_token_mapping' can't be null";
         }
+        if ((count($this->container['id_token_mapping']) < 1)) {
+            $invalidProperties[] = "invalid value for 'id_token_mapping', number of items must be greater than or equal to 1.";
+        }
+
         if ($this->container['client_metadata'] === null) {
             $invalidProperties[] = "'client_metadata' can't be null";
         }
@@ -708,7 +712,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets id_token_mapping
      *
-     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]
      */
     public function getIdTokenMapping()
     {
@@ -718,7 +722,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets id_token_mapping
      *
-     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping $id_token_mapping id_token_mapping
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[] $id_token_mapping Fields name/path mapping between the vp_token and the id_token
      *
      * @return self
      */
@@ -726,6 +730,11 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
     {
         if (is_null($id_token_mapping)) {
             throw new \InvalidArgumentException('non-nullable id_token_mapping cannot be null');
+        }
+
+
+        if ((count($id_token_mapping) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $id_token_mapping when calling LoginConfigurationObject., number of items must be greater than or equal to 1.');
         }
         $this->container['id_token_mapping'] = $id_token_mapping;
 

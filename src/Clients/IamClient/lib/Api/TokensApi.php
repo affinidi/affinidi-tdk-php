@@ -36,6 +36,9 @@ use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use AffinidiTdk\Clients\IamClient\ApiException;
+use AffinidiTdk\Clients\IamClient\InvalidJwtTokenError;
+use AffinidiTdk\Clients\IamClient\InvalidParameterError;
+use AffinidiTdk\Clients\IamClient\NotFoundError;
 use AffinidiTdk\Clients\IamClient\Configuration;
 use AffinidiTdk\Clients\IamClient\HeaderSelector;
 use AffinidiTdk\Clients\IamClient\ObjectSerializer;
@@ -99,10 +102,10 @@ class TokensApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
@@ -173,6 +176,20 @@ class TokensApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -546,6 +563,20 @@ class TokensApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -785,6 +816,20 @@ class TokensApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1164,15 +1209,15 @@ class TokensApi
      * Operation listProjectsOfToken
      *
      * @param  string $token_id token_id (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 100)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjectsOfToken'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \AffinidiTdk\Clients\IamClient\Model\ProjectWithPolicyList|\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\IamClient\Model\NotFoundError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError
      */
-    public function listProjectsOfToken($token_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
+    public function listProjectsOfToken($token_id, $limit = 100, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
     {
         list($response) = $this->listProjectsOfTokenWithHttpInfo($token_id, $limit, $exclusive_start_key, $contentType);
         return $response;
@@ -1182,15 +1227,15 @@ class TokensApi
      * Operation listProjectsOfTokenWithHttpInfo
      *
      * @param  string $token_id (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 100)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjectsOfToken'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \AffinidiTdk\Clients\IamClient\Model\ProjectWithPolicyList|\AffinidiTdk\Clients\IamClient\Model\ActionForbiddenError|\AffinidiTdk\Clients\IamClient\Model\NotFoundError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listProjectsOfTokenWithHttpInfo($token_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
+    public function listProjectsOfTokenWithHttpInfo($token_id, $limit = 100, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
     {
         $request = $this->listProjectsOfTokenRequest($token_id, $limit, $exclusive_start_key, $contentType);
 
@@ -1199,6 +1244,20 @@ class TokensApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1412,14 +1471,14 @@ class TokensApi
      * Operation listProjectsOfTokenAsync
      *
      * @param  string $token_id (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 100)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjectsOfToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listProjectsOfTokenAsync($token_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
+    public function listProjectsOfTokenAsync($token_id, $limit = 100, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
     {
         return $this->listProjectsOfTokenAsyncWithHttpInfo($token_id, $limit, $exclusive_start_key, $contentType)
             ->then(
@@ -1433,14 +1492,14 @@ class TokensApi
      * Operation listProjectsOfTokenAsyncWithHttpInfo
      *
      * @param  string $token_id (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 100)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjectsOfToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listProjectsOfTokenAsyncWithHttpInfo($token_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
+    public function listProjectsOfTokenAsyncWithHttpInfo($token_id, $limit = 100, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
     {
         $returnType = '\AffinidiTdk\Clients\IamClient\Model\ProjectWithPolicyList';
         $request = $this->listProjectsOfTokenRequest($token_id, $limit, $exclusive_start_key, $contentType);
@@ -1485,14 +1544,14 @@ class TokensApi
      * Create request for operation 'listProjectsOfToken'
      *
      * @param  string $token_id (required)
-     * @param  int $limit Maximum number of records to fetch in a list (optional)
-     * @param  string $exclusive_start_key exclusiveStartKey for retrieving the next batch of data. (optional)
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 100)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjectsOfToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listProjectsOfTokenRequest($token_id, $limit = null, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
+    public function listProjectsOfTokenRequest($token_id, $limit = 100, $exclusive_start_key = null, string $contentType = self::contentTypes['listProjectsOfToken'][0])
     {
 
         // verify the required parameter 'token_id' is set
@@ -1502,8 +1561,17 @@ class TokensApi
             );
         }
 
-
-
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling TokensApi.listProjectsOfToken, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling TokensApi.listProjectsOfToken, must be bigger than or equal to 1.');
+        }
+        
+        if ($exclusive_start_key !== null && strlen($exclusive_start_key) > 3000) {
+            throw new \InvalidArgumentException('invalid length for "$exclusive_start_key" when calling TokensApi.listProjectsOfToken, must be smaller than or equal to 3000.');
+        }
+        
 
         $resourcePath = '/v1/tokens/{tokenId}/projects';
         $formParams = [];
@@ -1603,36 +1671,54 @@ class TokensApi
     /**
      * Operation listToken
      *
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 100)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listToken'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \AffinidiTdk\Clients\IamClient\Model\TokenList|\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError
      */
-    public function listToken(string $contentType = self::contentTypes['listToken'][0])
+    public function listToken($limit = 100, $exclusive_start_key = null, string $contentType = self::contentTypes['listToken'][0])
     {
-        list($response) = $this->listTokenWithHttpInfo($contentType);
+        list($response) = $this->listTokenWithHttpInfo($limit, $exclusive_start_key, $contentType);
         return $response;
     }
 
     /**
      * Operation listTokenWithHttpInfo
      *
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 100)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listToken'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \AffinidiTdk\Clients\IamClient\Model\TokenList|\AffinidiTdk\Clients\IamClient\Model\InvalidParameterError|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listTokenWithHttpInfo(string $contentType = self::contentTypes['listToken'][0])
+    public function listTokenWithHttpInfo($limit = 100, $exclusive_start_key = null, string $contentType = self::contentTypes['listToken'][0])
     {
-        $request = $this->listTokenRequest($contentType);
+        $request = $this->listTokenRequest($limit, $exclusive_start_key, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1810,14 +1896,16 @@ class TokensApi
     /**
      * Operation listTokenAsync
      *
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 100)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listTokenAsync(string $contentType = self::contentTypes['listToken'][0])
+    public function listTokenAsync($limit = 100, $exclusive_start_key = null, string $contentType = self::contentTypes['listToken'][0])
     {
-        return $this->listTokenAsyncWithHttpInfo($contentType)
+        return $this->listTokenAsyncWithHttpInfo($limit, $exclusive_start_key, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1828,15 +1916,17 @@ class TokensApi
     /**
      * Operation listTokenAsyncWithHttpInfo
      *
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 100)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listTokenAsyncWithHttpInfo(string $contentType = self::contentTypes['listToken'][0])
+    public function listTokenAsyncWithHttpInfo($limit = 100, $exclusive_start_key = null, string $contentType = self::contentTypes['listToken'][0])
     {
         $returnType = '\AffinidiTdk\Clients\IamClient\Model\TokenList';
-        $request = $this->listTokenRequest($contentType);
+        $request = $this->listTokenRequest($limit, $exclusive_start_key, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1877,14 +1967,27 @@ class TokensApi
     /**
      * Create request for operation 'listToken'
      *
+     * @param  int|null $limit Maximum number of records to fetch in a list (optional, default to 100)
+     * @param  string|null $exclusive_start_key The base64url encoded key of the first item that this operation will evaluate (it is not returned). Use the value that was returned in the previous operation. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listTokenRequest(string $contentType = self::contentTypes['listToken'][0])
+    public function listTokenRequest($limit = 100, $exclusive_start_key = null, string $contentType = self::contentTypes['listToken'][0])
     {
 
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling TokensApi.listToken, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling TokensApi.listToken, must be bigger than or equal to 1.');
+        }
+        
+        if ($exclusive_start_key !== null && strlen($exclusive_start_key) > 3000) {
+            throw new \InvalidArgumentException('invalid length for "$exclusive_start_key" when calling TokensApi.listToken, must be smaller than or equal to 3000.');
+        }
+        
 
         $resourcePath = '/v1/tokens';
         $formParams = [];
@@ -1893,6 +1996,24 @@ class TokensApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $exclusive_start_key,
+            'exclusiveStartKey', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
@@ -1992,6 +2113,20 @@ class TokensApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
