@@ -174,8 +174,8 @@ class FetchIOTAVPResponseOK implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $attributeMap = [
         'correlation_id' => 'correlationId',
-        'presentation_submission' => 'presentationSubmission',
-        'vp_token' => 'vpToken'
+        'presentation_submission' => 'presentation_submission',
+        'vp_token' => 'vp_token'
     ];
 
     /**

@@ -59,8 +59,8 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'verifiable_presentation' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentation',
-        'signed_presentation' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentation',
+        'verifiable_presentation' => 'object',
+        'signed_presentation' => 'object',
         'presentation_definition' => 'object',
         'presentation_submission' => 'object',
         'challenge' => 'string'
@@ -322,7 +322,7 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets verifiable_presentation
      *
-     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentation|null
+     * @return object|null
      */
     public function getVerifiablePresentation()
     {
@@ -332,7 +332,7 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets verifiable_presentation
      *
-     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentation|null $verifiable_presentation verifiable_presentation
+     * @param object|null $verifiable_presentation verifiable_presentation
      *
      * @return self
      */
@@ -349,7 +349,7 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets signed_presentation
      *
-     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentation|null
+     * @return object|null
      */
     public function getSignedPresentation()
     {
@@ -359,7 +359,7 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets signed_presentation
      *
-     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cPresentation|null $signed_presentation signed_presentation
+     * @param object|null $signed_presentation signed_presentation
      *
      * @return self
      */
