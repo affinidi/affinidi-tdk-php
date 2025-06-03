@@ -182,9 +182,9 @@ class IotaClientIntegrationTest extends TestCase
 
         $vpRaw = $iotaApi->fetchIotaVpResponse($vpInput);
         $vpResponse = decodeJson($vpRaw);
-        $this->assertArrayHasKey('vpToken', $vpResponse);
+        $this->assertArrayHasKey('vp_token', $vpResponse);
 
-        $vp = decodeJson($vpResponse['vpToken']);
+        $vp = decodeJson($vpResponse['vp_token']);
         $this->assertGreaterThan(0, count($vp['verifiableCredential']), 'No VCs were returned.');
     }
 
