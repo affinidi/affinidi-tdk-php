@@ -64,7 +64,7 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
         'post_logout_redirect_uris' => 'string[]',
         'vp_definition' => 'string',
         'presentation_definition' => 'object',
-        'id_token_mapping' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping',
+        'id_token_mapping' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]',
         'client_metadata' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataInput',
         'claim_format' => 'string',
         'fail_on_mapping_conflict' => 'bool',
@@ -373,6 +373,10 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
         if ($this->container['redirect_uris'] === null) {
             $invalidProperties[] = "'redirect_uris' can't be null";
         }
+        if (!is_null($this->container['id_token_mapping']) && (count($this->container['id_token_mapping']) < 1)) {
+            $invalidProperties[] = "invalid value for 'id_token_mapping', number of items must be greater than or equal to 1.";
+        }
+
         $allowedValues = $this->getClaimFormatAllowableValues();
         if (!is_null($this->container['claim_format']) && !in_array($this->container['claim_format'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -562,7 +566,7 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
     /**
      * Gets id_token_mapping
      *
-     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping|null
+     * @return \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]|null
      */
     public function getIdTokenMapping()
     {
@@ -572,7 +576,7 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets id_token_mapping
      *
-     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMapping|null $id_token_mapping id_token_mapping
+     * @param \AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]|null $id_token_mapping Fields name/path mapping between the vp_token and the id_token
      *
      * @return self
      */
@@ -580,6 +584,11 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
     {
         if (is_null($id_token_mapping)) {
             throw new \InvalidArgumentException('non-nullable id_token_mapping cannot be null');
+        }
+
+
+        if ((count($id_token_mapping) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $id_token_mapping when calling CreateLoginConfigurationInput., number of items must be greater than or equal to 1.');
         }
         $this->container['id_token_mapping'] = $id_token_mapping;
 
