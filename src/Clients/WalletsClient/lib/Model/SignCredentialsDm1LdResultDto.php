@@ -1,6 +1,6 @@
 <?php
 /**
- * DidKeyInputParams
+ * SignCredentialsDm1LdResultDto
  *
  * PHP version 7.4
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * DidKeyInputParams Class Doc Comment
+ * SignCredentialsDm1LdResultDto Class Doc Comment
  *
  * @category Class
- * @description Did key input params
+ * @description DTO contains signed credential
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DidKeyInputParams implements ModelInterface, ArrayAccess, \JsonSerializable
+class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class DidKeyInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'DidKeyInputParams';
+    protected static $openAPIModelName = 'SignCredentialsDm1LdResultDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +59,7 @@ class DidKeyInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'description' => 'string',
-        'did_method' => 'string'
+        'credential' => 'object'
     ];
 
     /**
@@ -72,9 +70,7 @@ class DidKeyInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'description' => null,
-        'did_method' => null
+        'credential' => null
     ];
 
     /**
@@ -83,9 +79,7 @@ class DidKeyInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'description' => false,
-        'did_method' => false
+        'credential' => false
     ];
 
     /**
@@ -174,9 +168,7 @@ class DidKeyInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'description' => 'description',
-        'did_method' => 'didMethod'
+        'credential' => 'credential'
     ];
 
     /**
@@ -185,9 +177,7 @@ class DidKeyInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'description' => 'setDescription',
-        'did_method' => 'setDidMethod'
+        'credential' => 'setCredential'
     ];
 
     /**
@@ -196,9 +186,7 @@ class DidKeyInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'description' => 'getDescription',
-        'did_method' => 'getDidMethod'
+        'credential' => 'getCredential'
     ];
 
     /**
@@ -242,19 +230,6 @@ class DidKeyInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
         return self::$openAPIModelName;
     }
 
-    public const DID_METHOD_KEY = 'key';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getDidMethodAllowableValues()
-    {
-        return [
-            self::DID_METHOD_KEY,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -271,9 +246,7 @@ class DidKeyInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('did_method', $data ?? [], null);
+        $this->setIfExists('credential', $data ?? [], null);
     }
 
     /**
@@ -303,15 +276,9 @@ class DidKeyInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getDidMethodAllowableValues();
-        if (!is_null($this->container['did_method']) && !in_array($this->container['did_method'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'did_method', must be one of '%s'",
-                $this->container['did_method'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['credential'] === null) {
+            $invalidProperties[] = "'credential' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -328,92 +295,28 @@ class DidKeyInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
 
 
     /**
-     * Gets name
+     * Gets credential
      *
-     * @return string|null
+     * @return object
      */
-    public function getName()
+    public function getCredential()
     {
-        return $this->container['name'];
+        return $this->container['credential'];
     }
 
     /**
-     * Sets name
+     * Sets credential
      *
-     * @param string|null $name The name of the wallet
+     * @param object $credential Signed credential can be in Dm1Ld format
      *
      * @return self
      */
-    public function setName($name)
+    public function setCredential($credential)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($credential)) {
+            throw new \InvalidArgumentException('non-nullable credential cannot be null');
         }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description The description of the wallet
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets did_method
-     *
-     * @return string|null
-     */
-    public function getDidMethod()
-    {
-        return $this->container['did_method'];
-    }
-
-    /**
-     * Sets did_method
-     *
-     * @param string|null $did_method did_method
-     *
-     * @return self
-     */
-    public function setDidMethod($did_method)
-    {
-        if (is_null($did_method)) {
-            throw new \InvalidArgumentException('non-nullable did_method cannot be null');
-        }
-        $allowedValues = $this->getDidMethodAllowableValues();
-        if (!in_array($did_method, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'did_method', must be one of '%s'",
-                    $did_method,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['did_method'] = $did_method;
+        $this->container['credential'] = $credential;
 
         return $this;
     }

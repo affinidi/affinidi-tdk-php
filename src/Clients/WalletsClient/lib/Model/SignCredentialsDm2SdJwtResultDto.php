@@ -1,6 +1,6 @@
 <?php
 /**
- * DidWebInputParams
+ * SignCredentialsDm2SdJwtResultDto
  *
  * PHP version 7.4
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * DidWebInputParams Class Doc Comment
+ * SignCredentialsDm2SdJwtResultDto Class Doc Comment
  *
  * @category Class
- * @description Additional params for did method web
+ * @description DTO contains signed credential
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DidWebInputParams implements ModelInterface, ArrayAccess, \JsonSerializable
+class SignCredentialsDm2SdJwtResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class DidWebInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'DidWebInputParams';
+    protected static $openAPIModelName = 'SignCredentialsDm2SdJwtResultDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,10 +59,7 @@ class DidWebInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'description' => 'string',
-        'did_method' => 'string',
-        'did_web_url' => 'string'
+        'credential' => 'string'
     ];
 
     /**
@@ -73,10 +70,7 @@ class DidWebInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'description' => null,
-        'did_method' => null,
-        'did_web_url' => null
+        'credential' => null
     ];
 
     /**
@@ -85,10 +79,7 @@ class DidWebInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'description' => false,
-        'did_method' => false,
-        'did_web_url' => false
+        'credential' => false
     ];
 
     /**
@@ -177,10 +168,7 @@ class DidWebInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'description' => 'description',
-        'did_method' => 'didMethod',
-        'did_web_url' => 'didWebUrl'
+        'credential' => 'credential'
     ];
 
     /**
@@ -189,10 +177,7 @@ class DidWebInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'description' => 'setDescription',
-        'did_method' => 'setDidMethod',
-        'did_web_url' => 'setDidWebUrl'
+        'credential' => 'setCredential'
     ];
 
     /**
@@ -201,10 +186,7 @@ class DidWebInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'description' => 'getDescription',
-        'did_method' => 'getDidMethod',
-        'did_web_url' => 'getDidWebUrl'
+        'credential' => 'getCredential'
     ];
 
     /**
@@ -248,19 +230,6 @@ class DidWebInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
         return self::$openAPIModelName;
     }
 
-    public const DID_METHOD_WEB = 'web';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getDidMethodAllowableValues()
-    {
-        return [
-            self::DID_METHOD_WEB,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -277,10 +246,7 @@ class DidWebInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('did_method', $data ?? [], null);
-        $this->setIfExists('did_web_url', $data ?? [], null);
+        $this->setIfExists('credential', $data ?? [], null);
     }
 
     /**
@@ -310,29 +276,9 @@ class DidWebInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
         $invalidProperties = [];
 
-        if ($this->container['did_method'] === null) {
-            $invalidProperties[] = "'did_method' can't be null";
+        if ($this->container['credential'] === null) {
+            $invalidProperties[] = "'credential' can't be null";
         }
-        $allowedValues = $this->getDidMethodAllowableValues();
-        if (!is_null($this->container['did_method']) && !in_array($this->container['did_method'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'did_method', must be one of '%s'",
-                $this->container['did_method'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['did_web_url'] === null) {
-            $invalidProperties[] = "'did_web_url' can't be null";
-        }
-        if ((mb_strlen($this->container['did_web_url']) > 300)) {
-            $invalidProperties[] = "invalid value for 'did_web_url', the character length must be smaller than or equal to 300.";
-        }
-
-        if (!preg_match("/^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/", $this->container['did_web_url'])) {
-            $invalidProperties[] = "invalid value for 'did_web_url', must be conform to the pattern /^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/.";
-        }
-
         return $invalidProperties;
     }
 
@@ -349,126 +295,28 @@ class DidWebInputParams implements ModelInterface, ArrayAccess, \JsonSerializabl
 
 
     /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name The name of the wallet
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description The description of the wallet
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets did_method
+     * Gets credential
      *
      * @return string
      */
-    public function getDidMethod()
+    public function getCredential()
     {
-        return $this->container['did_method'];
+        return $this->container['credential'];
     }
 
     /**
-     * Sets did_method
+     * Sets credential
      *
-     * @param string $did_method did_method
+     * @param string $credential Issued selective disclosure SD in jwt format
      *
      * @return self
      */
-    public function setDidMethod($did_method)
+    public function setCredential($credential)
     {
-        if (is_null($did_method)) {
-            throw new \InvalidArgumentException('non-nullable did_method cannot be null');
+        if (is_null($credential)) {
+            throw new \InvalidArgumentException('non-nullable credential cannot be null');
         }
-        $allowedValues = $this->getDidMethodAllowableValues();
-        if (!in_array($did_method, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'did_method', must be one of '%s'",
-                    $did_method,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['did_method'] = $did_method;
-
-        return $this;
-    }
-
-    /**
-     * Gets did_web_url
-     *
-     * @return string
-     */
-    public function getDidWebUrl()
-    {
-        return $this->container['did_web_url'];
-    }
-
-    /**
-     * Sets did_web_url
-     *
-     * @param string $did_web_url If the did method is web, this is the URL of the did
-     *
-     * @return self
-     */
-    public function setDidWebUrl($did_web_url)
-    {
-        if (is_null($did_web_url)) {
-            throw new \InvalidArgumentException('non-nullable did_web_url cannot be null');
-        }
-        if ((mb_strlen($did_web_url) > 300)) {
-            throw new \InvalidArgumentException('invalid length for $did_web_url when calling DidWebInputParams., must be smaller than or equal to 300.');
-        }
-        if ((!preg_match("/^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/", ObjectSerializer::toString($did_web_url)))) {
-            throw new \InvalidArgumentException("invalid value for \$did_web_url when calling DidWebInputParams., must conform to the pattern /^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/.");
-        }
-
-        $this->container['did_web_url'] = $did_web_url;
+        $this->container['credential'] = $credential;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * DidWebInputParamsTest
+ * SignCredentialsDm1LdResultDtoTest
  *
  * PHP version 7.4
  *
@@ -32,15 +32,15 @@ namespace AffinidiTdk\Clients\WalletsClient\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * DidWebInputParamsTest Class Doc Comment
+ * SignCredentialsDm1LdResultDtoTest Class Doc Comment
  *
  * @category    Class
- * @description Additional params for did method web
+ * @description DTO contains signed credential
  * @package     AffinidiTdk\Clients\WalletsClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class DidWebInputParamsTest extends TestCase
+class SignCredentialsDm1LdResultDtoTest extends TestCase
 {
 
     /**
@@ -72,45 +72,18 @@ class DidWebInputParamsTest extends TestCase
     }
 
     /**
-     * Test "DidWebInputParams"
+     * Test "SignCredentialsDm1LdResultDto"
      */
-    public function testDidWebInputParams()
+    public function testSignCredentialsDm1LdResultDto()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "credential"
      */
-    public function testPropertyName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "description"
-     */
-    public function testPropertyDescription()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "did_method"
-     */
-    public function testPropertyDidMethod()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "did_web_url"
-     */
-    public function testPropertyDidWebUrl()
+    public function testPropertyCredential()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

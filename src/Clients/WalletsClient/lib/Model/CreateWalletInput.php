@@ -248,6 +248,7 @@ class CreateWalletInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     }
 
     public const DID_METHOD_KEY = 'key';
+    public const DID_METHOD_WEB = 'web';
 
     /**
      * Gets allowable values of the enum
@@ -258,6 +259,7 @@ class CreateWalletInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
         return [
             self::DID_METHOD_KEY,
+            self::DID_METHOD_WEB,
         ];
     }
 
@@ -321,14 +323,11 @@ class CreateWalletInput implements ModelInterface, ArrayAccess, \JsonSerializabl
             );
         }
 
-        if ($this->container['did_web_url'] === null) {
-            $invalidProperties[] = "'did_web_url' can't be null";
-        }
-        if ((mb_strlen($this->container['did_web_url']) > 300)) {
+        if (!is_null($this->container['did_web_url']) && (mb_strlen($this->container['did_web_url']) > 300)) {
             $invalidProperties[] = "invalid value for 'did_web_url', the character length must be smaller than or equal to 300.";
         }
 
-        if (!preg_match("/^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/", $this->container['did_web_url'])) {
+        if (!is_null($this->container['did_web_url']) && !preg_match("/^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/", $this->container['did_web_url'])) {
             $invalidProperties[] = "invalid value for 'did_web_url', must be conform to the pattern /^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/.";
         }
 
@@ -414,7 +413,7 @@ class CreateWalletInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets did_method
      *
-     * @param string $did_method did_method
+     * @param string $did_method Define how DID of your wallet is created and resolved
      *
      * @return self
      */
@@ -441,7 +440,7 @@ class CreateWalletInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets did_web_url
      *
-     * @return string
+     * @return string|null
      */
     public function getDidWebUrl()
     {
@@ -451,7 +450,7 @@ class CreateWalletInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets did_web_url
      *
-     * @param string $did_web_url If the did method is web, this is the URL of the did
+     * @param string|null $did_web_url URL of the DID. Required if the did method is web
      *
      * @return self
      */
