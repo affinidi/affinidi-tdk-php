@@ -1,10 +1,9 @@
-# # VerifyPresentationOutput
+# # SignCredentialsDm1LdResultDto
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**errors** | **string[]** | Error of the verification |
-**is_valid** | **bool** | Verification result |
+**credential** | **object** | Signed credential can be in Dm1Ld format |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
