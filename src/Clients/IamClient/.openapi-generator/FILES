@@ -42,7 +42,6 @@ docs/Model/PublicKeyCannotBeResolvedFromDidError.md
 docs/Model/RightsEnum.md
 docs/Model/ServiceErrorResponse.md
 docs/Model/ServiceErrorResponseDetailsInner.md
-docs/Model/TokenAuthenticationMethodDto.md
 docs/Model/TokenDto.md
 docs/Model/TokenList.md
 docs/Model/TokenPrivateKeyAuthenticationMethodDto.md
@@ -70,6 +69,7 @@ lib/Api/TokensApi.php
 lib/Api/WellKnownApi.php
 lib/ApiException.php
 lib/Configuration.php
+lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/InvalidJwtTokenError.php
 lib/InvalidParameterError.php
@@ -107,7 +107,6 @@ lib/Model/PublicKeyCannotBeResolvedFromDidError.php
 lib/Model/RightsEnum.php
 lib/Model/ServiceErrorResponse.php
 lib/Model/ServiceErrorResponseDetailsInner.php
-lib/Model/TokenAuthenticationMethodDto.php
 lib/Model/TokenDto.php
 lib/Model/TokenList.php
 lib/Model/TokenPrivateKeyAuthenticationMethodDto.php
@@ -169,7 +168,6 @@ test/Model/PublicKeyCannotBeResolvedFromDidErrorTest.php
 test/Model/RightsEnumTest.php
 test/Model/ServiceErrorResponseDetailsInnerTest.php
 test/Model/ServiceErrorResponseTest.php
-test/Model/TokenAuthenticationMethodDtoTest.php
 test/Model/TokenDtoTest.php
 test/Model/TokenListTest.php
 test/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf1Test.php
