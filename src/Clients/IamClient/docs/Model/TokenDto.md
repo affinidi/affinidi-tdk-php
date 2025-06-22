@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ari** | **string** | Token ARI |
 **owner_ari** | **string** | The Token owner&#39;s ARI |
 **name** | **string** | Owner defined Token display name |
-**authentication_method** | [**\AffinidiTdk\Clients\IamClient\Model\TokenAuthenticationMethodDto**](TokenAuthenticationMethodDto.md) |  |
+**authentication_method** | [**\AffinidiTdk\Clients\IamClient\Model\TokenPrivateKeyAuthenticationMethodDto**](TokenPrivateKeyAuthenticationMethodDto.md) |  |
 **scopes** | **string[]** | Scopes that will be assigned to the Token on authentication |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
