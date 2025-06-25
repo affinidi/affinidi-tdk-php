@@ -30,6 +30,7 @@ docs/Model/GroupUserMappingsList.md
 docs/Model/GroupsList.md
 docs/Model/GroupsPerUserLimitExceededError.md
 docs/Model/IdTokenMappingItem.md
+docs/Model/InlineObject.md
 docs/Model/InvalidClaimContextError.md
 docs/Model/InvalidGroupsError.md
 docs/Model/InvalidParameterError.md
@@ -70,6 +71,7 @@ lib/Api/GroupApi.php
 lib/Api/IdpApi.php
 lib/ApiException.php
 lib/Configuration.php
+lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/InvalidJwtTokenError.php
 lib/InvalidParameterError.php
@@ -97,6 +99,7 @@ lib/Model/GroupUserMappingsList.php
 lib/Model/GroupsList.php
 lib/Model/GroupsPerUserLimitExceededError.php
 lib/Model/IdTokenMappingItem.php
+lib/Model/InlineObject.php
 lib/Model/InvalidClaimContextError.php
 lib/Model/InvalidGroupsError.php
 lib/Model/InvalidParameterError.php
@@ -163,6 +166,7 @@ test/Model/GroupUserMappingsListTest.php
 test/Model/GroupsListTest.php
 test/Model/GroupsPerUserLimitExceededErrorTest.php
 test/Model/IdTokenMappingItemTest.php
+test/Model/InlineObjectTest.php
 test/Model/InvalidClaimContextErrorTest.php
 test/Model/InvalidGroupsErrorTest.php
 test/Model/InvalidParameterErrorDetailsInnerTest.php
