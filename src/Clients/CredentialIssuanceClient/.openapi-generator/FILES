@@ -88,6 +88,7 @@ lib/Api/OfferApi.php
 lib/Api/WellKnownApi.php
 lib/ApiException.php
 lib/Configuration.php
+lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/InvalidJwtTokenError.php
 lib/InvalidParameterError.php

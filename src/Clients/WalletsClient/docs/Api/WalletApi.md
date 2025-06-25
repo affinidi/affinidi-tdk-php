@@ -42,7 +42,7 @@ $apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\WalletApi(
     new GuzzleHttp\Client(),
     $config
 );
-$create_wallet_input = new \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput(); // \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput | CreateWallet
+$create_wallet_input = {"name":"AliceWallet","description":"Personal wallet using did:key","didMethod":"key"}; // \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput | CreateWallet
 
 try {
     $result = $apiInstance->createWallet($create_wallet_input);

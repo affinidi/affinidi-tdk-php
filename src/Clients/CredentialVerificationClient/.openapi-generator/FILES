@@ -33,12 +33,12 @@ docs/Model/VerifyCredentialInput.md
 docs/Model/VerifyCredentialOutput.md
 docs/Model/VerifyPresentationInput.md
 docs/Model/VerifyPresentationOutput.md
-docs/Model/VerifyPresentationOutputErrors.md
 docs/Model/W3cCredentialStatus.md
 docs/Model/W3cProof.md
 lib/Api/DefaultApi.php
 lib/ApiException.php
 lib/Configuration.php
+lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/InvalidJwtTokenError.php
 lib/InvalidParameterError.php
@@ -74,7 +74,6 @@ lib/Model/VerifyCredentialInput.php
 lib/Model/VerifyCredentialOutput.php
 lib/Model/VerifyPresentationInput.php
 lib/Model/VerifyPresentationOutput.php
-lib/Model/VerifyPresentationOutputErrors.php
 lib/Model/W3cCredentialStatus.php
 lib/Model/W3cProof.php
 lib/NotFoundError.php
@@ -111,7 +110,6 @@ test/Model/ValidateJwtOutputTest.php
 test/Model/VerifyCredentialInputTest.php
 test/Model/VerifyCredentialOutputTest.php
 test/Model/VerifyPresentationInputTest.php
-test/Model/VerifyPresentationOutputErrorsTest.php
 test/Model/VerifyPresentationOutputTest.php
 test/Model/W3cCredentialStatusTest.php
 test/Model/W3cProofTest.php

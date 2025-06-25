@@ -61,6 +61,7 @@ lib/Api/IotaApi.php
 lib/Api/PexQueryApi.php
 lib/ApiException.php
 lib/Configuration.php
+lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/InvalidJwtTokenError.php
 lib/InvalidParameterError.php
