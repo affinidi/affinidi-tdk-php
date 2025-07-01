@@ -126,6 +126,15 @@ class WellKnownOpenIdCredentialIssuerResponseTest extends TestCase
     }
 
     /**
+     * Test attribute "credential_configurations_supported"
+     */
+    public function testPropertyCredentialConfigurationsSupported()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "deferred_credential_endpoint"
      */
     public function testPropertyDeferredCredentialEndpoint()
@@ -153,6 +162,15 @@ class WellKnownOpenIdCredentialIssuerResponseTest extends TestCase
     }
 
     /**
+     * Test attribute "display"
+     */
+    public function testPropertyDisplay()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "scopes_supported"
      */
     public function testPropertyScopesSupported()
@@ -174,6 +192,15 @@ class WellKnownOpenIdCredentialIssuerResponseTest extends TestCase
      * Test attribute "token_endpoint_auth_methods_supported"
      */
     public function testPropertyTokenEndpointAuthMethodsSupported()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "return_uris"
+     */
+    public function testPropertyReturnUris()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

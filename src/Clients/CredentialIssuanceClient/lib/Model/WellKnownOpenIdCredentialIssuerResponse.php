@@ -63,12 +63,15 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'credential_issuer' => 'string',
         'batch_credential_endpoint' => 'string',
         'credentials_supported' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner[]',
+        'credential_configurations_supported' => 'object[]',
         'deferred_credential_endpoint' => 'string',
         'grant_types_supported' => 'string[]',
         'jwks_uri' => 'string',
+        'display' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponseDisplay',
         'scopes_supported' => 'string[]',
         'token_endpoint' => 'string',
-        'token_endpoint_auth_methods_supported' => 'string[]'
+        'token_endpoint_auth_methods_supported' => 'string[]',
+        'return_uris' => 'string[]'
     ];
 
     /**
@@ -84,12 +87,15 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'credential_issuer' => null,
         'batch_credential_endpoint' => null,
         'credentials_supported' => null,
+        'credential_configurations_supported' => null,
         'deferred_credential_endpoint' => null,
         'grant_types_supported' => null,
         'jwks_uri' => null,
+        'display' => null,
         'scopes_supported' => null,
         'token_endpoint' => null,
-        'token_endpoint_auth_methods_supported' => null
+        'token_endpoint_auth_methods_supported' => null,
+        'return_uris' => null
     ];
 
     /**
@@ -103,12 +109,15 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'credential_issuer' => false,
         'batch_credential_endpoint' => false,
         'credentials_supported' => false,
+        'credential_configurations_supported' => false,
         'deferred_credential_endpoint' => false,
         'grant_types_supported' => false,
         'jwks_uri' => false,
+        'display' => false,
         'scopes_supported' => false,
         'token_endpoint' => false,
-        'token_endpoint_auth_methods_supported' => false
+        'token_endpoint_auth_methods_supported' => false,
+        'return_uris' => false
     ];
 
     /**
@@ -202,12 +211,15 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'credential_issuer' => 'credential_issuer',
         'batch_credential_endpoint' => 'batch_credential_endpoint',
         'credentials_supported' => 'credentials_supported',
+        'credential_configurations_supported' => 'credential_configurations_supported',
         'deferred_credential_endpoint' => 'deferred_credential_endpoint',
         'grant_types_supported' => 'grant_types_supported',
         'jwks_uri' => 'jwks_uri',
+        'display' => 'display',
         'scopes_supported' => 'scopes_supported',
         'token_endpoint' => 'token_endpoint',
-        'token_endpoint_auth_methods_supported' => 'token_endpoint_auth_methods_supported'
+        'token_endpoint_auth_methods_supported' => 'token_endpoint_auth_methods_supported',
+        'return_uris' => 'return_uris'
     ];
 
     /**
@@ -221,12 +233,15 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'credential_issuer' => 'setCredentialIssuer',
         'batch_credential_endpoint' => 'setBatchCredentialEndpoint',
         'credentials_supported' => 'setCredentialsSupported',
+        'credential_configurations_supported' => 'setCredentialConfigurationsSupported',
         'deferred_credential_endpoint' => 'setDeferredCredentialEndpoint',
         'grant_types_supported' => 'setGrantTypesSupported',
         'jwks_uri' => 'setJwksUri',
+        'display' => 'setDisplay',
         'scopes_supported' => 'setScopesSupported',
         'token_endpoint' => 'setTokenEndpoint',
-        'token_endpoint_auth_methods_supported' => 'setTokenEndpointAuthMethodsSupported'
+        'token_endpoint_auth_methods_supported' => 'setTokenEndpointAuthMethodsSupported',
+        'return_uris' => 'setReturnUris'
     ];
 
     /**
@@ -240,12 +255,15 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         'credential_issuer' => 'getCredentialIssuer',
         'batch_credential_endpoint' => 'getBatchCredentialEndpoint',
         'credentials_supported' => 'getCredentialsSupported',
+        'credential_configurations_supported' => 'getCredentialConfigurationsSupported',
         'deferred_credential_endpoint' => 'getDeferredCredentialEndpoint',
         'grant_types_supported' => 'getGrantTypesSupported',
         'jwks_uri' => 'getJwksUri',
+        'display' => 'getDisplay',
         'scopes_supported' => 'getScopesSupported',
         'token_endpoint' => 'getTokenEndpoint',
-        'token_endpoint_auth_methods_supported' => 'getTokenEndpointAuthMethodsSupported'
+        'token_endpoint_auth_methods_supported' => 'getTokenEndpointAuthMethodsSupported',
+        'return_uris' => 'getReturnUris'
     ];
 
     /**
@@ -355,12 +373,15 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
         $this->setIfExists('credential_issuer', $data ?? [], null);
         $this->setIfExists('batch_credential_endpoint', $data ?? [], null);
         $this->setIfExists('credentials_supported', $data ?? [], null);
+        $this->setIfExists('credential_configurations_supported', $data ?? [], null);
         $this->setIfExists('deferred_credential_endpoint', $data ?? [], null);
         $this->setIfExists('grant_types_supported', $data ?? [], null);
         $this->setIfExists('jwks_uri', $data ?? [], null);
+        $this->setIfExists('display', $data ?? [], null);
         $this->setIfExists('scopes_supported', $data ?? [], null);
         $this->setIfExists('token_endpoint', $data ?? [], null);
         $this->setIfExists('token_endpoint_auth_methods_supported', $data ?? [], null);
+        $this->setIfExists('return_uris', $data ?? [], null);
     }
 
     /**
@@ -541,6 +562,33 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
     }
 
     /**
+     * Gets credential_configurations_supported
+     *
+     * @return object[]|null
+     */
+    public function getCredentialConfigurationsSupported()
+    {
+        return $this->container['credential_configurations_supported'];
+    }
+
+    /**
+     * Sets credential_configurations_supported
+     *
+     * @param object[]|null $credential_configurations_supported credential_configurations_supported
+     *
+     * @return self
+     */
+    public function setCredentialConfigurationsSupported($credential_configurations_supported)
+    {
+        if (is_null($credential_configurations_supported)) {
+            throw new \InvalidArgumentException('non-nullable credential_configurations_supported cannot be null');
+        }
+        $this->container['credential_configurations_supported'] = $credential_configurations_supported;
+
+        return $this;
+    }
+
+    /**
      * Gets deferred_credential_endpoint
      *
      * @return string|null
@@ -626,6 +674,33 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
             throw new \InvalidArgumentException('non-nullable jwks_uri cannot be null');
         }
         $this->container['jwks_uri'] = $jwks_uri;
+
+        return $this;
+    }
+
+    /**
+     * Gets display
+     *
+     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponseDisplay|null
+     */
+    public function getDisplay()
+    {
+        return $this->container['display'];
+    }
+
+    /**
+     * Sets display
+     *
+     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\WellKnownOpenIdCredentialIssuerResponseDisplay|null $display display
+     *
+     * @return self
+     */
+    public function setDisplay($display)
+    {
+        if (is_null($display)) {
+            throw new \InvalidArgumentException('non-nullable display cannot be null');
+        }
+        $this->container['display'] = $display;
 
         return $this;
     }
@@ -725,6 +800,33 @@ class WellKnownOpenIdCredentialIssuerResponse implements ModelInterface, ArrayAc
             );
         }
         $this->container['token_endpoint_auth_methods_supported'] = $token_endpoint_auth_methods_supported;
+
+        return $this;
+    }
+
+    /**
+     * Gets return_uris
+     *
+     * @return string[]|null
+     */
+    public function getReturnUris()
+    {
+        return $this->container['return_uris'];
+    }
+
+    /**
+     * Sets return_uris
+     *
+     * @param string[]|null $return_uris return_uris
+     *
+     * @return self
+     */
+    public function setReturnUris($return_uris)
+    {
+        if (is_null($return_uris)) {
+            throw new \InvalidArgumentException('non-nullable return_uris cannot be null');
+        }
+        $this->container['return_uris'] = $return_uris;
 
         return $this;
     }
