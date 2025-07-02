@@ -59,6 +59,8 @@ class ConsumerAuthTokenEndpointInput implements ModelInterface, ArrayAccess, \Js
       */
     protected static $openAPITypes = [
         'grant_type' => 'string',
+        'client_assertion_type' => 'string',
+        'client_assertion' => 'string',
         'code' => 'string',
         'refresh_token' => 'string',
         'redirect_uri' => 'string',
@@ -74,6 +76,8 @@ class ConsumerAuthTokenEndpointInput implements ModelInterface, ArrayAccess, \Js
       */
     protected static $openAPIFormats = [
         'grant_type' => null,
+        'client_assertion_type' => null,
+        'client_assertion' => null,
         'code' => null,
         'refresh_token' => null,
         'redirect_uri' => null,
@@ -87,6 +91,8 @@ class ConsumerAuthTokenEndpointInput implements ModelInterface, ArrayAccess, \Js
       */
     protected static array $openAPINullables = [
         'grant_type' => false,
+        'client_assertion_type' => false,
+        'client_assertion' => false,
         'code' => false,
         'refresh_token' => false,
         'redirect_uri' => false,
@@ -180,6 +186,8 @@ class ConsumerAuthTokenEndpointInput implements ModelInterface, ArrayAccess, \Js
      */
     protected static $attributeMap = [
         'grant_type' => 'grant_type',
+        'client_assertion_type' => 'client_assertion_type',
+        'client_assertion' => 'client_assertion',
         'code' => 'code',
         'refresh_token' => 'refresh_token',
         'redirect_uri' => 'redirect_uri',
@@ -193,6 +201,8 @@ class ConsumerAuthTokenEndpointInput implements ModelInterface, ArrayAccess, \Js
      */
     protected static $setters = [
         'grant_type' => 'setGrantType',
+        'client_assertion_type' => 'setClientAssertionType',
+        'client_assertion' => 'setClientAssertion',
         'code' => 'setCode',
         'refresh_token' => 'setRefreshToken',
         'redirect_uri' => 'setRedirectUri',
@@ -206,6 +216,8 @@ class ConsumerAuthTokenEndpointInput implements ModelInterface, ArrayAccess, \Js
      */
     protected static $getters = [
         'grant_type' => 'getGrantType',
+        'client_assertion_type' => 'getClientAssertionType',
+        'client_assertion' => 'getClientAssertion',
         'code' => 'getCode',
         'refresh_token' => 'getRefreshToken',
         'redirect_uri' => 'getRedirectUri',
@@ -253,6 +265,36 @@ class ConsumerAuthTokenEndpointInput implements ModelInterface, ArrayAccess, \Js
         return self::$openAPIModelName;
     }
 
+    public const GRANT_TYPE_CLIENT_CREDENTIALS = 'client_credentials';
+    public const GRANT_TYPE_AFFINIDI_DELEGATION = 'affinidi_delegation';
+    public const CLIENT_ASSERTION_TYPE_URN_IETF_PARAMS_OAUTH_CLIENT_ASSERTION_TYPE_JWT_BEARER = 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer';
+    public const CLIENT_ASSERTION_TYPE_URN_IETF_PARAMS_OAUTH_DELEGATION_ASSERTION_TYPE_JWT_BEARER = 'urn:ietf:params:oauth:delegation-assertion-type:jwt-bearer';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getGrantTypeAllowableValues()
+    {
+        return [
+            self::GRANT_TYPE_CLIENT_CREDENTIALS,
+            self::GRANT_TYPE_AFFINIDI_DELEGATION,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getClientAssertionTypeAllowableValues()
+    {
+        return [
+            self::CLIENT_ASSERTION_TYPE_URN_IETF_PARAMS_OAUTH_CLIENT_ASSERTION_TYPE_JWT_BEARER,
+            self::CLIENT_ASSERTION_TYPE_URN_IETF_PARAMS_OAUTH_DELEGATION_ASSERTION_TYPE_JWT_BEARER,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -270,6 +312,8 @@ class ConsumerAuthTokenEndpointInput implements ModelInterface, ArrayAccess, \Js
     public function __construct(array $data = null)
     {
         $this->setIfExists('grant_type', $data ?? [], null);
+        $this->setIfExists('client_assertion_type', $data ?? [], null);
+        $this->setIfExists('client_assertion', $data ?? [], null);
         $this->setIfExists('code', $data ?? [], null);
         $this->setIfExists('refresh_token', $data ?? [], null);
         $this->setIfExists('redirect_uri', $data ?? [], null);
@@ -305,6 +349,30 @@ class ConsumerAuthTokenEndpointInput implements ModelInterface, ArrayAccess, \Js
 
         if ($this->container['grant_type'] === null) {
             $invalidProperties[] = "'grant_type' can't be null";
+        }
+        $allowedValues = $this->getGrantTypeAllowableValues();
+        if (!is_null($this->container['grant_type']) && !in_array($this->container['grant_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'grant_type', must be one of '%s'",
+                $this->container['grant_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['client_assertion_type'] === null) {
+            $invalidProperties[] = "'client_assertion_type' can't be null";
+        }
+        $allowedValues = $this->getClientAssertionTypeAllowableValues();
+        if (!is_null($this->container['client_assertion_type']) && !in_array($this->container['client_assertion_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'client_assertion_type', must be one of '%s'",
+                $this->container['client_assertion_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['client_assertion'] === null) {
+            $invalidProperties[] = "'client_assertion' can't be null";
         }
         return $invalidProperties;
     }
@@ -343,7 +411,81 @@ class ConsumerAuthTokenEndpointInput implements ModelInterface, ArrayAccess, \Js
         if (is_null($grant_type)) {
             throw new \InvalidArgumentException('non-nullable grant_type cannot be null');
         }
+        $allowedValues = $this->getGrantTypeAllowableValues();
+        if (!in_array($grant_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'grant_type', must be one of '%s'",
+                    $grant_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
         $this->container['grant_type'] = $grant_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets client_assertion_type
+     *
+     * @return string
+     */
+    public function getClientAssertionType()
+    {
+        return $this->container['client_assertion_type'];
+    }
+
+    /**
+     * Sets client_assertion_type
+     *
+     * @param string $client_assertion_type client_assertion_type
+     *
+     * @return self
+     */
+    public function setClientAssertionType($client_assertion_type)
+    {
+        if (is_null($client_assertion_type)) {
+            throw new \InvalidArgumentException('non-nullable client_assertion_type cannot be null');
+        }
+        $allowedValues = $this->getClientAssertionTypeAllowableValues();
+        if (!in_array($client_assertion_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'client_assertion_type', must be one of '%s'",
+                    $client_assertion_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['client_assertion_type'] = $client_assertion_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets client_assertion
+     *
+     * @return string
+     */
+    public function getClientAssertion()
+    {
+        return $this->container['client_assertion'];
+    }
+
+    /**
+     * Sets client_assertion
+     *
+     * @param string $client_assertion client_assertion
+     *
+     * @return self
+     */
+    public function setClientAssertion($client_assertion)
+    {
+        if (is_null($client_assertion)) {
+            throw new \InvalidArgumentException('non-nullable client_assertion cannot be null');
+        }
+        $this->container['client_assertion'] = $client_assertion;
 
         return $this;
     }
