@@ -159,6 +159,8 @@ Class | Method | HTTP request | Description
 - [VcClaimedError](docs/Model/VcClaimedError.md)
 - [WellKnownOpenIdCredentialIssuerResponse](docs/Model/WellKnownOpenIdCredentialIssuerResponse.md)
 - [WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner](docs/Model/WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner.md)
+- [WellKnownOpenIdCredentialIssuerResponseDisplay](docs/Model/WellKnownOpenIdCredentialIssuerResponseDisplay.md)
+- [WellKnownOpenIdCredentialIssuerResponseDisplayLogo](docs/Model/WellKnownOpenIdCredentialIssuerResponseDisplayLogo.md)
 
 ## Authorization
 

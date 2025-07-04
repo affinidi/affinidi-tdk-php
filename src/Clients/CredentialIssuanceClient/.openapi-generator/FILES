@@ -80,6 +80,8 @@ docs/Model/UpdateIssuanceConfigInput.md
 docs/Model/VcClaimedError.md
 docs/Model/WellKnownOpenIdCredentialIssuerResponse.md
 docs/Model/WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner.md
+docs/Model/WellKnownOpenIdCredentialIssuerResponseDisplay.md
+docs/Model/WellKnownOpenIdCredentialIssuerResponseDisplayLogo.md
 lib/Api/ConfigurationApi.php
 lib/Api/CredentialsApi.php
 lib/Api/DefaultApi.php
@@ -166,6 +168,8 @@ lib/Model/UpdateIssuanceConfigInput.php
 lib/Model/VcClaimedError.php
 lib/Model/WellKnownOpenIdCredentialIssuerResponse.php
 lib/Model/WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner.php
+lib/Model/WellKnownOpenIdCredentialIssuerResponseDisplay.php
+lib/Model/WellKnownOpenIdCredentialIssuerResponseDisplayLogo.php
 lib/NotFoundError.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
@@ -247,4 +251,6 @@ test/Model/SupportedCredentialMetadataTest.php
 test/Model/UpdateIssuanceConfigInputTest.php
 test/Model/VcClaimedErrorTest.php
 test/Model/WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInnerTest.php
+test/Model/WellKnownOpenIdCredentialIssuerResponseDisplayLogoTest.php
+test/Model/WellKnownOpenIdCredentialIssuerResponseDisplayTest.php
 test/Model/WellKnownOpenIdCredentialIssuerResponseTest.php
