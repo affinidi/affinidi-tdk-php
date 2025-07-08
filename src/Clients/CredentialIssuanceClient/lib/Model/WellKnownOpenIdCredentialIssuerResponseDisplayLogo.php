@@ -1,6 +1,6 @@
 <?php
 /**
- * ProjectCredentialConfigExistError
+ * WellKnownOpenIdCredentialIssuerResponseDisplayLogo
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
 
 /**
- * ProjectCredentialConfigExistError Class Doc Comment
+ * WellKnownOpenIdCredentialIssuerResponseDisplayLogo Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\CredentialIssuanceClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\CredentialIssuanceClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, \JsonSerializable
+class WellKnownOpenIdCredentialIssuerResponseDisplayLogo implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ProjectCredentialConfigExistError';
+    protected static $openAPIModelName = 'WellKnownOpenIdCredentialIssuerResponse_display_logo';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,8 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'message' => 'string',
-        'http_status_code' => 'float',
-        'trace_id' => 'string',
-        'details' => '\AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]'
+        'uri' => 'string',
+        'alt_text' => 'string'
     ];
 
     /**
@@ -73,11 +70,8 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'message' => null,
-        'http_status_code' => null,
-        'trace_id' => null,
-        'details' => null
+        'uri' => null,
+        'alt_text' => null
     ];
 
     /**
@@ -86,11 +80,8 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'message' => false,
-        'http_status_code' => false,
-        'trace_id' => false,
-        'details' => false
+        'uri' => false,
+        'alt_text' => false
     ];
 
     /**
@@ -179,11 +170,8 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'message' => 'message',
-        'http_status_code' => 'httpStatusCode',
-        'trace_id' => 'traceId',
-        'details' => 'details'
+        'uri' => 'uri',
+        'alt_text' => 'alt_text'
     ];
 
     /**
@@ -192,11 +180,8 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'message' => 'setMessage',
-        'http_status_code' => 'setHttpStatusCode',
-        'trace_id' => 'setTraceId',
-        'details' => 'setDetails'
+        'uri' => 'setUri',
+        'alt_text' => 'setAltText'
     ];
 
     /**
@@ -205,11 +190,8 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'message' => 'getMessage',
-        'http_status_code' => 'getHttpStatusCode',
-        'trace_id' => 'getTraceId',
-        'details' => 'getDetails'
+        'uri' => 'getUri',
+        'alt_text' => 'getAltText'
     ];
 
     /**
@@ -253,45 +235,6 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
         return self::$openAPIModelName;
     }
 
-    public const NAME_PROJECT_CREDENTIAL_CONFIG_EXIST_ERROR = 'ProjectCredentialConfigExistError';
-    public const MESSAGE_CREDENTIAL_CONFIGURATION_ALREADY_EXISTS_FOR_THIS_PROJECT_AND_ONLY_ONE_CONFIGURATION_IS_ALLOWED_PER_PROJECT = 'Credential configuration already exists for this project and only one configuration is allowed per project';
-    public const HTTP_STATUS_CODE_NUMBER_400 = 400;
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getNameAllowableValues()
-    {
-        return [
-            self::NAME_PROJECT_CREDENTIAL_CONFIG_EXIST_ERROR,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getMessageAllowableValues()
-    {
-        return [
-            self::MESSAGE_CREDENTIAL_CONFIGURATION_ALREADY_EXISTS_FOR_THIS_PROJECT_AND_ONLY_ONE_CONFIGURATION_IS_ALLOWED_PER_PROJECT,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getHttpStatusCodeAllowableValues()
-    {
-        return [
-            self::HTTP_STATUS_CODE_NUMBER_400,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -308,11 +251,8 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('http_status_code', $data ?? [], null);
-        $this->setIfExists('trace_id', $data ?? [], null);
-        $this->setIfExists('details', $data ?? [], null);
+        $this->setIfExists('uri', $data ?? [], null);
+        $this->setIfExists('alt_text', $data ?? [], null);
     }
 
     /**
@@ -342,44 +282,8 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        $allowedValues = $this->getNameAllowableValues();
-        if (!is_null($this->container['name']) && !in_array($this->container['name'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'name', must be one of '%s'",
-                $this->container['name'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
-        }
-        $allowedValues = $this->getMessageAllowableValues();
-        if (!is_null($this->container['message']) && !in_array($this->container['message'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'message', must be one of '%s'",
-                $this->container['message'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['http_status_code'] === null) {
-            $invalidProperties[] = "'http_status_code' can't be null";
-        }
-        $allowedValues = $this->getHttpStatusCodeAllowableValues();
-        if (!is_null($this->container['http_status_code']) && !in_array($this->container['http_status_code'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'http_status_code', must be one of '%s'",
-                $this->container['http_status_code'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['trace_id'] === null) {
-            $invalidProperties[] = "'trace_id' can't be null";
+        if ($this->container['uri'] === null) {
+            $invalidProperties[] = "'uri' can't be null";
         }
         return $invalidProperties;
     }
@@ -397,166 +301,55 @@ class ProjectCredentialConfigExistError implements ModelInterface, ArrayAccess, 
 
 
     /**
-     * Gets name
+     * Gets uri
      *
      * @return string
      */
-    public function getName()
+    public function getUri()
     {
-        return $this->container['name'];
+        return $this->container['uri'];
     }
 
     /**
-     * Sets name
+     * Sets uri
      *
-     * @param string $name name
+     * @param string $uri uri
      *
      * @return self
      */
-    public function setName($name)
+    public function setUri($uri)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($uri)) {
+            throw new \InvalidArgumentException('non-nullable uri cannot be null');
         }
-        $allowedValues = $this->getNameAllowableValues();
-        if (!in_array($name, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'name', must be one of '%s'",
-                    $name,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['name'] = $name;
+        $this->container['uri'] = $uri;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets alt_text
      *
-     * @return string
+     * @return string|null
      */
-    public function getMessage()
+    public function getAltText()
     {
-        return $this->container['message'];
+        return $this->container['alt_text'];
     }
 
     /**
-     * Sets message
+     * Sets alt_text
      *
-     * @param string $message message
+     * @param string|null $alt_text alt_text
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setAltText($alt_text)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($alt_text)) {
+            throw new \InvalidArgumentException('non-nullable alt_text cannot be null');
         }
-        $allowedValues = $this->getMessageAllowableValues();
-        if (!in_array($message, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'message', must be one of '%s'",
-                    $message,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['message'] = $message;
-
-        return $this;
-    }
-
-    /**
-     * Gets http_status_code
-     *
-     * @return float
-     */
-    public function getHttpStatusCode()
-    {
-        return $this->container['http_status_code'];
-    }
-
-    /**
-     * Sets http_status_code
-     *
-     * @param float $http_status_code http_status_code
-     *
-     * @return self
-     */
-    public function setHttpStatusCode($http_status_code)
-    {
-        if (is_null($http_status_code)) {
-            throw new \InvalidArgumentException('non-nullable http_status_code cannot be null');
-        }
-        $allowedValues = $this->getHttpStatusCodeAllowableValues();
-        if (!in_array($http_status_code, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'http_status_code', must be one of '%s'",
-                    $http_status_code,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['http_status_code'] = $http_status_code;
-
-        return $this;
-    }
-
-    /**
-     * Gets trace_id
-     *
-     * @return string
-     */
-    public function getTraceId()
-    {
-        return $this->container['trace_id'];
-    }
-
-    /**
-     * Sets trace_id
-     *
-     * @param string $trace_id trace_id
-     *
-     * @return self
-     */
-    public function setTraceId($trace_id)
-    {
-        if (is_null($trace_id)) {
-            throw new \InvalidArgumentException('non-nullable trace_id cannot be null');
-        }
-        $this->container['trace_id'] = $trace_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets details
-     *
-     * @return \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]|null
-     */
-    public function getDetails()
-    {
-        return $this->container['details'];
-    }
-
-    /**
-     * Sets details
-     *
-     * @param \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ActionForbiddenErrorDetailsInner[]|null $details details
-     *
-     * @return self
-     */
-    public function setDetails($details)
-    {
-        if (is_null($details)) {
-            throw new \InvalidArgumentException('non-nullable details cannot be null');
-        }
-        $this->container['details'] = $details;
+        $this->container['alt_text'] = $alt_text;
 
         return $this;
     }
