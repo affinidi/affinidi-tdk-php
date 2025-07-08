@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **grant_type** | **string** |  |
+**client_assertion_type** | **string** |  |
+**client_assertion** | **string** |  |
 **code** | **string** |  | [optional]
 **refresh_token** | **string** |  | [optional]
 **redirect_uri** | **string** |  | [optional]
