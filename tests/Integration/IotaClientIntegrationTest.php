@@ -23,8 +23,6 @@ class IotaClientIntegrationTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
-        checkWalletLimitExceeded();
-
         $wallet = createWallet();
         self::$walletId = $wallet['id'];
         self::$walletAri = $wallet['ari'];
@@ -56,8 +54,12 @@ class IotaClientIntegrationTest extends TestCase
 
     private static function getApiConfig(): IotaClient\Configuration
     {
+        $originalBasePath = IotaClient\Configuration::getDefaultConfiguration()->getHost();
+        $host = replaceBaseDomain($originalBasePath);
+
         return IotaClient\Configuration::getDefaultConfiguration()
-            ->setApiKey('authorization', '', getTokenCallback());
+            ->setApiKey('authorization', '', getTokenCallback())
+            ->setHost($host);
     }
 
     private static function createIotaConfiguration(): void

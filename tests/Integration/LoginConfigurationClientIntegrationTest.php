@@ -36,8 +36,12 @@ class LoginConfigurationClientIntegrationTest extends TestCase
 
     private static function getApiConfig(): LoginConfigurationClient\Configuration
     {
+        $originalBasePath = LoginConfigurationClient\Configuration::getDefaultConfiguration()->getHost();
+        $host = replaceBaseDomain($originalBasePath);
+
         return LoginConfigurationClient\Configuration::getDefaultConfiguration()
-            ->setApiKey('authorization', '', getTokenCallback());
+            ->setApiKey('authorization', '', getTokenCallback())
+            ->setHost($host);
     }
 
     private static function createLoginConfiguration(): void
