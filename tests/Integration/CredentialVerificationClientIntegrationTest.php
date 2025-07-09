@@ -9,8 +9,12 @@ class CredentialVerificationClientIntegrationTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
+        $originalBasePath = CredentialVerificationClient\Configuration::getDefaultConfiguration()->getHost();
+        $host = replaceBaseDomain($originalBasePath);
+
         $config = CredentialVerificationClient\Configuration::getDefaultConfiguration()
-            ->setApiKey('authorization', '', getTokenCallback());
+            ->setApiKey('authorization', '', getTokenCallback())
+            ->setHost($host);
 
         self::$api = new CredentialVerificationClient\Api\DefaultApi(config: $config);
     }

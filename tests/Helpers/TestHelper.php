@@ -3,6 +3,8 @@
 use Dotenv\Dotenv;
 use Ramsey\Uuid\Uuid;
 use AffinidiTdk\AuthProvider\AuthProvider;
+use AffinidiTdk\Common\Helpers\Environment;
+use AffinidiTdk\Common\Helpers\EnvironmentUtils;
 use AffinidiTdk\Clients\WalletsClient;
 use AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput;
 use AffinidiTdk\Clients\CredentialVerificationClient;
@@ -13,6 +15,11 @@ use AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredential;
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
+function isProd(): bool
+{
+    return EnvironmentUtils::fetchEnvironment() === Environment::PRODUCTION;
+}
+
 /**
  * Fetch configurations from environment variables.
  *
@@ -21,12 +28,22 @@ $dotenv->load();
  */
 function getConfiguration(): array
 {
-    $requiredKeys = [
-        'PRIVATE_KEY', 'PROJECT_ID', 'TOKEN_ID', 'IOTA_CONFIGURATION',
-        'IOTA_PRESENTATION_DEFINITION', 'IOTA_PRESENTATION_SUBMISSION',
-        'VERIFIABLE_PRESENTATION', 'VERIFIABLE_CREDENTIAL',
-        'UNSIGNED_CREDENTIAL_PARAMS', 'CREDENTIAL_ISSUANCE_DATA',
+    $isProd = isProd();
+
+    $requiredKeys =
+    [
+        'PRIVATE_KEY', 'PROJECT_ID', 'TOKEN_ID',
+        'IOTA_CONFIGURATION', 'IOTA_PRESENTATION_DEFINITION',
+        'IOTA_PRESENTATION_SUBMISSION', 'VERIFIABLE_PRESENTATION',
+        'VERIFIABLE_CREDENTIAL', 'UNSIGNED_CREDENTIAL_PARAMS',
+        'CREDENTIAL_ISSUANCE_DATA'
     ];
+
+    if ($isProd) {
+        $requiredKeys = array_merge($requiredKeys, [
+            'DEV_PRIVATE_KEY', 'DEV_PROJECT_ID', 'DEV_TOKEN_ID'
+        ]);
+    }
 
     $missing = array_filter($requiredKeys, fn($key) => empty($_ENV[$key]));
     if (!empty($missing)) {
@@ -34,11 +51,11 @@ function getConfiguration(): array
     }
 
     return [
-        'privateKey' => $_ENV['PRIVATE_KEY'],
-        'keyId' => $_ENV['KEY_ID'],
-        'passphrase' => $_ENV['PASSPHRASE'],
-        'projectId' => $_ENV['PROJECT_ID'],
-        'tokenId' => $_ENV['TOKEN_ID'],
+        'privateKey' => $_ENV[$isProd ? 'PRIVATE_KEY' : 'DEV_PRIVATE_KEY'],
+        'keyId' => $_ENV[$isProd ? 'KEY_ID' : 'DEV_KEY_ID'] ?? '',
+        'passphrase' => $_ENV[$isProd ? 'PASSPHRASE' : 'DEV_PASSPHRASE'] ?? '',
+        'projectId' => $_ENV[$isProd ? 'PROJECT_ID' : 'DEV_PROJECT_ID'],
+        'tokenId' => $_ENV[$isProd ? 'TOKEN_ID' : 'DEV_TOKEN_ID'],
         // fixtures
         'iotaConfiguration' => $_ENV['IOTA_CONFIGURATION'],
         'iotaPresentationDefinition' => $_ENV['IOTA_PRESENTATION_DEFINITION'],
@@ -91,8 +108,13 @@ function debugMessage(string $subject, array $details, bool $end = false): void
  */
 function createWallet(string $didMethod = 'key'): array
 {
+    checkWalletLimitExceeded();
+    $originalBasePath = WalletsClient\Configuration::getDefaultConfiguration()->getHost();
+    $host = replaceBaseDomain($originalBasePath);
+
     $config = WalletsClient\Configuration::getDefaultConfiguration()
-        ->setApiKey('authorization', '', getTokenCallback());
+        ->setApiKey('authorization', '', getTokenCallback())
+        ->setHost($host);
 
     $api = new WalletsClient\Api\WalletApi(config: $config);
 
@@ -119,8 +141,12 @@ function createWallet(string $didMethod = 'key'): array
  */
 function deleteWallet(string $walletId): void
 {
+    $originalBasePath = WalletsClient\Configuration::getDefaultConfiguration()->getHost();
+    $host = replaceBaseDomain($originalBasePath);
+
     $config = WalletsClient\Configuration::getDefaultConfiguration()
-        ->setApiKey('authorization', '', getTokenCallback());
+        ->setApiKey('authorization', '', getTokenCallback())
+        ->setHost($host);
 
     $api = new WalletsClient\Api\WalletApi(config: $config);
     [$response, $statusCode] = $api->deleteWalletWithHttpInfo($walletId);
@@ -135,8 +161,12 @@ function deleteWallet(string $walletId): void
  */
 function isCredentialValid($credential): bool
 {
+    $originalBasePath = CredentialVerificationClient\Configuration::getDefaultConfiguration()->getHost();
+    $host = replaceBaseDomain($originalBasePath);
+
     $config = CredentialVerificationClient\Configuration::getDefaultConfiguration()
-        ->setApiKey('authorization', '', getTokenCallback());
+        ->setApiKey('authorization', '', getTokenCallback())
+        ->setHost($host);
 
     $api = new CredentialVerificationClient\Api\DefaultApi(config: $config);
 
@@ -169,10 +199,18 @@ function decodeJson(string $json): array
     return $data;
 }
 
+// NOTE: Max number of wallets for project is 10. Making clean up,
+//       if wallet number exceeds threshold, to prevent 422 error
 function checkWalletLimitExceeded(): void
 {
+    $WALLETS_LIMIT_THRESHOLD = 7;
+
+    $originalBasePath = WalletsClient\Configuration::getDefaultConfiguration()->getHost();
+    $host = replaceBaseDomain($originalBasePath);
+
     $config = WalletsClient\Configuration::getDefaultConfiguration()
-        ->setApiKey('authorization', '', getTokenCallback());
+        ->setApiKey('authorization', '', getTokenCallback())
+        ->setHost($host);
 
     $api = new WalletsClient\Api\WalletApi(config: $config);
 
@@ -183,7 +221,26 @@ function checkWalletLimitExceeded(): void
         throw new RuntimeException("Failed to get wallets. Response missing 'wallets' key.");
     }
 
-    if (count($data['wallets']) == 10) {
-        throw new RuntimeException("❗️Max wallets limit exceeded (10). Delete unused wallets and try again.");
+    if (count($data['wallets']) > $WALLETS_LIMIT_THRESHOLD) {
+        print("❗️Number of wallets reaching the limit (10). Deleting wallets.");
+
+        foreach ($data['wallets'] as $wallet) {
+            deleteWallet($wallet['id']);
+        }
     }
+}
+
+function replaceBaseDomain(string $originalBasePath, string $newDomain = ''): string
+{
+    $domain = $newDomain !== '' ? $newDomain : EnvironmentUtils::fetchApiGwUrl();
+
+    $originalParts = parse_url($originalBasePath);
+    $newDomainParts = parse_url($domain);
+
+    $scheme = $newDomainParts['scheme'] ?? 'https';
+    $host = $newDomainParts['host'] ?? '';
+    $port = isset($newDomainParts['port']) ? ':' . $newDomainParts['port'] : '';
+    $path = $originalParts['path'] ?? '';
+
+    return "{$scheme}://{$host}{$port}{$path}";
 }

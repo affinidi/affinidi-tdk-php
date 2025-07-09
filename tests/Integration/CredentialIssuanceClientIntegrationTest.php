@@ -62,16 +62,24 @@ class CredentialIssuanceClientIntegrationTest extends TestCase
 
     private function getConfigurationApi(): CredentialIssuanceClient\Api\ConfigurationApi
     {
+        $originalBasePath = CredentialIssuanceClient\Configuration::getDefaultConfiguration()->getHost();
+        $host = replaceBaseDomain($originalBasePath);
+
         $config = CredentialIssuanceClient\Configuration::getDefaultConfiguration()
-            ->setApiKey('Authorization', '', getTokenCallback());
+            ->setApiKey('Authorization', '', getTokenCallback())
+            ->setHost($host);
 
         return new CredentialIssuanceClient\Api\ConfigurationApi(config: $config);
     }
 
     private function getIssuanceApi(): CredentialIssuanceClient\Api\IssuanceApi
     {
+        $originalBasePath = CredentialIssuanceClient\Configuration::getDefaultConfiguration()->getHost();
+        $host = replaceBaseDomain($originalBasePath);
+
         $config = CredentialIssuanceClient\Configuration::getDefaultConfiguration()
-            ->setApiKey('authorization', '', getTokenCallback());
+            ->setApiKey('authorization', '', getTokenCallback())
+            ->setHost($host);
 
         return new CredentialIssuanceClient\Api\IssuanceApi(config: $config);
     }
@@ -92,7 +100,10 @@ class CredentialIssuanceClientIntegrationTest extends TestCase
 
     private function getCredentialOffer(string $issuanceId): array
     {
-        $config = CredentialIssuanceClient\Configuration::getDefaultConfiguration();
+        $originalBasePath = CredentialIssuanceClient\Configuration::getDefaultConfiguration()->getHost();
+        $host = replaceBaseDomain($originalBasePath);
+
+        $config = CredentialIssuanceClient\Configuration::getDefaultConfiguration()->setHost($host);
         $api = new CredentialIssuanceClient\Api\OfferApi(config: $config);
 
         $response = $api->getCredentialOffer(self::$projectId, $issuanceId);

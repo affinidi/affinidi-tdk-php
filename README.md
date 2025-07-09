@@ -97,6 +97,12 @@ composer run-script test
 
 # Run tests with debug information
 composer run-script test:debug
+
+# Run a single test
+composer run-script test -- --filter testSignAndRevokeCredential
+
+# ❗️ NOTE: For internal usage. To run tests against DEV environment
+AFFINIDI_TDK_ENVIRONMENT=dev composer run-script test
 ```
 
 The debug mode provides additional information that can be helpful when troubleshooting failing tests.

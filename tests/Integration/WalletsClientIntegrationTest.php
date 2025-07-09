@@ -15,8 +15,6 @@ class WalletsClientIntegrationTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
-        checkWalletLimitExceeded();
-
         $config = self::getApiConfig();
 
         self::$walletApi = new WalletsClient\Api\WalletApi(config: $config);
@@ -41,8 +39,12 @@ class WalletsClientIntegrationTest extends TestCase
 
     private static function getApiConfig(): WalletsClient\Configuration
     {
+        $originalBasePath = WalletsClient\Configuration::getDefaultConfiguration()->getHost();
+        $host = replaceBaseDomain($originalBasePath);
+
         return WalletsClient\Configuration::getDefaultConfiguration()
-            ->setApiKey('authorization', '', getTokenCallback());
+            ->setApiKey('authorization', '', getTokenCallback())
+            ->setHost($host);
     }
 
     public function testSignAndRevokeCredential(): void

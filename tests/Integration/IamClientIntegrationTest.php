@@ -14,10 +14,14 @@ class IamClientIntegrationTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
+        $originalBasePath = IamClient\Configuration::getDefaultConfiguration()->getHost();
+        $host = replaceBaseDomain($originalBasePath);
+
         self::$principalId = Uuid::uuid4()->toString();
 
         $config = IamClient\Configuration::getDefaultConfiguration()
-            ->setApiKey('authorization', '', getTokenCallback());
+            ->setApiKey('authorization', '', getTokenCallback())
+            ->setHost($host);
 
         self::$policiesApi = new IamClient\Api\PoliciesApi(config: $config);
         self::$projectsApi = new IamClient\Api\ProjectsApi(config: $config);
