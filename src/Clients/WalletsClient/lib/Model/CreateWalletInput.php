@@ -249,6 +249,7 @@ class CreateWalletInput implements ModelInterface, ArrayAccess, \JsonSerializabl
 
     public const DID_METHOD_KEY = 'key';
     public const DID_METHOD_WEB = 'web';
+    public const DID_METHOD_PEER0 = 'peer0';
 
     /**
      * Gets allowable values of the enum
@@ -260,6 +261,7 @@ class CreateWalletInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         return [
             self::DID_METHOD_KEY,
             self::DID_METHOD_WEB,
+            self::DID_METHOD_PEER0,
         ];
     }
 
