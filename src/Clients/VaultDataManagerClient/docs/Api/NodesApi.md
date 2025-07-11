@@ -19,7 +19,7 @@ All URIs are relative to https://api.vault.affinidi.com/vfs, except if the opera
 ## `createNode()`
 
 ```php
-createNode($create_node_input): \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK
+createNode($create_node_input, $parent_node_id): \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK
 ```
 
 
@@ -46,9 +46,10 @@ $apiInstance = new AffinidiTdk\Clients\VaultDataManagerClient\Api\NodesApi(
     $config
 );
 $create_node_input = new \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput(); // \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput | CreateNode
+$parent_node_id = 'parent_node_id_example'; // string | parent node id, if not provided then root element is used
 
 try {
-    $result = $apiInstance->createNode($create_node_input);
+    $result = $apiInstance->createNode($create_node_input, $parent_node_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling NodesApi->createNode: ', $e->getMessage(), PHP_EOL;
@@ -60,6 +61,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **create_node_input** | [**\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput**](../Model/CreateNodeInput.md)| CreateNode | |
+| **parent_node_id** | **string**| parent node id, if not provided then root element is used | [optional] |
 
 ### Return type
 
