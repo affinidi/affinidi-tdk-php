@@ -267,7 +267,6 @@ class FlowDataStatusListsDetailsInner implements ModelInterface, ArrayAccess, \J
 
     public const STATUS_LIST_PURPOSE_REVOKED = 'REVOKED';
     public const STANDARD_REVOCATION_LIST2020 = 'RevocationList2020';
-    public const STANDARD_BITSTRING_STATUS_LIST_V1 = 'BitstringStatusListV1';
 
     /**
      * Gets allowable values of the enum
@@ -290,7 +289,6 @@ class FlowDataStatusListsDetailsInner implements ModelInterface, ArrayAccess, \J
     {
         return [
             self::STANDARD_REVOCATION_LIST2020,
-            self::STANDARD_BITSTRING_STATUS_LIST_V1,
         ];
     }
 
