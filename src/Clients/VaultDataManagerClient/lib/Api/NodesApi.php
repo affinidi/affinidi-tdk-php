@@ -157,15 +157,16 @@ class NodesApi
      * Operation createNode
      *
      * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput $create_node_input CreateNode (required)
+     * @param  string|null $parent_node_id parent node id, if not provided then root element is used (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createNode'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\VaultDataManagerClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK|\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError
      */
-    public function createNode($create_node_input, string $contentType = self::contentTypes['createNode'][0])
+    public function createNode($create_node_input, $parent_node_id = null, string $contentType = self::contentTypes['createNode'][0])
     {
-        list($response) = $this->createNodeWithHttpInfo($create_node_input, $contentType);
+        list($response) = $this->createNodeWithHttpInfo($create_node_input, $parent_node_id, $contentType);
         return $response;
     }
 
@@ -173,15 +174,16 @@ class NodesApi
      * Operation createNodeWithHttpInfo
      *
      * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput $create_node_input CreateNode (required)
+     * @param  string|null $parent_node_id parent node id, if not provided then root element is used (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createNode'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\VaultDataManagerClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK|\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createNodeWithHttpInfo($create_node_input, string $contentType = self::contentTypes['createNode'][0])
+    public function createNodeWithHttpInfo($create_node_input, $parent_node_id = null, string $contentType = self::contentTypes['createNode'][0])
     {
-        $request = $this->createNodeRequest($create_node_input, $contentType);
+        $request = $this->createNodeRequest($create_node_input, $parent_node_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -345,14 +347,15 @@ class NodesApi
      * Operation createNodeAsync
      *
      * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput $create_node_input CreateNode (required)
+     * @param  string|null $parent_node_id parent node id, if not provided then root element is used (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createNode'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createNodeAsync($create_node_input, string $contentType = self::contentTypes['createNode'][0])
+    public function createNodeAsync($create_node_input, $parent_node_id = null, string $contentType = self::contentTypes['createNode'][0])
     {
-        return $this->createNodeAsyncWithHttpInfo($create_node_input, $contentType)
+        return $this->createNodeAsyncWithHttpInfo($create_node_input, $parent_node_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -364,15 +367,16 @@ class NodesApi
      * Operation createNodeAsyncWithHttpInfo
      *
      * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput $create_node_input CreateNode (required)
+     * @param  string|null $parent_node_id parent node id, if not provided then root element is used (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createNode'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createNodeAsyncWithHttpInfo($create_node_input, string $contentType = self::contentTypes['createNode'][0])
+    public function createNodeAsyncWithHttpInfo($create_node_input, $parent_node_id = null, string $contentType = self::contentTypes['createNode'][0])
     {
         $returnType = '\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK';
-        $request = $this->createNodeRequest($create_node_input, $contentType);
+        $request = $this->createNodeRequest($create_node_input, $parent_node_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -414,12 +418,13 @@ class NodesApi
      * Create request for operation 'createNode'
      *
      * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput $create_node_input CreateNode (required)
+     * @param  string|null $parent_node_id parent node id, if not provided then root element is used (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createNode'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createNodeRequest($create_node_input, string $contentType = self::contentTypes['createNode'][0])
+    public function createNodeRequest($create_node_input, $parent_node_id = null, string $contentType = self::contentTypes['createNode'][0])
     {
 
         // verify the required parameter 'create_node_input' is set
@@ -430,6 +435,7 @@ class NodesApi
         }
 
 
+
         $resourcePath = '/v1/nodes';
         $formParams = [];
         $queryParams = [];
@@ -437,6 +443,15 @@ class NodesApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $parent_node_id,
+            'parentNodeId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
