@@ -31,6 +31,7 @@ docs/Model/ValidateJwtInput.md
 docs/Model/ValidateJwtOutput.md
 docs/Model/VerifyCredentialInput.md
 docs/Model/VerifyCredentialOutput.md
+docs/Model/VerifyCredentialV2Input.md
 docs/Model/VerifyPresentationInput.md
 docs/Model/VerifyPresentationOutput.md
 docs/Model/W3cCredentialStatus.md
@@ -72,6 +73,7 @@ lib/Model/ValidateJwtInput.php
 lib/Model/ValidateJwtOutput.php
 lib/Model/VerifyCredentialInput.php
 lib/Model/VerifyCredentialOutput.php
+lib/Model/VerifyCredentialV2Input.php
 lib/Model/VerifyPresentationInput.php
 lib/Model/VerifyPresentationOutput.php
 lib/Model/W3cCredentialStatus.php
