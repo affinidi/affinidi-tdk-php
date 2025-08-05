@@ -29,6 +29,7 @@ docs/Model/CorsStartFileScanOK.md
 docs/Model/CorsUpdateProfileDataOK.md
 docs/Model/CreateAccountInput.md
 docs/Model/CreateAccountOK.md
+docs/Model/CreateChildNodeInput.md
 docs/Model/CreateNodeInput.md
 docs/Model/CreateNodeOK.md
 docs/Model/DeleteAccountDto.md
@@ -97,6 +98,7 @@ lib/Model/CorsStartFileScanOK.php
 lib/Model/CorsUpdateProfileDataOK.php
 lib/Model/CreateAccountInput.php
 lib/Model/CreateAccountOK.php
+lib/Model/CreateChildNodeInput.php
 lib/Model/CreateNodeInput.php
 lib/Model/CreateNodeOK.php
 lib/Model/DeleteAccountDto.php
