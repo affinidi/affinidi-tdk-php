@@ -112,7 +112,6 @@ Class | Method | HTTP request | Description
 - [CreateProjectScopedTokenOutput](docs/Model/CreateProjectScopedTokenOutput.md)
 - [CreateTokenInput](docs/Model/CreateTokenInput.md)
 - [DeleteAccessOutput](docs/Model/DeleteAccessOutput.md)
-- [GetWellKnownDidOK](docs/Model/GetWellKnownDidOK.md)
 - [GrantAccessInput](docs/Model/GrantAccessInput.md)
 - [GrantAccessOutput](docs/Model/GrantAccessOutput.md)
 - [InvalidDIDError](docs/Model/InvalidDIDError.md)

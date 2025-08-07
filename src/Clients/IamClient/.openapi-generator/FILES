@@ -21,7 +21,6 @@ docs/Model/CreateProjectScopedTokenInput.md
 docs/Model/CreateProjectScopedTokenOutput.md
 docs/Model/CreateTokenInput.md
 docs/Model/DeleteAccessOutput.md
-docs/Model/GetWellKnownDidOK.md
 docs/Model/GrantAccessInput.md
 docs/Model/GrantAccessOutput.md
 docs/Model/InvalidDIDError.md
@@ -85,7 +84,6 @@ lib/Model/CreateProjectScopedTokenInput.php
 lib/Model/CreateProjectScopedTokenOutput.php
 lib/Model/CreateTokenInput.php
 lib/Model/DeleteAccessOutput.php
-lib/Model/GetWellKnownDidOK.php
 lib/Model/GrantAccessInput.php
 lib/Model/GrantAccessOutput.php
 lib/Model/InvalidDIDError.php
