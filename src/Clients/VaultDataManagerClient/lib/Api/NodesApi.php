@@ -75,6 +75,9 @@ class NodesApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
+        'createChildNode' => [
+            'application/json',
+        ],
         'createNode' => [
             'application/json',
         ],
@@ -151,6 +154,374 @@ class NodesApi
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * Operation createChildNode
+     *
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput $create_node_input CreateNode (required)
+     * @param  string|null $parent_node_id parent node id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createChildNode'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\VaultDataManagerClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK|\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError
+     */
+    public function createChildNode($create_node_input, $parent_node_id = null, string $contentType = self::contentTypes['createChildNode'][0])
+    {
+        list($response) = $this->createChildNodeWithHttpInfo($create_node_input, $parent_node_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation createChildNodeWithHttpInfo
+     *
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput $create_node_input CreateNode (required)
+     * @param  string|null $parent_node_id parent node id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createChildNode'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\VaultDataManagerClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK|\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createChildNodeWithHttpInfo($create_node_input, $parent_node_id = null, string $contentType = self::contentTypes['createChildNode'][0])
+    {
+        $request = $this->createChildNodeRequest($create_node_input, $parent_node_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createChildNodeAsync
+     *
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput $create_node_input CreateNode (required)
+     * @param  string|null $parent_node_id parent node id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createChildNode'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createChildNodeAsync($create_node_input, $parent_node_id = null, string $contentType = self::contentTypes['createChildNode'][0])
+    {
+        return $this->createChildNodeAsyncWithHttpInfo($create_node_input, $parent_node_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createChildNodeAsyncWithHttpInfo
+     *
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput $create_node_input CreateNode (required)
+     * @param  string|null $parent_node_id parent node id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createChildNode'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createChildNodeAsyncWithHttpInfo($create_node_input, $parent_node_id = null, string $contentType = self::contentTypes['createChildNode'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK';
+        $request = $this->createChildNodeRequest($create_node_input, $parent_node_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createChildNode'
+     *
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput $create_node_input CreateNode (required)
+     * @param  string|null $parent_node_id parent node id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createChildNode'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createChildNodeRequest($create_node_input, $parent_node_id = null, string $contentType = self::contentTypes['createChildNode'][0])
+    {
+
+        // verify the required parameter 'create_node_input' is set
+        if ($create_node_input === null || (is_array($create_node_input) && count($create_node_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $create_node_input when calling createChildNode'
+            );
+        }
+
+
+
+        $resourcePath = '/v1/nodes/{nodeId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $parent_node_id,
+            'parentNodeId', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($create_node_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_node_input));
+            } else {
+                $httpBody = $create_node_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
     }
 
     /**
