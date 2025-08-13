@@ -11,7 +11,7 @@ All URIs are relative to https://apse1.api.affinidi.io/iam, except if the operat
 ## `getWellKnownDid()`
 
 ```php
-getWellKnownDid(): \AffinidiTdk\Clients\IamClient\Model\GetWellKnownDidOK
+getWellKnownDid(): object
 ```
 
 
@@ -44,7 +44,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\AffinidiTdk\Clients\IamClient\Model\GetWellKnownDidOK**](../Model/GetWellKnownDidOK.md)
+**object**
 
 ### Authorization
 
