@@ -136,7 +136,7 @@ class WellKnownApi
      *
      * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\IamClient\Model\GetWellKnownDidOK|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError
+     * @return object|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError
      */
     public function getWellKnownDid(string $contentType = self::contentTypes['getWellKnownDid'][0])
     {
@@ -151,7 +151,7 @@ class WellKnownApi
      *
      * @throws \AffinidiTdk\Clients\IamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\IamClient\Model\GetWellKnownDidOK|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object|\AffinidiTdk\Clients\IamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getWellKnownDidWithHttpInfo(string $contentType = self::contentTypes['getWellKnownDid'][0])
     {
@@ -196,11 +196,11 @@ class WellKnownApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\AffinidiTdk\Clients\IamClient\Model\GetWellKnownDidOK' === '\SplFileObject') {
+                    if ('object' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\AffinidiTdk\Clients\IamClient\Model\GetWellKnownDidOK' !== 'string') {
+                        if ('object' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -218,7 +218,7 @@ class WellKnownApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\IamClient\Model\GetWellKnownDidOK', []),
+                        ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -264,7 +264,7 @@ class WellKnownApi
                 );
             }
 
-            $returnType = '\AffinidiTdk\Clients\IamClient\Model\GetWellKnownDidOK';
+            $returnType = 'object';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -297,7 +297,7 @@ class WellKnownApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\AffinidiTdk\Clients\IamClient\Model\GetWellKnownDidOK',
+                        'object',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -343,7 +343,7 @@ class WellKnownApi
      */
     public function getWellKnownDidAsyncWithHttpInfo(string $contentType = self::contentTypes['getWellKnownDid'][0])
     {
-        $returnType = '\AffinidiTdk\Clients\IamClient\Model\GetWellKnownDidOK';
+        $returnType = 'object';
         $request = $this->getWellKnownDidRequest($contentType);
 
         return $this->client
