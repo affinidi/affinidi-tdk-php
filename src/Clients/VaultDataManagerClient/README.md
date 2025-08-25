@@ -74,6 +74,7 @@ Class | Method | HTTP request | Description
 *FilesApi* | [**getScannedFileInfo**](docs/Api/FilesApi.md#getscannedfileinfo) | **GET** /v1/scanned-files/{scannedFileJobId} | 
 *FilesApi* | [**listScannedFiles**](docs/Api/FilesApi.md#listscannedfiles) | **GET** /v1/scanned-files/ | 
 *FilesApi* | [**startFileScan**](docs/Api/FilesApi.md#startfilescan) | **POST** /v1/nodes/{nodeId}/file/scan | 
+*NodesApi* | [**createChildNode**](docs/Api/NodesApi.md#createchildnode) | **POST** /v1/nodes/{nodeId} | 
 *NodesApi* | [**createNode**](docs/Api/NodesApi.md#createnode) | **POST** /v1/nodes | 
 *NodesApi* | [**deleteNode**](docs/Api/NodesApi.md#deletenode) | **DELETE** /v1/nodes/{nodeId} | 
 *NodesApi* | [**getDetailedNodeInfo**](docs/Api/NodesApi.md#getdetailednodeinfo) | **GET** /v1/nodes/{nodeId} | 
@@ -112,6 +113,7 @@ Class | Method | HTTP request | Description
 - [CorsUpdateProfileDataOK](docs/Model/CorsUpdateProfileDataOK.md)
 - [CreateAccountInput](docs/Model/CreateAccountInput.md)
 - [CreateAccountOK](docs/Model/CreateAccountOK.md)
+- [CreateChildNodeInput](docs/Model/CreateChildNodeInput.md)
 - [CreateNodeInput](docs/Model/CreateNodeInput.md)
 - [CreateNodeOK](docs/Model/CreateNodeOK.md)
 - [DeleteAccountDto](docs/Model/DeleteAccountDto.md)
