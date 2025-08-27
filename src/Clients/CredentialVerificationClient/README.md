@@ -100,6 +100,7 @@ Class | Method | HTTP request | Description
 - [ValidateJwtOutput](docs/Model/ValidateJwtOutput.md)
 - [VerifyCredentialInput](docs/Model/VerifyCredentialInput.md)
 - [VerifyCredentialOutput](docs/Model/VerifyCredentialOutput.md)
+- [VerifyCredentialV2Input](docs/Model/VerifyCredentialV2Input.md)
 - [VerifyPresentationInput](docs/Model/VerifyPresentationInput.md)
 - [VerifyPresentationOutput](docs/Model/VerifyPresentationOutput.md)
 - [W3cCredentialStatus](docs/Model/W3cCredentialStatus.md)
