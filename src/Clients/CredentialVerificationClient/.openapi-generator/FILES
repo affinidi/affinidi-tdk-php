@@ -34,6 +34,7 @@ docs/Model/VerifyCredentialOutput.md
 docs/Model/VerifyCredentialV2Input.md
 docs/Model/VerifyPresentationInput.md
 docs/Model/VerifyPresentationOutput.md
+docs/Model/VerifyPresentationV2Input.md
 docs/Model/W3cCredentialStatus.md
 docs/Model/W3cProof.md
 lib/Api/DefaultApi.php
@@ -76,6 +77,7 @@ lib/Model/VerifyCredentialOutput.php
 lib/Model/VerifyCredentialV2Input.php
 lib/Model/VerifyPresentationInput.php
 lib/Model/VerifyPresentationOutput.php
+lib/Model/VerifyPresentationV2Input.php
 lib/Model/W3cCredentialStatus.php
 lib/Model/W3cProof.php
 lib/NotFoundError.php
