@@ -1,6 +1,6 @@
 <?php
 /**
- * VerifyPresentationInput
+ * VerifyPresentationV2Input
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
- * VerifyPresentationInput Class Doc Comment
+ * VerifyPresentationV2Input Class Doc Comment
  *
  * @category Class
- * @description Request model of /verify-vp
+ * @description Request model of /v2/verify-vp
  * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class VerifyPresentationV2Input implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
       *
       * @var string
       */
-    protected static $openAPIModelName = 'VerifyPresentationInput';
+    protected static $openAPIModelName = 'VerifyPresentationV2Input';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,10 +60,8 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPITypes = [
         'verifiable_presentation' => 'object',
-        'signed_presentation' => 'object',
         'presentation_definition' => 'object',
         'presentation_submission' => 'object',
-        'dcql_query' => 'object',
         'challenge' => 'string'
     ];
 
@@ -76,10 +74,8 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPIFormats = [
         'verifiable_presentation' => null,
-        'signed_presentation' => null,
         'presentation_definition' => null,
         'presentation_submission' => null,
-        'dcql_query' => null,
         'challenge' => null
     ];
 
@@ -90,10 +86,8 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static array $openAPINullables = [
         'verifiable_presentation' => false,
-        'signed_presentation' => false,
         'presentation_definition' => false,
         'presentation_submission' => false,
-        'dcql_query' => false,
         'challenge' => false
     ];
 
@@ -184,10 +178,8 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $attributeMap = [
         'verifiable_presentation' => 'verifiablePresentation',
-        'signed_presentation' => 'signedPresentation',
         'presentation_definition' => 'presentationDefinition',
         'presentation_submission' => 'presentationSubmission',
-        'dcql_query' => 'dcqlQuery',
         'challenge' => 'challenge'
     ];
 
@@ -198,10 +190,8 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $setters = [
         'verifiable_presentation' => 'setVerifiablePresentation',
-        'signed_presentation' => 'setSignedPresentation',
         'presentation_definition' => 'setPresentationDefinition',
         'presentation_submission' => 'setPresentationSubmission',
-        'dcql_query' => 'setDcqlQuery',
         'challenge' => 'setChallenge'
     ];
 
@@ -212,10 +202,8 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $getters = [
         'verifiable_presentation' => 'getVerifiablePresentation',
-        'signed_presentation' => 'getSignedPresentation',
         'presentation_definition' => 'getPresentationDefinition',
         'presentation_submission' => 'getPresentationSubmission',
-        'dcql_query' => 'getDcqlQuery',
         'challenge' => 'getChallenge'
     ];
 
@@ -277,10 +265,8 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
     public function __construct(array $data = null)
     {
         $this->setIfExists('verifiable_presentation', $data ?? [], null);
-        $this->setIfExists('signed_presentation', $data ?? [], null);
         $this->setIfExists('presentation_definition', $data ?? [], null);
         $this->setIfExists('presentation_submission', $data ?? [], null);
-        $this->setIfExists('dcql_query', $data ?? [], null);
         $this->setIfExists('challenge', $data ?? [], null);
     }
 
@@ -354,33 +340,6 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
     }
 
     /**
-     * Gets signed_presentation
-     *
-     * @return object|null
-     */
-    public function getSignedPresentation()
-    {
-        return $this->container['signed_presentation'];
-    }
-
-    /**
-     * Sets signed_presentation
-     *
-     * @param object|null $signed_presentation signed_presentation
-     *
-     * @return self
-     */
-    public function setSignedPresentation($signed_presentation)
-    {
-        if (is_null($signed_presentation)) {
-            throw new \InvalidArgumentException('non-nullable signed_presentation cannot be null');
-        }
-        $this->container['signed_presentation'] = $signed_presentation;
-
-        return $this;
-    }
-
-    /**
      * Gets presentation_definition
      *
      * @return object|null
@@ -430,33 +389,6 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
             throw new \InvalidArgumentException('non-nullable presentation_submission cannot be null');
         }
         $this->container['presentation_submission'] = $presentation_submission;
-
-        return $this;
-    }
-
-    /**
-     * Gets dcql_query
-     *
-     * @return object|null
-     */
-    public function getDcqlQuery()
-    {
-        return $this->container['dcql_query'];
-    }
-
-    /**
-     * Sets dcql_query
-     *
-     * @param object|null $dcql_query dcql_query
-     *
-     * @return self
-     */
-    public function setDcqlQuery($dcql_query)
-    {
-        if (is_null($dcql_query)) {
-            throw new \InvalidArgumentException('non-nullable dcql_query cannot be null');
-        }
-        $this->container['dcql_query'] = $dcql_query;
 
         return $this;
     }
