@@ -30,6 +30,8 @@ docs/Model/SignCredentialsDm2SdJwtInputDto.md
 docs/Model/SignCredentialsDm2SdJwtResultDto.md
 docs/Model/SignJwtToken.md
 docs/Model/SignJwtTokenOK.md
+docs/Model/SignPresentationLdpInputDto.md
+docs/Model/SignPresentationLdpResultDto.md
 docs/Model/SigningFailedError.md
 docs/Model/UpdateWalletInput.md
 docs/Model/WalletDto.md
@@ -71,6 +73,8 @@ lib/Model/SignCredentialsDm2SdJwtInputDto.php
 lib/Model/SignCredentialsDm2SdJwtResultDto.php
 lib/Model/SignJwtToken.php
 lib/Model/SignJwtTokenOK.php
+lib/Model/SignPresentationLdpInputDto.php
+lib/Model/SignPresentationLdpResultDto.php
 lib/Model/SigningFailedError.php
 lib/Model/UpdateWalletInput.php
 lib/Model/WalletDto.php

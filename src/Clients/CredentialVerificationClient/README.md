@@ -103,6 +103,7 @@ Class | Method | HTTP request | Description
 - [VerifyCredentialV2Input](docs/Model/VerifyCredentialV2Input.md)
 - [VerifyPresentationInput](docs/Model/VerifyPresentationInput.md)
 - [VerifyPresentationOutput](docs/Model/VerifyPresentationOutput.md)
+- [VerifyPresentationV2Input](docs/Model/VerifyPresentationV2Input.md)
 - [W3cCredentialStatus](docs/Model/W3cCredentialStatus.md)
 - [W3cProof](docs/Model/W3cProof.md)
 
