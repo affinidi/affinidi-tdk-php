@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **client_secret** | **string** | OAuth2 client secret | [optional]
 **vp_definition** | **string** | VP definition in JSON stringify format | [optional]
 **presentation_definition** | **object** | Presentation Definition | [optional]
+**dcql_query** | **object** | DCQL query in JSON stringify format | [optional]
 **id_token_mapping** | [**\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]**](IdTokenMappingItem.md) | Fields name/path mapping between the vp_token and the id_token | [optional]
 **client_metadata** | [**\AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataInput**](LoginConfigurationClientMetadataInput.md) |  | [optional]
 **token_endpoint_auth_method** | [**\AffinidiTdk\Clients\LoginConfigurationClient\Model\TokenEndpointAuthMethod**](TokenEndpointAuthMethod.md) |  | [optional]
