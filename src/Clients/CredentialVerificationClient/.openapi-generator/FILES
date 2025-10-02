@@ -4,8 +4,6 @@ README.md
 docs/Api/DefaultApi.md
 docs/Model/Constraints.md
 docs/Model/ConstraintsStatuses.md
-docs/Model/CredentialRequirements.md
-docs/Model/CredentialRequirementsConstraints.md
 docs/Model/Descriptor.md
 docs/Model/Error.md
 docs/Model/ErrorDetail.md
@@ -34,6 +32,7 @@ docs/Model/VerifyCredentialOutput.md
 docs/Model/VerifyCredentialV2Input.md
 docs/Model/VerifyPresentationInput.md
 docs/Model/VerifyPresentationOutput.md
+docs/Model/VerifyPresentationV2Input.md
 docs/Model/W3cCredentialStatus.md
 docs/Model/W3cProof.md
 lib/Api/DefaultApi.php
@@ -45,8 +44,6 @@ lib/InvalidJwtTokenError.php
 lib/InvalidParameterError.php
 lib/Model/Constraints.php
 lib/Model/ConstraintsStatuses.php
-lib/Model/CredentialRequirements.php
-lib/Model/CredentialRequirementsConstraints.php
 lib/Model/Descriptor.php
 lib/Model/Error.php
 lib/Model/ErrorDetail.php
@@ -76,6 +73,7 @@ lib/Model/VerifyCredentialOutput.php
 lib/Model/VerifyCredentialV2Input.php
 lib/Model/VerifyPresentationInput.php
 lib/Model/VerifyPresentationOutput.php
+lib/Model/VerifyPresentationV2Input.php
 lib/Model/W3cCredentialStatus.php
 lib/Model/W3cProof.php
 lib/NotFoundError.php
