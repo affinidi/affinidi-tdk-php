@@ -63,6 +63,7 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
         'signed_presentation' => 'object',
         'presentation_definition' => 'object',
         'presentation_submission' => 'object',
+        'dcql_query' => 'object',
         'challenge' => 'string'
     ];
 
@@ -78,6 +79,7 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
         'signed_presentation' => null,
         'presentation_definition' => null,
         'presentation_submission' => null,
+        'dcql_query' => null,
         'challenge' => null
     ];
 
@@ -91,6 +93,7 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
         'signed_presentation' => false,
         'presentation_definition' => false,
         'presentation_submission' => false,
+        'dcql_query' => false,
         'challenge' => false
     ];
 
@@ -184,6 +187,7 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
         'signed_presentation' => 'signedPresentation',
         'presentation_definition' => 'presentationDefinition',
         'presentation_submission' => 'presentationSubmission',
+        'dcql_query' => 'dcqlQuery',
         'challenge' => 'challenge'
     ];
 
@@ -197,6 +201,7 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
         'signed_presentation' => 'setSignedPresentation',
         'presentation_definition' => 'setPresentationDefinition',
         'presentation_submission' => 'setPresentationSubmission',
+        'dcql_query' => 'setDcqlQuery',
         'challenge' => 'setChallenge'
     ];
 
@@ -210,6 +215,7 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
         'signed_presentation' => 'getSignedPresentation',
         'presentation_definition' => 'getPresentationDefinition',
         'presentation_submission' => 'getPresentationSubmission',
+        'dcql_query' => 'getDcqlQuery',
         'challenge' => 'getChallenge'
     ];
 
@@ -274,6 +280,7 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('signed_presentation', $data ?? [], null);
         $this->setIfExists('presentation_definition', $data ?? [], null);
         $this->setIfExists('presentation_submission', $data ?? [], null);
+        $this->setIfExists('dcql_query', $data ?? [], null);
         $this->setIfExists('challenge', $data ?? [], null);
     }
 
@@ -423,6 +430,33 @@ class VerifyPresentationInput implements ModelInterface, ArrayAccess, \JsonSeria
             throw new \InvalidArgumentException('non-nullable presentation_submission cannot be null');
         }
         $this->container['presentation_submission'] = $presentation_submission;
+
+        return $this;
+    }
+
+    /**
+     * Gets dcql_query
+     *
+     * @return object|null
+     */
+    public function getDcqlQuery()
+    {
+        return $this->container['dcql_query'];
+    }
+
+    /**
+     * Sets dcql_query
+     *
+     * @param object|null $dcql_query dcql_query
+     *
+     * @return self
+     */
+    public function setDcqlQuery($dcql_query)
+    {
+        if (is_null($dcql_query)) {
+            throw new \InvalidArgumentException('non-nullable dcql_query cannot be null');
+        }
+        $this->container['dcql_query'] = $dcql_query;
 
         return $this;
     }

@@ -20,7 +20,7 @@ All URIs are relative to https://api.vault.affinidi.com/vfs, except if the opera
 ## `createChildNode()`
 
 ```php
-createChildNode($create_node_input, $parent_node_id): \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK
+createChildNode($node_id, $create_child_node_input): \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeOK
 ```
 
 
@@ -46,11 +46,11 @@ $apiInstance = new AffinidiTdk\Clients\VaultDataManagerClient\Api\NodesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$create_node_input = new \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput(); // \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput | CreateNode
-$parent_node_id = 'parent_node_id_example'; // string | parent node id
+$node_id = 'node_id_example'; // string | parent node id
+$create_child_node_input = new \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateChildNodeInput(); // \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateChildNodeInput | CreateChildNode
 
 try {
-    $result = $apiInstance->createChildNode($create_node_input, $parent_node_id);
+    $result = $apiInstance->createChildNode($node_id, $create_child_node_input);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling NodesApi->createChildNode: ', $e->getMessage(), PHP_EOL;
@@ -61,8 +61,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **create_node_input** | [**\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateNodeInput**](../Model/CreateNodeInput.md)| CreateNode | |
-| **parent_node_id** | **string**| parent node id | [optional] |
+| **node_id** | **string**| parent node id | |
+| **create_child_node_input** | [**\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateChildNodeInput**](../Model/CreateChildNodeInput.md)| CreateChildNode | |
 
 ### Return type
 
