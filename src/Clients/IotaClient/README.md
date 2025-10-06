@@ -1,7 +1,7 @@
 # iota-client
 
 
-For more information, please visit [https://github.com/affinidi/affinidi-tdk](https://github.com/affinidi/affinidi-tdk).
+For more information, please visit [www.affinidi.com](www.affinidi.com).
 
 ## Installation & Usage
 
@@ -98,8 +98,10 @@ Class | Method | HTTP request | Description
 - [CorsInitiateDataSharingRequestOK](docs/Model/CorsInitiateDataSharingRequestOK.md)
 - [CorsIotOidc4vpcallbackOK](docs/Model/CorsIotOidc4vpcallbackOK.md)
 - [CorsIotaExchangeCredentialsOK](docs/Model/CorsIotaExchangeCredentialsOK.md)
+- [CreateDcqlQueryInput](docs/Model/CreateDcqlQueryInput.md)
 - [CreateIotaConfigurationInput](docs/Model/CreateIotaConfigurationInput.md)
 - [CreatePexQueryInput](docs/Model/CreatePexQueryInput.md)
+- [DcqlQueryDto](docs/Model/DcqlQueryDto.md)
 - [DeletePexQueriesInput](docs/Model/DeletePexQueriesInput.md)
 - [FetchIOTAVPResponseInput](docs/Model/FetchIOTAVPResponseInput.md)
 - [FetchIOTAVPResponseOK](docs/Model/FetchIOTAVPResponseOK.md)
@@ -115,6 +117,7 @@ Class | Method | HTTP request | Description
 - [IotaExchangeCredentialsOK](docs/Model/IotaExchangeCredentialsOK.md)
 - [IotaExchangeCredentialsOKCredentials](docs/Model/IotaExchangeCredentialsOKCredentials.md)
 - [ListConfigurationOK](docs/Model/ListConfigurationOK.md)
+- [ListDcqlQueriesOK](docs/Model/ListDcqlQueriesOK.md)
 - [ListLoggedConsentsOK](docs/Model/ListLoggedConsentsOK.md)
 - [ListPexQueriesOK](docs/Model/ListPexQueriesOK.md)
 - [MessagePublishingError](docs/Model/MessagePublishingError.md)
@@ -129,6 +132,7 @@ Class | Method | HTTP request | Description
 - [SavePexQueriesUpdateInputQueriesInner](docs/Model/SavePexQueriesUpdateInputQueriesInner.md)
 - [UpdateConfigurationByIdInput](docs/Model/UpdateConfigurationByIdInput.md)
 - [UpdateConfigurationByIdOK](docs/Model/UpdateConfigurationByIdOK.md)
+- [UpdateDcqlQueryInput](docs/Model/UpdateDcqlQueryInput.md)
 - [UpdatePexQueryInput](docs/Model/UpdatePexQueryInput.md)
 - [VPTokenValidationError](docs/Model/VPTokenValidationError.md)
 
