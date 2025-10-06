@@ -1,7 +1,7 @@
 # wallets-client
 
 
-For more information, please visit [https://github.com/affinidi/affinidi-tdk](https://github.com/affinidi/affinidi-tdk).
+For more information, please visit [www.affinidi.com](www.affinidi.com).
 
 ## Installation & Usage
 
@@ -108,6 +108,8 @@ Class | Method | HTTP request | Description
 - [SignCredentialsDm2SdJwtResultDto](docs/Model/SignCredentialsDm2SdJwtResultDto.md)
 - [SignJwtToken](docs/Model/SignJwtToken.md)
 - [SignJwtTokenOK](docs/Model/SignJwtTokenOK.md)
+- [SignPresentationLdpInputDto](docs/Model/SignPresentationLdpInputDto.md)
+- [SignPresentationLdpResultDto](docs/Model/SignPresentationLdpResultDto.md)
 - [SigningFailedError](docs/Model/SigningFailedError.md)
 - [UpdateWalletInput](docs/Model/UpdateWalletInput.md)
 - [WalletDto](docs/Model/WalletDto.md)
