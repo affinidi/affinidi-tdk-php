@@ -21,8 +21,10 @@ docs/Model/CorsFetchIotaVpResponseOK.md
 docs/Model/CorsInitiateDataSharingRequestOK.md
 docs/Model/CorsIotOidc4vpcallbackOK.md
 docs/Model/CorsIotaExchangeCredentialsOK.md
+docs/Model/CreateDcqlQueryInput.md
 docs/Model/CreateIotaConfigurationInput.md
 docs/Model/CreatePexQueryInput.md
+docs/Model/DcqlQueryDto.md
 docs/Model/DeletePexQueriesInput.md
 docs/Model/FetchIOTAVPResponseInput.md
 docs/Model/FetchIOTAVPResponseOK.md
@@ -38,6 +40,7 @@ docs/Model/IotaExchangeCredentials.md
 docs/Model/IotaExchangeCredentialsOK.md
 docs/Model/IotaExchangeCredentialsOKCredentials.md
 docs/Model/ListConfigurationOK.md
+docs/Model/ListDcqlQueriesOK.md
 docs/Model/ListLoggedConsentsOK.md
 docs/Model/ListPexQueriesOK.md
 docs/Model/MessagePublishingError.md
@@ -52,6 +55,7 @@ docs/Model/SavePexQueriesUpdateInput.md
 docs/Model/SavePexQueriesUpdateInputQueriesInner.md
 docs/Model/UpdateConfigurationByIdInput.md
 docs/Model/UpdateConfigurationByIdOK.md
+docs/Model/UpdateDcqlQueryInput.md
 docs/Model/UpdatePexQueryInput.md
 docs/Model/VPTokenValidationError.md
 lib/Api/CallbackApi.php
@@ -80,8 +84,10 @@ lib/Model/CorsFetchIotaVpResponseOK.php
 lib/Model/CorsInitiateDataSharingRequestOK.php
 lib/Model/CorsIotOidc4vpcallbackOK.php
 lib/Model/CorsIotaExchangeCredentialsOK.php
+lib/Model/CreateDcqlQueryInput.php
 lib/Model/CreateIotaConfigurationInput.php
 lib/Model/CreatePexQueryInput.php
+lib/Model/DcqlQueryDto.php
 lib/Model/DeletePexQueriesInput.php
 lib/Model/FetchIOTAVPResponseInput.php
 lib/Model/FetchIOTAVPResponseOK.php
@@ -97,6 +103,7 @@ lib/Model/IotaExchangeCredentials.php
 lib/Model/IotaExchangeCredentialsOK.php
 lib/Model/IotaExchangeCredentialsOKCredentials.php
 lib/Model/ListConfigurationOK.php
+lib/Model/ListDcqlQueriesOK.php
 lib/Model/ListLoggedConsentsOK.php
 lib/Model/ListPexQueriesOK.php
 lib/Model/MessagePublishingError.php
@@ -112,6 +119,7 @@ lib/Model/SavePexQueriesUpdateInput.php
 lib/Model/SavePexQueriesUpdateInputQueriesInner.php
 lib/Model/UpdateConfigurationByIdInput.php
 lib/Model/UpdateConfigurationByIdOK.php
+lib/Model/UpdateDcqlQueryInput.php
 lib/Model/UpdatePexQueryInput.php
 lib/Model/VPTokenValidationError.php
 lib/NotFoundError.php
