@@ -5,6 +5,8 @@ docs/Api/RevocationApi.md
 docs/Api/WalletApi.md
 docs/Model/CreateWalletInput.md
 docs/Model/CreateWalletResponse.md
+docs/Model/CreateWalletV2Input.md
+docs/Model/CreateWalletV2Response.md
 docs/Model/EntityNotFoundError.md
 docs/Model/GetRevocationCredentialStatusOK.md
 docs/Model/GetRevocationListCredentialResultDto.md
@@ -30,10 +32,13 @@ docs/Model/SignCredentialsDm2SdJwtInputDto.md
 docs/Model/SignCredentialsDm2SdJwtResultDto.md
 docs/Model/SignJwtToken.md
 docs/Model/SignJwtTokenOK.md
+docs/Model/SignPresentationLdpInputDto.md
+docs/Model/SignPresentationLdpResultDto.md
 docs/Model/SigningFailedError.md
 docs/Model/UpdateWalletInput.md
 docs/Model/WalletDto.md
 docs/Model/WalletDtoKeysInner.md
+docs/Model/WalletV2Dto.md
 docs/Model/WalletsListDto.md
 lib/Api/RevocationApi.php
 lib/Api/WalletApi.php
@@ -45,6 +50,8 @@ lib/InvalidJwtTokenError.php
 lib/InvalidParameterError.php
 lib/Model/CreateWalletInput.php
 lib/Model/CreateWalletResponse.php
+lib/Model/CreateWalletV2Input.php
+lib/Model/CreateWalletV2Response.php
 lib/Model/EntityNotFoundError.php
 lib/Model/GetRevocationCredentialStatusOK.php
 lib/Model/GetRevocationListCredentialResultDto.php
@@ -71,10 +78,13 @@ lib/Model/SignCredentialsDm2SdJwtInputDto.php
 lib/Model/SignCredentialsDm2SdJwtResultDto.php
 lib/Model/SignJwtToken.php
 lib/Model/SignJwtTokenOK.php
+lib/Model/SignPresentationLdpInputDto.php
+lib/Model/SignPresentationLdpResultDto.php
 lib/Model/SigningFailedError.php
 lib/Model/UpdateWalletInput.php
 lib/Model/WalletDto.php
 lib/Model/WalletDtoKeysInner.php
+lib/Model/WalletV2Dto.php
 lib/Model/WalletsListDto.php
 lib/NotFoundError.php
 lib/ObjectSerializer.php

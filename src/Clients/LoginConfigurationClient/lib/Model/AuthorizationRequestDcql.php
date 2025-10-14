@@ -1,6 +1,6 @@
 <?php
 /**
- * LoginSessionDtoAuthorizationRequest
+ * AuthorizationRequestDcql
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
 
 /**
- * LoginSessionDtoAuthorizationRequest Class Doc Comment
+ * AuthorizationRequestDcql Class Doc Comment
  *
  * @category Class
- * @description Authorization Request Object
  * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class AuthorizationRequestDcql implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LoginSessionDto_authorizationRequest';
+    protected static $openAPIModelName = 'AuthorizationRequestDcql';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,11 +59,10 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'state' => 'string',
-        'presentation_definition' => 'string',
+        'dcql_query' => 'string',
         'ari' => 'string',
         'client_id' => 'string',
-        'nonce' => 'string',
-        'dcql_query' => 'string'
+        'nonce' => 'string'
     ];
 
     /**
@@ -76,11 +74,10 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'state' => null,
-        'presentation_definition' => null,
+        'dcql_query' => null,
         'ari' => null,
         'client_id' => null,
-        'nonce' => null,
-        'dcql_query' => null
+        'nonce' => null
     ];
 
     /**
@@ -90,11 +87,10 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
       */
     protected static array $openAPINullables = [
         'state' => false,
-        'presentation_definition' => false,
+        'dcql_query' => false,
         'ari' => false,
         'client_id' => false,
-        'nonce' => false,
-        'dcql_query' => false
+        'nonce' => false
     ];
 
     /**
@@ -184,11 +180,10 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'state' => 'state',
-        'presentation_definition' => 'presentationDefinition',
+        'dcql_query' => 'dcqlQuery',
         'ari' => 'ari',
         'client_id' => 'clientId',
-        'nonce' => 'nonce',
-        'dcql_query' => 'dcqlQuery'
+        'nonce' => 'nonce'
     ];
 
     /**
@@ -198,11 +193,10 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'state' => 'setState',
-        'presentation_definition' => 'setPresentationDefinition',
+        'dcql_query' => 'setDcqlQuery',
         'ari' => 'setAri',
         'client_id' => 'setClientId',
-        'nonce' => 'setNonce',
-        'dcql_query' => 'setDcqlQuery'
+        'nonce' => 'setNonce'
     ];
 
     /**
@@ -212,11 +206,10 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'state' => 'getState',
-        'presentation_definition' => 'getPresentationDefinition',
+        'dcql_query' => 'getDcqlQuery',
         'ari' => 'getAri',
         'client_id' => 'getClientId',
-        'nonce' => 'getNonce',
-        'dcql_query' => 'getDcqlQuery'
+        'nonce' => 'getNonce'
     ];
 
     /**
@@ -277,11 +270,10 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->setIfExists('state', $data ?? [], null);
-        $this->setIfExists('presentation_definition', $data ?? [], null);
+        $this->setIfExists('dcql_query', $data ?? [], null);
         $this->setIfExists('ari', $data ?? [], null);
         $this->setIfExists('client_id', $data ?? [], null);
         $this->setIfExists('nonce', $data ?? [], null);
-        $this->setIfExists('dcql_query', $data ?? [], null);
     }
 
     /**
@@ -313,9 +305,6 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
 
         if ($this->container['state'] === null) {
             $invalidProperties[] = "'state' can't be null";
-        }
-        if ($this->container['presentation_definition'] === null) {
-            $invalidProperties[] = "'presentation_definition' can't be null";
         }
         if ($this->container['dcql_query'] === null) {
             $invalidProperties[] = "'dcql_query' can't be null";
@@ -363,28 +352,28 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets presentation_definition
+     * Gets dcql_query
      *
      * @return string
      */
-    public function getPresentationDefinition()
+    public function getDcqlQuery()
     {
-        return $this->container['presentation_definition'];
+        return $this->container['dcql_query'];
     }
 
     /**
-     * Sets presentation_definition
+     * Sets dcql_query
      *
-     * @param string $presentation_definition Presentation Definition to ask from the user. In JSON Stringify format.
+     * @param string $dcql_query DCQL query to ask from the user. In JSON Stringify format.
      *
      * @return self
      */
-    public function setPresentationDefinition($presentation_definition)
+    public function setDcqlQuery($dcql_query)
     {
-        if (is_null($presentation_definition)) {
-            throw new \InvalidArgumentException('non-nullable presentation_definition cannot be null');
+        if (is_null($dcql_query)) {
+            throw new \InvalidArgumentException('non-nullable dcql_query cannot be null');
         }
-        $this->container['presentation_definition'] = $presentation_definition;
+        $this->container['dcql_query'] = $dcql_query;
 
         return $this;
     }
@@ -466,33 +455,6 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
             throw new \InvalidArgumentException('non-nullable nonce cannot be null');
         }
         $this->container['nonce'] = $nonce;
-
-        return $this;
-    }
-
-    /**
-     * Gets dcql_query
-     *
-     * @return string
-     */
-    public function getDcqlQuery()
-    {
-        return $this->container['dcql_query'];
-    }
-
-    /**
-     * Sets dcql_query
-     *
-     * @param string $dcql_query DCQL query to ask from the user. In JSON Stringify format.
-     *
-     * @return self
-     */
-    public function setDcqlQuery($dcql_query)
-    {
-        if (is_null($dcql_query)) {
-            throw new \InvalidArgumentException('non-nullable dcql_query cannot be null');
-        }
-        $this->container['dcql_query'] = $dcql_query;
 
         return $this;
     }
