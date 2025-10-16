@@ -64,6 +64,7 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
         'post_logout_redirect_uris' => 'string[]',
         'vp_definition' => 'string',
         'presentation_definition' => 'object',
+        'dcql_query' => 'object',
         'id_token_mapping' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]',
         'client_metadata' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataInput',
         'claim_format' => 'string',
@@ -86,6 +87,7 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
         'post_logout_redirect_uris' => null,
         'vp_definition' => null,
         'presentation_definition' => null,
+        'dcql_query' => null,
         'id_token_mapping' => null,
         'client_metadata' => null,
         'claim_format' => null,
@@ -106,6 +108,7 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
         'post_logout_redirect_uris' => false,
         'vp_definition' => false,
         'presentation_definition' => false,
+        'dcql_query' => false,
         'id_token_mapping' => false,
         'client_metadata' => false,
         'claim_format' => false,
@@ -206,6 +209,7 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
         'post_logout_redirect_uris' => 'postLogoutRedirectUris',
         'vp_definition' => 'vpDefinition',
         'presentation_definition' => 'presentationDefinition',
+        'dcql_query' => 'dcqlQuery',
         'id_token_mapping' => 'idTokenMapping',
         'client_metadata' => 'clientMetadata',
         'claim_format' => 'claimFormat',
@@ -226,6 +230,7 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
         'post_logout_redirect_uris' => 'setPostLogoutRedirectUris',
         'vp_definition' => 'setVpDefinition',
         'presentation_definition' => 'setPresentationDefinition',
+        'dcql_query' => 'setDcqlQuery',
         'id_token_mapping' => 'setIdTokenMapping',
         'client_metadata' => 'setClientMetadata',
         'claim_format' => 'setClaimFormat',
@@ -246,6 +251,7 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
         'post_logout_redirect_uris' => 'getPostLogoutRedirectUris',
         'vp_definition' => 'getVpDefinition',
         'presentation_definition' => 'getPresentationDefinition',
+        'dcql_query' => 'getDcqlQuery',
         'id_token_mapping' => 'getIdTokenMapping',
         'client_metadata' => 'getClientMetadata',
         'claim_format' => 'getClaimFormat',
@@ -332,6 +338,7 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('post_logout_redirect_uris', $data ?? [], null);
         $this->setIfExists('vp_definition', $data ?? [], null);
         $this->setIfExists('presentation_definition', $data ?? [], null);
+        $this->setIfExists('dcql_query', $data ?? [], null);
         $this->setIfExists('id_token_mapping', $data ?? [], null);
         $this->setIfExists('client_metadata', $data ?? [], null);
         $this->setIfExists('claim_format', $data ?? [], null);
@@ -559,6 +566,33 @@ class CreateLoginConfigurationInput implements ModelInterface, ArrayAccess, \Jso
             throw new \InvalidArgumentException('non-nullable presentation_definition cannot be null');
         }
         $this->container['presentation_definition'] = $presentation_definition;
+
+        return $this;
+    }
+
+    /**
+     * Gets dcql_query
+     *
+     * @return object|null
+     */
+    public function getDcqlQuery()
+    {
+        return $this->container['dcql_query'];
+    }
+
+    /**
+     * Sets dcql_query
+     *
+     * @param object|null $dcql_query DCQL query in JSON stringify format
+     *
+     * @return self
+     */
+    public function setDcqlQuery($dcql_query)
+    {
+        if (is_null($dcql_query)) {
+            throw new \InvalidArgumentException('non-nullable dcql_query cannot be null');
+        }
+        $this->container['dcql_query'] = $dcql_query;
 
         return $this;
     }
