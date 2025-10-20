@@ -61,6 +61,7 @@ class CallbackInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'state' => 'string',
         'presentation_submission' => 'string',
         'vp_token' => 'string',
+        'response_code' => 'string',
         'error' => 'string',
         'error_description' => 'string',
         'onboarded' => 'bool'
@@ -77,6 +78,7 @@ class CallbackInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'state' => null,
         'presentation_submission' => null,
         'vp_token' => null,
+        'response_code' => null,
         'error' => null,
         'error_description' => null,
         'onboarded' => null
@@ -91,6 +93,7 @@ class CallbackInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'state' => false,
         'presentation_submission' => false,
         'vp_token' => false,
+        'response_code' => false,
         'error' => false,
         'error_description' => false,
         'onboarded' => false
@@ -185,6 +188,7 @@ class CallbackInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'state' => 'state',
         'presentation_submission' => 'presentation_submission',
         'vp_token' => 'vp_token',
+        'response_code' => 'response_code',
         'error' => 'error',
         'error_description' => 'error_description',
         'onboarded' => 'onboarded'
@@ -199,6 +203,7 @@ class CallbackInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'state' => 'setState',
         'presentation_submission' => 'setPresentationSubmission',
         'vp_token' => 'setVpToken',
+        'response_code' => 'setResponseCode',
         'error' => 'setError',
         'error_description' => 'setErrorDescription',
         'onboarded' => 'setOnboarded'
@@ -213,6 +218,7 @@ class CallbackInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'state' => 'getState',
         'presentation_submission' => 'getPresentationSubmission',
         'vp_token' => 'getVpToken',
+        'response_code' => 'getResponseCode',
         'error' => 'getError',
         'error_description' => 'getErrorDescription',
         'onboarded' => 'getOnboarded'
@@ -278,6 +284,7 @@ class CallbackInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('state', $data ?? [], null);
         $this->setIfExists('presentation_submission', $data ?? [], null);
         $this->setIfExists('vp_token', $data ?? [], null);
+        $this->setIfExists('response_code', $data ?? [], null);
         $this->setIfExists('error', $data ?? [], null);
         $this->setIfExists('error_description', $data ?? [], null);
         $this->setIfExists('onboarded', $data ?? [], null);
@@ -405,6 +412,33 @@ class CallbackInput implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable vp_token cannot be null');
         }
         $this->container['vp_token'] = $vp_token;
+
+        return $this;
+    }
+
+    /**
+     * Gets response_code
+     *
+     * @return string|null
+     */
+    public function getResponseCode()
+    {
+        return $this->container['response_code'];
+    }
+
+    /**
+     * Sets response_code
+     *
+     * @param string|null $response_code Used only for internal system flows. This field is not applicable  for external client integrations and will not produce valid results  when used outside of internal contexts.
+     *
+     * @return self
+     */
+    public function setResponseCode($response_code)
+    {
+        if (is_null($response_code)) {
+            throw new \InvalidArgumentException('non-nullable response_code cannot be null');
+        }
+        $this->container['response_code'] = $response_code;
 
         return $this;
     }

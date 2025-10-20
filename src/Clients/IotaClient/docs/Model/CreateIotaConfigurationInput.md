@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **enable_consent_audit_log** | **bool** | Records the user&#39;s consent when they share their data, including the type of data shared when enabled. |
 **token_max_age** | **float** | This is the lifetime of the signed request token during the data-sharing flow. | [optional]
 **client_metadata** | [**\AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDtoClientMetadata**](IotaConfigurationDtoClientMetadata.md) |  |
-**mode** | **string** | Determines whether to handle the data-sharing request using the WebSocket or Redirect flow. | [optional] [default to 'websocket']
+**mode** | **string** | Determines whether to handle the data-sharing request using the WebSocket, Redirect or Didcomm messaging flow. | [optional] [default to 'websocket']
 **redirect_uris** | **string[]** | List of allowed URLs to redirect users, including the response from the request. This is required if the selected data-sharing mode is Redirect. | [optional]
 **enable_idv_providers** | **bool** | Enables identity verification from user with a 3rd-party provider when a verified identity document is not found. | [optional]
 

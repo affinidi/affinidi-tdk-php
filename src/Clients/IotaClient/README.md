@@ -1,7 +1,7 @@
 # iota-client
 
 
-For more information, please visit [https://github.com/affinidi/affinidi-tdk](https://github.com/affinidi/affinidi-tdk).
+For more information, please visit [www.affinidi.com](www.affinidi.com).
 
 ## Installation & Usage
 
@@ -67,6 +67,11 @@ Class | Method | HTTP request | Description
 *ConfigurationsApi* | [**getIotaConfigurationMetaData**](docs/Api/ConfigurationsApi.md#getiotaconfigurationmetadata) | **GET** /v1/projects/{projectId}/configurations/{configurationId}/metadata | 
 *ConfigurationsApi* | [**listIotaConfigurations**](docs/Api/ConfigurationsApi.md#listiotaconfigurations) | **GET** /v1/configurations | 
 *ConfigurationsApi* | [**updateIotaConfigurationById**](docs/Api/ConfigurationsApi.md#updateiotaconfigurationbyid) | **PATCH** /v1/configurations/{configurationId} | 
+*DcqlQueryApi* | [**createDcqlQuery**](docs/Api/DcqlQueryApi.md#createdcqlquery) | **POST** /v1/configurations/{configurationId}/dcql-queries | 
+*DcqlQueryApi* | [**deleteDcqlQueryById**](docs/Api/DcqlQueryApi.md#deletedcqlquerybyid) | **DELETE** /v1/configurations/{configurationId}/dcql-queries/{queryId} | 
+*DcqlQueryApi* | [**getDcqlQueryById**](docs/Api/DcqlQueryApi.md#getdcqlquerybyid) | **GET** /v1/configurations/{configurationId}/dcql-queries/{queryId} | 
+*DcqlQueryApi* | [**listDcqlQueries**](docs/Api/DcqlQueryApi.md#listdcqlqueries) | **GET** /v1/configurations/{configurationId}/dcql-queries | 
+*DcqlQueryApi* | [**updateDcqlQueryById**](docs/Api/DcqlQueryApi.md#updatedcqlquerybyid) | **PATCH** /v1/configurations/{configurationId}/dcql-queries/{queryId} | 
 *DefaultApi* | [**listLoggedConsents**](docs/Api/DefaultApi.md#listloggedconsents) | **GET** /v1/logged-consents | 
 *IotaApi* | [**awsExchangeCredentials**](docs/Api/IotaApi.md#awsexchangecredentials) | **POST** /v1/aws-exchange-credentials | 
 *IotaApi* | [**awsExchangeCredentialsProjectToken**](docs/Api/IotaApi.md#awsexchangecredentialsprojecttoken) | **POST** /v1/aws-exchange-credentials/project-token | 
@@ -98,8 +103,10 @@ Class | Method | HTTP request | Description
 - [CorsInitiateDataSharingRequestOK](docs/Model/CorsInitiateDataSharingRequestOK.md)
 - [CorsIotOidc4vpcallbackOK](docs/Model/CorsIotOidc4vpcallbackOK.md)
 - [CorsIotaExchangeCredentialsOK](docs/Model/CorsIotaExchangeCredentialsOK.md)
+- [CreateDcqlQueryInput](docs/Model/CreateDcqlQueryInput.md)
 - [CreateIotaConfigurationInput](docs/Model/CreateIotaConfigurationInput.md)
 - [CreatePexQueryInput](docs/Model/CreatePexQueryInput.md)
+- [DcqlQueryDto](docs/Model/DcqlQueryDto.md)
 - [DeletePexQueriesInput](docs/Model/DeletePexQueriesInput.md)
 - [FetchIOTAVPResponseInput](docs/Model/FetchIOTAVPResponseInput.md)
 - [FetchIOTAVPResponseOK](docs/Model/FetchIOTAVPResponseOK.md)
@@ -115,6 +122,7 @@ Class | Method | HTTP request | Description
 - [IotaExchangeCredentialsOK](docs/Model/IotaExchangeCredentialsOK.md)
 - [IotaExchangeCredentialsOKCredentials](docs/Model/IotaExchangeCredentialsOKCredentials.md)
 - [ListConfigurationOK](docs/Model/ListConfigurationOK.md)
+- [ListDcqlQueriesOK](docs/Model/ListDcqlQueriesOK.md)
 - [ListLoggedConsentsOK](docs/Model/ListLoggedConsentsOK.md)
 - [ListPexQueriesOK](docs/Model/ListPexQueriesOK.md)
 - [MessagePublishingError](docs/Model/MessagePublishingError.md)
@@ -129,6 +137,7 @@ Class | Method | HTTP request | Description
 - [SavePexQueriesUpdateInputQueriesInner](docs/Model/SavePexQueriesUpdateInputQueriesInner.md)
 - [UpdateConfigurationByIdInput](docs/Model/UpdateConfigurationByIdInput.md)
 - [UpdateConfigurationByIdOK](docs/Model/UpdateConfigurationByIdOK.md)
+- [UpdateDcqlQueryInput](docs/Model/UpdateDcqlQueryInput.md)
 - [UpdatePexQueryInput](docs/Model/UpdatePexQueryInput.md)
 - [VPTokenValidationError](docs/Model/VPTokenValidationError.md)
 

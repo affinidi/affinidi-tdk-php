@@ -36,6 +36,7 @@ use \AffinidiTdk\Clients\LoginConfigurationClient\ObjectSerializer;
  * LoginSessionDtoAuthorizationRequest Class Doc Comment
  *
  * @category Class
+ * @description Authorization Request Object
  * @package  AffinidiTdk\Clients\LoginConfigurationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -62,7 +63,8 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
         'presentation_definition' => 'string',
         'ari' => 'string',
         'client_id' => 'string',
-        'nonce' => 'string'
+        'nonce' => 'string',
+        'dcql_query' => 'string'
     ];
 
     /**
@@ -77,7 +79,8 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
         'presentation_definition' => null,
         'ari' => null,
         'client_id' => null,
-        'nonce' => null
+        'nonce' => null,
+        'dcql_query' => null
     ];
 
     /**
@@ -90,7 +93,8 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
         'presentation_definition' => false,
         'ari' => false,
         'client_id' => false,
-        'nonce' => false
+        'nonce' => false,
+        'dcql_query' => false
     ];
 
     /**
@@ -183,7 +187,8 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
         'presentation_definition' => 'presentationDefinition',
         'ari' => 'ari',
         'client_id' => 'clientId',
-        'nonce' => 'nonce'
+        'nonce' => 'nonce',
+        'dcql_query' => 'dcqlQuery'
     ];
 
     /**
@@ -196,7 +201,8 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
         'presentation_definition' => 'setPresentationDefinition',
         'ari' => 'setAri',
         'client_id' => 'setClientId',
-        'nonce' => 'setNonce'
+        'nonce' => 'setNonce',
+        'dcql_query' => 'setDcqlQuery'
     ];
 
     /**
@@ -209,7 +215,8 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
         'presentation_definition' => 'getPresentationDefinition',
         'ari' => 'getAri',
         'client_id' => 'getClientId',
-        'nonce' => 'getNonce'
+        'nonce' => 'getNonce',
+        'dcql_query' => 'getDcqlQuery'
     ];
 
     /**
@@ -274,6 +281,7 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
         $this->setIfExists('ari', $data ?? [], null);
         $this->setIfExists('client_id', $data ?? [], null);
         $this->setIfExists('nonce', $data ?? [], null);
+        $this->setIfExists('dcql_query', $data ?? [], null);
     }
 
     /**
@@ -308,6 +316,9 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
         }
         if ($this->container['presentation_definition'] === null) {
             $invalidProperties[] = "'presentation_definition' can't be null";
+        }
+        if ($this->container['dcql_query'] === null) {
+            $invalidProperties[] = "'dcql_query' can't be null";
         }
         return $invalidProperties;
     }
@@ -455,6 +466,33 @@ class LoginSessionDtoAuthorizationRequest implements ModelInterface, ArrayAccess
             throw new \InvalidArgumentException('non-nullable nonce cannot be null');
         }
         $this->container['nonce'] = $nonce;
+
+        return $this;
+    }
+
+    /**
+     * Gets dcql_query
+     *
+     * @return string
+     */
+    public function getDcqlQuery()
+    {
+        return $this->container['dcql_query'];
+    }
+
+    /**
+     * Sets dcql_query
+     *
+     * @param string $dcql_query DCQL query to ask from the user. In JSON Stringify format.
+     *
+     * @return self
+     */
+    public function setDcqlQuery($dcql_query)
+    {
+        if (is_null($dcql_query)) {
+            throw new \InvalidArgumentException('non-nullable dcql_query cannot be null');
+        }
+        $this->container['dcql_query'] = $dcql_query;
 
         return $this;
     }

@@ -1,7 +1,7 @@
 # wallets-client
 
 
-For more information, please visit [https://github.com/affinidi/affinidi-tdk](https://github.com/affinidi/affinidi-tdk).
+For more information, please visit [www.affinidi.com](www.affinidi.com).
 
 ## Installation & Usage
 
@@ -83,6 +83,8 @@ Class | Method | HTTP request | Description
 
 - [CreateWalletInput](docs/Model/CreateWalletInput.md)
 - [CreateWalletResponse](docs/Model/CreateWalletResponse.md)
+- [CreateWalletV2Input](docs/Model/CreateWalletV2Input.md)
+- [CreateWalletV2Response](docs/Model/CreateWalletV2Response.md)
 - [EntityNotFoundError](docs/Model/EntityNotFoundError.md)
 - [GetRevocationCredentialStatusOK](docs/Model/GetRevocationCredentialStatusOK.md)
 - [GetRevocationListCredentialResultDto](docs/Model/GetRevocationListCredentialResultDto.md)
@@ -98,20 +100,23 @@ Class | Method | HTTP request | Description
 - [SignCredentialInputDto](docs/Model/SignCredentialInputDto.md)
 - [SignCredentialInputDtoUnsignedCredentialParams](docs/Model/SignCredentialInputDtoUnsignedCredentialParams.md)
 - [SignCredentialResultDto](docs/Model/SignCredentialResultDto.md)
-- [SignCredentialsDm1JwtInputDto](docs/Model/SignCredentialsDm1JwtInputDto.md)
-- [SignCredentialsDm1JwtResultDto](docs/Model/SignCredentialsDm1JwtResultDto.md)
 - [SignCredentialsDm1LdInputDto](docs/Model/SignCredentialsDm1LdInputDto.md)
 - [SignCredentialsDm1LdResultDto](docs/Model/SignCredentialsDm1LdResultDto.md)
-- [SignCredentialsDm2LdInputDto](docs/Model/SignCredentialsDm2LdInputDto.md)
-- [SignCredentialsDm2LdResultDto](docs/Model/SignCredentialsDm2LdResultDto.md)
 - [SignCredentialsDm2SdJwtInputDto](docs/Model/SignCredentialsDm2SdJwtInputDto.md)
 - [SignCredentialsDm2SdJwtResultDto](docs/Model/SignCredentialsDm2SdJwtResultDto.md)
+- [SignCredentialsJwtInputDto](docs/Model/SignCredentialsJwtInputDto.md)
+- [SignCredentialsJwtResultDto](docs/Model/SignCredentialsJwtResultDto.md)
+- [SignCredentialsLdpInputDto](docs/Model/SignCredentialsLdpInputDto.md)
+- [SignCredentialsLdpResultDto](docs/Model/SignCredentialsLdpResultDto.md)
 - [SignJwtToken](docs/Model/SignJwtToken.md)
 - [SignJwtTokenOK](docs/Model/SignJwtTokenOK.md)
+- [SignPresentationLdpInputDto](docs/Model/SignPresentationLdpInputDto.md)
+- [SignPresentationLdpResultDto](docs/Model/SignPresentationLdpResultDto.md)
 - [SigningFailedError](docs/Model/SigningFailedError.md)
 - [UpdateWalletInput](docs/Model/UpdateWalletInput.md)
 - [WalletDto](docs/Model/WalletDto.md)
 - [WalletDtoKeysInner](docs/Model/WalletDtoKeysInner.md)
+- [WalletV2Dto](docs/Model/WalletV2Dto.md)
 - [WalletsListDto](docs/Model/WalletsListDto.md)
 
 ## Authorization
