@@ -380,7 +380,7 @@ class AwsExchangeCredentialsProjectToken implements ModelInterface, ArrayAccess,
     /**
      * Sets did
      *
-     * @param string $did The Decentalised Identifier (DID) of the user.
+     * @param string $did The Decentralized Identifier (DID) of the user.
      *
      * @return self
      */

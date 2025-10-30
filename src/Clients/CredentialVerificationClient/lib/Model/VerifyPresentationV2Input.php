@@ -1,6 +1,6 @@
 <?php
 /**
- * CredentialRequirements
+ * VerifyPresentationV2Input
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\CredentialVerificationClient\ObjectSerializer;
 
 /**
- * CredentialRequirements Class Doc Comment
+ * VerifyPresentationV2Input Class Doc Comment
  *
  * @category Class
- * @description Requirements of the VC
+ * @description Request model of /v2/verify-vp
  * @package  AffinidiTdk\Clients\CredentialVerificationClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerializable
+class VerifyPresentationV2Input implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CredentialRequirements';
+    protected static $openAPIModelName = 'VerifyPresentationV2Input';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +59,9 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'type' => 'string[]',
-        'constraints' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\CredentialRequirementsConstraints'
+        'verifiable_presentation' => 'object',
+        'pex_query' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\VerifyPresentationV2InputPexQuery',
+        'challenge' => 'string'
     ];
 
     /**
@@ -71,8 +72,9 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'type' => null,
-        'constraints' => null
+        'verifiable_presentation' => null,
+        'pex_query' => null,
+        'challenge' => null
     ];
 
     /**
@@ -81,8 +83,9 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'type' => false,
-        'constraints' => false
+        'verifiable_presentation' => false,
+        'pex_query' => false,
+        'challenge' => false
     ];
 
     /**
@@ -171,8 +174,9 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'type' => 'type',
-        'constraints' => 'constraints'
+        'verifiable_presentation' => 'verifiablePresentation',
+        'pex_query' => 'pexQuery',
+        'challenge' => 'challenge'
     ];
 
     /**
@@ -181,8 +185,9 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'type' => 'setType',
-        'constraints' => 'setConstraints'
+        'verifiable_presentation' => 'setVerifiablePresentation',
+        'pex_query' => 'setPexQuery',
+        'challenge' => 'setChallenge'
     ];
 
     /**
@@ -191,8 +196,9 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'type' => 'getType',
-        'constraints' => 'getConstraints'
+        'verifiable_presentation' => 'getVerifiablePresentation',
+        'pex_query' => 'getPexQuery',
+        'challenge' => 'getChallenge'
     ];
 
     /**
@@ -252,8 +258,9 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('constraints', $data ?? [], null);
+        $this->setIfExists('verifiable_presentation', $data ?? [], null);
+        $this->setIfExists('pex_query', $data ?? [], null);
+        $this->setIfExists('challenge', $data ?? [], null);
     }
 
     /**
@@ -283,9 +290,6 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -302,55 +306,82 @@ class CredentialRequirements implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets type
+     * Gets verifiable_presentation
      *
-     * @return string[]
+     * @return object|null
      */
-    public function getType()
+    public function getVerifiablePresentation()
     {
-        return $this->container['type'];
+        return $this->container['verifiable_presentation'];
     }
 
     /**
-     * Sets type
+     * Sets verifiable_presentation
      *
-     * @param string[] $type Type list of the VC requirements
+     * @param object|null $verifiable_presentation verifiable_presentation
      *
      * @return self
      */
-    public function setType($type)
+    public function setVerifiablePresentation($verifiable_presentation)
     {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($verifiable_presentation)) {
+            throw new \InvalidArgumentException('non-nullable verifiable_presentation cannot be null');
         }
-        $this->container['type'] = $type;
+        $this->container['verifiable_presentation'] = $verifiable_presentation;
 
         return $this;
     }
 
     /**
-     * Gets constraints
+     * Gets pex_query
      *
-     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\CredentialRequirementsConstraints|null
+     * @return \AffinidiTdk\Clients\CredentialVerificationClient\Model\VerifyPresentationV2InputPexQuery|null
      */
-    public function getConstraints()
+    public function getPexQuery()
     {
-        return $this->container['constraints'];
+        return $this->container['pex_query'];
     }
 
     /**
-     * Sets constraints
+     * Sets pex_query
      *
-     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\CredentialRequirementsConstraints|null $constraints constraints
+     * @param \AffinidiTdk\Clients\CredentialVerificationClient\Model\VerifyPresentationV2InputPexQuery|null $pex_query pex_query
      *
      * @return self
      */
-    public function setConstraints($constraints)
+    public function setPexQuery($pex_query)
     {
-        if (is_null($constraints)) {
-            throw new \InvalidArgumentException('non-nullable constraints cannot be null');
+        if (is_null($pex_query)) {
+            throw new \InvalidArgumentException('non-nullable pex_query cannot be null');
         }
-        $this->container['constraints'] = $constraints;
+        $this->container['pex_query'] = $pex_query;
+
+        return $this;
+    }
+
+    /**
+     * Gets challenge
+     *
+     * @return string|null
+     */
+    public function getChallenge()
+    {
+        return $this->container['challenge'];
+    }
+
+    /**
+     * Sets challenge
+     *
+     * @param string|null $challenge challenge
+     *
+     * @return self
+     */
+    public function setChallenge($challenge)
+    {
+        if (is_null($challenge)) {
+            throw new \InvalidArgumentException('non-nullable challenge cannot be null');
+        }
+        $this->container['challenge'] = $challenge;
 
         return $this;
     }
