@@ -1,9 +1,9 @@
-# # SignCredentialsDm1JwtResultDto
+# # SignPresentationLdpResultDto
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**credential** | **string** | Signed credential in DM2 jwt format |
+**presentation** | **object** | Signed presentation in Dm1Ld format |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

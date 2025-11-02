@@ -303,6 +303,7 @@ class IotaConfigurationDto implements ModelInterface, ArrayAccess, \JsonSerializ
 
     public const MODE_REDIRECT = 'redirect';
     public const MODE_WEBSOCKET = 'websocket';
+    public const MODE_DIDCOMM = 'didcomm';
 
     /**
      * Gets allowable values of the enum
@@ -314,6 +315,7 @@ class IotaConfigurationDto implements ModelInterface, ArrayAccess, \JsonSerializ
         return [
             self::MODE_REDIRECT,
             self::MODE_WEBSOCKET,
+            self::MODE_DIDCOMM,
         ];
     }
 
@@ -708,7 +710,7 @@ class IotaConfigurationDto implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets mode
      *
-     * @param string|null $mode Determines whether to handle the data-sharing request using the WebSocket or Redirect flow.
+     * @param string|null $mode Determines whether to handle the data-sharing request using the WebSocket, Redirect or Didcomm messaging flow.
      *
      * @return self
      */

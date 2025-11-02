@@ -1,7 +1,7 @@
 # credential-verification-client
 
 
-For more information, please visit [https://github.com/affinidi/affinidi-tdk](https://github.com/affinidi/affinidi-tdk).
+For more information, please visit [www.affinidi.com](www.affinidi.com).
 
 ## Installation & Usage
 
@@ -73,8 +73,6 @@ Class | Method | HTTP request | Description
 
 - [Constraints](docs/Model/Constraints.md)
 - [ConstraintsStatuses](docs/Model/ConstraintsStatuses.md)
-- [CredentialRequirements](docs/Model/CredentialRequirements.md)
-- [CredentialRequirementsConstraints](docs/Model/CredentialRequirementsConstraints.md)
 - [Descriptor](docs/Model/Descriptor.md)
 - [Error](docs/Model/Error.md)
 - [ErrorDetail](docs/Model/ErrorDetail.md)
@@ -103,6 +101,8 @@ Class | Method | HTTP request | Description
 - [VerifyCredentialV2Input](docs/Model/VerifyCredentialV2Input.md)
 - [VerifyPresentationInput](docs/Model/VerifyPresentationInput.md)
 - [VerifyPresentationOutput](docs/Model/VerifyPresentationOutput.md)
+- [VerifyPresentationV2Input](docs/Model/VerifyPresentationV2Input.md)
+- [VerifyPresentationV2InputPexQuery](docs/Model/VerifyPresentationV2InputPexQuery.md)
 - [W3cCredentialStatus](docs/Model/W3cCredentialStatus.md)
 - [W3cProof](docs/Model/W3cProof.md)
 
