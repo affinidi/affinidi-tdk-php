@@ -64,6 +64,7 @@ class InitiateDataSharingRequestInput implements ModelInterface, ArrayAccess, \J
         'nonce' => 'string',
         'redirect_uri' => 'string',
         'configuration_id' => 'string',
+        'user_did' => 'string',
         'mode' => 'string'
     ];
 
@@ -81,6 +82,7 @@ class InitiateDataSharingRequestInput implements ModelInterface, ArrayAccess, \J
         'nonce' => null,
         'redirect_uri' => null,
         'configuration_id' => null,
+        'user_did' => null,
         'mode' => null
     ];
 
@@ -96,6 +98,7 @@ class InitiateDataSharingRequestInput implements ModelInterface, ArrayAccess, \J
         'nonce' => false,
         'redirect_uri' => false,
         'configuration_id' => false,
+        'user_did' => false,
         'mode' => false
     ];
 
@@ -191,6 +194,7 @@ class InitiateDataSharingRequestInput implements ModelInterface, ArrayAccess, \J
         'nonce' => 'nonce',
         'redirect_uri' => 'redirectUri',
         'configuration_id' => 'configurationId',
+        'user_did' => 'userDid',
         'mode' => 'mode'
     ];
 
@@ -206,6 +210,7 @@ class InitiateDataSharingRequestInput implements ModelInterface, ArrayAccess, \J
         'nonce' => 'setNonce',
         'redirect_uri' => 'setRedirectUri',
         'configuration_id' => 'setConfigurationId',
+        'user_did' => 'setUserDid',
         'mode' => 'setMode'
     ];
 
@@ -221,6 +226,7 @@ class InitiateDataSharingRequestInput implements ModelInterface, ArrayAccess, \J
         'nonce' => 'getNonce',
         'redirect_uri' => 'getRedirectUri',
         'configuration_id' => 'getConfigurationId',
+        'user_did' => 'getUserDid',
         'mode' => 'getMode'
     ];
 
@@ -267,6 +273,7 @@ class InitiateDataSharingRequestInput implements ModelInterface, ArrayAccess, \J
 
     public const MODE_REDIRECT = 'redirect';
     public const MODE_WEBSOCKET = 'websocket';
+    public const MODE_DIDCOMM = 'didcomm';
 
     /**
      * Gets allowable values of the enum
@@ -278,6 +285,7 @@ class InitiateDataSharingRequestInput implements ModelInterface, ArrayAccess, \J
         return [
             self::MODE_REDIRECT,
             self::MODE_WEBSOCKET,
+            self::MODE_DIDCOMM,
         ];
     }
 
@@ -302,6 +310,7 @@ class InitiateDataSharingRequestInput implements ModelInterface, ArrayAccess, \J
         $this->setIfExists('nonce', $data ?? [], null);
         $this->setIfExists('redirect_uri', $data ?? [], null);
         $this->setIfExists('configuration_id', $data ?? [], null);
+        $this->setIfExists('user_did', $data ?? [], null);
         $this->setIfExists('mode', $data ?? [], null);
     }
 
@@ -537,6 +546,33 @@ class InitiateDataSharingRequestInput implements ModelInterface, ArrayAccess, \J
     }
 
     /**
+     * Gets user_did
+     *
+     * @return string|null
+     */
+    public function getUserDid()
+    {
+        return $this->container['user_did'];
+    }
+
+    /**
+     * Sets user_did
+     *
+     * @param string|null $user_did User DID to send the initiating request to. Only required if mode is didcomm
+     *
+     * @return self
+     */
+    public function setUserDid($user_did)
+    {
+        if (is_null($user_did)) {
+            throw new \InvalidArgumentException('non-nullable user_did cannot be null');
+        }
+        $this->container['user_did'] = $user_did;
+
+        return $this;
+    }
+
+    /**
      * Gets mode
      *
      * @return string
@@ -549,7 +585,7 @@ class InitiateDataSharingRequestInput implements ModelInterface, ArrayAccess, \J
     /**
      * Sets mode
      *
-     * @param string $mode Determines whether to handle the data-sharing request using the WebSocket or Redirect flow.
+     * @param string $mode Determines whether to handle the data-sharing request using the WebSocket, Redirect or Didcomm messaging flow.
      *
      * @return self
      */

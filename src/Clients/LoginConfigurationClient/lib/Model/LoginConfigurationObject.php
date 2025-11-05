@@ -69,6 +69,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
         'creation_date' => 'string',
         'vp_definition' => 'string',
         'presentation_definition' => 'object',
+        'dcql_query' => 'object',
         'id_token_mapping' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\IdTokenMappingItem[]',
         'client_metadata' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\LoginConfigurationClientMetadataOutput',
         'token_endpoint_auth_method' => '\AffinidiTdk\Clients\LoginConfigurationClient\Model\TokenEndpointAuthMethod'
@@ -93,6 +94,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
         'creation_date' => null,
         'vp_definition' => null,
         'presentation_definition' => null,
+        'dcql_query' => null,
         'id_token_mapping' => null,
         'client_metadata' => null,
         'token_endpoint_auth_method' => null
@@ -115,6 +117,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
         'creation_date' => false,
         'vp_definition' => false,
         'presentation_definition' => false,
+        'dcql_query' => false,
         'id_token_mapping' => false,
         'client_metadata' => false,
         'token_endpoint_auth_method' => false
@@ -217,6 +220,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
         'creation_date' => 'creationDate',
         'vp_definition' => 'vpDefinition',
         'presentation_definition' => 'presentationDefinition',
+        'dcql_query' => 'dcqlQuery',
         'id_token_mapping' => 'idTokenMapping',
         'client_metadata' => 'clientMetadata',
         'token_endpoint_auth_method' => 'tokenEndpointAuthMethod'
@@ -239,6 +243,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
         'creation_date' => 'setCreationDate',
         'vp_definition' => 'setVpDefinition',
         'presentation_definition' => 'setPresentationDefinition',
+        'dcql_query' => 'setDcqlQuery',
         'id_token_mapping' => 'setIdTokenMapping',
         'client_metadata' => 'setClientMetadata',
         'token_endpoint_auth_method' => 'setTokenEndpointAuthMethod'
@@ -261,6 +266,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
         'creation_date' => 'getCreationDate',
         'vp_definition' => 'getVpDefinition',
         'presentation_definition' => 'getPresentationDefinition',
+        'dcql_query' => 'getDcqlQuery',
         'id_token_mapping' => 'getIdTokenMapping',
         'client_metadata' => 'getClientMetadata',
         'token_endpoint_auth_method' => 'getTokenEndpointAuthMethod'
@@ -334,6 +340,7 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
         $this->setIfExists('creation_date', $data ?? [], null);
         $this->setIfExists('vp_definition', $data ?? [], null);
         $this->setIfExists('presentation_definition', $data ?? [], null);
+        $this->setIfExists('dcql_query', $data ?? [], null);
         $this->setIfExists('id_token_mapping', $data ?? [], null);
         $this->setIfExists('client_metadata', $data ?? [], null);
         $this->setIfExists('token_endpoint_auth_method', $data ?? [], null);
@@ -699,6 +706,33 @@ class LoginConfigurationObject implements ModelInterface, ArrayAccess, \JsonSeri
             throw new \InvalidArgumentException('non-nullable presentation_definition cannot be null');
         }
         $this->container['presentation_definition'] = $presentation_definition;
+
+        return $this;
+    }
+
+    /**
+     * Gets dcql_query
+     *
+     * @return object|null
+     */
+    public function getDcqlQuery()
+    {
+        return $this->container['dcql_query'];
+    }
+
+    /**
+     * Sets dcql_query
+     *
+     * @param object|null $dcql_query DCQL query
+     *
+     * @return self
+     */
+    public function setDcqlQuery($dcql_query)
+    {
+        if (is_null($dcql_query)) {
+            throw new \InvalidArgumentException('non-nullable dcql_query cannot be null');
+        }
+        $this->container['dcql_query'] = $dcql_query;
 
         return $this;
     }

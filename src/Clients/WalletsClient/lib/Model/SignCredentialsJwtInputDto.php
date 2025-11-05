@@ -1,6 +1,6 @@
 <?php
 /**
- * SignCredentialsDm2LdInputDto
+ * SignCredentialsJwtInputDto
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * SignCredentialsDm2LdInputDto Class Doc Comment
+ * SignCredentialsJwtInputDto Class Doc Comment
  *
  * @category Class
  * @description DTO contains params to sign credential
@@ -42,7 +42,7 @@ use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class SignCredentialsJwtInputDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SignCredentialsDm2LdInputDto';
+    protected static $openAPIModelName = 'signCredentialsJwtInputDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,7 +60,8 @@ class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \Json
       */
     protected static $openAPITypes = [
         'unsigned_credential' => 'object',
-        'revocable' => 'bool'
+        'revocable' => 'bool',
+        'signature_scheme' => 'string'
     ];
 
     /**
@@ -72,7 +73,8 @@ class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \Json
       */
     protected static $openAPIFormats = [
         'unsigned_credential' => null,
-        'revocable' => null
+        'revocable' => null,
+        'signature_scheme' => null
     ];
 
     /**
@@ -82,7 +84,8 @@ class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \Json
       */
     protected static array $openAPINullables = [
         'unsigned_credential' => false,
-        'revocable' => false
+        'revocable' => false,
+        'signature_scheme' => false
     ];
 
     /**
@@ -172,7 +175,8 @@ class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \Json
      */
     protected static $attributeMap = [
         'unsigned_credential' => 'unsignedCredential',
-        'revocable' => 'revocable'
+        'revocable' => 'revocable',
+        'signature_scheme' => 'signatureScheme'
     ];
 
     /**
@@ -182,7 +186,8 @@ class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \Json
      */
     protected static $setters = [
         'unsigned_credential' => 'setUnsignedCredential',
-        'revocable' => 'setRevocable'
+        'revocable' => 'setRevocable',
+        'signature_scheme' => 'setSignatureScheme'
     ];
 
     /**
@@ -192,7 +197,8 @@ class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \Json
      */
     protected static $getters = [
         'unsigned_credential' => 'getUnsignedCredential',
-        'revocable' => 'getRevocable'
+        'revocable' => 'getRevocable',
+        'signature_scheme' => 'getSignatureScheme'
     ];
 
     /**
@@ -236,6 +242,23 @@ class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \Json
         return self::$openAPIModelName;
     }
 
+    public const SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256 = 'ecdsa_secp256k1_sha256';
+    public const SIGNATURE_SCHEME_ECDSA_P256_SHA256 = 'ecdsa_p256_sha256';
+    public const SIGNATURE_SCHEME_ED25519 = 'ed25519';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSignatureSchemeAllowableValues()
+    {
+        return [
+            self::SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256,
+            self::SIGNATURE_SCHEME_ECDSA_P256_SHA256,
+            self::SIGNATURE_SCHEME_ED25519,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -254,6 +277,7 @@ class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \Json
     {
         $this->setIfExists('unsigned_credential', $data ?? [], null);
         $this->setIfExists('revocable', $data ?? [], null);
+        $this->setIfExists('signature_scheme', $data ?? [], null);
     }
 
     /**
@@ -286,6 +310,15 @@ class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \Json
         if ($this->container['unsigned_credential'] === null) {
             $invalidProperties[] = "'unsigned_credential' can't be null";
         }
+        $allowedValues = $this->getSignatureSchemeAllowableValues();
+        if (!is_null($this->container['signature_scheme']) && !in_array($this->container['signature_scheme'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'signature_scheme', must be one of '%s'",
+                $this->container['signature_scheme'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -314,7 +347,7 @@ class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets unsigned_credential
      *
-     * @param object $unsigned_credential Unsigned Credential in Dm2 format
+     * @param object $unsigned_credential Unsigned Credential in Dm1 format
      *
      * @return self
      */
@@ -351,6 +384,43 @@ class SignCredentialsDm2LdInputDto implements ModelInterface, ArrayAccess, \Json
             throw new \InvalidArgumentException('non-nullable revocable cannot be null');
         }
         $this->container['revocable'] = $revocable;
+
+        return $this;
+    }
+
+    /**
+     * Gets signature_scheme
+     *
+     * @return string|null
+     */
+    public function getSignatureScheme()
+    {
+        return $this->container['signature_scheme'];
+    }
+
+    /**
+     * Sets signature_scheme
+     *
+     * @param string|null $signature_scheme signature_scheme
+     *
+     * @return self
+     */
+    public function setSignatureScheme($signature_scheme)
+    {
+        if (is_null($signature_scheme)) {
+            throw new \InvalidArgumentException('non-nullable signature_scheme cannot be null');
+        }
+        $allowedValues = $this->getSignatureSchemeAllowableValues();
+        if (!in_array($signature_scheme, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'signature_scheme', must be one of '%s'",
+                    $signature_scheme,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['signature_scheme'] = $signature_scheme;
 
         return $this;
     }
