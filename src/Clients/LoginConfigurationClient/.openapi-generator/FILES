@@ -8,6 +8,8 @@ docs/Api/GroupApi.md
 docs/Api/IdpApi.md
 docs/Model/ActionForbiddenError.md
 docs/Model/AddUserToGroupInput.md
+docs/Model/AuthorizationRequestDcql.md
+docs/Model/AuthorizationRequestPex.md
 docs/Model/BlockedUsers.md
 docs/Model/BlockedUsersInput.md
 docs/Model/CorsLoginSessionAcceptResponseOK.md
@@ -77,6 +79,8 @@ lib/InvalidJwtTokenError.php
 lib/InvalidParameterError.php
 lib/Model/ActionForbiddenError.php
 lib/Model/AddUserToGroupInput.php
+lib/Model/AuthorizationRequestDcql.php
+lib/Model/AuthorizationRequestPex.php
 lib/Model/BlockedUsers.php
 lib/Model/BlockedUsersInput.php
 lib/Model/CorsLoginSessionAcceptResponseOK.php

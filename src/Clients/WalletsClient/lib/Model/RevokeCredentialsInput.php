@@ -1,6 +1,6 @@
 <?php
 /**
- * SignCredentialsDm1JwtInputDto
+ * RevokeCredentialsInput
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * SignCredentialsDm1JwtInputDto Class Doc Comment
+ * RevokeCredentialsInput Class Doc Comment
  *
  * @category Class
- * @description DTO contains params to sign credential
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SignCredentialsDm1JwtInputDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class RevokeCredentialsInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class SignCredentialsDm1JwtInputDto implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SignCredentialsDm1JwtInputDto';
+    protected static $openAPIModelName = 'RevokeCredentialsInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +58,8 @@ class SignCredentialsDm1JwtInputDto implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'unsigned_credential' => 'object',
-        'revocable' => 'bool'
+        'revocation_reason' => 'string',
+        'credential_id' => 'string'
     ];
 
     /**
@@ -71,8 +70,8 @@ class SignCredentialsDm1JwtInputDto implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'unsigned_credential' => null,
-        'revocable' => null
+        'revocation_reason' => null,
+        'credential_id' => null
     ];
 
     /**
@@ -81,8 +80,8 @@ class SignCredentialsDm1JwtInputDto implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'unsigned_credential' => false,
-        'revocable' => false
+        'revocation_reason' => false,
+        'credential_id' => false
     ];
 
     /**
@@ -171,8 +170,8 @@ class SignCredentialsDm1JwtInputDto implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'unsigned_credential' => 'unsignedCredential',
-        'revocable' => 'revocable'
+        'revocation_reason' => 'revocationReason',
+        'credential_id' => 'credentialId'
     ];
 
     /**
@@ -181,8 +180,8 @@ class SignCredentialsDm1JwtInputDto implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'unsigned_credential' => 'setUnsignedCredential',
-        'revocable' => 'setRevocable'
+        'revocation_reason' => 'setRevocationReason',
+        'credential_id' => 'setCredentialId'
     ];
 
     /**
@@ -191,8 +190,8 @@ class SignCredentialsDm1JwtInputDto implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'unsigned_credential' => 'getUnsignedCredential',
-        'revocable' => 'getRevocable'
+        'revocation_reason' => 'getRevocationReason',
+        'credential_id' => 'getCredentialId'
     ];
 
     /**
@@ -252,8 +251,8 @@ class SignCredentialsDm1JwtInputDto implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('unsigned_credential', $data ?? [], null);
-        $this->setIfExists('revocable', $data ?? [], null);
+        $this->setIfExists('revocation_reason', $data ?? [], null);
+        $this->setIfExists('credential_id', $data ?? [], null);
     }
 
     /**
@@ -283,8 +282,8 @@ class SignCredentialsDm1JwtInputDto implements ModelInterface, ArrayAccess, \Jso
     {
         $invalidProperties = [];
 
-        if ($this->container['unsigned_credential'] === null) {
-            $invalidProperties[] = "'unsigned_credential' can't be null";
+        if ($this->container['credential_id'] === null) {
+            $invalidProperties[] = "'credential_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -302,55 +301,55 @@ class SignCredentialsDm1JwtInputDto implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets unsigned_credential
+     * Gets revocation_reason
      *
-     * @return object
+     * @return string|null
      */
-    public function getUnsignedCredential()
+    public function getRevocationReason()
     {
-        return $this->container['unsigned_credential'];
+        return $this->container['revocation_reason'];
     }
 
     /**
-     * Sets unsigned_credential
+     * Sets revocation_reason
      *
-     * @param object $unsigned_credential Unsigned Credential in Dm1 format
+     * @param string|null $revocation_reason revocation_reason
      *
      * @return self
      */
-    public function setUnsignedCredential($unsigned_credential)
+    public function setRevocationReason($revocation_reason)
     {
-        if (is_null($unsigned_credential)) {
-            throw new \InvalidArgumentException('non-nullable unsigned_credential cannot be null');
+        if (is_null($revocation_reason)) {
+            throw new \InvalidArgumentException('non-nullable revocation_reason cannot be null');
         }
-        $this->container['unsigned_credential'] = $unsigned_credential;
+        $this->container['revocation_reason'] = $revocation_reason;
 
         return $this;
     }
 
     /**
-     * Gets revocable
+     * Gets credential_id
      *
-     * @return bool|null
+     * @return string
      */
-    public function getRevocable()
+    public function getCredentialId()
     {
-        return $this->container['revocable'];
+        return $this->container['credential_id'];
     }
 
     /**
-     * Sets revocable
+     * Sets credential_id
      *
-     * @param bool|null $revocable revocable
+     * @param string $credential_id credential_id
      *
      * @return self
      */
-    public function setRevocable($revocable)
+    public function setCredentialId($credential_id)
     {
-        if (is_null($revocable)) {
-            throw new \InvalidArgumentException('non-nullable revocable cannot be null');
+        if (is_null($credential_id)) {
+            throw new \InvalidArgumentException('non-nullable credential_id cannot be null');
         }
-        $this->container['revocable'] = $revocable;
+        $this->container['credential_id'] = $credential_id;
 
         return $this;
     }
