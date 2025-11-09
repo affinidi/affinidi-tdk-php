@@ -1,6 +1,6 @@
 <?php
 /**
- * SignCredentialsDm2LdResultDto
+ * SignCredentialsJwtResultDto
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * SignCredentialsDm2LdResultDto Class Doc Comment
+ * SignCredentialsJwtResultDto Class Doc Comment
  *
  * @category Class
  * @description DTO contains signed credential
@@ -42,7 +42,7 @@ use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SignCredentialsDm2LdResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class SignCredentialsJwtResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class SignCredentialsDm2LdResultDto implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SignCredentialsDm2LdResultDto';
+    protected static $openAPIModelName = 'signCredentialsJwtResultDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +59,7 @@ class SignCredentialsDm2LdResultDto implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credential' => 'object'
+        'credential' => 'string'
     ];
 
     /**
@@ -297,7 +297,7 @@ class SignCredentialsDm2LdResultDto implements ModelInterface, ArrayAccess, \Jso
     /**
      * Gets credential
      *
-     * @return object
+     * @return string
      */
     public function getCredential()
     {
@@ -307,7 +307,7 @@ class SignCredentialsDm2LdResultDto implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets credential
      *
-     * @param object $credential Signed credential can be in Dm2Ld format
+     * @param string $credential Signed credential in DM2 jwt format
      *
      * @return self
      */
