@@ -1,6 +1,6 @@
 <?php
 /**
- * SignCredentialsDm2SdJwtInputDto
+ * CreateWalletV2Input
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * SignCredentialsDm2SdJwtInputDto Class Doc Comment
+ * CreateWalletV2Input Class Doc Comment
  *
  * @category Class
- * @description DTO contains params to sign credential
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SignCredentialsDm2SdJwtInputDto';
+    protected static $openAPIModelName = 'CreateWalletV2Input';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,10 +58,11 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
       * @var string[]
       */
     protected static $openAPITypes = [
-        'unsigned_credential' => 'object',
-        'revocable' => 'bool',
-        'disclosure_frame' => 'object',
-        'signature_scheme' => 'string'
+        'name' => 'string',
+        'description' => 'string',
+        'did_method' => 'string',
+        'did_web_url' => 'string',
+        'algorithm' => 'string'
     ];
 
     /**
@@ -73,10 +73,11 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'unsigned_credential' => null,
-        'revocable' => null,
-        'disclosure_frame' => null,
-        'signature_scheme' => null
+        'name' => null,
+        'description' => null,
+        'did_method' => null,
+        'did_web_url' => null,
+        'algorithm' => null
     ];
 
     /**
@@ -85,10 +86,11 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'unsigned_credential' => false,
-        'revocable' => false,
-        'disclosure_frame' => false,
-        'signature_scheme' => false
+        'name' => false,
+        'description' => false,
+        'did_method' => false,
+        'did_web_url' => false,
+        'algorithm' => false
     ];
 
     /**
@@ -177,10 +179,11 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $attributeMap = [
-        'unsigned_credential' => 'unsignedCredential',
-        'revocable' => 'revocable',
-        'disclosure_frame' => 'disclosureFrame',
-        'signature_scheme' => 'signatureScheme'
+        'name' => 'name',
+        'description' => 'description',
+        'did_method' => 'didMethod',
+        'did_web_url' => 'didWebUrl',
+        'algorithm' => 'algorithm'
     ];
 
     /**
@@ -189,10 +192,11 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $setters = [
-        'unsigned_credential' => 'setUnsignedCredential',
-        'revocable' => 'setRevocable',
-        'disclosure_frame' => 'setDisclosureFrame',
-        'signature_scheme' => 'setSignatureScheme'
+        'name' => 'setName',
+        'description' => 'setDescription',
+        'did_method' => 'setDidMethod',
+        'did_web_url' => 'setDidWebUrl',
+        'algorithm' => 'setAlgorithm'
     ];
 
     /**
@@ -201,10 +205,11 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $getters = [
-        'unsigned_credential' => 'getUnsignedCredential',
-        'revocable' => 'getRevocable',
-        'disclosure_frame' => 'getDisclosureFrame',
-        'signature_scheme' => 'getSignatureScheme'
+        'name' => 'getName',
+        'description' => 'getDescription',
+        'did_method' => 'getDidMethod',
+        'did_web_url' => 'getDidWebUrl',
+        'algorithm' => 'getAlgorithm'
     ];
 
     /**
@@ -248,21 +253,38 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
         return self::$openAPIModelName;
     }
 
-    public const SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256 = 'ecdsa_secp256k1_sha256';
-    public const SIGNATURE_SCHEME_ECDSA_P256_SHA256 = 'ecdsa_p256_sha256';
-    public const SIGNATURE_SCHEME_ED25519 = 'ed25519';
+    public const DID_METHOD_KEY = 'key';
+    public const DID_METHOD_WEB = 'web';
+    public const DID_METHOD_PEER0 = 'peer0';
+    public const ALGORITHM_SECP256K1 = 'secp256k1';
+    public const ALGORITHM_ED25519 = 'ed25519';
+    public const ALGORITHM_P256 = 'p256';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getSignatureSchemeAllowableValues()
+    public function getDidMethodAllowableValues()
     {
         return [
-            self::SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256,
-            self::SIGNATURE_SCHEME_ECDSA_P256_SHA256,
-            self::SIGNATURE_SCHEME_ED25519,
+            self::DID_METHOD_KEY,
+            self::DID_METHOD_WEB,
+            self::DID_METHOD_PEER0,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAlgorithmAllowableValues()
+    {
+        return [
+            self::ALGORITHM_SECP256K1,
+            self::ALGORITHM_ED25519,
+            self::ALGORITHM_P256,
         ];
     }
 
@@ -281,10 +303,11 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('unsigned_credential', $data ?? [], null);
-        $this->setIfExists('revocable', $data ?? [], null);
-        $this->setIfExists('disclosure_frame', $data ?? [], null);
-        $this->setIfExists('signature_scheme', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('did_method', $data ?? [], 'key');
+        $this->setIfExists('did_web_url', $data ?? [], null);
+        $this->setIfExists('algorithm', $data ?? [], 'secp256k1');
     }
 
     /**
@@ -314,17 +337,28 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
     {
         $invalidProperties = [];
 
-        if ($this->container['unsigned_credential'] === null) {
-            $invalidProperties[] = "'unsigned_credential' can't be null";
-        }
-        if ($this->container['disclosure_frame'] === null) {
-            $invalidProperties[] = "'disclosure_frame' can't be null";
-        }
-        $allowedValues = $this->getSignatureSchemeAllowableValues();
-        if (!is_null($this->container['signature_scheme']) && !in_array($this->container['signature_scheme'], $allowedValues, true)) {
+        $allowedValues = $this->getDidMethodAllowableValues();
+        if (!is_null($this->container['did_method']) && !in_array($this->container['did_method'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'signature_scheme', must be one of '%s'",
-                $this->container['signature_scheme'],
+                "invalid value '%s' for 'did_method', must be one of '%s'",
+                $this->container['did_method'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if (!is_null($this->container['did_web_url']) && (mb_strlen($this->container['did_web_url']) > 300)) {
+            $invalidProperties[] = "invalid value for 'did_web_url', the character length must be smaller than or equal to 300.";
+        }
+
+        if (!is_null($this->container['did_web_url']) && !preg_match("/^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/", $this->container['did_web_url'])) {
+            $invalidProperties[] = "invalid value for 'did_web_url', must be conform to the pattern /^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/.";
+        }
+
+        $allowedValues = $this->getAlgorithmAllowableValues();
+        if (!is_null($this->container['algorithm']) && !in_array($this->container['algorithm'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'algorithm', must be one of '%s'",
+                $this->container['algorithm'],
                 implode("', '", $allowedValues)
             );
         }
@@ -345,119 +379,163 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
 
 
     /**
-     * Gets unsigned_credential
-     *
-     * @return object
-     */
-    public function getUnsignedCredential()
-    {
-        return $this->container['unsigned_credential'];
-    }
-
-    /**
-     * Sets unsigned_credential
-     *
-     * @param object $unsigned_credential Unsigned Credential in Dm2 format
-     *
-     * @return self
-     */
-    public function setUnsignedCredential($unsigned_credential)
-    {
-        if (is_null($unsigned_credential)) {
-            throw new \InvalidArgumentException('non-nullable unsigned_credential cannot be null');
-        }
-        $this->container['unsigned_credential'] = $unsigned_credential;
-
-        return $this;
-    }
-
-    /**
-     * Gets revocable
-     *
-     * @return bool|null
-     */
-    public function getRevocable()
-    {
-        return $this->container['revocable'];
-    }
-
-    /**
-     * Sets revocable
-     *
-     * @param bool|null $revocable revocable
-     *
-     * @return self
-     */
-    public function setRevocable($revocable)
-    {
-        if (is_null($revocable)) {
-            throw new \InvalidArgumentException('non-nullable revocable cannot be null');
-        }
-        $this->container['revocable'] = $revocable;
-
-        return $this;
-    }
-
-    /**
-     * Gets disclosure_frame
-     *
-     * @return object
-     */
-    public function getDisclosureFrame()
-    {
-        return $this->container['disclosure_frame'];
-    }
-
-    /**
-     * Sets disclosure_frame
-     *
-     * @param object $disclosure_frame disclosure_frame
-     *
-     * @return self
-     */
-    public function setDisclosureFrame($disclosure_frame)
-    {
-        if (is_null($disclosure_frame)) {
-            throw new \InvalidArgumentException('non-nullable disclosure_frame cannot be null');
-        }
-        $this->container['disclosure_frame'] = $disclosure_frame;
-
-        return $this;
-    }
-
-    /**
-     * Gets signature_scheme
+     * Gets name
      *
      * @return string|null
      */
-    public function getSignatureScheme()
+    public function getName()
     {
-        return $this->container['signature_scheme'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets signature_scheme
+     * Sets name
      *
-     * @param string|null $signature_scheme signature_scheme
+     * @param string|null $name The name of the wallet
      *
      * @return self
      */
-    public function setSignatureScheme($signature_scheme)
+    public function setName($name)
     {
-        if (is_null($signature_scheme)) {
-            throw new \InvalidArgumentException('non-nullable signature_scheme cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $allowedValues = $this->getSignatureSchemeAllowableValues();
-        if (!in_array($signature_scheme, $allowedValues, true)) {
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description The description of the wallet
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets did_method
+     *
+     * @return string|null
+     */
+    public function getDidMethod()
+    {
+        return $this->container['did_method'];
+    }
+
+    /**
+     * Sets did_method
+     *
+     * @param string|null $did_method Define how DID of your wallet is created and resolved
+     *
+     * @return self
+     */
+    public function setDidMethod($did_method)
+    {
+        if (is_null($did_method)) {
+            throw new \InvalidArgumentException('non-nullable did_method cannot be null');
+        }
+        $allowedValues = $this->getDidMethodAllowableValues();
+        if (!in_array($did_method, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'signature_scheme', must be one of '%s'",
-                    $signature_scheme,
+                    "Invalid value '%s' for 'did_method', must be one of '%s'",
+                    $did_method,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['signature_scheme'] = $signature_scheme;
+        $this->container['did_method'] = $did_method;
+
+        return $this;
+    }
+
+    /**
+     * Gets did_web_url
+     *
+     * @return string|null
+     */
+    public function getDidWebUrl()
+    {
+        return $this->container['did_web_url'];
+    }
+
+    /**
+     * Sets did_web_url
+     *
+     * @param string|null $did_web_url URL of the DID. Required if the did method is web
+     *
+     * @return self
+     */
+    public function setDidWebUrl($did_web_url)
+    {
+        if (is_null($did_web_url)) {
+            throw new \InvalidArgumentException('non-nullable did_web_url cannot be null');
+        }
+        if ((mb_strlen($did_web_url) > 300)) {
+            throw new \InvalidArgumentException('invalid length for $did_web_url when calling CreateWalletV2Input., must be smaller than or equal to 300.');
+        }
+        if ((!preg_match("/^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/", ObjectSerializer::toString($did_web_url)))) {
+            throw new \InvalidArgumentException("invalid value for \$did_web_url when calling CreateWalletV2Input., must conform to the pattern /^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/.");
+        }
+
+        $this->container['did_web_url'] = $did_web_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets algorithm
+     *
+     * @return string|null
+     */
+    public function getAlgorithm()
+    {
+        return $this->container['algorithm'];
+    }
+
+    /**
+     * Sets algorithm
+     *
+     * @param string|null $algorithm algorithm to generate key for the wallet
+     *
+     * @return self
+     */
+    public function setAlgorithm($algorithm)
+    {
+        if (is_null($algorithm)) {
+            throw new \InvalidArgumentException('non-nullable algorithm cannot be null');
+        }
+        $allowedValues = $this->getAlgorithmAllowableValues();
+        if (!in_array($algorithm, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'algorithm', must be one of '%s'",
+                    $algorithm,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['algorithm'] = $algorithm;
 
         return $this;
     }

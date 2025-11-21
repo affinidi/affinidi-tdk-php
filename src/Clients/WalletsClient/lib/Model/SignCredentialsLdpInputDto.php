@@ -1,6 +1,6 @@
 <?php
 /**
- * SignCredentialsDm2SdJwtInputDto
+ * SignCredentialsLdpInputDto
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * SignCredentialsDm2SdJwtInputDto Class Doc Comment
+ * SignCredentialsLdpInputDto Class Doc Comment
  *
  * @category Class
  * @description DTO contains params to sign credential
@@ -42,7 +42,7 @@ use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SignCredentialsDm2SdJwtInputDto';
+    protected static $openAPIModelName = 'signCredentialsLdpInputDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -61,7 +61,6 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
     protected static $openAPITypes = [
         'unsigned_credential' => 'object',
         'revocable' => 'bool',
-        'disclosure_frame' => 'object',
         'signature_scheme' => 'string'
     ];
 
@@ -75,7 +74,6 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
     protected static $openAPIFormats = [
         'unsigned_credential' => null,
         'revocable' => null,
-        'disclosure_frame' => null,
         'signature_scheme' => null
     ];
 
@@ -87,7 +85,6 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
     protected static array $openAPINullables = [
         'unsigned_credential' => false,
         'revocable' => false,
-        'disclosure_frame' => false,
         'signature_scheme' => false
     ];
 
@@ -179,7 +176,6 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
     protected static $attributeMap = [
         'unsigned_credential' => 'unsignedCredential',
         'revocable' => 'revocable',
-        'disclosure_frame' => 'disclosureFrame',
         'signature_scheme' => 'signatureScheme'
     ];
 
@@ -191,7 +187,6 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
     protected static $setters = [
         'unsigned_credential' => 'setUnsignedCredential',
         'revocable' => 'setRevocable',
-        'disclosure_frame' => 'setDisclosureFrame',
         'signature_scheme' => 'setSignatureScheme'
     ];
 
@@ -203,7 +198,6 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
     protected static $getters = [
         'unsigned_credential' => 'getUnsignedCredential',
         'revocable' => 'getRevocable',
-        'disclosure_frame' => 'getDisclosureFrame',
         'signature_scheme' => 'getSignatureScheme'
     ];
 
@@ -283,7 +277,6 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
     {
         $this->setIfExists('unsigned_credential', $data ?? [], null);
         $this->setIfExists('revocable', $data ?? [], null);
-        $this->setIfExists('disclosure_frame', $data ?? [], null);
         $this->setIfExists('signature_scheme', $data ?? [], null);
     }
 
@@ -316,9 +309,6 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
 
         if ($this->container['unsigned_credential'] === null) {
             $invalidProperties[] = "'unsigned_credential' can't be null";
-        }
-        if ($this->container['disclosure_frame'] === null) {
-            $invalidProperties[] = "'disclosure_frame' can't be null";
         }
         $allowedValues = $this->getSignatureSchemeAllowableValues();
         if (!is_null($this->container['signature_scheme']) && !in_array($this->container['signature_scheme'], $allowedValues, true)) {
@@ -394,33 +384,6 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
             throw new \InvalidArgumentException('non-nullable revocable cannot be null');
         }
         $this->container['revocable'] = $revocable;
-
-        return $this;
-    }
-
-    /**
-     * Gets disclosure_frame
-     *
-     * @return object
-     */
-    public function getDisclosureFrame()
-    {
-        return $this->container['disclosure_frame'];
-    }
-
-    /**
-     * Sets disclosure_frame
-     *
-     * @param object $disclosure_frame disclosure_frame
-     *
-     * @return self
-     */
-    public function setDisclosureFrame($disclosure_frame)
-    {
-        if (is_null($disclosure_frame)) {
-            throw new \InvalidArgumentException('non-nullable disclosure_frame cannot be null');
-        }
-        $this->container['disclosure_frame'] = $disclosure_frame;
 
         return $this;
     }

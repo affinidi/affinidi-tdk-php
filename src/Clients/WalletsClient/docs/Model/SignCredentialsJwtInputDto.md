@@ -1,4 +1,4 @@
-# # SignCredentialsDm1LdInputDto
+# # SignCredentialsJwtInputDto
 
 ## Properties
 

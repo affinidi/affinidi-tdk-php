@@ -1,11 +1,9 @@
-# # SignCredentialsDm1LdInputDto
+# # AuthcryptMessageResultDto
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**unsigned_credential** | **object** | Unsigned Credential in Dm1 format |
-**revocable** | **bool** |  | [optional]
-**signature_scheme** | **string** |  | [optional]
+**authcrypted_message** | **object** | Authcrypted message in JSON format |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

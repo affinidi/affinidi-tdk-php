@@ -1,6 +1,6 @@
 <?php
 /**
- * SignCredentialsDm1JwtResultDto
+ * AuthcryptMessageResultDto
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * SignCredentialsDm1JwtResultDto Class Doc Comment
+ * AuthcryptMessageResultDto Class Doc Comment
  *
  * @category Class
- * @description DTO contains signed credential
+ * @description DTO contains authcrypted message in JSON fromat
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SignCredentialsDm1JwtResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class SignCredentialsDm1JwtResultDto implements ModelInterface, ArrayAccess, \Js
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SignCredentialsDm1JwtResultDto';
+    protected static $openAPIModelName = 'AuthcryptMessageResultDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +59,7 @@ class SignCredentialsDm1JwtResultDto implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credential' => 'string'
+        'authcrypted_message' => 'object'
     ];
 
     /**
@@ -70,7 +70,7 @@ class SignCredentialsDm1JwtResultDto implements ModelInterface, ArrayAccess, \Js
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credential' => null
+        'authcrypted_message' => null
     ];
 
     /**
@@ -79,7 +79,7 @@ class SignCredentialsDm1JwtResultDto implements ModelInterface, ArrayAccess, \Js
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credential' => false
+        'authcrypted_message' => false
     ];
 
     /**
@@ -168,7 +168,7 @@ class SignCredentialsDm1JwtResultDto implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $attributeMap = [
-        'credential' => 'credential'
+        'authcrypted_message' => 'authcryptedMessage'
     ];
 
     /**
@@ -177,7 +177,7 @@ class SignCredentialsDm1JwtResultDto implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $setters = [
-        'credential' => 'setCredential'
+        'authcrypted_message' => 'setAuthcryptedMessage'
     ];
 
     /**
@@ -186,7 +186,7 @@ class SignCredentialsDm1JwtResultDto implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $getters = [
-        'credential' => 'getCredential'
+        'authcrypted_message' => 'getAuthcryptedMessage'
     ];
 
     /**
@@ -246,7 +246,7 @@ class SignCredentialsDm1JwtResultDto implements ModelInterface, ArrayAccess, \Js
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credential', $data ?? [], null);
+        $this->setIfExists('authcrypted_message', $data ?? [], null);
     }
 
     /**
@@ -276,8 +276,8 @@ class SignCredentialsDm1JwtResultDto implements ModelInterface, ArrayAccess, \Js
     {
         $invalidProperties = [];
 
-        if ($this->container['credential'] === null) {
-            $invalidProperties[] = "'credential' can't be null";
+        if ($this->container['authcrypted_message'] === null) {
+            $invalidProperties[] = "'authcrypted_message' can't be null";
         }
         return $invalidProperties;
     }
@@ -295,28 +295,28 @@ class SignCredentialsDm1JwtResultDto implements ModelInterface, ArrayAccess, \Js
 
 
     /**
-     * Gets credential
+     * Gets authcrypted_message
      *
-     * @return string
+     * @return object
      */
-    public function getCredential()
+    public function getAuthcryptedMessage()
     {
-        return $this->container['credential'];
+        return $this->container['authcrypted_message'];
     }
 
     /**
-     * Sets credential
+     * Sets authcrypted_message
      *
-     * @param string $credential Signed credential in DM2 jwt format
+     * @param object $authcrypted_message Authcrypted message in JSON format
      *
      * @return self
      */
-    public function setCredential($credential)
+    public function setAuthcryptedMessage($authcrypted_message)
     {
-        if (is_null($credential)) {
-            throw new \InvalidArgumentException('non-nullable credential cannot be null');
+        if (is_null($authcrypted_message)) {
+            throw new \InvalidArgumentException('non-nullable authcrypted_message cannot be null');
         }
-        $this->container['credential'] = $credential;
+        $this->container['authcrypted_message'] = $authcrypted_message;
 
         return $this;
     }

@@ -1,9 +1,10 @@
-# # SignCredentialsDm2LdResultDto
+# # RevokeCredentialsInput
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**credential** | **object** | Signed credential can be in Dm2Ld format |
+**revocation_reason** | **string** |  | [optional]
+**credential_id** | **string** |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
