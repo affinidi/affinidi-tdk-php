@@ -59,8 +59,8 @@ class VerifyCredentialV2Input implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'verifiable_credentials' => 'string[]',
-        'issuer_did_document' => 'array<string,mixed>'
+        'jwt_vcs' => 'string[]',
+        'ldp_vcs' => 'array<string,mixed>[]'
     ];
 
     /**
@@ -71,8 +71,8 @@ class VerifyCredentialV2Input implements ModelInterface, ArrayAccess, \JsonSeria
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'verifiable_credentials' => null,
-        'issuer_did_document' => null
+        'jwt_vcs' => null,
+        'ldp_vcs' => null
     ];
 
     /**
@@ -81,8 +81,8 @@ class VerifyCredentialV2Input implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'verifiable_credentials' => false,
-        'issuer_did_document' => false
+        'jwt_vcs' => false,
+        'ldp_vcs' => false
     ];
 
     /**
@@ -171,8 +171,8 @@ class VerifyCredentialV2Input implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'verifiable_credentials' => 'verifiableCredentials',
-        'issuer_did_document' => 'issuerDidDocument'
+        'jwt_vcs' => 'jwtVcs',
+        'ldp_vcs' => 'ldpVcs'
     ];
 
     /**
@@ -181,8 +181,8 @@ class VerifyCredentialV2Input implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'verifiable_credentials' => 'setVerifiableCredentials',
-        'issuer_did_document' => 'setIssuerDidDocument'
+        'jwt_vcs' => 'setJwtVcs',
+        'ldp_vcs' => 'setLdpVcs'
     ];
 
     /**
@@ -191,8 +191,8 @@ class VerifyCredentialV2Input implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'verifiable_credentials' => 'getVerifiableCredentials',
-        'issuer_did_document' => 'getIssuerDidDocument'
+        'jwt_vcs' => 'getJwtVcs',
+        'ldp_vcs' => 'getLdpVcs'
     ];
 
     /**
@@ -252,8 +252,8 @@ class VerifyCredentialV2Input implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('verifiable_credentials', $data ?? [], null);
-        $this->setIfExists('issuer_did_document', $data ?? [], null);
+        $this->setIfExists('jwt_vcs', $data ?? [], null);
+        $this->setIfExists('ldp_vcs', $data ?? [], null);
     }
 
     /**
@@ -283,13 +283,6 @@ class VerifyCredentialV2Input implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['verifiable_credentials'] === null) {
-            $invalidProperties[] = "'verifiable_credentials' can't be null";
-        }
-        if ((count($this->container['verifiable_credentials']) < 1)) {
-            $invalidProperties[] = "invalid value for 'verifiable_credentials', number of items must be greater than or equal to 1.";
-        }
-
         return $invalidProperties;
     }
 
@@ -306,60 +299,55 @@ class VerifyCredentialV2Input implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets verifiable_credentials
+     * Gets jwt_vcs
      *
-     * @return string[]
+     * @return string[]|null
      */
-    public function getVerifiableCredentials()
+    public function getJwtVcs()
     {
-        return $this->container['verifiable_credentials'];
+        return $this->container['jwt_vcs'];
     }
 
     /**
-     * Sets verifiable_credentials
+     * Sets jwt_vcs
      *
-     * @param string[] $verifiable_credentials List of VC strings
+     * @param string[]|null $jwt_vcs List of JWT VC strings
      *
      * @return self
      */
-    public function setVerifiableCredentials($verifiable_credentials)
+    public function setJwtVcs($jwt_vcs)
     {
-        if (is_null($verifiable_credentials)) {
-            throw new \InvalidArgumentException('non-nullable verifiable_credentials cannot be null');
+        if (is_null($jwt_vcs)) {
+            throw new \InvalidArgumentException('non-nullable jwt_vcs cannot be null');
         }
-
-
-        if ((count($verifiable_credentials) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $verifiable_credentials when calling VerifyCredentialV2Input., number of items must be greater than or equal to 1.');
-        }
-        $this->container['verifiable_credentials'] = $verifiable_credentials;
+        $this->container['jwt_vcs'] = $jwt_vcs;
 
         return $this;
     }
 
     /**
-     * Gets issuer_did_document
+     * Gets ldp_vcs
      *
-     * @return array<string,mixed>|null
+     * @return array<string,mixed>[]|null
      */
-    public function getIssuerDidDocument()
+    public function getLdpVcs()
     {
-        return $this->container['issuer_did_document'];
+        return $this->container['ldp_vcs'];
     }
 
     /**
-     * Sets issuer_did_document
+     * Sets ldp_vcs
      *
-     * @param array<string,mixed>|null $issuer_did_document Dynamic model
+     * @param array<string,mixed>[]|null $ldp_vcs List of LDP VC objects
      *
      * @return self
      */
-    public function setIssuerDidDocument($issuer_did_document)
+    public function setLdpVcs($ldp_vcs)
     {
-        if (is_null($issuer_did_document)) {
-            throw new \InvalidArgumentException('non-nullable issuer_did_document cannot be null');
+        if (is_null($ldp_vcs)) {
+            throw new \InvalidArgumentException('non-nullable ldp_vcs cannot be null');
         }
-        $this->container['issuer_did_document'] = $issuer_did_document;
+        $this->container['ldp_vcs'] = $ldp_vcs;
 
         return $this;
     }

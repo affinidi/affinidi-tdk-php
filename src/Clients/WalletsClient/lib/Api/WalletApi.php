@@ -78,6 +78,9 @@ class WalletApi
         'createWallet' => [
             'application/json',
         ],
+        'createWalletV2' => [
+            'application/json',
+        ],
         'deleteWallet' => [
             'application/json',
         ],
@@ -90,7 +93,19 @@ class WalletApi
         'signCredential' => [
             'application/json',
         ],
+        'signCredentialsJwt' => [
+            'application/json',
+        ],
+        'signCredentialsLdp' => [
+            'application/json',
+        ],
+        'signCredentialsSdJwt' => [
+            'application/json',
+        ],
         'signJwtToken' => [
+            'application/json',
+        ],
+        'signPresentationsLdp' => [
             'application/json',
         ],
         'updateWallet' => [
@@ -441,6 +456,340 @@ class WalletApi
                 $httpBody = $create_wallet_input;
             }
         } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation createWalletV2
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWalletV2'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Response|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError
+     */
+    public function createWalletV2(string $contentType = self::contentTypes['createWalletV2'][0])
+    {
+        list($response) = $this->createWalletV2WithHttpInfo($contentType);
+        return $response;
+    }
+
+    /**
+     * Operation createWalletV2WithHttpInfo
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWalletV2'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Response|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createWalletV2WithHttpInfo(string $contentType = self::contentTypes['createWalletV2'][0])
+    {
+        $request = $this->createWalletV2Request($contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 201:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Response' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Response';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createWalletV2Async
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWalletV2'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createWalletV2Async(string $contentType = self::contentTypes['createWalletV2'][0])
+    {
+        return $this->createWalletV2AsyncWithHttpInfo($contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createWalletV2AsyncWithHttpInfo
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWalletV2'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createWalletV2AsyncWithHttpInfo(string $contentType = self::contentTypes['createWalletV2'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Response';
+        $request = $this->createWalletV2Request($contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createWalletV2'
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWalletV2'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createWalletV2Request(string $contentType = self::contentTypes['createWalletV2'][0])
+    {
+
+
+        $resourcePath = '/v2/wallets';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -1971,6 +2320,1335 @@ class WalletApi
     }
 
     /**
+     * Operation signCredentialsJwt
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtInputDto $sign_credentials_jwt_input_dto signCredentialsJwt (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsJwt'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError
+     */
+    public function signCredentialsJwt($wallet_id, $sign_credentials_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsJwt'][0])
+    {
+        list($response) = $this->signCredentialsJwtWithHttpInfo($wallet_id, $sign_credentials_jwt_input_dto, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation signCredentialsJwtWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtInputDto $sign_credentials_jwt_input_dto signCredentialsJwt (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsJwt'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function signCredentialsJwtWithHttpInfo($wallet_id, $sign_credentials_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsJwt'][0])
+    {
+        $request = $this->signCredentialsJwtRequest($wallet_id, $sign_credentials_jwt_input_dto, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtResultDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtResultDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtResultDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtResultDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtResultDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation signCredentialsJwtAsync
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtInputDto $sign_credentials_jwt_input_dto signCredentialsJwt (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsJwt'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function signCredentialsJwtAsync($wallet_id, $sign_credentials_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsJwt'][0])
+    {
+        return $this->signCredentialsJwtAsyncWithHttpInfo($wallet_id, $sign_credentials_jwt_input_dto, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation signCredentialsJwtAsyncWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtInputDto $sign_credentials_jwt_input_dto signCredentialsJwt (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsJwt'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function signCredentialsJwtAsyncWithHttpInfo($wallet_id, $sign_credentials_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsJwt'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtResultDto';
+        $request = $this->signCredentialsJwtRequest($wallet_id, $sign_credentials_jwt_input_dto, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'signCredentialsJwt'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtInputDto $sign_credentials_jwt_input_dto signCredentialsJwt (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsJwt'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function signCredentialsJwtRequest($wallet_id, $sign_credentials_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsJwt'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling signCredentialsJwt'
+            );
+        }
+
+        // verify the required parameter 'sign_credentials_jwt_input_dto' is set
+        if ($sign_credentials_jwt_input_dto === null || (is_array($sign_credentials_jwt_input_dto) && count($sign_credentials_jwt_input_dto) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $sign_credentials_jwt_input_dto when calling signCredentialsJwt'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/credentials/jwt/sign';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($sign_credentials_jwt_input_dto)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($sign_credentials_jwt_input_dto));
+            } else {
+                $httpBody = $sign_credentials_jwt_input_dto;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation signCredentialsLdp
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpInputDto $sign_credentials_ldp_input_dto signCredentialsLdp (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsLdp'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError
+     */
+    public function signCredentialsLdp($wallet_id, $sign_credentials_ldp_input_dto, string $contentType = self::contentTypes['signCredentialsLdp'][0])
+    {
+        list($response) = $this->signCredentialsLdpWithHttpInfo($wallet_id, $sign_credentials_ldp_input_dto, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation signCredentialsLdpWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpInputDto $sign_credentials_ldp_input_dto signCredentialsLdp (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsLdp'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function signCredentialsLdpWithHttpInfo($wallet_id, $sign_credentials_ldp_input_dto, string $contentType = self::contentTypes['signCredentialsLdp'][0])
+    {
+        $request = $this->signCredentialsLdpRequest($wallet_id, $sign_credentials_ldp_input_dto, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpResultDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpResultDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpResultDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpResultDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpResultDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation signCredentialsLdpAsync
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpInputDto $sign_credentials_ldp_input_dto signCredentialsLdp (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsLdp'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function signCredentialsLdpAsync($wallet_id, $sign_credentials_ldp_input_dto, string $contentType = self::contentTypes['signCredentialsLdp'][0])
+    {
+        return $this->signCredentialsLdpAsyncWithHttpInfo($wallet_id, $sign_credentials_ldp_input_dto, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation signCredentialsLdpAsyncWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpInputDto $sign_credentials_ldp_input_dto signCredentialsLdp (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsLdp'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function signCredentialsLdpAsyncWithHttpInfo($wallet_id, $sign_credentials_ldp_input_dto, string $contentType = self::contentTypes['signCredentialsLdp'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpResultDto';
+        $request = $this->signCredentialsLdpRequest($wallet_id, $sign_credentials_ldp_input_dto, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'signCredentialsLdp'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpInputDto $sign_credentials_ldp_input_dto signCredentialsLdp (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsLdp'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function signCredentialsLdpRequest($wallet_id, $sign_credentials_ldp_input_dto, string $contentType = self::contentTypes['signCredentialsLdp'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling signCredentialsLdp'
+            );
+        }
+
+        // verify the required parameter 'sign_credentials_ldp_input_dto' is set
+        if ($sign_credentials_ldp_input_dto === null || (is_array($sign_credentials_ldp_input_dto) && count($sign_credentials_ldp_input_dto) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $sign_credentials_ldp_input_dto when calling signCredentialsLdp'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/credentials/ldp/sign';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($sign_credentials_ldp_input_dto)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($sign_credentials_ldp_input_dto));
+            } else {
+                $httpBody = $sign_credentials_ldp_input_dto;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation signCredentialsSdJwt
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtInputDto $sign_credentials_dm2_sd_jwt_input_dto SignCredentialsDm1SdJwt (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsSdJwt'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError
+     */
+    public function signCredentialsSdJwt($wallet_id, $sign_credentials_dm2_sd_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsSdJwt'][0])
+    {
+        list($response) = $this->signCredentialsSdJwtWithHttpInfo($wallet_id, $sign_credentials_dm2_sd_jwt_input_dto, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation signCredentialsSdJwtWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtInputDto $sign_credentials_dm2_sd_jwt_input_dto SignCredentialsDm1SdJwt (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsSdJwt'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function signCredentialsSdJwtWithHttpInfo($wallet_id, $sign_credentials_dm2_sd_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsSdJwt'][0])
+    {
+        $request = $this->signCredentialsSdJwtRequest($wallet_id, $sign_credentials_dm2_sd_jwt_input_dto, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtResultDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtResultDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtResultDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtResultDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtResultDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation signCredentialsSdJwtAsync
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtInputDto $sign_credentials_dm2_sd_jwt_input_dto SignCredentialsDm1SdJwt (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsSdJwt'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function signCredentialsSdJwtAsync($wallet_id, $sign_credentials_dm2_sd_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsSdJwt'][0])
+    {
+        return $this->signCredentialsSdJwtAsyncWithHttpInfo($wallet_id, $sign_credentials_dm2_sd_jwt_input_dto, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation signCredentialsSdJwtAsyncWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtInputDto $sign_credentials_dm2_sd_jwt_input_dto SignCredentialsDm1SdJwt (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsSdJwt'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function signCredentialsSdJwtAsyncWithHttpInfo($wallet_id, $sign_credentials_dm2_sd_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsSdJwt'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtResultDto';
+        $request = $this->signCredentialsSdJwtRequest($wallet_id, $sign_credentials_dm2_sd_jwt_input_dto, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'signCredentialsSdJwt'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtInputDto $sign_credentials_dm2_sd_jwt_input_dto SignCredentialsDm1SdJwt (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signCredentialsSdJwt'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function signCredentialsSdJwtRequest($wallet_id, $sign_credentials_dm2_sd_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsSdJwt'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling signCredentialsSdJwt'
+            );
+        }
+
+        // verify the required parameter 'sign_credentials_dm2_sd_jwt_input_dto' is set
+        if ($sign_credentials_dm2_sd_jwt_input_dto === null || (is_array($sign_credentials_dm2_sd_jwt_input_dto) && count($sign_credentials_dm2_sd_jwt_input_dto) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $sign_credentials_dm2_sd_jwt_input_dto when calling signCredentialsSdJwt'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/credentials/sd-jwt/sign';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($sign_credentials_dm2_sd_jwt_input_dto)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($sign_credentials_dm2_sd_jwt_input_dto));
+            } else {
+                $httpBody = $sign_credentials_dm2_sd_jwt_input_dto;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation signJwtToken
      *
      * @param  string $wallet_id id of the wallet. (required)
@@ -2361,6 +4039,449 @@ class WalletApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($sign_jwt_token));
             } else {
                 $httpBody = $sign_jwt_token;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation signPresentationsLdp
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpInputDto $sign_presentation_ldp_input_dto signPresentationLdp (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signPresentationsLdp'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError
+     */
+    public function signPresentationsLdp($wallet_id, $sign_presentation_ldp_input_dto, string $contentType = self::contentTypes['signPresentationsLdp'][0])
+    {
+        list($response) = $this->signPresentationsLdpWithHttpInfo($wallet_id, $sign_presentation_ldp_input_dto, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation signPresentationsLdpWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpInputDto $sign_presentation_ldp_input_dto signPresentationLdp (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signPresentationsLdp'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function signPresentationsLdpWithHttpInfo($wallet_id, $sign_presentation_ldp_input_dto, string $contentType = self::contentTypes['signPresentationsLdp'][0])
+    {
+        $request = $this->signPresentationsLdpRequest($wallet_id, $sign_presentation_ldp_input_dto, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpResultDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpResultDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpResultDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpResultDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpResultDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation signPresentationsLdpAsync
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpInputDto $sign_presentation_ldp_input_dto signPresentationLdp (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signPresentationsLdp'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function signPresentationsLdpAsync($wallet_id, $sign_presentation_ldp_input_dto, string $contentType = self::contentTypes['signPresentationsLdp'][0])
+    {
+        return $this->signPresentationsLdpAsyncWithHttpInfo($wallet_id, $sign_presentation_ldp_input_dto, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation signPresentationsLdpAsyncWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpInputDto $sign_presentation_ldp_input_dto signPresentationLdp (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signPresentationsLdp'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function signPresentationsLdpAsyncWithHttpInfo($wallet_id, $sign_presentation_ldp_input_dto, string $contentType = self::contentTypes['signPresentationsLdp'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpResultDto';
+        $request = $this->signPresentationsLdpRequest($wallet_id, $sign_presentation_ldp_input_dto, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'signPresentationsLdp'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignPresentationLdpInputDto $sign_presentation_ldp_input_dto signPresentationLdp (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signPresentationsLdp'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function signPresentationsLdpRequest($wallet_id, $sign_presentation_ldp_input_dto, string $contentType = self::contentTypes['signPresentationsLdp'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling signPresentationsLdp'
+            );
+        }
+
+        // verify the required parameter 'sign_presentation_ldp_input_dto' is set
+        if ($sign_presentation_ldp_input_dto === null || (is_array($sign_presentation_ldp_input_dto) && count($sign_presentation_ldp_input_dto) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $sign_presentation_ldp_input_dto when calling signPresentationsLdp'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/presentations/ldp/sign';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($sign_presentation_ldp_input_dto)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($sign_presentation_ldp_input_dto));
+            } else {
+                $httpBody = $sign_presentation_ldp_input_dto;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

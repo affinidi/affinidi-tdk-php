@@ -356,7 +356,7 @@ class PexQueryDto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets ari
      *
-     * @param string $ari The unique resource identifier of the qeuery.
+     * @param string $ari The unique resource identifier of the query.
      *
      * @return self
      */
