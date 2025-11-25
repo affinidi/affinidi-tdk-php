@@ -1,7 +1,7 @@
 # wallets-client
 
 
-For more information, please visit [https://github.com/affinidi/affinidi-tdk](https://github.com/affinidi/affinidi-tdk).
+For more information, please visit [www.affinidi.com](www.affinidi.com).
 
 ## Installation & Usage
 
@@ -71,18 +71,27 @@ Class | Method | HTTP request | Description
 *RevocationApi* | [**getRevocationCredentialStatus**](docs/Api/RevocationApi.md#getrevocationcredentialstatus) | **GET** /v1/projects/{projectId}/wallets/{walletId}/revocation-statuses/{statusId} | 
 *RevocationApi* | [**getRevocationListCredential**](docs/Api/RevocationApi.md#getrevocationlistcredential) | **GET** /v1/wallets/{walletId}/revocation-list/{listId} | Return revocation list credential.
 *RevocationApi* | [**revokeCredential**](docs/Api/RevocationApi.md#revokecredential) | **POST** /v1/wallets/{walletId}/revoke | Revoke Credential.
+*RevocationApi* | [**revokeCredentials**](docs/Api/RevocationApi.md#revokecredentials) | **POST** /v2/wallets/{walletId}/credentials/revoke | Revoke Credentials.
 *WalletApi* | [**createWallet**](docs/Api/WalletApi.md#createwallet) | **POST** /v1/wallets | 
 *WalletApi* | [**deleteWallet**](docs/Api/WalletApi.md#deletewallet) | **DELETE** /v1/wallets/{walletId} | 
 *WalletApi* | [**getWallet**](docs/Api/WalletApi.md#getwallet) | **GET** /v1/wallets/{walletId} | 
 *WalletApi* | [**listWallets**](docs/Api/WalletApi.md#listwallets) | **GET** /v1/wallets | 
 *WalletApi* | [**signCredential**](docs/Api/WalletApi.md#signcredential) | **POST** /v1/wallets/{walletId}/sign-credential | 
+*WalletApi* | [**signCredentialsJwt**](docs/Api/WalletApi.md#signcredentialsjwt) | **POST** /v2/wallets/{walletId}/credentials/jwt/sign | 
+*WalletApi* | [**signCredentialsLdp**](docs/Api/WalletApi.md#signcredentialsldp) | **POST** /v2/wallets/{walletId}/credentials/ldp/sign | 
+*WalletApi* | [**signCredentialsSdJwt**](docs/Api/WalletApi.md#signcredentialssdjwt) | **POST** /v2/wallets/{walletId}/credentials/sd-jwt/sign | 
 *WalletApi* | [**signJwtToken**](docs/Api/WalletApi.md#signjwttoken) | **POST** /v1/wallets/{walletId}/sign-jwt | 
+*WalletApi* | [**signPresentationsLdp**](docs/Api/WalletApi.md#signpresentationsldp) | **POST** /v2/wallets/{walletId}/presentations/ldp/sign | 
 *WalletApi* | [**updateWallet**](docs/Api/WalletApi.md#updatewallet) | **PATCH** /v1/wallets/{walletId} | 
 
 ## Models
 
+- [AuthcryptMessageInput](docs/Model/AuthcryptMessageInput.md)
+- [AuthcryptMessageResultDto](docs/Model/AuthcryptMessageResultDto.md)
 - [CreateWalletInput](docs/Model/CreateWalletInput.md)
 - [CreateWalletResponse](docs/Model/CreateWalletResponse.md)
+- [CreateWalletV2Input](docs/Model/CreateWalletV2Input.md)
+- [CreateWalletV2Response](docs/Model/CreateWalletV2Response.md)
 - [EntityNotFoundError](docs/Model/EntityNotFoundError.md)
 - [GetRevocationCredentialStatusOK](docs/Model/GetRevocationCredentialStatusOK.md)
 - [GetRevocationListCredentialResultDto](docs/Model/GetRevocationListCredentialResultDto.md)
@@ -92,26 +101,32 @@ Class | Method | HTTP request | Description
 - [NotFoundError](docs/Model/NotFoundError.md)
 - [OperationForbiddenError](docs/Model/OperationForbiddenError.md)
 - [RevokeCredentialInput](docs/Model/RevokeCredentialInput.md)
+- [RevokeCredentialsInput](docs/Model/RevokeCredentialsInput.md)
 - [ServiceErrorResponse](docs/Model/ServiceErrorResponse.md)
 - [ServiceErrorResponseDetailsInner](docs/Model/ServiceErrorResponseDetailsInner.md)
 - [SignCredential400Response](docs/Model/SignCredential400Response.md)
 - [SignCredentialInputDto](docs/Model/SignCredentialInputDto.md)
 - [SignCredentialInputDtoUnsignedCredentialParams](docs/Model/SignCredentialInputDtoUnsignedCredentialParams.md)
 - [SignCredentialResultDto](docs/Model/SignCredentialResultDto.md)
-- [SignCredentialsDm1JwtInputDto](docs/Model/SignCredentialsDm1JwtInputDto.md)
-- [SignCredentialsDm1JwtResultDto](docs/Model/SignCredentialsDm1JwtResultDto.md)
 - [SignCredentialsDm1LdInputDto](docs/Model/SignCredentialsDm1LdInputDto.md)
 - [SignCredentialsDm1LdResultDto](docs/Model/SignCredentialsDm1LdResultDto.md)
-- [SignCredentialsDm2LdInputDto](docs/Model/SignCredentialsDm2LdInputDto.md)
-- [SignCredentialsDm2LdResultDto](docs/Model/SignCredentialsDm2LdResultDto.md)
 - [SignCredentialsDm2SdJwtInputDto](docs/Model/SignCredentialsDm2SdJwtInputDto.md)
 - [SignCredentialsDm2SdJwtResultDto](docs/Model/SignCredentialsDm2SdJwtResultDto.md)
+- [SignCredentialsJwtInputDto](docs/Model/SignCredentialsJwtInputDto.md)
+- [SignCredentialsJwtResultDto](docs/Model/SignCredentialsJwtResultDto.md)
+- [SignCredentialsLdpInputDto](docs/Model/SignCredentialsLdpInputDto.md)
+- [SignCredentialsLdpResultDto](docs/Model/SignCredentialsLdpResultDto.md)
 - [SignJwtToken](docs/Model/SignJwtToken.md)
 - [SignJwtTokenOK](docs/Model/SignJwtTokenOK.md)
+- [SignMessageInput](docs/Model/SignMessageInput.md)
+- [SignMessageResultDto](docs/Model/SignMessageResultDto.md)
+- [SignPresentationLdpInputDto](docs/Model/SignPresentationLdpInputDto.md)
+- [SignPresentationLdpResultDto](docs/Model/SignPresentationLdpResultDto.md)
 - [SigningFailedError](docs/Model/SigningFailedError.md)
 - [UpdateWalletInput](docs/Model/UpdateWalletInput.md)
 - [WalletDto](docs/Model/WalletDto.md)
 - [WalletDtoKeysInner](docs/Model/WalletDtoKeysInner.md)
+- [WalletV2Dto](docs/Model/WalletV2Dto.md)
 - [WalletsListDto](docs/Model/WalletsListDto.md)
 
 ## Authorization

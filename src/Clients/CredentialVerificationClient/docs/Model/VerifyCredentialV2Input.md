@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**verifiable_credentials** | **string[]** | List of VC strings |
-**issuer_did_document** | **array<string,mixed>** | Dynamic model | [optional]
+**jwt_vcs** | **string[]** | List of JWT VC strings | [optional]
+**ldp_vcs** | **array<string,mixed>[]** | List of LDP VC objects | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
