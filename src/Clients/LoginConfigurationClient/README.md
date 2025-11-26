@@ -1,7 +1,7 @@
 # login-configuration-client
 
 
-For more information, please visit [https://github.com/affinidi/affinidi-tdk](https://github.com/affinidi/affinidi-tdk).
+For more information, please visit [https://www.affinidi.com](https://www.affinidi.com).
 
 ## Installation & Usage
 
@@ -99,6 +99,8 @@ Class | Method | HTTP request | Description
 
 - [ActionForbiddenError](docs/Model/ActionForbiddenError.md)
 - [AddUserToGroupInput](docs/Model/AddUserToGroupInput.md)
+- [AuthorizationRequestDcql](docs/Model/AuthorizationRequestDcql.md)
+- [AuthorizationRequestPex](docs/Model/AuthorizationRequestPex.md)
 - [BlockedUsers](docs/Model/BlockedUsers.md)
 - [BlockedUsersInput](docs/Model/BlockedUsersInput.md)
 - [CorsLoginSessionAcceptResponseOK](docs/Model/CorsLoginSessionAcceptResponseOK.md)
