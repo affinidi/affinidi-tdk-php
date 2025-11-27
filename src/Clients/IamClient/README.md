@@ -1,7 +1,7 @@
 # iam-client
 
 
-For more information, please visit [https://github.com/affinidi/affinidi-tdk](https://github.com/affinidi/affinidi-tdk).
+For more information, please visit [https://www.affinidi.com](https://www.affinidi.com).
 
 ## Installation & Usage
 

@@ -9,5 +9,6 @@ Name | Type | Description | Notes
 **ari** | **string** | ARI is used for analytics proposals. | [optional]
 **client_id** | **string** | clientId used for detect origin. | [optional]
 **nonce** | **string** | nonce for VP Token proof challenge | [optional]
+**dcql_query** | **string** | DCQL query to ask from the user. In JSON Stringify format. |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
