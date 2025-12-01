@@ -123,6 +123,7 @@ Class | Method | HTTP request | Description
 - [SignPresentationLdpInputDto](docs/Model/SignPresentationLdpInputDto.md)
 - [SignPresentationLdpResultDto](docs/Model/SignPresentationLdpResultDto.md)
 - [SigningFailedError](docs/Model/SigningFailedError.md)
+- [TooManyRequestsError](docs/Model/TooManyRequestsError.md)
 - [UpdateWalletInput](docs/Model/UpdateWalletInput.md)
 - [WalletDto](docs/Model/WalletDto.md)
 - [WalletDtoKeysInner](docs/Model/WalletDtoKeysInner.md)
