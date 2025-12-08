@@ -1548,7 +1548,7 @@ class WalletApi
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialResultDto|\AffinidiTdk\Clients\WalletsClient\Model\SignCredential400Response|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialResultDto|\AffinidiTdk\Clients\WalletsClient\Model\SignCredential400Response|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError|\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError
      */
     public function signCredential($wallet_id, $sign_credential_input_dto, string $contentType = self::contentTypes['signCredential'][0])
     {
@@ -1565,7 +1565,7 @@ class WalletApi
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialResultDto|\AffinidiTdk\Clients\WalletsClient\Model\SignCredential400Response|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialResultDto|\AffinidiTdk\Clients\WalletsClient\Model\SignCredential400Response|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError|\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError, HTTP status code, HTTP response headers (array of strings)
      */
     public function signCredentialWithHttpInfo($wallet_id, $sign_credential_input_dto, string $contentType = self::contentTypes['signCredential'][0])
     {
@@ -1717,6 +1717,33 @@ class WalletApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 429:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             if ($statusCode < 200 || $statusCode > 299) {
@@ -1790,6 +1817,14 @@ class WalletApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1991,7 +2026,7 @@ class WalletApi
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError|\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError
      */
     public function signCredentialsJwt($wallet_id, $sign_credentials_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsJwt'][0])
     {
@@ -2008,7 +2043,7 @@ class WalletApi
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsJwtResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError|\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError, HTTP status code, HTTP response headers (array of strings)
      */
     public function signCredentialsJwtWithHttpInfo($wallet_id, $sign_credentials_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsJwt'][0])
     {
@@ -2160,6 +2195,33 @@ class WalletApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 429:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             if ($statusCode < 200 || $statusCode > 299) {
@@ -2233,6 +2295,14 @@ class WalletApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2434,7 +2504,7 @@ class WalletApi
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError|\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError
      */
     public function signCredentialsLdp($wallet_id, $sign_credentials_ldp_input_dto, string $contentType = self::contentTypes['signCredentialsLdp'][0])
     {
@@ -2451,7 +2521,7 @@ class WalletApi
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsLdpResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError|\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError, HTTP status code, HTTP response headers (array of strings)
      */
     public function signCredentialsLdpWithHttpInfo($wallet_id, $sign_credentials_ldp_input_dto, string $contentType = self::contentTypes['signCredentialsLdp'][0])
     {
@@ -2603,6 +2673,33 @@ class WalletApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 429:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             if ($statusCode < 200 || $statusCode > 299) {
@@ -2676,6 +2773,14 @@ class WalletApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2877,7 +2982,7 @@ class WalletApi
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError|\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError
      */
     public function signCredentialsSdJwt($wallet_id, $sign_credentials_dm2_sd_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsSdJwt'][0])
     {
@@ -2894,7 +2999,7 @@ class WalletApi
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignCredentialsDm2SdJwtResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError|\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError, HTTP status code, HTTP response headers (array of strings)
      */
     public function signCredentialsSdJwtWithHttpInfo($wallet_id, $sign_credentials_dm2_sd_jwt_input_dto, string $contentType = self::contentTypes['signCredentialsSdJwt'][0])
     {
@@ -3046,6 +3151,33 @@ class WalletApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 429:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             if ($statusCode < 200 || $statusCode > 299) {
@@ -3119,6 +3251,14 @@ class WalletApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
