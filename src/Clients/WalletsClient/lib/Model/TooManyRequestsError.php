@@ -1,6 +1,6 @@
 <?php
 /**
- * SignPresentationLdpInputDto
+ * TooManyRequestsError
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * SignPresentationLdpInputDto Class Doc Comment
+ * TooManyRequestsError Class Doc Comment
  *
  * @category Class
- * @description DTO contains params to sign presentation
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class TooManyRequestsError implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SignPresentationLdpInputDto';
+    protected static $openAPIModelName = 'TooManyRequestsError';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +58,11 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'unsigned_presentation' => 'object',
-        'signature_scheme' => 'string',
-        'signature_suite' => 'string',
-        'domain' => 'string[]',
-        'challenge' => 'string'
+        'name' => 'string',
+        'message' => 'string',
+        'http_status_code' => 'float',
+        'trace_id' => 'string',
+        'details' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]'
     ];
 
     /**
@@ -74,11 +73,11 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'unsigned_presentation' => null,
-        'signature_scheme' => null,
-        'signature_suite' => null,
-        'domain' => null,
-        'challenge' => null
+        'name' => null,
+        'message' => null,
+        'http_status_code' => null,
+        'trace_id' => null,
+        'details' => null
     ];
 
     /**
@@ -87,11 +86,11 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'unsigned_presentation' => false,
-        'signature_scheme' => false,
-        'signature_suite' => false,
-        'domain' => false,
-        'challenge' => false
+        'name' => false,
+        'message' => false,
+        'http_status_code' => false,
+        'trace_id' => false,
+        'details' => false
     ];
 
     /**
@@ -180,11 +179,11 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'unsigned_presentation' => 'unsignedPresentation',
-        'signature_scheme' => 'signatureScheme',
-        'signature_suite' => 'signatureSuite',
-        'domain' => 'domain',
-        'challenge' => 'challenge'
+        'name' => 'name',
+        'message' => 'message',
+        'http_status_code' => 'httpStatusCode',
+        'trace_id' => 'traceId',
+        'details' => 'details'
     ];
 
     /**
@@ -193,11 +192,11 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'unsigned_presentation' => 'setUnsignedPresentation',
-        'signature_scheme' => 'setSignatureScheme',
-        'signature_suite' => 'setSignatureSuite',
-        'domain' => 'setDomain',
-        'challenge' => 'setChallenge'
+        'name' => 'setName',
+        'message' => 'setMessage',
+        'http_status_code' => 'setHttpStatusCode',
+        'trace_id' => 'setTraceId',
+        'details' => 'setDetails'
     ];
 
     /**
@@ -206,11 +205,11 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'unsigned_presentation' => 'getUnsignedPresentation',
-        'signature_scheme' => 'getSignatureScheme',
-        'signature_suite' => 'getSignatureSuite',
-        'domain' => 'getDomain',
-        'challenge' => 'getChallenge'
+        'name' => 'getName',
+        'message' => 'getMessage',
+        'http_status_code' => 'getHttpStatusCode',
+        'trace_id' => 'getTraceId',
+        'details' => 'getDetails'
     ];
 
     /**
@@ -254,26 +253,19 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
         return self::$openAPIModelName;
     }
 
-    public const SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256 = 'ecdsa_secp256k1_sha256';
-    public const SIGNATURE_SCHEME_ECDSA_P256_SHA256 = 'ecdsa_p256_sha256';
-    public const SIGNATURE_SCHEME_ED25519 = 'ed25519';
-    public const SIGNATURE_SUITE_ECDSA_JCS_2019 = 'ecdsa-jcs-2019';
-    public const SIGNATURE_SUITE_ECDSA_RDFC_2019 = 'ecdsa-rdfc-2019';
-    public const SIGNATURE_SUITE_EDDSA_JCS_2022 = 'eddsa-jcs-2022';
-    public const SIGNATURE_SUITE_EDDSA_RDFC_2022 = 'eddsa-rdfc-2022';
-    public const SIGNATURE_SUITE_ECDSA_SECP256K1_SIGNATURE2019 = 'EcdsaSecp256k1Signature2019';
+    public const NAME_TOO_MANY_REQUESTS_ERROR = 'TooManyRequestsError';
+    public const MESSAGE_TOO_MANY_CONCURRENT_REQUESTS_TO_THE_SAME_WALLET__THE_OPERATION_FAILED_AFTER_MULTIPLE_RETRY_ATTEMPTS_DUE_TO_CONCURRENT_UPDATES__PLEASE_RETRY_YOUR_REQUEST_AFTER_A_SHORT_DELAY = 'Too many concurrent requests to the same wallet. The operation failed after multiple retry attempts due to concurrent updates. Please retry your request after a short delay.';
+    public const HTTP_STATUS_CODE_NUMBER_429 = 429;
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getSignatureSchemeAllowableValues()
+    public function getNameAllowableValues()
     {
         return [
-            self::SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256,
-            self::SIGNATURE_SCHEME_ECDSA_P256_SHA256,
-            self::SIGNATURE_SCHEME_ED25519,
+            self::NAME_TOO_MANY_REQUESTS_ERROR,
         ];
     }
 
@@ -282,14 +274,22 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
      *
      * @return string[]
      */
-    public function getSignatureSuiteAllowableValues()
+    public function getMessageAllowableValues()
     {
         return [
-            self::SIGNATURE_SUITE_ECDSA_JCS_2019,
-            self::SIGNATURE_SUITE_ECDSA_RDFC_2019,
-            self::SIGNATURE_SUITE_EDDSA_JCS_2022,
-            self::SIGNATURE_SUITE_EDDSA_RDFC_2022,
-            self::SIGNATURE_SUITE_ECDSA_SECP256K1_SIGNATURE2019,
+            self::MESSAGE_TOO_MANY_CONCURRENT_REQUESTS_TO_THE_SAME_WALLET__THE_OPERATION_FAILED_AFTER_MULTIPLE_RETRY_ATTEMPTS_DUE_TO_CONCURRENT_UPDATES__PLEASE_RETRY_YOUR_REQUEST_AFTER_A_SHORT_DELAY,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getHttpStatusCodeAllowableValues()
+    {
+        return [
+            self::HTTP_STATUS_CODE_NUMBER_429,
         ];
     }
 
@@ -308,11 +308,11 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('unsigned_presentation', $data ?? [], null);
-        $this->setIfExists('signature_scheme', $data ?? [], null);
-        $this->setIfExists('signature_suite', $data ?? [], null);
-        $this->setIfExists('domain', $data ?? [], null);
-        $this->setIfExists('challenge', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('http_status_code', $data ?? [], null);
+        $this->setIfExists('trace_id', $data ?? [], null);
+        $this->setIfExists('details', $data ?? [], null);
     }
 
     /**
@@ -342,27 +342,45 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        if ($this->container['unsigned_presentation'] === null) {
-            $invalidProperties[] = "'unsigned_presentation' can't be null";
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
         }
-        $allowedValues = $this->getSignatureSchemeAllowableValues();
-        if (!is_null($this->container['signature_scheme']) && !in_array($this->container['signature_scheme'], $allowedValues, true)) {
+        $allowedValues = $this->getNameAllowableValues();
+        if (!is_null($this->container['name']) && !in_array($this->container['name'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'signature_scheme', must be one of '%s'",
-                $this->container['signature_scheme'],
+                "invalid value '%s' for 'name', must be one of '%s'",
+                $this->container['name'],
                 implode("', '", $allowedValues)
             );
         }
 
-        $allowedValues = $this->getSignatureSuiteAllowableValues();
-        if (!is_null($this->container['signature_suite']) && !in_array($this->container['signature_suite'], $allowedValues, true)) {
+        if ($this->container['message'] === null) {
+            $invalidProperties[] = "'message' can't be null";
+        }
+        $allowedValues = $this->getMessageAllowableValues();
+        if (!is_null($this->container['message']) && !in_array($this->container['message'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'signature_suite', must be one of '%s'",
-                $this->container['signature_suite'],
+                "invalid value '%s' for 'message', must be one of '%s'",
+                $this->container['message'],
                 implode("', '", $allowedValues)
             );
         }
 
+        if ($this->container['http_status_code'] === null) {
+            $invalidProperties[] = "'http_status_code' can't be null";
+        }
+        $allowedValues = $this->getHttpStatusCodeAllowableValues();
+        if (!is_null($this->container['http_status_code']) && !in_array($this->container['http_status_code'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'http_status_code', must be one of '%s'",
+                $this->container['http_status_code'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['trace_id'] === null) {
+            $invalidProperties[] = "'trace_id' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -379,156 +397,166 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets unsigned_presentation
+     * Gets name
      *
-     * @return object
+     * @return string
      */
-    public function getUnsignedPresentation()
+    public function getName()
     {
-        return $this->container['unsigned_presentation'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets unsigned_presentation
+     * Sets name
      *
-     * @param object $unsigned_presentation Unsigned presentation in Dm1 format
+     * @param string $name name
      *
      * @return self
      */
-    public function setUnsignedPresentation($unsigned_presentation)
+    public function setName($name)
     {
-        if (is_null($unsigned_presentation)) {
-            throw new \InvalidArgumentException('non-nullable unsigned_presentation cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['unsigned_presentation'] = $unsigned_presentation;
-
-        return $this;
-    }
-
-    /**
-     * Gets signature_scheme
-     *
-     * @return string|null
-     */
-    public function getSignatureScheme()
-    {
-        return $this->container['signature_scheme'];
-    }
-
-    /**
-     * Sets signature_scheme
-     *
-     * @param string|null $signature_scheme signature_scheme
-     *
-     * @return self
-     */
-    public function setSignatureScheme($signature_scheme)
-    {
-        if (is_null($signature_scheme)) {
-            throw new \InvalidArgumentException('non-nullable signature_scheme cannot be null');
-        }
-        $allowedValues = $this->getSignatureSchemeAllowableValues();
-        if (!in_array($signature_scheme, $allowedValues, true)) {
+        $allowedValues = $this->getNameAllowableValues();
+        if (!in_array($name, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'signature_scheme', must be one of '%s'",
-                    $signature_scheme,
+                    "Invalid value '%s' for 'name', must be one of '%s'",
+                    $name,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['signature_scheme'] = $signature_scheme;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets signature_suite
+     * Gets message
      *
-     * @return string|null
+     * @return string
      */
-    public function getSignatureSuite()
+    public function getMessage()
     {
-        return $this->container['signature_suite'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets signature_suite
+     * Sets message
      *
-     * @param string|null $signature_suite W3C signature suite for canonicalization. Defaults to rdfc variants for each algorithm (ecdsa-rdfc-2019 for P256, eddsa-rdfc-2022 for Ed25519, EcdsaSecp256k1Signature2019 for secp256k1).
+     * @param string $message message
      *
      * @return self
      */
-    public function setSignatureSuite($signature_suite)
+    public function setMessage($message)
     {
-        if (is_null($signature_suite)) {
-            throw new \InvalidArgumentException('non-nullable signature_suite cannot be null');
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
-        $allowedValues = $this->getSignatureSuiteAllowableValues();
-        if (!in_array($signature_suite, $allowedValues, true)) {
+        $allowedValues = $this->getMessageAllowableValues();
+        if (!in_array($message, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'signature_suite', must be one of '%s'",
-                    $signature_suite,
+                    "Invalid value '%s' for 'message', must be one of '%s'",
+                    $message,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['signature_suite'] = $signature_suite;
+        $this->container['message'] = $message;
 
         return $this;
     }
 
     /**
-     * Gets domain
+     * Gets http_status_code
      *
-     * @return string[]|null
+     * @return float
      */
-    public function getDomain()
+    public function getHttpStatusCode()
     {
-        return $this->container['domain'];
+        return $this->container['http_status_code'];
     }
 
     /**
-     * Sets domain
+     * Sets http_status_code
      *
-     * @param string[]|null $domain Domain(s) for which the presentation is intended
+     * @param float $http_status_code http_status_code
      *
      * @return self
      */
-    public function setDomain($domain)
+    public function setHttpStatusCode($http_status_code)
     {
-        if (is_null($domain)) {
-            throw new \InvalidArgumentException('non-nullable domain cannot be null');
+        if (is_null($http_status_code)) {
+            throw new \InvalidArgumentException('non-nullable http_status_code cannot be null');
         }
-        $this->container['domain'] = $domain;
+        $allowedValues = $this->getHttpStatusCodeAllowableValues();
+        if (!in_array($http_status_code, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'http_status_code', must be one of '%s'",
+                    $http_status_code,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['http_status_code'] = $http_status_code;
 
         return $this;
     }
 
     /**
-     * Gets challenge
+     * Gets trace_id
      *
-     * @return string|null
+     * @return string
      */
-    public function getChallenge()
+    public function getTraceId()
     {
-        return $this->container['challenge'];
+        return $this->container['trace_id'];
     }
 
     /**
-     * Sets challenge
+     * Sets trace_id
      *
-     * @param string|null $challenge Challenge string
+     * @param string $trace_id trace_id
      *
      * @return self
      */
-    public function setChallenge($challenge)
+    public function setTraceId($trace_id)
     {
-        if (is_null($challenge)) {
-            throw new \InvalidArgumentException('non-nullable challenge cannot be null');
+        if (is_null($trace_id)) {
+            throw new \InvalidArgumentException('non-nullable trace_id cannot be null');
         }
-        $this->container['challenge'] = $challenge;
+        $this->container['trace_id'] = $trace_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets details
+     *
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null
+     */
+    public function getDetails()
+    {
+        return $this->container['details'];
+    }
+
+    /**
+     * Sets details
+     *
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null $details details
+     *
+     * @return self
+     */
+    public function setDetails($details)
+    {
+        if (is_null($details)) {
+            throw new \InvalidArgumentException('non-nullable details cannot be null');
+        }
+        $this->container['details'] = $details;
 
         return $this;
     }
