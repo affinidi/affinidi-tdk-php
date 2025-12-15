@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **unsigned_presentation** | **object** | Unsigned presentation in Dm1 format |
 **signature_scheme** | **string** |  | [optional]
+**signature_suite** | **string** | W3C signature suite for canonicalization. Defaults to rdfc variants for each algorithm (ecdsa-rdfc-2019 for P256, eddsa-rdfc-2022 for Ed25519, EcdsaSecp256k1Signature2019 for secp256k1). | [optional]
 **domain** | **string[]** | Domain(s) for which the presentation is intended | [optional]
 **challenge** | **string** | Challenge string | [optional]
 
