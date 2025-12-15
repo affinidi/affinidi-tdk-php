@@ -83,6 +83,68 @@ try {
 ## `createWalletV2()`
 
 ```php
+createWalletV2($create_wallet_v2_input): \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Response
+```
+
+
+
+Create v2 wallet
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ProjectTokenAuth
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\WalletApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$create_wallet_v2_input = new \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Input(); // \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Input | CreateWallet
+
+try {
+    $result = $apiInstance->createWalletV2($create_wallet_v2_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WalletApi->createWalletV2: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **create_wallet_v2_input** | [**\AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Input**](../Model/CreateWalletV2Input.md)| CreateWallet | [optional] |
+
+### Return type
+
+[**\AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Response**](../Model/CreateWalletV2Response.md)
+
+### Authorization
+
+[ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createWalletV2()`
+
+```php
 createWalletV2(): \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Response
 ```
 
