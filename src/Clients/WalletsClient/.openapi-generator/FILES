@@ -40,6 +40,9 @@ docs/Model/SignMessageResultDto.md
 docs/Model/SignPresentationLdpInputDto.md
 docs/Model/SignPresentationLdpResultDto.md
 docs/Model/SigningFailedError.md
+docs/Model/TooManyRequestsError.md
+docs/Model/UnpackMessageInput.md
+docs/Model/UnpackMessageResultDto.md
 docs/Model/UpdateWalletInput.md
 docs/Model/WalletDto.md
 docs/Model/WalletDtoKeysInner.md
@@ -91,6 +94,9 @@ lib/Model/SignMessageResultDto.php
 lib/Model/SignPresentationLdpInputDto.php
 lib/Model/SignPresentationLdpResultDto.php
 lib/Model/SigningFailedError.php
+lib/Model/TooManyRequestsError.php
+lib/Model/UnpackMessageInput.php
+lib/Model/UnpackMessageResultDto.php
 lib/Model/UpdateWalletInput.php
 lib/Model/WalletDto.php
 lib/Model/WalletDtoKeysInner.php
