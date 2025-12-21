@@ -61,7 +61,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
     protected static $openAPITypes = [
         'unsigned_credential' => 'object',
         'revocable' => 'bool',
-        'signature_scheme' => 'string'
+        'signature_scheme' => 'string',
+        'signature_suite' => 'string'
     ];
 
     /**
@@ -74,7 +75,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
     protected static $openAPIFormats = [
         'unsigned_credential' => null,
         'revocable' => null,
-        'signature_scheme' => null
+        'signature_scheme' => null,
+        'signature_suite' => null
     ];
 
     /**
@@ -85,7 +87,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
     protected static array $openAPINullables = [
         'unsigned_credential' => false,
         'revocable' => false,
-        'signature_scheme' => false
+        'signature_scheme' => false,
+        'signature_suite' => false
     ];
 
     /**
@@ -176,7 +179,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
     protected static $attributeMap = [
         'unsigned_credential' => 'unsignedCredential',
         'revocable' => 'revocable',
-        'signature_scheme' => 'signatureScheme'
+        'signature_scheme' => 'signatureScheme',
+        'signature_suite' => 'signatureSuite'
     ];
 
     /**
@@ -187,7 +191,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
     protected static $setters = [
         'unsigned_credential' => 'setUnsignedCredential',
         'revocable' => 'setRevocable',
-        'signature_scheme' => 'setSignatureScheme'
+        'signature_scheme' => 'setSignatureScheme',
+        'signature_suite' => 'setSignatureSuite'
     ];
 
     /**
@@ -198,7 +203,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
     protected static $getters = [
         'unsigned_credential' => 'getUnsignedCredential',
         'revocable' => 'getRevocable',
-        'signature_scheme' => 'getSignatureScheme'
+        'signature_scheme' => 'getSignatureScheme',
+        'signature_suite' => 'getSignatureSuite'
     ];
 
     /**
@@ -245,6 +251,11 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
     public const SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256 = 'ecdsa_secp256k1_sha256';
     public const SIGNATURE_SCHEME_ECDSA_P256_SHA256 = 'ecdsa_p256_sha256';
     public const SIGNATURE_SCHEME_ED25519 = 'ed25519';
+    public const SIGNATURE_SUITE_ECDSA_JCS_2019 = 'ecdsa-jcs-2019';
+    public const SIGNATURE_SUITE_ECDSA_RDFC_2019 = 'ecdsa-rdfc-2019';
+    public const SIGNATURE_SUITE_EDDSA_JCS_2022 = 'eddsa-jcs-2022';
+    public const SIGNATURE_SUITE_EDDSA_RDFC_2022 = 'eddsa-rdfc-2022';
+    public const SIGNATURE_SUITE_ECDSA_SECP256K1_SIGNATURE2019 = 'EcdsaSecp256k1Signature2019';
 
     /**
      * Gets allowable values of the enum
@@ -257,6 +268,22 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
             self::SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256,
             self::SIGNATURE_SCHEME_ECDSA_P256_SHA256,
             self::SIGNATURE_SCHEME_ED25519,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSignatureSuiteAllowableValues()
+    {
+        return [
+            self::SIGNATURE_SUITE_ECDSA_JCS_2019,
+            self::SIGNATURE_SUITE_ECDSA_RDFC_2019,
+            self::SIGNATURE_SUITE_EDDSA_JCS_2022,
+            self::SIGNATURE_SUITE_EDDSA_RDFC_2022,
+            self::SIGNATURE_SUITE_ECDSA_SECP256K1_SIGNATURE2019,
         ];
     }
 
@@ -278,6 +305,7 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('unsigned_credential', $data ?? [], null);
         $this->setIfExists('revocable', $data ?? [], null);
         $this->setIfExists('signature_scheme', $data ?? [], null);
+        $this->setIfExists('signature_suite', $data ?? [], null);
     }
 
     /**
@@ -315,6 +343,15 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'signature_scheme', must be one of '%s'",
                 $this->container['signature_scheme'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getSignatureSuiteAllowableValues();
+        if (!is_null($this->container['signature_suite']) && !in_array($this->container['signature_suite'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'signature_suite', must be one of '%s'",
+                $this->container['signature_suite'],
                 implode("', '", $allowedValues)
             );
         }
@@ -421,6 +458,43 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
             );
         }
         $this->container['signature_scheme'] = $signature_scheme;
+
+        return $this;
+    }
+
+    /**
+     * Gets signature_suite
+     *
+     * @return string|null
+     */
+    public function getSignatureSuite()
+    {
+        return $this->container['signature_suite'];
+    }
+
+    /**
+     * Sets signature_suite
+     *
+     * @param string|null $signature_suite W3C signature suite for canonicalization. Defaults to rdfc variants for each algorithm (ecdsa-rdfc-2019 for P256, eddsa-rdfc-2022 for Ed25519, EcdsaSecp256k1Signature2019 for secp256k1).
+     *
+     * @return self
+     */
+    public function setSignatureSuite($signature_suite)
+    {
+        if (is_null($signature_suite)) {
+            throw new \InvalidArgumentException('non-nullable signature_suite cannot be null');
+        }
+        $allowedValues = $this->getSignatureSuiteAllowableValues();
+        if (!in_array($signature_suite, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'signature_suite', must be one of '%s'",
+                    $signature_suite,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['signature_suite'] = $signature_suite;
 
         return $this;
     }
