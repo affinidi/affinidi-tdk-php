@@ -61,6 +61,7 @@ class VerifyPresentationV2Input implements ModelInterface, ArrayAccess, \JsonSer
     protected static $openAPITypes = [
         'verifiable_presentation' => 'object',
         'pex_query' => '\AffinidiTdk\Clients\CredentialVerificationClient\Model\VerifyPresentationV2InputPexQuery',
+        'dcql_query' => 'array<string,mixed>',
         'challenge' => 'string',
         'domain' => 'string[]'
     ];
@@ -75,6 +76,7 @@ class VerifyPresentationV2Input implements ModelInterface, ArrayAccess, \JsonSer
     protected static $openAPIFormats = [
         'verifiable_presentation' => null,
         'pex_query' => null,
+        'dcql_query' => null,
         'challenge' => null,
         'domain' => null
     ];
@@ -87,6 +89,7 @@ class VerifyPresentationV2Input implements ModelInterface, ArrayAccess, \JsonSer
     protected static array $openAPINullables = [
         'verifiable_presentation' => false,
         'pex_query' => false,
+        'dcql_query' => false,
         'challenge' => false,
         'domain' => false
     ];
@@ -179,6 +182,7 @@ class VerifyPresentationV2Input implements ModelInterface, ArrayAccess, \JsonSer
     protected static $attributeMap = [
         'verifiable_presentation' => 'verifiablePresentation',
         'pex_query' => 'pexQuery',
+        'dcql_query' => 'dcqlQuery',
         'challenge' => 'challenge',
         'domain' => 'domain'
     ];
@@ -191,6 +195,7 @@ class VerifyPresentationV2Input implements ModelInterface, ArrayAccess, \JsonSer
     protected static $setters = [
         'verifiable_presentation' => 'setVerifiablePresentation',
         'pex_query' => 'setPexQuery',
+        'dcql_query' => 'setDcqlQuery',
         'challenge' => 'setChallenge',
         'domain' => 'setDomain'
     ];
@@ -203,6 +208,7 @@ class VerifyPresentationV2Input implements ModelInterface, ArrayAccess, \JsonSer
     protected static $getters = [
         'verifiable_presentation' => 'getVerifiablePresentation',
         'pex_query' => 'getPexQuery',
+        'dcql_query' => 'getDcqlQuery',
         'challenge' => 'getChallenge',
         'domain' => 'getDomain'
     ];
@@ -266,6 +272,7 @@ class VerifyPresentationV2Input implements ModelInterface, ArrayAccess, \JsonSer
     {
         $this->setIfExists('verifiable_presentation', $data ?? [], null);
         $this->setIfExists('pex_query', $data ?? [], null);
+        $this->setIfExists('dcql_query', $data ?? [], null);
         $this->setIfExists('challenge', $data ?? [], null);
         $this->setIfExists('domain', $data ?? [], null);
     }
@@ -362,6 +369,33 @@ class VerifyPresentationV2Input implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable pex_query cannot be null');
         }
         $this->container['pex_query'] = $pex_query;
+
+        return $this;
+    }
+
+    /**
+     * Gets dcql_query
+     *
+     * @return array<string,mixed>|null
+     */
+    public function getDcqlQuery()
+    {
+        return $this->container['dcql_query'];
+    }
+
+    /**
+     * Sets dcql_query
+     *
+     * @param array<string,mixed>|null $dcql_query DCQL (Digital Credentials Query Language) Query used to verify that the credentials in the Verifiable Presentation match the specified query requirements. Currently supports only ldp_vc format credentials. Developers should implement additional business rule validation on top of the verification results returned by this service.
+     *
+     * @return self
+     */
+    public function setDcqlQuery($dcql_query)
+    {
+        if (is_null($dcql_query)) {
+            throw new \InvalidArgumentException('non-nullable dcql_query cannot be null');
+        }
+        $this->container['dcql_query'] = $dcql_query;
 
         return $this;
     }
