@@ -1,6 +1,6 @@
 <?php
 /**
- * SignPresentationLdpInputDto
+ * UnpackMessageResultDto
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * SignPresentationLdpInputDto Class Doc Comment
+ * UnpackMessageResultDto Class Doc Comment
  *
  * @category Class
- * @description DTO contains params to sign presentation
+ * @description DTO contains decrypted message in JSON fromat
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SignPresentationLdpInputDto';
+    protected static $openAPIModelName = 'UnpackMessageResultDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +59,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'unsigned_presentation' => 'object',
-        'signature_scheme' => 'string',
-        'signature_suite' => 'string',
-        'domain' => 'string[]',
-        'challenge' => 'string'
+        'message' => 'object'
     ];
 
     /**
@@ -74,11 +70,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'unsigned_presentation' => null,
-        'signature_scheme' => null,
-        'signature_suite' => null,
-        'domain' => null,
-        'challenge' => null
+        'message' => null
     ];
 
     /**
@@ -87,11 +79,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'unsigned_presentation' => false,
-        'signature_scheme' => false,
-        'signature_suite' => false,
-        'domain' => false,
-        'challenge' => false
+        'message' => false
     ];
 
     /**
@@ -180,11 +168,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'unsigned_presentation' => 'unsignedPresentation',
-        'signature_scheme' => 'signatureScheme',
-        'signature_suite' => 'signatureSuite',
-        'domain' => 'domain',
-        'challenge' => 'challenge'
+        'message' => 'message'
     ];
 
     /**
@@ -193,11 +177,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'unsigned_presentation' => 'setUnsignedPresentation',
-        'signature_scheme' => 'setSignatureScheme',
-        'signature_suite' => 'setSignatureSuite',
-        'domain' => 'setDomain',
-        'challenge' => 'setChallenge'
+        'message' => 'setMessage'
     ];
 
     /**
@@ -206,11 +186,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'unsigned_presentation' => 'getUnsignedPresentation',
-        'signature_scheme' => 'getSignatureScheme',
-        'signature_suite' => 'getSignatureSuite',
-        'domain' => 'getDomain',
-        'challenge' => 'getChallenge'
+        'message' => 'getMessage'
     ];
 
     /**
@@ -254,44 +230,6 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
         return self::$openAPIModelName;
     }
 
-    public const SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256 = 'ecdsa_secp256k1_sha256';
-    public const SIGNATURE_SCHEME_ECDSA_P256_SHA256 = 'ecdsa_p256_sha256';
-    public const SIGNATURE_SCHEME_ED25519 = 'ed25519';
-    public const SIGNATURE_SUITE_ECDSA_JCS_2019 = 'ecdsa-jcs-2019';
-    public const SIGNATURE_SUITE_ECDSA_RDFC_2019 = 'ecdsa-rdfc-2019';
-    public const SIGNATURE_SUITE_EDDSA_JCS_2022 = 'eddsa-jcs-2022';
-    public const SIGNATURE_SUITE_EDDSA_RDFC_2022 = 'eddsa-rdfc-2022';
-    public const SIGNATURE_SUITE_ECDSA_SECP256K1_SIGNATURE2019 = 'EcdsaSecp256k1Signature2019';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getSignatureSchemeAllowableValues()
-    {
-        return [
-            self::SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256,
-            self::SIGNATURE_SCHEME_ECDSA_P256_SHA256,
-            self::SIGNATURE_SCHEME_ED25519,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getSignatureSuiteAllowableValues()
-    {
-        return [
-            self::SIGNATURE_SUITE_ECDSA_JCS_2019,
-            self::SIGNATURE_SUITE_ECDSA_RDFC_2019,
-            self::SIGNATURE_SUITE_EDDSA_JCS_2022,
-            self::SIGNATURE_SUITE_EDDSA_RDFC_2022,
-            self::SIGNATURE_SUITE_ECDSA_SECP256K1_SIGNATURE2019,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -308,11 +246,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('unsigned_presentation', $data ?? [], null);
-        $this->setIfExists('signature_scheme', $data ?? [], null);
-        $this->setIfExists('signature_suite', $data ?? [], null);
-        $this->setIfExists('domain', $data ?? [], null);
-        $this->setIfExists('challenge', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
     }
 
     /**
@@ -342,27 +276,9 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        if ($this->container['unsigned_presentation'] === null) {
-            $invalidProperties[] = "'unsigned_presentation' can't be null";
+        if ($this->container['message'] === null) {
+            $invalidProperties[] = "'message' can't be null";
         }
-        $allowedValues = $this->getSignatureSchemeAllowableValues();
-        if (!is_null($this->container['signature_scheme']) && !in_array($this->container['signature_scheme'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'signature_scheme', must be one of '%s'",
-                $this->container['signature_scheme'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        $allowedValues = $this->getSignatureSuiteAllowableValues();
-        if (!is_null($this->container['signature_suite']) && !in_array($this->container['signature_suite'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'signature_suite', must be one of '%s'",
-                $this->container['signature_suite'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -379,156 +295,28 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets unsigned_presentation
+     * Gets message
      *
      * @return object
      */
-    public function getUnsignedPresentation()
+    public function getMessage()
     {
-        return $this->container['unsigned_presentation'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets unsigned_presentation
+     * Sets message
      *
-     * @param object $unsigned_presentation Unsigned presentation in Dm1 format
+     * @param object $message decrypted message in JSON format
      *
      * @return self
      */
-    public function setUnsignedPresentation($unsigned_presentation)
+    public function setMessage($message)
     {
-        if (is_null($unsigned_presentation)) {
-            throw new \InvalidArgumentException('non-nullable unsigned_presentation cannot be null');
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
-        $this->container['unsigned_presentation'] = $unsigned_presentation;
-
-        return $this;
-    }
-
-    /**
-     * Gets signature_scheme
-     *
-     * @return string|null
-     */
-    public function getSignatureScheme()
-    {
-        return $this->container['signature_scheme'];
-    }
-
-    /**
-     * Sets signature_scheme
-     *
-     * @param string|null $signature_scheme signature_scheme
-     *
-     * @return self
-     */
-    public function setSignatureScheme($signature_scheme)
-    {
-        if (is_null($signature_scheme)) {
-            throw new \InvalidArgumentException('non-nullable signature_scheme cannot be null');
-        }
-        $allowedValues = $this->getSignatureSchemeAllowableValues();
-        if (!in_array($signature_scheme, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'signature_scheme', must be one of '%s'",
-                    $signature_scheme,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['signature_scheme'] = $signature_scheme;
-
-        return $this;
-    }
-
-    /**
-     * Gets signature_suite
-     *
-     * @return string|null
-     */
-    public function getSignatureSuite()
-    {
-        return $this->container['signature_suite'];
-    }
-
-    /**
-     * Sets signature_suite
-     *
-     * @param string|null $signature_suite W3C signature suite for canonicalization. Defaults to rdfc variants for each algorithm (ecdsa-rdfc-2019 for P256, eddsa-rdfc-2022 for Ed25519, EcdsaSecp256k1Signature2019 for secp256k1).
-     *
-     * @return self
-     */
-    public function setSignatureSuite($signature_suite)
-    {
-        if (is_null($signature_suite)) {
-            throw new \InvalidArgumentException('non-nullable signature_suite cannot be null');
-        }
-        $allowedValues = $this->getSignatureSuiteAllowableValues();
-        if (!in_array($signature_suite, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'signature_suite', must be one of '%s'",
-                    $signature_suite,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['signature_suite'] = $signature_suite;
-
-        return $this;
-    }
-
-    /**
-     * Gets domain
-     *
-     * @return string[]|null
-     */
-    public function getDomain()
-    {
-        return $this->container['domain'];
-    }
-
-    /**
-     * Sets domain
-     *
-     * @param string[]|null $domain Domain(s) for which the presentation is intended
-     *
-     * @return self
-     */
-    public function setDomain($domain)
-    {
-        if (is_null($domain)) {
-            throw new \InvalidArgumentException('non-nullable domain cannot be null');
-        }
-        $this->container['domain'] = $domain;
-
-        return $this;
-    }
-
-    /**
-     * Gets challenge
-     *
-     * @return string|null
-     */
-    public function getChallenge()
-    {
-        return $this->container['challenge'];
-    }
-
-    /**
-     * Sets challenge
-     *
-     * @param string|null $challenge Challenge string
-     *
-     * @return self
-     */
-    public function setChallenge($challenge)
-    {
-        if (is_null($challenge)) {
-            throw new \InvalidArgumentException('non-nullable challenge cannot be null');
-        }
-        $this->container['challenge'] = $challenge;
+        $this->container['message'] = $message;
 
         return $this;
     }
