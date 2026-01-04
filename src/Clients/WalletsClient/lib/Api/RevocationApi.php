@@ -1051,6 +1051,14 @@ class RevocationApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\TooManyRequestsError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
