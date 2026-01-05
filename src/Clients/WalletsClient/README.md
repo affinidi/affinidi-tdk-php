@@ -73,6 +73,7 @@ Class | Method | HTTP request | Description
 *RevocationApi* | [**revokeCredential**](docs/Api/RevocationApi.md#revokecredential) | **POST** /v1/wallets/{walletId}/revoke | Revoke Credential.
 *RevocationApi* | [**revokeCredentials**](docs/Api/RevocationApi.md#revokecredentials) | **POST** /v2/wallets/{walletId}/credentials/revoke | Revoke Credentials.
 *WalletApi* | [**createWallet**](docs/Api/WalletApi.md#createwallet) | **POST** /v1/wallets | 
+*WalletApi* | [**createWalletV2**](docs/Api/WalletApi.md#createwalletv2) | **POST** /v2/wallets | 
 *WalletApi* | [**deleteWallet**](docs/Api/WalletApi.md#deletewallet) | **DELETE** /v1/wallets/{walletId} | 
 *WalletApi* | [**getWallet**](docs/Api/WalletApi.md#getwallet) | **GET** /v1/wallets/{walletId} | 
 *WalletApi* | [**listWallets**](docs/Api/WalletApi.md#listwallets) | **GET** /v1/wallets | 
@@ -123,6 +124,9 @@ Class | Method | HTTP request | Description
 - [SignPresentationLdpInputDto](docs/Model/SignPresentationLdpInputDto.md)
 - [SignPresentationLdpResultDto](docs/Model/SignPresentationLdpResultDto.md)
 - [SigningFailedError](docs/Model/SigningFailedError.md)
+- [TooManyRequestsError](docs/Model/TooManyRequestsError.md)
+- [UnpackMessageInput](docs/Model/UnpackMessageInput.md)
+- [UnpackMessageResultDto](docs/Model/UnpackMessageResultDto.md)
 - [UpdateWalletInput](docs/Model/UpdateWalletInput.md)
 - [WalletDto](docs/Model/WalletDto.md)
 - [WalletDtoKeysInner](docs/Model/WalletDtoKeysInner.md)
