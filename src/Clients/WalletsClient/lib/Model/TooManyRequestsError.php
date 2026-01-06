@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateWalletV2Input
+ * TooManyRequestsError
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * CreateWalletV2Input Class Doc Comment
+ * TooManyRequestsError Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\WalletsClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializable
+class TooManyRequestsError implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreateWalletV2Input';
+    protected static $openAPIModelName = 'TooManyRequestsError';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,10 +59,10 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static $openAPITypes = [
         'name' => 'string',
-        'description' => 'string',
-        'did_method' => 'string',
-        'did_web_url' => 'string',
-        'algorithm' => 'string'
+        'message' => 'string',
+        'http_status_code' => 'float',
+        'trace_id' => 'string',
+        'details' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]'
     ];
 
     /**
@@ -74,10 +74,10 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static $openAPIFormats = [
         'name' => null,
-        'description' => null,
-        'did_method' => null,
-        'did_web_url' => null,
-        'algorithm' => null
+        'message' => null,
+        'http_status_code' => null,
+        'trace_id' => null,
+        'details' => null
     ];
 
     /**
@@ -87,10 +87,10 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'description' => false,
-        'did_method' => false,
-        'did_web_url' => false,
-        'algorithm' => false
+        'message' => false,
+        'http_status_code' => false,
+        'trace_id' => false,
+        'details' => false
     ];
 
     /**
@@ -180,10 +180,10 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $attributeMap = [
         'name' => 'name',
-        'description' => 'description',
-        'did_method' => 'didMethod',
-        'did_web_url' => 'didWebUrl',
-        'algorithm' => 'algorithm'
+        'message' => 'message',
+        'http_status_code' => 'httpStatusCode',
+        'trace_id' => 'traceId',
+        'details' => 'details'
     ];
 
     /**
@@ -193,10 +193,10 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $setters = [
         'name' => 'setName',
-        'description' => 'setDescription',
-        'did_method' => 'setDidMethod',
-        'did_web_url' => 'setDidWebUrl',
-        'algorithm' => 'setAlgorithm'
+        'message' => 'setMessage',
+        'http_status_code' => 'setHttpStatusCode',
+        'trace_id' => 'setTraceId',
+        'details' => 'setDetails'
     ];
 
     /**
@@ -206,10 +206,10 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $getters = [
         'name' => 'getName',
-        'description' => 'getDescription',
-        'did_method' => 'getDidMethod',
-        'did_web_url' => 'getDidWebUrl',
-        'algorithm' => 'getAlgorithm'
+        'message' => 'getMessage',
+        'http_status_code' => 'getHttpStatusCode',
+        'trace_id' => 'getTraceId',
+        'details' => 'getDetails'
     ];
 
     /**
@@ -253,24 +253,19 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
         return self::$openAPIModelName;
     }
 
-    public const DID_METHOD_KEY = 'key';
-    public const DID_METHOD_WEB = 'web';
-    public const DID_METHOD_PEER0 = 'peer0';
-    public const ALGORITHM_SECP256K1 = 'secp256k1';
-    public const ALGORITHM_ED25519 = 'ed25519';
-    public const ALGORITHM_P256 = 'p256';
+    public const NAME_TOO_MANY_REQUESTS_ERROR = 'TooManyRequestsError';
+    public const MESSAGE_TOO_MANY_CONCURRENT_REQUESTS_TO_THE_SAME_WALLET__THE_OPERATION_FAILED_AFTER_MULTIPLE_RETRY_ATTEMPTS_DUE_TO_CONCURRENT_UPDATES__PLEASE_RETRY_YOUR_REQUEST_AFTER_A_SHORT_DELAY = 'Too many concurrent requests to the same wallet. The operation failed after multiple retry attempts due to concurrent updates. Please retry your request after a short delay.';
+    public const HTTP_STATUS_CODE_NUMBER_429 = 429;
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getDidMethodAllowableValues()
+    public function getNameAllowableValues()
     {
         return [
-            self::DID_METHOD_KEY,
-            self::DID_METHOD_WEB,
-            self::DID_METHOD_PEER0,
+            self::NAME_TOO_MANY_REQUESTS_ERROR,
         ];
     }
 
@@ -279,12 +274,22 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
      *
      * @return string[]
      */
-    public function getAlgorithmAllowableValues()
+    public function getMessageAllowableValues()
     {
         return [
-            self::ALGORITHM_SECP256K1,
-            self::ALGORITHM_ED25519,
-            self::ALGORITHM_P256,
+            self::MESSAGE_TOO_MANY_CONCURRENT_REQUESTS_TO_THE_SAME_WALLET__THE_OPERATION_FAILED_AFTER_MULTIPLE_RETRY_ATTEMPTS_DUE_TO_CONCURRENT_UPDATES__PLEASE_RETRY_YOUR_REQUEST_AFTER_A_SHORT_DELAY,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getHttpStatusCodeAllowableValues()
+    {
+        return [
+            self::HTTP_STATUS_CODE_NUMBER_429,
         ];
     }
 
@@ -304,10 +309,10 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
     public function __construct(array $data = null)
     {
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('did_method', $data ?? [], 'key');
-        $this->setIfExists('did_web_url', $data ?? [], null);
-        $this->setIfExists('algorithm', $data ?? [], 'secp256k1');
+        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('http_status_code', $data ?? [], null);
+        $this->setIfExists('trace_id', $data ?? [], null);
+        $this->setIfExists('details', $data ?? [], null);
     }
 
     /**
@@ -337,32 +342,45 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getDidMethodAllowableValues();
-        if (!is_null($this->container['did_method']) && !in_array($this->container['did_method'], $allowedValues, true)) {
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        $allowedValues = $this->getNameAllowableValues();
+        if (!is_null($this->container['name']) && !in_array($this->container['name'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'did_method', must be one of '%s'",
-                $this->container['did_method'],
+                "invalid value '%s' for 'name', must be one of '%s'",
+                $this->container['name'],
                 implode("', '", $allowedValues)
             );
         }
 
-        if (!is_null($this->container['did_web_url']) && (mb_strlen($this->container['did_web_url']) > 300)) {
-            $invalidProperties[] = "invalid value for 'did_web_url', the character length must be smaller than or equal to 300.";
+        if ($this->container['message'] === null) {
+            $invalidProperties[] = "'message' can't be null";
         }
-
-        if (!is_null($this->container['did_web_url']) && !preg_match("/^(https?:\/\/)?(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/", $this->container['did_web_url'])) {
-            $invalidProperties[] = "invalid value for 'did_web_url', must be conform to the pattern /^(https?:\/\/)?(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/.";
-        }
-
-        $allowedValues = $this->getAlgorithmAllowableValues();
-        if (!is_null($this->container['algorithm']) && !in_array($this->container['algorithm'], $allowedValues, true)) {
+        $allowedValues = $this->getMessageAllowableValues();
+        if (!is_null($this->container['message']) && !in_array($this->container['message'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'algorithm', must be one of '%s'",
-                $this->container['algorithm'],
+                "invalid value '%s' for 'message', must be one of '%s'",
+                $this->container['message'],
                 implode("', '", $allowedValues)
             );
         }
 
+        if ($this->container['http_status_code'] === null) {
+            $invalidProperties[] = "'http_status_code' can't be null";
+        }
+        $allowedValues = $this->getHttpStatusCodeAllowableValues();
+        if (!is_null($this->container['http_status_code']) && !in_array($this->container['http_status_code'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'http_status_code', must be one of '%s'",
+                $this->container['http_status_code'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['trace_id'] === null) {
+            $invalidProperties[] = "'trace_id' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -381,7 +399,7 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets name
      *
-     * @return string|null
+     * @return string
      */
     public function getName()
     {
@@ -391,7 +409,7 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets name
      *
-     * @param string|null $name The name of the wallet
+     * @param string $name name
      *
      * @return self
      */
@@ -400,142 +418,145 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
         if (is_null($name)) {
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
+        $allowedValues = $this->getNameAllowableValues();
+        if (!in_array($name, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'name', must be one of '%s'",
+                    $name,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
         $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets description
+     * Gets message
      *
-     * @return string|null
+     * @return string
      */
-    public function getDescription()
+    public function getMessage()
     {
-        return $this->container['description'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets description
+     * Sets message
      *
-     * @param string|null $description The description of the wallet
+     * @param string $message message
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setMessage($message)
     {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets did_method
-     *
-     * @return string|null
-     */
-    public function getDidMethod()
-    {
-        return $this->container['did_method'];
-    }
-
-    /**
-     * Sets did_method
-     *
-     * @param string|null $did_method Define how DID of your wallet is created and resolved
-     *
-     * @return self
-     */
-    public function setDidMethod($did_method)
-    {
-        if (is_null($did_method)) {
-            throw new \InvalidArgumentException('non-nullable did_method cannot be null');
-        }
-        $allowedValues = $this->getDidMethodAllowableValues();
-        if (!in_array($did_method, $allowedValues, true)) {
+        $allowedValues = $this->getMessageAllowableValues();
+        if (!in_array($message, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'did_method', must be one of '%s'",
-                    $did_method,
+                    "Invalid value '%s' for 'message', must be one of '%s'",
+                    $message,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['did_method'] = $did_method;
+        $this->container['message'] = $message;
 
         return $this;
     }
 
     /**
-     * Gets did_web_url
+     * Gets http_status_code
      *
-     * @return string|null
+     * @return float
      */
-    public function getDidWebUrl()
+    public function getHttpStatusCode()
     {
-        return $this->container['did_web_url'];
+        return $this->container['http_status_code'];
     }
 
     /**
-     * Sets did_web_url
+     * Sets http_status_code
      *
-     * @param string|null $did_web_url URL of the DID. Required if the did method is web
+     * @param float $http_status_code http_status_code
      *
      * @return self
      */
-    public function setDidWebUrl($did_web_url)
+    public function setHttpStatusCode($http_status_code)
     {
-        if (is_null($did_web_url)) {
-            throw new \InvalidArgumentException('non-nullable did_web_url cannot be null');
+        if (is_null($http_status_code)) {
+            throw new \InvalidArgumentException('non-nullable http_status_code cannot be null');
         }
-        if ((mb_strlen($did_web_url) > 300)) {
-            throw new \InvalidArgumentException('invalid length for $did_web_url when calling CreateWalletV2Input., must be smaller than or equal to 300.');
-        }
-        if ((!preg_match("/^(https?:\/\/)?(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/", ObjectSerializer::toString($did_web_url)))) {
-            throw new \InvalidArgumentException("invalid value for \$did_web_url when calling CreateWalletV2Input., must conform to the pattern /^(https?:\/\/)?(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/.");
-        }
-
-        $this->container['did_web_url'] = $did_web_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets algorithm
-     *
-     * @return string|null
-     */
-    public function getAlgorithm()
-    {
-        return $this->container['algorithm'];
-    }
-
-    /**
-     * Sets algorithm
-     *
-     * @param string|null $algorithm algorithm to generate key for the wallet
-     *
-     * @return self
-     */
-    public function setAlgorithm($algorithm)
-    {
-        if (is_null($algorithm)) {
-            throw new \InvalidArgumentException('non-nullable algorithm cannot be null');
-        }
-        $allowedValues = $this->getAlgorithmAllowableValues();
-        if (!in_array($algorithm, $allowedValues, true)) {
+        $allowedValues = $this->getHttpStatusCodeAllowableValues();
+        if (!in_array($http_status_code, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'algorithm', must be one of '%s'",
-                    $algorithm,
+                    "Invalid value '%s' for 'http_status_code', must be one of '%s'",
+                    $http_status_code,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['algorithm'] = $algorithm;
+        $this->container['http_status_code'] = $http_status_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets trace_id
+     *
+     * @return string
+     */
+    public function getTraceId()
+    {
+        return $this->container['trace_id'];
+    }
+
+    /**
+     * Sets trace_id
+     *
+     * @param string $trace_id trace_id
+     *
+     * @return self
+     */
+    public function setTraceId($trace_id)
+    {
+        if (is_null($trace_id)) {
+            throw new \InvalidArgumentException('non-nullable trace_id cannot be null');
+        }
+        $this->container['trace_id'] = $trace_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets details
+     *
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null
+     */
+    public function getDetails()
+    {
+        return $this->container['details'];
+    }
+
+    /**
+     * Sets details
+     *
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null $details details
+     *
+     * @return self
+     */
+    public function setDetails($details)
+    {
+        if (is_null($details)) {
+            throw new \InvalidArgumentException('non-nullable details cannot be null');
+        }
+        $this->container['details'] = $details;
 
         return $this;
     }
