@@ -2,6 +2,7 @@
 .php-cs-fixer.dist.php
 README.md
 docs/Api/DefaultApi.md
+docs/Api/VerifierApi.md
 docs/Model/Constraints.md
 docs/Model/ConstraintsStatuses.md
 docs/Model/Descriptor.md
@@ -37,6 +38,7 @@ docs/Model/VerifyPresentationV2InputPexQuery.md
 docs/Model/W3cCredentialStatus.md
 docs/Model/W3cProof.md
 lib/Api/DefaultApi.php
+lib/Api/VerifierApi.php
 lib/ApiException.php
 lib/Configuration.php
 lib/FormDataProcessor.php
