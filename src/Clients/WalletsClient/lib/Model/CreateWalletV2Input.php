@@ -350,8 +350,8 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
             $invalidProperties[] = "invalid value for 'did_web_url', the character length must be smaller than or equal to 300.";
         }
 
-        if (!is_null($this->container['did_web_url']) && !preg_match("/^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/", $this->container['did_web_url'])) {
-            $invalidProperties[] = "invalid value for 'did_web_url', must be conform to the pattern /^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/.";
+        if (!is_null($this->container['did_web_url']) && !preg_match("/^(https?:\/\/)?(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/", $this->container['did_web_url'])) {
+            $invalidProperties[] = "invalid value for 'did_web_url', must be conform to the pattern /^(https?:\/\/)?(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/.";
         }
 
         $allowedValues = $this->getAlgorithmAllowableValues();
@@ -494,8 +494,8 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
         if ((mb_strlen($did_web_url) > 300)) {
             throw new \InvalidArgumentException('invalid length for $did_web_url when calling CreateWalletV2Input., must be smaller than or equal to 300.');
         }
-        if ((!preg_match("/^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/", ObjectSerializer::toString($did_web_url)))) {
-            throw new \InvalidArgumentException("invalid value for \$did_web_url when calling CreateWalletV2Input., must conform to the pattern /^(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/.");
+        if ((!preg_match("/^(https?:\/\/)?(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/", ObjectSerializer::toString($did_web_url)))) {
+            throw new \InvalidArgumentException("invalid value for \$did_web_url when calling CreateWalletV2Input., must conform to the pattern /^(https?:\/\/)?(?!:\/\/)([a-zA-Z0-9\\-\\.]+)(:[0-9]+)?(\/[a-zA-Z0-9\\-\/]*)?$/.");
         }
 
         $this->container['did_web_url'] = $did_web_url;

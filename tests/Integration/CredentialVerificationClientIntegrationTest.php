@@ -40,4 +40,38 @@ class CredentialVerificationClientIntegrationTest extends TestCase
         $this->assertEquals(0, count($data['errors'] ?? []), 'Presentation verification returned errors.');
         $this->assertTrue((bool)($data['isValid'] ?? false), 'Presentation is not valid.');
     }
+
+    public function testVerifyLdpCredential(): void
+    {
+        $credential = json_decode(getConfiguration()['verifiableCredential']);
+        $credentials = ['ldpVcs' => [$credential]];
+
+        $verifyCredentialsResponse = self::$api->verifyCredentialsV2($credentials);
+        $data = decodeJson($verifyCredentialsResponse);
+        $this->assertEquals(0, count($data['errors'] ?? []), 'Credential verification returned errors.');
+        $this->assertTrue((bool)($data['isValid'] ?? false), 'Credential is not valid.');
+    }
+
+    public function testVerifyJwtCredential(): void
+    {
+        $credential = getConfiguration()['jwtCredentialV2'];
+        $credentials = ['jwtVcs' => [$credential]];
+
+        $verifyCredentialsResponse = self::$api->verifyCredentialsV2($credentials);
+        $data = decodeJson($verifyCredentialsResponse);
+        $this->assertEquals(0, count($data['errors'] ?? []), 'Credential verification returned errors.');
+        $this->assertTrue((bool)($data['isValid'] ?? false), 'Credential is not valid.');
+    }
+
+
+    public function testVerifyPresentationV2(): void
+    {
+        $presentation = json_decode(getConfiguration()['verifiablePresentation']);
+        $input = ['verifiablePresentation' => $presentation];
+
+        $verifyPresentationResponse = self::$api->verifyPresentationV2($input);
+        $data = decodeJson($verifyPresentationResponse);
+        $this->assertEquals(0, count($data['errors'] ?? []), 'Presentation verification returned errors.');
+        $this->assertTrue((bool)($data['isValid'] ?? false), 'Presentation is not valid.');
+    }
 }
