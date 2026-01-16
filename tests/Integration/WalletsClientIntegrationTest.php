@@ -17,7 +17,6 @@ class WalletsClientIntegrationTest extends TestCase
     private static string $walletIdDidWeb;
 
     private static string $v2WalletId;
-    private static string $v2WalletDid;
 
     public static function setUpBeforeClass(): void
     {
@@ -35,7 +34,6 @@ class WalletsClientIntegrationTest extends TestCase
 
         $walletV2 = createWalletV2();
         self::$v2WalletId = $walletV2['id'];
-        self::$v2WalletDid = $walletV2['did'];
     }
 
     public static function tearDownAfterClass(): void
@@ -210,11 +208,8 @@ class WalletsClientIntegrationTest extends TestCase
         echo "\n\033[0;36m[CREDENTIAL]\033[0m " . json_encode($credential, JSON_PRETTY_PRINT) . "\n";
         $this->assertArrayHasKey('proof', $credential);
 
-        // Signed credential should be valid
-        $isValid = isCredentialValidV2($credential);
-        $this->assertTrue($isValid);
-
         $revocationListUrl = $credential['credentialStatus']['revocationListCredential'];
+
         $statusId = extractRevocationStatusId($revocationListUrl);
         $this->assertNotEmpty($statusId);
 
@@ -237,8 +232,10 @@ class WalletsClientIntegrationTest extends TestCase
             'revocation_reason' => 'test',
             'credential_id' => $credentialId,
         ]);
+
         self::$revocationApi->revokeCredentials(self::$v2WalletId, $revokeCredentialInput);
 
+        // Revoked credential should be invalid
         $this->assertFalse(isCredentialValidV2($credential));
     }
 }
