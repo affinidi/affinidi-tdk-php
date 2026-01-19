@@ -61,6 +61,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
     protected static $openAPITypes = [
         'unsigned_presentation' => 'object',
         'signature_scheme' => 'string',
+        'signature_suite' => 'string',
         'domain' => 'string[]',
         'challenge' => 'string'
     ];
@@ -75,6 +76,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
     protected static $openAPIFormats = [
         'unsigned_presentation' => null,
         'signature_scheme' => null,
+        'signature_suite' => null,
         'domain' => null,
         'challenge' => null
     ];
@@ -87,6 +89,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
     protected static array $openAPINullables = [
         'unsigned_presentation' => false,
         'signature_scheme' => false,
+        'signature_suite' => false,
         'domain' => false,
         'challenge' => false
     ];
@@ -179,6 +182,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
     protected static $attributeMap = [
         'unsigned_presentation' => 'unsignedPresentation',
         'signature_scheme' => 'signatureScheme',
+        'signature_suite' => 'signatureSuite',
         'domain' => 'domain',
         'challenge' => 'challenge'
     ];
@@ -191,6 +195,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
     protected static $setters = [
         'unsigned_presentation' => 'setUnsignedPresentation',
         'signature_scheme' => 'setSignatureScheme',
+        'signature_suite' => 'setSignatureSuite',
         'domain' => 'setDomain',
         'challenge' => 'setChallenge'
     ];
@@ -203,6 +208,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
     protected static $getters = [
         'unsigned_presentation' => 'getUnsignedPresentation',
         'signature_scheme' => 'getSignatureScheme',
+        'signature_suite' => 'getSignatureSuite',
         'domain' => 'getDomain',
         'challenge' => 'getChallenge'
     ];
@@ -251,6 +257,11 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
     public const SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256 = 'ecdsa_secp256k1_sha256';
     public const SIGNATURE_SCHEME_ECDSA_P256_SHA256 = 'ecdsa_p256_sha256';
     public const SIGNATURE_SCHEME_ED25519 = 'ed25519';
+    public const SIGNATURE_SUITE_ECDSA_JCS_2019 = 'ecdsa-jcs-2019';
+    public const SIGNATURE_SUITE_ECDSA_RDFC_2019 = 'ecdsa-rdfc-2019';
+    public const SIGNATURE_SUITE_EDDSA_JCS_2022 = 'eddsa-jcs-2022';
+    public const SIGNATURE_SUITE_EDDSA_RDFC_2022 = 'eddsa-rdfc-2022';
+    public const SIGNATURE_SUITE_ECDSA_SECP256K1_SIGNATURE2019 = 'EcdsaSecp256k1Signature2019';
 
     /**
      * Gets allowable values of the enum
@@ -263,6 +274,22 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
             self::SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256,
             self::SIGNATURE_SCHEME_ECDSA_P256_SHA256,
             self::SIGNATURE_SCHEME_ED25519,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSignatureSuiteAllowableValues()
+    {
+        return [
+            self::SIGNATURE_SUITE_ECDSA_JCS_2019,
+            self::SIGNATURE_SUITE_ECDSA_RDFC_2019,
+            self::SIGNATURE_SUITE_EDDSA_JCS_2022,
+            self::SIGNATURE_SUITE_EDDSA_RDFC_2022,
+            self::SIGNATURE_SUITE_ECDSA_SECP256K1_SIGNATURE2019,
         ];
     }
 
@@ -283,6 +310,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
     {
         $this->setIfExists('unsigned_presentation', $data ?? [], null);
         $this->setIfExists('signature_scheme', $data ?? [], null);
+        $this->setIfExists('signature_suite', $data ?? [], null);
         $this->setIfExists('domain', $data ?? [], null);
         $this->setIfExists('challenge', $data ?? [], null);
     }
@@ -322,6 +350,15 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'signature_scheme', must be one of '%s'",
                 $this->container['signature_scheme'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getSignatureSuiteAllowableValues();
+        if (!is_null($this->container['signature_suite']) && !in_array($this->container['signature_suite'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'signature_suite', must be one of '%s'",
+                $this->container['signature_suite'],
                 implode("', '", $allowedValues)
             );
         }
@@ -401,6 +438,43 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
             );
         }
         $this->container['signature_scheme'] = $signature_scheme;
+
+        return $this;
+    }
+
+    /**
+     * Gets signature_suite
+     *
+     * @return string|null
+     */
+    public function getSignatureSuite()
+    {
+        return $this->container['signature_suite'];
+    }
+
+    /**
+     * Sets signature_suite
+     *
+     * @param string|null $signature_suite W3C signature suite for canonicalization. Defaults to rdfc variants for each algorithm (ecdsa-rdfc-2019 for P256, eddsa-rdfc-2022 for Ed25519, EcdsaSecp256k1Signature2019 for secp256k1).
+     *
+     * @return self
+     */
+    public function setSignatureSuite($signature_suite)
+    {
+        if (is_null($signature_suite)) {
+            throw new \InvalidArgumentException('non-nullable signature_suite cannot be null');
+        }
+        $allowedValues = $this->getSignatureSuiteAllowableValues();
+        if (!in_array($signature_suite, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'signature_suite', must be one of '%s'",
+                    $signature_suite,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['signature_suite'] = $signature_suite;
 
         return $this;
     }
