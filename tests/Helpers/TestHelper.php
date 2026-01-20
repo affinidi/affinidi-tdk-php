@@ -7,9 +7,9 @@ use AffinidiTdk\Common\Helpers\Environment;
 use AffinidiTdk\Common\Helpers\EnvironmentUtils;
 use AffinidiTdk\Clients\WalletsClient;
 use AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput;
+use AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Input;
 use AffinidiTdk\Clients\CredentialVerificationClient;
-use AffinidiTdk\Clients\CredentialVerificationClient\Model\VerifyCredentialInput;
-use AffinidiTdk\Clients\CredentialVerificationClient\Model\W3cCredential;
+
 
 // Load the .env file
 $dotenv = Dotenv::createImmutable(__DIR__);
@@ -64,6 +64,9 @@ function getConfiguration(): array
         'verifiableCredential' => $_ENV['VERIFIABLE_CREDENTIAL'],
         'unsignedCredentialParams' => $_ENV['UNSIGNED_CREDENTIAL_PARAMS'],
         'credentialIssuanceData' => $_ENV['CREDENTIAL_ISSUANCE_DATA'],
+        'unsignedCredentialV2' => $_ENV['UNSIGNED_CREDENTIAL_V2'],
+        'disclosureFrameV2' => $_ENV['DISCLOSURE_FRAME_V2'],
+        'jwtCredentialV2' => $_ENV['JWT_CREDENTIAL_V2'],
     ];
 }
 
@@ -136,6 +139,39 @@ function createWallet(string $didMethod = 'key'): array
     return $data['wallet'];
 }
 
+
+function createWalletV2(string $didMethod = 'key'): array
+{
+    checkWalletLimitExceeded();
+    $originalBasePath = WalletsClient\Configuration::getDefaultConfiguration()->getHost();
+    $host = replaceBaseDomain($originalBasePath);
+
+    $config = WalletsClient\Configuration::getDefaultConfiguration()
+        ->setApiKey('authorization', '', getTokenCallback())
+        ->setHost($host);
+
+    $api = new WalletsClient\Api\WalletApi(config: $config);
+    $data = ['name' => 'Test Wallet V2'];
+    $data['did_method'] = $didMethod;
+
+
+
+    if ($didMethod === 'web') {
+        $randomUrl = substr(Uuid::uuid4()->toString(), 0, 8);
+        $data['did_web_url'] = "https://$randomUrl.com";
+    }
+
+    $input = new CreateWalletV2Input($data);
+    $createWalletResponse = $api->createWalletV2($input);
+    $data = json_decode($createWalletResponse, true);
+
+    if (!isset($data['wallet'])) {
+        throw new RuntimeException("Failed to create wallet. Response missing 'wallet' key.");
+    }
+
+    return $data['wallet'];
+}
+
 /**
  * Delete a wallet by ID.
  */
@@ -172,6 +208,33 @@ function isCredentialValid($credential): bool
 
     $result = decodeJson($api->verifyCredentials([
         'verifiableCredentials' => [$credential],
+    ]));
+
+    if (!isset($result['isValid'])) {
+        throw new RuntimeException("Credential validation failed. Response missing 'isValid'.");
+    }
+
+    return (bool)$result['isValid'];
+}
+
+
+/**
+ * Validates a verifiable credential V2.
+ */
+function isCredentialValidV2($ldpVc = null, $jwtVc = null): bool
+{
+    $originalBasePath = CredentialVerificationClient\Configuration::getDefaultConfiguration()->getHost();
+    $host = replaceBaseDomain($originalBasePath);
+
+    $config = CredentialVerificationClient\Configuration::getDefaultConfiguration()
+        ->setApiKey('authorization', '', getTokenCallback())
+        ->setHost($host);
+
+    $api = new CredentialVerificationClient\Api\DefaultApi(config: $config);
+
+    $result = decodeJson($api->verifyCredentialsV2([
+        'ldpVcs' => $ldpVc ? [$ldpVc] : [],
+        'jwtVcs' => $jwtVc ? [$jwtVc] : [],
     ]));
 
     if (!isset($result['isValid'])) {

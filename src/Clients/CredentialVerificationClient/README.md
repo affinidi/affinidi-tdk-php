@@ -67,7 +67,9 @@ All URIs are relative to *https://apse1.api.affinidi.io/ver*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DefaultApi* | [**verifyCredentials**](docs/Api/DefaultApi.md#verifycredentials) | **POST** /v1/verifier/verify-vcs | Verifying VC
+*DefaultApi* | [**verifyCredentialsV2**](docs/Api/DefaultApi.md#verifycredentialsv2) | **POST** /v2/verifier/credentials | Verifying VC
 *DefaultApi* | [**verifyPresentation**](docs/Api/DefaultApi.md#verifypresentation) | **POST** /v1/verifier/verify-vp | Verifying VP
+*DefaultApi* | [**verifyPresentationV2**](docs/Api/DefaultApi.md#verifypresentationv2) | **POST** /v2/verifier/presentation | Verifying VP
 
 ## Models
 
