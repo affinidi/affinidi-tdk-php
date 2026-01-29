@@ -35,6 +35,8 @@ docs/Model/SignCredentialsLdpInputDto.md
 docs/Model/SignCredentialsLdpResultDto.md
 docs/Model/SignJwtToken.md
 docs/Model/SignJwtTokenOK.md
+docs/Model/SignJwtV2.md
+docs/Model/SignJwtV2OK.md
 docs/Model/SignMessageInput.md
 docs/Model/SignMessageResultDto.md
 docs/Model/SignPresentationLdpInputDto.md
@@ -89,6 +91,8 @@ lib/Model/SignCredentialsLdpInputDto.php
 lib/Model/SignCredentialsLdpResultDto.php
 lib/Model/SignJwtToken.php
 lib/Model/SignJwtTokenOK.php
+lib/Model/SignJwtV2.php
+lib/Model/SignJwtV2OK.php
 lib/Model/SignMessageInput.php
 lib/Model/SignMessageResultDto.php
 lib/Model/SignPresentationLdpInputDto.php
