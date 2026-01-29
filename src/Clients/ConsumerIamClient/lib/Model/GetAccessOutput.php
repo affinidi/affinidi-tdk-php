@@ -1,6 +1,6 @@
 <?php
 /**
- * Permission
+ * GetAccessOutput
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\ConsumerIamClient\ObjectSerializer;
 
 /**
- * Permission Class Doc Comment
+ * GetAccessOutput Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\ConsumerIamClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\ConsumerIamClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetAccessOutput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Permission';
+    protected static $openAPIModelName = 'GetAccessOutput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +58,7 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'rights' => '\AffinidiTdk\Clients\ConsumerIamClient\Model\RightsEnum[]',
-        'node_ids' => 'string[]',
-        'expires_at' => '\DateTime'
+        'permissions' => '\AffinidiTdk\Clients\ConsumerIamClient\Model\Permission[]'
     ];
 
     /**
@@ -71,9 +69,7 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'rights' => null,
-        'node_ids' => null,
-        'expires_at' => 'date-time'
+        'permissions' => null
     ];
 
     /**
@@ -82,9 +78,7 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'rights' => false,
-        'node_ids' => false,
-        'expires_at' => false
+        'permissions' => false
     ];
 
     /**
@@ -173,9 +167,7 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'rights' => 'rights',
-        'node_ids' => 'nodeIds',
-        'expires_at' => 'expiresAt'
+        'permissions' => 'permissions'
     ];
 
     /**
@@ -184,9 +176,7 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'rights' => 'setRights',
-        'node_ids' => 'setNodeIds',
-        'expires_at' => 'setExpiresAt'
+        'permissions' => 'setPermissions'
     ];
 
     /**
@@ -195,9 +185,7 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'rights' => 'getRights',
-        'node_ids' => 'getNodeIds',
-        'expires_at' => 'getExpiresAt'
+        'permissions' => 'getPermissions'
     ];
 
     /**
@@ -257,9 +245,7 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('rights', $data ?? [], null);
-        $this->setIfExists('node_ids', $data ?? [], null);
-        $this->setIfExists('expires_at', $data ?? [], null);
+        $this->setIfExists('permissions', $data ?? [], null);
     }
 
     /**
@@ -289,11 +275,8 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['rights'] === null) {
-            $invalidProperties[] = "'rights' can't be null";
-        }
-        if ($this->container['node_ids'] === null) {
-            $invalidProperties[] = "'node_ids' can't be null";
+        if ($this->container['permissions'] === null) {
+            $invalidProperties[] = "'permissions' can't be null";
         }
         return $invalidProperties;
     }
@@ -311,82 +294,28 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets rights
+     * Gets permissions
      *
-     * @return \AffinidiTdk\Clients\ConsumerIamClient\Model\RightsEnum[]
+     * @return \AffinidiTdk\Clients\ConsumerIamClient\Model\Permission[]
      */
-    public function getRights()
+    public function getPermissions()
     {
-        return $this->container['rights'];
+        return $this->container['permissions'];
     }
 
     /**
-     * Sets rights
+     * Sets permissions
      *
-     * @param \AffinidiTdk\Clients\ConsumerIamClient\Model\RightsEnum[] $rights rights
+     * @param \AffinidiTdk\Clients\ConsumerIamClient\Model\Permission[] $permissions List of permissions currently granted
      *
      * @return self
      */
-    public function setRights($rights)
+    public function setPermissions($permissions)
     {
-        if (is_null($rights)) {
-            throw new \InvalidArgumentException('non-nullable rights cannot be null');
+        if (is_null($permissions)) {
+            throw new \InvalidArgumentException('non-nullable permissions cannot be null');
         }
-        $this->container['rights'] = $rights;
-
-        return $this;
-    }
-
-    /**
-     * Gets node_ids
-     *
-     * @return string[]
-     */
-    public function getNodeIds()
-    {
-        return $this->container['node_ids'];
-    }
-
-    /**
-     * Sets node_ids
-     *
-     * @param string[] $node_ids node_ids
-     *
-     * @return self
-     */
-    public function setNodeIds($node_ids)
-    {
-        if (is_null($node_ids)) {
-            throw new \InvalidArgumentException('non-nullable node_ids cannot be null');
-        }
-        $this->container['node_ids'] = $node_ids;
-
-        return $this;
-    }
-
-    /**
-     * Gets expires_at
-     *
-     * @return \DateTime|null
-     */
-    public function getExpiresAt()
-    {
-        return $this->container['expires_at'];
-    }
-
-    /**
-     * Sets expires_at
-     *
-     * @param \DateTime|null $expires_at expires_at
-     *
-     * @return self
-     */
-    public function setExpiresAt($expires_at)
-    {
-        if (is_null($expires_at)) {
-            throw new \InvalidArgumentException('non-nullable expires_at cannot be null');
-        }
-        $this->container['expires_at'] = $expires_at;
+        $this->container['permissions'] = $permissions;
 
         return $this;
     }
