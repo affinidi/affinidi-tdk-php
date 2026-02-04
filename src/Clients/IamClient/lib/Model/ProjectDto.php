@@ -62,6 +62,7 @@ class ProjectDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'owner_id' => 'string',
         'description' => 'string',
+        'identity_verification_enabled' => 'bool',
         'created_at' => 'string',
         'updated_at' => 'string'
     ];
@@ -78,6 +79,7 @@ class ProjectDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => null,
         'owner_id' => null,
         'description' => null,
+        'identity_verification_enabled' => null,
         'created_at' => null,
         'updated_at' => null
     ];
@@ -92,6 +94,7 @@ class ProjectDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => false,
         'owner_id' => false,
         'description' => false,
+        'identity_verification_enabled' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -186,6 +189,7 @@ class ProjectDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'name',
         'owner_id' => 'ownerId',
         'description' => 'description',
+        'identity_verification_enabled' => 'identityVerificationEnabled',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -200,6 +204,7 @@ class ProjectDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'setName',
         'owner_id' => 'setOwnerId',
         'description' => 'setDescription',
+        'identity_verification_enabled' => 'setIdentityVerificationEnabled',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -214,6 +219,7 @@ class ProjectDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'getName',
         'owner_id' => 'getOwnerId',
         'description' => 'getDescription',
+        'identity_verification_enabled' => 'getIdentityVerificationEnabled',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -279,6 +285,7 @@ class ProjectDto implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('owner_id', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('identity_verification_enabled', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -435,6 +442,33 @@ class ProjectDto implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets identity_verification_enabled
+     *
+     * @return bool|null
+     */
+    public function getIdentityVerificationEnabled()
+    {
+        return $this->container['identity_verification_enabled'];
+    }
+
+    /**
+     * Sets identity_verification_enabled
+     *
+     * @param bool|null $identity_verification_enabled identity_verification_enabled
+     *
+     * @return self
+     */
+    public function setIdentityVerificationEnabled($identity_verification_enabled)
+    {
+        if (is_null($identity_verification_enabled)) {
+            throw new \InvalidArgumentException('non-nullable identity_verification_enabled cannot be null');
+        }
+        $this->container['identity_verification_enabled'] = $identity_verification_enabled;
 
         return $this;
     }
