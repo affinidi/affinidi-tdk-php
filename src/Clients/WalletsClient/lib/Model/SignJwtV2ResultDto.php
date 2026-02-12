@@ -1,6 +1,6 @@
 <?php
 /**
- * AuthcryptMessageResultDto
+ * SignJwtV2ResultDto
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * AuthcryptMessageResultDto Class Doc Comment
+ * SignJwtV2ResultDto Class Doc Comment
  *
  * @category Class
- * @description DTO contains authcrypted message in JSON fromat
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class SignJwtV2ResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AuthcryptMessageResultDto';
+    protected static $openAPIModelName = 'SignJwtV2ResultDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +58,7 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'authcrypted_message' => 'object'
+        'signed_jwt' => 'string'
     ];
 
     /**
@@ -70,7 +69,7 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'authcrypted_message' => null
+        'signed_jwt' => null
     ];
 
     /**
@@ -79,7 +78,7 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'authcrypted_message' => false
+        'signed_jwt' => false
     ];
 
     /**
@@ -168,7 +167,7 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'authcrypted_message' => 'authcryptedMessage'
+        'signed_jwt' => 'signedJwt'
     ];
 
     /**
@@ -177,7 +176,7 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'authcrypted_message' => 'setAuthcryptedMessage'
+        'signed_jwt' => 'setSignedJwt'
     ];
 
     /**
@@ -186,7 +185,7 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'authcrypted_message' => 'getAuthcryptedMessage'
+        'signed_jwt' => 'getSignedJwt'
     ];
 
     /**
@@ -246,7 +245,7 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('authcrypted_message', $data ?? [], null);
+        $this->setIfExists('signed_jwt', $data ?? [], null);
     }
 
     /**
@@ -276,9 +275,6 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
-        if ($this->container['authcrypted_message'] === null) {
-            $invalidProperties[] = "'authcrypted_message' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -295,28 +291,28 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets authcrypted_message
+     * Gets signed_jwt
      *
-     * @return object
+     * @return string|null
      */
-    public function getAuthcryptedMessage()
+    public function getSignedJwt()
     {
-        return $this->container['authcrypted_message'];
+        return $this->container['signed_jwt'];
     }
 
     /**
-     * Sets authcrypted_message
+     * Sets signed_jwt
      *
-     * @param object $authcrypted_message Authcrypted message in JSON format
+     * @param string|null $signed_jwt signed_jwt
      *
      * @return self
      */
-    public function setAuthcryptedMessage($authcrypted_message)
+    public function setSignedJwt($signed_jwt)
     {
-        if (is_null($authcrypted_message)) {
-            throw new \InvalidArgumentException('non-nullable authcrypted_message cannot be null');
+        if (is_null($signed_jwt)) {
+            throw new \InvalidArgumentException('non-nullable signed_jwt cannot be null');
         }
-        $this->container['authcrypted_message'] = $authcrypted_message;
+        $this->container['signed_jwt'] = $signed_jwt;
 
         return $this;
     }

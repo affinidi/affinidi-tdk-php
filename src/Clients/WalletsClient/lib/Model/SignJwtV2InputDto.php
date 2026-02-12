@@ -1,6 +1,6 @@
 <?php
 /**
- * ServiceErrorResponse
+ * SignJwtV2InputDto
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * ServiceErrorResponse Class Doc Comment
+ * SignJwtV2InputDto Class Doc Comment
  *
  * @category Class
+ * @description DTO contains payload of JWT to be signed
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class SignJwtV2InputDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ServiceErrorResponse';
+    protected static $openAPIModelName = 'SignJwtV2InputDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +59,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'debug_id' => 'string',
-        'name' => 'string',
-        'code' => 'string',
-        'details' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]'
+        'payload' => 'object'
     ];
 
     /**
@@ -72,10 +70,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'debug_id' => 'uuid',
-        'name' => null,
-        'code' => null,
-        'details' => null
+        'payload' => null
     ];
 
     /**
@@ -84,10 +79,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'debug_id' => false,
-        'name' => false,
-        'code' => false,
-        'details' => false
+        'payload' => false
     ];
 
     /**
@@ -176,10 +168,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'debug_id' => 'debugId',
-        'name' => 'name',
-        'code' => 'code',
-        'details' => 'details'
+        'payload' => 'payload'
     ];
 
     /**
@@ -188,10 +177,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'debug_id' => 'setDebugId',
-        'name' => 'setName',
-        'code' => 'setCode',
-        'details' => 'setDetails'
+        'payload' => 'setPayload'
     ];
 
     /**
@@ -200,10 +186,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'debug_id' => 'getDebugId',
-        'name' => 'getName',
-        'code' => 'getCode',
-        'details' => 'getDetails'
+        'payload' => 'getPayload'
     ];
 
     /**
@@ -263,10 +246,7 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('debug_id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('details', $data ?? [], null);
+        $this->setIfExists('payload', $data ?? [], null);
     }
 
     /**
@@ -296,14 +276,8 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        if ($this->container['debug_id'] === null) {
-            $invalidProperties[] = "'debug_id' can't be null";
-        }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['code'] === null) {
-            $invalidProperties[] = "'code' can't be null";
+        if ($this->container['payload'] === null) {
+            $invalidProperties[] = "'payload' can't be null";
         }
         return $invalidProperties;
     }
@@ -321,109 +295,28 @@ class ServiceErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets debug_id
+     * Gets payload
      *
-     * @return string
+     * @return object
      */
-    public function getDebugId()
+    public function getPayload()
     {
-        return $this->container['debug_id'];
+        return $this->container['payload'];
     }
 
     /**
-     * Sets debug_id
+     * Sets payload
      *
-     * @param string $debug_id unique id for correlating this specific error to logs
+     * @param object $payload payload
      *
      * @return self
      */
-    public function setDebugId($debug_id)
+    public function setPayload($payload)
     {
-        if (is_null($debug_id)) {
-            throw new \InvalidArgumentException('non-nullable debug_id cannot be null');
+        if (is_null($payload)) {
+            throw new \InvalidArgumentException('non-nullable payload cannot be null');
         }
-        $this->container['debug_id'] = $debug_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name of the error
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets code
-     *
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->container['code'];
-    }
-
-    /**
-     * Sets code
-     *
-     * @param string $code backwards compatible Affinidi error code
-     *
-     * @return self
-     */
-    public function setCode($code)
-    {
-        if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
-        }
-        $this->container['code'] = $code;
-
-        return $this;
-    }
-
-    /**
-     * Gets details
-     *
-     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null
-     */
-    public function getDetails()
-    {
-        return $this->container['details'];
-    }
-
-    /**
-     * Sets details
-     *
-     * @param \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null $details details
-     *
-     * @return self
-     */
-    public function setDetails($details)
-    {
-        if (is_null($details)) {
-            throw new \InvalidArgumentException('non-nullable details cannot be null');
-        }
-        $this->container['details'] = $details;
+        $this->container['payload'] = $payload;
 
         return $this;
     }
