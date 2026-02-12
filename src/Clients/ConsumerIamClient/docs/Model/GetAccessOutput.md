@@ -1,10 +1,9 @@
-# # AwsExchangeCredentialsOK
+# # GetAccessOutput
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**connection_client_id** | **string** |  |
-**credentials** | [**\AffinidiTdk\Clients\IotaClient\Model\AwsExchangeCredentialsOKCredentials**](AwsExchangeCredentialsOKCredentials.md) |  |
+**permissions** | [**\AffinidiTdk\Clients\ConsumerIamClient\Model\Permission[]**](Permission.md) | List of permissions currently granted |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
