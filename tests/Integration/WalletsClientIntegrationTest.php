@@ -148,6 +148,22 @@ class WalletsClientIntegrationTest extends TestCase
         $this->assertArrayHasKey('signedJwt', $resultJson);
     }
 
+    public function testSignJwtV2(): void
+    {
+        $input = [
+            'payload' => [
+                'sub' => Uuid::uuid4()->toString(),
+                'iat' => time(),
+                'exp' => time() + (5 * 60),
+            ],
+        ];
+
+        $response = self::$walletApi->signJwtV2(self::$walletId, $input);
+        $resultJson = decodeJson($response);
+
+        $this->assertArrayHasKey('signedJwt', $resultJson);
+    }
+
     public function testWallets(): void
     {
         // Get wallet
