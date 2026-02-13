@@ -1,6 +1,6 @@
 <?php
 /**
- * AuthcryptMessageResultDto
+ * WalletV2DtoKeysInner
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * AuthcryptMessageResultDto Class Doc Comment
+ * WalletV2DtoKeysInner Class Doc Comment
  *
  * @category Class
- * @description DTO contains authcrypted message in JSON fromat
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class WalletV2DtoKeysInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AuthcryptMessageResultDto';
+    protected static $openAPIModelName = 'WalletV2Dto_keys_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +58,11 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'authcrypted_message' => 'object'
+        'key_id' => 'string',
+        'kms_key_id' => 'string',
+        'kms_key_ari' => 'string',
+        'kms_key_type' => 'string',
+        'relationships' => 'string'
     ];
 
     /**
@@ -70,7 +73,11 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'authcrypted_message' => null
+        'key_id' => null,
+        'kms_key_id' => null,
+        'kms_key_ari' => null,
+        'kms_key_type' => null,
+        'relationships' => null
     ];
 
     /**
@@ -79,7 +86,11 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'authcrypted_message' => false
+        'key_id' => false,
+        'kms_key_id' => false,
+        'kms_key_ari' => false,
+        'kms_key_type' => false,
+        'relationships' => false
     ];
 
     /**
@@ -168,7 +179,11 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'authcrypted_message' => 'authcryptedMessage'
+        'key_id' => 'keyId',
+        'kms_key_id' => 'kmsKeyId',
+        'kms_key_ari' => 'kmsKeyAri',
+        'kms_key_type' => 'kmsKeyType',
+        'relationships' => 'relationships'
     ];
 
     /**
@@ -177,7 +192,11 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'authcrypted_message' => 'setAuthcryptedMessage'
+        'key_id' => 'setKeyId',
+        'kms_key_id' => 'setKmsKeyId',
+        'kms_key_ari' => 'setKmsKeyAri',
+        'kms_key_type' => 'setKmsKeyType',
+        'relationships' => 'setRelationships'
     ];
 
     /**
@@ -186,7 +205,11 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'authcrypted_message' => 'getAuthcryptedMessage'
+        'key_id' => 'getKeyId',
+        'kms_key_id' => 'getKmsKeyId',
+        'kms_key_ari' => 'getKmsKeyAri',
+        'kms_key_type' => 'getKmsKeyType',
+        'relationships' => 'getRelationships'
     ];
 
     /**
@@ -246,7 +269,11 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('authcrypted_message', $data ?? [], null);
+        $this->setIfExists('key_id', $data ?? [], null);
+        $this->setIfExists('kms_key_id', $data ?? [], null);
+        $this->setIfExists('kms_key_ari', $data ?? [], null);
+        $this->setIfExists('kms_key_type', $data ?? [], null);
+        $this->setIfExists('relationships', $data ?? [], null);
     }
 
     /**
@@ -276,8 +303,17 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
-        if ($this->container['authcrypted_message'] === null) {
-            $invalidProperties[] = "'authcrypted_message' can't be null";
+        if ($this->container['key_id'] === null) {
+            $invalidProperties[] = "'key_id' can't be null";
+        }
+        if ($this->container['kms_key_id'] === null) {
+            $invalidProperties[] = "'kms_key_id' can't be null";
+        }
+        if ($this->container['kms_key_ari'] === null) {
+            $invalidProperties[] = "'kms_key_ari' can't be null";
+        }
+        if ($this->container['kms_key_type'] === null) {
+            $invalidProperties[] = "'kms_key_type' can't be null";
         }
         return $invalidProperties;
     }
@@ -295,28 +331,136 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets authcrypted_message
+     * Gets key_id
      *
-     * @return object
+     * @return string
      */
-    public function getAuthcryptedMessage()
+    public function getKeyId()
     {
-        return $this->container['authcrypted_message'];
+        return $this->container['key_id'];
     }
 
     /**
-     * Sets authcrypted_message
+     * Sets key_id
      *
-     * @param object $authcrypted_message Authcrypted message in JSON format
+     * @param string $key_id wallet-scoped key identifier (e.g., \"key-1\")
      *
      * @return self
      */
-    public function setAuthcryptedMessage($authcrypted_message)
+    public function setKeyId($key_id)
     {
-        if (is_null($authcrypted_message)) {
-            throw new \InvalidArgumentException('non-nullable authcrypted_message cannot be null');
+        if (is_null($key_id)) {
+            throw new \InvalidArgumentException('non-nullable key_id cannot be null');
         }
-        $this->container['authcrypted_message'] = $authcrypted_message;
+        $this->container['key_id'] = $key_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets kms_key_id
+     *
+     * @return string
+     */
+    public function getKmsKeyId()
+    {
+        return $this->container['kms_key_id'];
+    }
+
+    /**
+     * Sets kms_key_id
+     *
+     * @param string $kms_key_id id of the key in KMS
+     *
+     * @return self
+     */
+    public function setKmsKeyId($kms_key_id)
+    {
+        if (is_null($kms_key_id)) {
+            throw new \InvalidArgumentException('non-nullable kms_key_id cannot be null');
+        }
+        $this->container['kms_key_id'] = $kms_key_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets kms_key_ari
+     *
+     * @return string
+     */
+    public function getKmsKeyAri()
+    {
+        return $this->container['kms_key_ari'];
+    }
+
+    /**
+     * Sets kms_key_ari
+     *
+     * @param string $kms_key_ari ari of the key in KMS
+     *
+     * @return self
+     */
+    public function setKmsKeyAri($kms_key_ari)
+    {
+        if (is_null($kms_key_ari)) {
+            throw new \InvalidArgumentException('non-nullable kms_key_ari cannot be null');
+        }
+        $this->container['kms_key_ari'] = $kms_key_ari;
+
+        return $this;
+    }
+
+    /**
+     * Gets kms_key_type
+     *
+     * @return string
+     */
+    public function getKmsKeyType()
+    {
+        return $this->container['kms_key_type'];
+    }
+
+    /**
+     * Sets kms_key_type
+     *
+     * @param string $kms_key_type type of the key in KMS
+     *
+     * @return self
+     */
+    public function setKmsKeyType($kms_key_type)
+    {
+        if (is_null($kms_key_type)) {
+            throw new \InvalidArgumentException('non-nullable kms_key_type cannot be null');
+        }
+        $this->container['kms_key_type'] = $kms_key_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets relationships
+     *
+     * @return string|null
+     */
+    public function getRelationships()
+    {
+        return $this->container['relationships'];
+    }
+
+    /**
+     * Sets relationships
+     *
+     * @param string|null $relationships comma separated relationships
+     *
+     * @return self
+     */
+    public function setRelationships($relationships)
+    {
+        if (is_null($relationships)) {
+            throw new \InvalidArgumentException('non-nullable relationships cannot be null');
+        }
+        $this->container['relationships'] = $relationships;
 
         return $this;
     }

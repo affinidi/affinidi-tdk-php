@@ -1,6 +1,6 @@
 <?php
 /**
- * AuthcryptMessageInput
+ * SignJwtV2InputDto
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * AuthcryptMessageInput Class Doc Comment
+ * SignJwtV2InputDto Class Doc Comment
  *
  * @category Class
- * @description DTO contains params to authcrypt plain text DIDComm message
+ * @description DTO contains payload of JWT to be signed
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AuthcryptMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class SignJwtV2InputDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class AuthcryptMessageInput implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AuthcryptMessageInput';
+    protected static $openAPIModelName = 'SignJwtV2InputDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +59,7 @@ class AuthcryptMessageInput implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'plain_text_message' => 'object',
-        'signature_scheme' => 'string'
+        'payload' => 'object'
     ];
 
     /**
@@ -71,8 +70,7 @@ class AuthcryptMessageInput implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'plain_text_message' => null,
-        'signature_scheme' => null
+        'payload' => null
     ];
 
     /**
@@ -81,8 +79,7 @@ class AuthcryptMessageInput implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'plain_text_message' => false,
-        'signature_scheme' => false
+        'payload' => false
     ];
 
     /**
@@ -171,8 +168,7 @@ class AuthcryptMessageInput implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'plain_text_message' => 'plainTextMessage',
-        'signature_scheme' => 'signatureScheme'
+        'payload' => 'payload'
     ];
 
     /**
@@ -181,8 +177,7 @@ class AuthcryptMessageInput implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'plain_text_message' => 'setPlainTextMessage',
-        'signature_scheme' => 'setSignatureScheme'
+        'payload' => 'setPayload'
     ];
 
     /**
@@ -191,8 +186,7 @@ class AuthcryptMessageInput implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'plain_text_message' => 'getPlainTextMessage',
-        'signature_scheme' => 'getSignatureScheme'
+        'payload' => 'getPayload'
     ];
 
     /**
@@ -236,23 +230,6 @@ class AuthcryptMessageInput implements ModelInterface, ArrayAccess, \JsonSeriali
         return self::$openAPIModelName;
     }
 
-    public const SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256 = 'ecdsa_secp256k1_sha256';
-    public const SIGNATURE_SCHEME_ECDSA_P256_SHA256 = 'ecdsa_p256_sha256';
-    public const SIGNATURE_SCHEME_ED25519 = 'ed25519';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getSignatureSchemeAllowableValues()
-    {
-        return [
-            self::SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256,
-            self::SIGNATURE_SCHEME_ECDSA_P256_SHA256,
-            self::SIGNATURE_SCHEME_ED25519,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -269,8 +246,7 @@ class AuthcryptMessageInput implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('plain_text_message', $data ?? [], null);
-        $this->setIfExists('signature_scheme', $data ?? [], null);
+        $this->setIfExists('payload', $data ?? [], null);
     }
 
     /**
@@ -300,18 +276,9 @@ class AuthcryptMessageInput implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $invalidProperties = [];
 
-        if ($this->container['plain_text_message'] === null) {
-            $invalidProperties[] = "'plain_text_message' can't be null";
+        if ($this->container['payload'] === null) {
+            $invalidProperties[] = "'payload' can't be null";
         }
-        $allowedValues = $this->getSignatureSchemeAllowableValues();
-        if (!is_null($this->container['signature_scheme']) && !in_array($this->container['signature_scheme'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'signature_scheme', must be one of '%s'",
-                $this->container['signature_scheme'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -328,65 +295,28 @@ class AuthcryptMessageInput implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets plain_text_message
+     * Gets payload
      *
      * @return object
      */
-    public function getPlainTextMessage()
+    public function getPayload()
     {
-        return $this->container['plain_text_message'];
+        return $this->container['payload'];
     }
 
     /**
-     * Sets plain_text_message
+     * Sets payload
      *
-     * @param object $plain_text_message Unsigned plain text DIDComm message
+     * @param object $payload payload
      *
      * @return self
      */
-    public function setPlainTextMessage($plain_text_message)
+    public function setPayload($payload)
     {
-        if (is_null($plain_text_message)) {
-            throw new \InvalidArgumentException('non-nullable plain_text_message cannot be null');
+        if (is_null($payload)) {
+            throw new \InvalidArgumentException('non-nullable payload cannot be null');
         }
-        $this->container['plain_text_message'] = $plain_text_message;
-
-        return $this;
-    }
-
-    /**
-     * Gets signature_scheme
-     *
-     * @return string|null
-     */
-    public function getSignatureScheme()
-    {
-        return $this->container['signature_scheme'];
-    }
-
-    /**
-     * Sets signature_scheme
-     *
-     * @param string|null $signature_scheme signature_scheme
-     *
-     * @return self
-     */
-    public function setSignatureScheme($signature_scheme)
-    {
-        if (is_null($signature_scheme)) {
-            throw new \InvalidArgumentException('non-nullable signature_scheme cannot be null');
-        }
-        $allowedValues = $this->getSignatureSchemeAllowableValues();
-        if (!in_array($signature_scheme, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'signature_scheme', must be one of '%s'",
-                    $signature_scheme,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['signature_scheme'] = $signature_scheme;
+        $this->container['payload'] = $payload;
 
         return $this;
     }
