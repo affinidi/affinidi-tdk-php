@@ -11,7 +11,9 @@ Name | Type | Description | Notes
 **did_document** | **object** | did document of the wallet | [optional]
 **ari** | **string** | ARI of the wallet | [optional]
 **algorithm** | **string** | algorithm used to generate key for the wallet | [optional]
-**keys** | [**\AffinidiTdk\Clients\WalletsClient\Model\WalletDtoKeysInner[]**](WalletDtoKeysInner.md) |  | [optional]
+**keys** | [**\AffinidiTdk\Clients\WalletsClient\Model\WalletV2DtoKeysInner[]**](WalletV2DtoKeysInner.md) |  | [optional]
+**default_key_id** | **string** | default key for signing operations when keyId not specified | [optional]
+**services** | [**\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[]**](ServiceEndpointDto.md) | service endpoints in DID document | [optional]
 **created_at** | **string** |  | [optional]
 **modified_at** | **string** |  | [optional]
 
