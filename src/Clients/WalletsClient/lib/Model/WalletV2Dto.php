@@ -66,7 +66,9 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'did_document' => 'object',
         'ari' => 'string',
         'algorithm' => 'string',
-        'keys' => '\AffinidiTdk\Clients\WalletsClient\Model\WalletDtoKeysInner[]',
+        'keys' => '\AffinidiTdk\Clients\WalletsClient\Model\WalletV2DtoKeysInner[]',
+        'default_key_id' => 'string',
+        'services' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[]',
         'created_at' => 'string',
         'modified_at' => 'string'
     ];
@@ -87,6 +89,8 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => null,
         'algorithm' => null,
         'keys' => null,
+        'default_key_id' => null,
+        'services' => null,
         'created_at' => null,
         'modified_at' => null
     ];
@@ -105,6 +109,8 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => false,
         'algorithm' => false,
         'keys' => false,
+        'default_key_id' => false,
+        'services' => false,
         'created_at' => false,
         'modified_at' => false
     ];
@@ -203,6 +209,8 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => 'ari',
         'algorithm' => 'algorithm',
         'keys' => 'keys',
+        'default_key_id' => 'defaultKeyId',
+        'services' => 'services',
         'created_at' => 'createdAt',
         'modified_at' => 'modifiedAt'
     ];
@@ -221,6 +229,8 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => 'setAri',
         'algorithm' => 'setAlgorithm',
         'keys' => 'setKeys',
+        'default_key_id' => 'setDefaultKeyId',
+        'services' => 'setServices',
         'created_at' => 'setCreatedAt',
         'modified_at' => 'setModifiedAt'
     ];
@@ -239,6 +249,8 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => 'getAri',
         'algorithm' => 'getAlgorithm',
         'keys' => 'getKeys',
+        'default_key_id' => 'getDefaultKeyId',
+        'services' => 'getServices',
         'created_at' => 'getCreatedAt',
         'modified_at' => 'getModifiedAt'
     ];
@@ -308,6 +320,8 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('ari', $data ?? [], null);
         $this->setIfExists('algorithm', $data ?? [], null);
         $this->setIfExists('keys', $data ?? [], null);
+        $this->setIfExists('default_key_id', $data ?? [], null);
+        $this->setIfExists('services', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('modified_at', $data ?? [], null);
     }
@@ -546,7 +560,7 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets keys
      *
-     * @return \AffinidiTdk\Clients\WalletsClient\Model\WalletDtoKeysInner[]|null
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\WalletV2DtoKeysInner[]|null
      */
     public function getKeys()
     {
@@ -556,7 +570,7 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets keys
      *
-     * @param \AffinidiTdk\Clients\WalletsClient\Model\WalletDtoKeysInner[]|null $keys keys
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\WalletV2DtoKeysInner[]|null $keys keys
      *
      * @return self
      */
@@ -566,6 +580,60 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable keys cannot be null');
         }
         $this->container['keys'] = $keys;
+
+        return $this;
+    }
+
+    /**
+     * Gets default_key_id
+     *
+     * @return string|null
+     */
+    public function getDefaultKeyId()
+    {
+        return $this->container['default_key_id'];
+    }
+
+    /**
+     * Sets default_key_id
+     *
+     * @param string|null $default_key_id default key for signing operations when keyId not specified
+     *
+     * @return self
+     */
+    public function setDefaultKeyId($default_key_id)
+    {
+        if (is_null($default_key_id)) {
+            throw new \InvalidArgumentException('non-nullable default_key_id cannot be null');
+        }
+        $this->container['default_key_id'] = $default_key_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets services
+     *
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[]|null
+     */
+    public function getServices()
+    {
+        return $this->container['services'];
+    }
+
+    /**
+     * Sets services
+     *
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[]|null $services service endpoints in DID document
+     *
+     * @return self
+     */
+    public function setServices($services)
+    {
+        if (is_null($services)) {
+            throw new \InvalidArgumentException('non-nullable services cannot be null');
+        }
+        $this->container['services'] = $services;
 
         return $this;
     }
