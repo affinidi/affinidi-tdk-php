@@ -1,6 +1,6 @@
 <?php
 /**
- * ServiceErrorResponseDetailsInner
+ * NotFoundErrorDetailsInner
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * ServiceErrorResponseDetailsInner Class Doc Comment
+ * NotFoundErrorDetailsInner Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\WalletsClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class NotFoundErrorDetailsInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ServiceErrorResponse_details_inner';
+    protected static $openAPIModelName = 'NotFoundError_details_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

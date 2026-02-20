@@ -1,6 +1,6 @@
 <?php
 /**
- * UnpackMessageInput
+ * SignJwtV2InputDto
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * UnpackMessageInput Class Doc Comment
+ * SignJwtV2InputDto Class Doc Comment
  *
  * @category Class
- * @description DTO contains params to unpack encrypted DIDComm message
+ * @description DTO contains payload of JWT to be signed
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class SignJwtV2InputDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UnpackMessageInput';
+    protected static $openAPIModelName = 'SignJwtV2InputDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +59,7 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'message' => 'object'
+        'payload' => 'object'
     ];
 
     /**
@@ -70,7 +70,7 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'message' => null
+        'payload' => null
     ];
 
     /**
@@ -79,7 +79,7 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'message' => false
+        'payload' => false
     ];
 
     /**
@@ -168,7 +168,7 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'message' => 'message'
+        'payload' => 'payload'
     ];
 
     /**
@@ -177,7 +177,7 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'message' => 'setMessage'
+        'payload' => 'setPayload'
     ];
 
     /**
@@ -186,7 +186,7 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'message' => 'getMessage'
+        'payload' => 'getPayload'
     ];
 
     /**
@@ -246,7 +246,7 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('payload', $data ?? [], null);
     }
 
     /**
@@ -276,8 +276,8 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
+        if ($this->container['payload'] === null) {
+            $invalidProperties[] = "'payload' can't be null";
         }
         return $invalidProperties;
     }
@@ -295,28 +295,28 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets message
+     * Gets payload
      *
      * @return object
      */
-    public function getMessage()
+    public function getPayload()
     {
-        return $this->container['message'];
+        return $this->container['payload'];
     }
 
     /**
-     * Sets message
+     * Sets payload
      *
-     * @param object $message Encrypted DIDComm message
+     * @param object $payload payload
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setPayload($payload)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($payload)) {
+            throw new \InvalidArgumentException('non-nullable payload cannot be null');
         }
-        $this->container['message'] = $message;
+        $this->container['payload'] = $payload;
 
         return $this;
     }

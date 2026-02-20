@@ -1,11 +1,11 @@
-# # SignCredentialsDm1LdInputDto
+# # ServiceEndpointInput
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**unsigned_credential** | **object** | Unsigned Credential in Dm1 format |
-**revocable** | **bool** |  | [optional]
-**signature_scheme** | **string** |  | [optional]
+**name** | **string** | Name of the service endpoint |
+**description** | **string** | Description of the service endpoint |
+**url** | **string** | service endpoint URL |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
