@@ -1,6 +1,6 @@
 <?php
 /**
- * UnpackMessageInput
+ * ServiceEndpointInput
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * UnpackMessageInput Class Doc Comment
+ * ServiceEndpointInput Class Doc Comment
  *
  * @category Class
- * @description DTO contains params to unpack encrypted DIDComm message
+ * @description Input for adding a service endpoint
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class ServiceEndpointInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UnpackMessageInput';
+    protected static $openAPIModelName = 'ServiceEndpointInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +59,9 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'message' => 'object'
+        'name' => 'string',
+        'description' => 'string',
+        'url' => 'string'
     ];
 
     /**
@@ -70,7 +72,9 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'message' => null
+        'name' => null,
+        'description' => null,
+        'url' => null
     ];
 
     /**
@@ -79,7 +83,9 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'message' => false
+        'name' => false,
+        'description' => false,
+        'url' => false
     ];
 
     /**
@@ -168,7 +174,9 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'message' => 'message'
+        'name' => 'name',
+        'description' => 'description',
+        'url' => 'url'
     ];
 
     /**
@@ -177,7 +185,9 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'message' => 'setMessage'
+        'name' => 'setName',
+        'description' => 'setDescription',
+        'url' => 'setUrl'
     ];
 
     /**
@@ -186,7 +196,9 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'message' => 'getMessage'
+        'name' => 'getName',
+        'description' => 'getDescription',
+        'url' => 'getUrl'
     ];
 
     /**
@@ -246,7 +258,9 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('url', $data ?? [], null);
     }
 
     /**
@@ -276,8 +290,14 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['description'] === null) {
+            $invalidProperties[] = "'description' can't be null";
+        }
+        if ($this->container['url'] === null) {
+            $invalidProperties[] = "'url' can't be null";
         }
         return $invalidProperties;
     }
@@ -295,28 +315,82 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets message
+     * Gets name
      *
-     * @return object
+     * @return string
      */
-    public function getMessage()
+    public function getName()
     {
-        return $this->container['message'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets message
+     * Sets name
      *
-     * @param object $message Encrypted DIDComm message
+     * @param string $name Name of the service endpoint
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setName($name)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['message'] = $message;
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string $description Description of the service endpoint
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->container['url'];
+    }
+
+    /**
+     * Sets url
+     *
+     * @param string $url service endpoint URL
+     *
+     * @return self
+     */
+    public function setUrl($url)
+    {
+        if (is_null($url)) {
+            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        }
+        $this->container['url'] = $url;
 
         return $this;
     }
