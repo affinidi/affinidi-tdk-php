@@ -20,12 +20,6 @@ docs/Model/CisConfigurationWebhookSetting.md
 docs/Model/CisConfigurationWebhookSettingEndpoint.md
 docs/Model/ClaimedCredentialListResponse.md
 docs/Model/ClaimedCredentialResponse.md
-docs/Model/CorsBatchCredentialOK.md
-docs/Model/CorsGenerateCredentialsOK.md
-docs/Model/CorsGetClaimedCredentialsOK.md
-docs/Model/CorsGetCredentialOfferOK.md
-docs/Model/CorsGetIssuanceIdClaimedCredentialOK.md
-docs/Model/CorsGetWellKnownOpenIdCredentialIssuerOK.md
 docs/Model/CreateCredentialInput.md
 docs/Model/CreateIssuanceConfig400Response.md
 docs/Model/CreateIssuanceConfigInput.md
@@ -44,7 +38,6 @@ docs/Model/CredentialResponseImmediateCNonceExpiresIn.md
 docs/Model/CredentialResponseImmediateCredential.md
 docs/Model/CredentialSubjectNotValidError.md
 docs/Model/CredentialSupportedObject.md
-docs/Model/DeferredCredentialInput.md
 docs/Model/FlowData.md
 docs/Model/FlowDataStatusListsDetailsInner.md
 docs/Model/GenerateCredentials400Response.md
@@ -66,7 +59,6 @@ docs/Model/MissingHolderDidError.md
 docs/Model/NotFoundError.md
 docs/Model/ProjectCredentialConfigExistError.md
 docs/Model/ProjectCredentialConfigNotExistError.md
-docs/Model/RevocationForbiddenError.md
 docs/Model/StartIssuance400Response.md
 docs/Model/StartIssuanceInput.md
 docs/Model/StartIssuanceInputDataInner.md
@@ -107,12 +99,6 @@ lib/Model/CisConfigurationWebhookSetting.php
 lib/Model/CisConfigurationWebhookSettingEndpoint.php
 lib/Model/ClaimedCredentialListResponse.php
 lib/Model/ClaimedCredentialResponse.php
-lib/Model/CorsBatchCredentialOK.php
-lib/Model/CorsGenerateCredentialsOK.php
-lib/Model/CorsGetClaimedCredentialsOK.php
-lib/Model/CorsGetCredentialOfferOK.php
-lib/Model/CorsGetIssuanceIdClaimedCredentialOK.php
-lib/Model/CorsGetWellKnownOpenIdCredentialIssuerOK.php
 lib/Model/CreateCredentialInput.php
 lib/Model/CreateIssuanceConfig400Response.php
 lib/Model/CreateIssuanceConfigInput.php
@@ -131,7 +117,6 @@ lib/Model/CredentialResponseImmediateCNonceExpiresIn.php
 lib/Model/CredentialResponseImmediateCredential.php
 lib/Model/CredentialSubjectNotValidError.php
 lib/Model/CredentialSupportedObject.php
-lib/Model/DeferredCredentialInput.php
 lib/Model/FlowData.php
 lib/Model/FlowDataStatusListsDetailsInner.php
 lib/Model/GenerateCredentials400Response.php
@@ -154,7 +139,6 @@ lib/Model/ModelInterface.php
 lib/Model/NotFoundError.php
 lib/Model/ProjectCredentialConfigExistError.php
 lib/Model/ProjectCredentialConfigNotExistError.php
-lib/Model/RevocationForbiddenError.php
 lib/Model/StartIssuance400Response.php
 lib/Model/StartIssuanceInput.php
 lib/Model/StartIssuanceInputDataInner.php
