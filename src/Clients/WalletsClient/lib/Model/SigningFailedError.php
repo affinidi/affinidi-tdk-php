@@ -62,7 +62,7 @@ class SigningFailedError implements ModelInterface, ArrayAccess, \JsonSerializab
         'message' => 'string',
         'http_status_code' => 'float',
         'trace_id' => 'string',
-        'details' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]'
+        'details' => '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundErrorDetailsInner[]'
     ];
 
     /**
@@ -537,7 +537,7 @@ class SigningFailedError implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets details
      *
-     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\NotFoundErrorDetailsInner[]|null
      */
     public function getDetails()
     {
@@ -547,7 +547,7 @@ class SigningFailedError implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets details
      *
-     * @param \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null $details details
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\NotFoundErrorDetailsInner[]|null $details details
      *
      * @return self
      */
