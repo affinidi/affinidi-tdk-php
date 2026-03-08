@@ -62,7 +62,8 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
         'unsigned_credential' => 'object',
         'revocable' => 'bool',
         'disclosure_frame' => 'object',
-        'signature_scheme' => 'string'
+        'signature_scheme' => 'string',
+        'key_id' => 'string'
     ];
 
     /**
@@ -76,7 +77,8 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
         'unsigned_credential' => null,
         'revocable' => null,
         'disclosure_frame' => null,
-        'signature_scheme' => null
+        'signature_scheme' => null,
+        'key_id' => null
     ];
 
     /**
@@ -88,7 +90,8 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
         'unsigned_credential' => false,
         'revocable' => false,
         'disclosure_frame' => false,
-        'signature_scheme' => false
+        'signature_scheme' => false,
+        'key_id' => false
     ];
 
     /**
@@ -180,7 +183,8 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
         'unsigned_credential' => 'unsignedCredential',
         'revocable' => 'revocable',
         'disclosure_frame' => 'disclosureFrame',
-        'signature_scheme' => 'signatureScheme'
+        'signature_scheme' => 'signatureScheme',
+        'key_id' => 'keyId'
     ];
 
     /**
@@ -192,7 +196,8 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
         'unsigned_credential' => 'setUnsignedCredential',
         'revocable' => 'setRevocable',
         'disclosure_frame' => 'setDisclosureFrame',
-        'signature_scheme' => 'setSignatureScheme'
+        'signature_scheme' => 'setSignatureScheme',
+        'key_id' => 'setKeyId'
     ];
 
     /**
@@ -204,7 +209,8 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
         'unsigned_credential' => 'getUnsignedCredential',
         'revocable' => 'getRevocable',
         'disclosure_frame' => 'getDisclosureFrame',
-        'signature_scheme' => 'getSignatureScheme'
+        'signature_scheme' => 'getSignatureScheme',
+        'key_id' => 'getKeyId'
     ];
 
     /**
@@ -285,6 +291,7 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
         $this->setIfExists('revocable', $data ?? [], null);
         $this->setIfExists('disclosure_frame', $data ?? [], null);
         $this->setIfExists('signature_scheme', $data ?? [], null);
+        $this->setIfExists('key_id', $data ?? [], null);
     }
 
     /**
@@ -458,6 +465,33 @@ class SignCredentialsDm2SdJwtInputDto implements ModelInterface, ArrayAccess, \J
             );
         }
         $this->container['signature_scheme'] = $signature_scheme;
+
+        return $this;
+    }
+
+    /**
+     * Gets key_id
+     *
+     * @return string|null
+     */
+    public function getKeyId()
+    {
+        return $this->container['key_id'];
+    }
+
+    /**
+     * Sets key_id
+     *
+     * @param string|null $key_id wallet key ID to use for signing (defaults to wallet's default key)
+     *
+     * @return self
+     */
+    public function setKeyId($key_id)
+    {
+        if (is_null($key_id)) {
+            throw new \InvalidArgumentException('non-nullable key_id cannot be null');
+        }
+        $this->container['key_id'] = $key_id;
 
         return $this;
     }
