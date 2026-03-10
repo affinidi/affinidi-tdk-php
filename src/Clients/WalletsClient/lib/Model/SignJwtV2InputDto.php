@@ -1,6 +1,6 @@
 <?php
 /**
- * AuthcryptMessageResultDto
+ * SignJwtV2InputDto
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * AuthcryptMessageResultDto Class Doc Comment
+ * SignJwtV2InputDto Class Doc Comment
  *
  * @category Class
- * @description DTO contains authcrypted message in JSON fromat
+ * @description DTO contains payload of JWT to be signed
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class SignJwtV2InputDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AuthcryptMessageResultDto';
+    protected static $openAPIModelName = 'SignJwtV2InputDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +59,8 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'authcrypted_message' => 'object'
+        'payload' => 'object',
+        'key_id' => 'string'
     ];
 
     /**
@@ -70,7 +71,8 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'authcrypted_message' => null
+        'payload' => null,
+        'key_id' => null
     ];
 
     /**
@@ -79,7 +81,8 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'authcrypted_message' => false
+        'payload' => false,
+        'key_id' => false
     ];
 
     /**
@@ -168,7 +171,8 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'authcrypted_message' => 'authcryptedMessage'
+        'payload' => 'payload',
+        'key_id' => 'keyId'
     ];
 
     /**
@@ -177,7 +181,8 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'authcrypted_message' => 'setAuthcryptedMessage'
+        'payload' => 'setPayload',
+        'key_id' => 'setKeyId'
     ];
 
     /**
@@ -186,7 +191,8 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'authcrypted_message' => 'getAuthcryptedMessage'
+        'payload' => 'getPayload',
+        'key_id' => 'getKeyId'
     ];
 
     /**
@@ -246,7 +252,8 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('authcrypted_message', $data ?? [], null);
+        $this->setIfExists('payload', $data ?? [], null);
+        $this->setIfExists('key_id', $data ?? [], null);
     }
 
     /**
@@ -276,8 +283,8 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
-        if ($this->container['authcrypted_message'] === null) {
-            $invalidProperties[] = "'authcrypted_message' can't be null";
+        if ($this->container['payload'] === null) {
+            $invalidProperties[] = "'payload' can't be null";
         }
         return $invalidProperties;
     }
@@ -295,28 +302,55 @@ class AuthcryptMessageResultDto implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets authcrypted_message
+     * Gets payload
      *
      * @return object
      */
-    public function getAuthcryptedMessage()
+    public function getPayload()
     {
-        return $this->container['authcrypted_message'];
+        return $this->container['payload'];
     }
 
     /**
-     * Sets authcrypted_message
+     * Sets payload
      *
-     * @param object $authcrypted_message Authcrypted message in JSON format
+     * @param object $payload payload
      *
      * @return self
      */
-    public function setAuthcryptedMessage($authcrypted_message)
+    public function setPayload($payload)
     {
-        if (is_null($authcrypted_message)) {
-            throw new \InvalidArgumentException('non-nullable authcrypted_message cannot be null');
+        if (is_null($payload)) {
+            throw new \InvalidArgumentException('non-nullable payload cannot be null');
         }
-        $this->container['authcrypted_message'] = $authcrypted_message;
+        $this->container['payload'] = $payload;
+
+        return $this;
+    }
+
+    /**
+     * Gets key_id
+     *
+     * @return string|null
+     */
+    public function getKeyId()
+    {
+        return $this->container['key_id'];
+    }
+
+    /**
+     * Sets key_id
+     *
+     * @param string|null $key_id wallet key ID to use for signing (defaults to wallet's default key)
+     *
+     * @return self
+     */
+    public function setKeyId($key_id)
+    {
+        if (is_null($key_id)) {
+            throw new \InvalidArgumentException('non-nullable key_id cannot be null');
+        }
+        $this->container['key_id'] = $key_id;
 
         return $this;
     }
