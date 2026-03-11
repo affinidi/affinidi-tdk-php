@@ -1,6 +1,6 @@
 <?php
 /**
- * ServiceErrorResponseDetailsInner
+ * SignJwtV2InputDto
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * ServiceErrorResponseDetailsInner Class Doc Comment
+ * SignJwtV2InputDto Class Doc Comment
  *
  * @category Class
+ * @description DTO contains payload of JWT to be signed
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class SignJwtV2InputDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ServiceErrorResponse_details_inner';
+    protected static $openAPIModelName = 'SignJwtV2InputDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +59,8 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
-        'issue' => 'string',
-        'field' => 'string',
-        'value' => 'string',
-        'location' => 'string'
+        'payload' => 'object',
+        'key_id' => 'string'
     ];
 
     /**
@@ -72,10 +71,8 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'issue' => null,
-        'field' => null,
-        'value' => null,
-        'location' => null
+        'payload' => null,
+        'key_id' => null
     ];
 
     /**
@@ -84,10 +81,8 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'issue' => false,
-        'field' => false,
-        'value' => false,
-        'location' => false
+        'payload' => false,
+        'key_id' => false
     ];
 
     /**
@@ -176,10 +171,8 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'issue' => 'issue',
-        'field' => 'field',
-        'value' => 'value',
-        'location' => 'location'
+        'payload' => 'payload',
+        'key_id' => 'keyId'
     ];
 
     /**
@@ -188,10 +181,8 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'issue' => 'setIssue',
-        'field' => 'setField',
-        'value' => 'setValue',
-        'location' => 'setLocation'
+        'payload' => 'setPayload',
+        'key_id' => 'setKeyId'
     ];
 
     /**
@@ -200,10 +191,8 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'issue' => 'getIssue',
-        'field' => 'getField',
-        'value' => 'getValue',
-        'location' => 'getLocation'
+        'payload' => 'getPayload',
+        'key_id' => 'getKeyId'
     ];
 
     /**
@@ -263,10 +252,8 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('issue', $data ?? [], null);
-        $this->setIfExists('field', $data ?? [], null);
-        $this->setIfExists('value', $data ?? [], null);
-        $this->setIfExists('location', $data ?? [], null);
+        $this->setIfExists('payload', $data ?? [], null);
+        $this->setIfExists('key_id', $data ?? [], null);
     }
 
     /**
@@ -296,8 +283,8 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
     {
         $invalidProperties = [];
 
-        if ($this->container['issue'] === null) {
-            $invalidProperties[] = "'issue' can't be null";
+        if ($this->container['payload'] === null) {
+            $invalidProperties[] = "'payload' can't be null";
         }
         return $invalidProperties;
     }
@@ -315,109 +302,55 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
 
 
     /**
-     * Gets issue
+     * Gets payload
      *
-     * @return string
+     * @return object
      */
-    public function getIssue()
+    public function getPayload()
     {
-        return $this->container['issue'];
+        return $this->container['payload'];
     }
 
     /**
-     * Sets issue
+     * Sets payload
      *
-     * @param string $issue issue
+     * @param object $payload payload
      *
      * @return self
      */
-    public function setIssue($issue)
+    public function setPayload($payload)
     {
-        if (is_null($issue)) {
-            throw new \InvalidArgumentException('non-nullable issue cannot be null');
+        if (is_null($payload)) {
+            throw new \InvalidArgumentException('non-nullable payload cannot be null');
         }
-        $this->container['issue'] = $issue;
+        $this->container['payload'] = $payload;
 
         return $this;
     }
 
     /**
-     * Gets field
+     * Gets key_id
      *
      * @return string|null
      */
-    public function getField()
+    public function getKeyId()
     {
-        return $this->container['field'];
+        return $this->container['key_id'];
     }
 
     /**
-     * Sets field
+     * Sets key_id
      *
-     * @param string|null $field field
+     * @param string|null $key_id wallet key ID to use for signing (defaults to wallet's default key)
      *
      * @return self
      */
-    public function setField($field)
+    public function setKeyId($key_id)
     {
-        if (is_null($field)) {
-            throw new \InvalidArgumentException('non-nullable field cannot be null');
+        if (is_null($key_id)) {
+            throw new \InvalidArgumentException('non-nullable key_id cannot be null');
         }
-        $this->container['field'] = $field;
-
-        return $this;
-    }
-
-    /**
-     * Gets value
-     *
-     * @return string|null
-     */
-    public function getValue()
-    {
-        return $this->container['value'];
-    }
-
-    /**
-     * Sets value
-     *
-     * @param string|null $value value
-     *
-     * @return self
-     */
-    public function setValue($value)
-    {
-        if (is_null($value)) {
-            throw new \InvalidArgumentException('non-nullable value cannot be null');
-        }
-        $this->container['value'] = $value;
-
-        return $this;
-    }
-
-    /**
-     * Gets location
-     *
-     * @return string|null
-     */
-    public function getLocation()
-    {
-        return $this->container['location'];
-    }
-
-    /**
-     * Sets location
-     *
-     * @param string|null $location location
-     *
-     * @return self
-     */
-    public function setLocation($location)
-    {
-        if (is_null($location)) {
-            throw new \InvalidArgumentException('non-nullable location cannot be null');
-        }
-        $this->container['location'] = $location;
+        $this->container['key_id'] = $key_id;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * UnpackMessageInput
+ * NotFoundErrorDetailsInner
  *
  * PHP version 8.1
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * UnpackMessageInput Class Doc Comment
+ * NotFoundErrorDetailsInner Class Doc Comment
  *
  * @category Class
- * @description DTO contains params to unpack encrypted DIDComm message
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class NotFoundErrorDetailsInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UnpackMessageInput';
+    protected static $openAPIModelName = 'NotFoundError_details_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +58,10 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'message' => 'object'
+        'issue' => 'string',
+        'field' => 'string',
+        'value' => 'string',
+        'location' => 'string'
     ];
 
     /**
@@ -70,7 +72,10 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'message' => null
+        'issue' => null,
+        'field' => null,
+        'value' => null,
+        'location' => null
     ];
 
     /**
@@ -79,7 +84,10 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'message' => false
+        'issue' => false,
+        'field' => false,
+        'value' => false,
+        'location' => false
     ];
 
     /**
@@ -168,7 +176,10 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'message' => 'message'
+        'issue' => 'issue',
+        'field' => 'field',
+        'value' => 'value',
+        'location' => 'location'
     ];
 
     /**
@@ -177,7 +188,10 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'message' => 'setMessage'
+        'issue' => 'setIssue',
+        'field' => 'setField',
+        'value' => 'setValue',
+        'location' => 'setLocation'
     ];
 
     /**
@@ -186,7 +200,10 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'message' => 'getMessage'
+        'issue' => 'getIssue',
+        'field' => 'getField',
+        'value' => 'getValue',
+        'location' => 'getLocation'
     ];
 
     /**
@@ -246,7 +263,10 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('issue', $data ?? [], null);
+        $this->setIfExists('field', $data ?? [], null);
+        $this->setIfExists('value', $data ?? [], null);
+        $this->setIfExists('location', $data ?? [], null);
     }
 
     /**
@@ -276,8 +296,8 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
+        if ($this->container['issue'] === null) {
+            $invalidProperties[] = "'issue' can't be null";
         }
         return $invalidProperties;
     }
@@ -295,28 +315,109 @@ class UnpackMessageInput implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets message
+     * Gets issue
      *
-     * @return object
+     * @return string
      */
-    public function getMessage()
+    public function getIssue()
     {
-        return $this->container['message'];
+        return $this->container['issue'];
     }
 
     /**
-     * Sets message
+     * Sets issue
      *
-     * @param object $message Encrypted DIDComm message
+     * @param string $issue issue
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setIssue($issue)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($issue)) {
+            throw new \InvalidArgumentException('non-nullable issue cannot be null');
         }
-        $this->container['message'] = $message;
+        $this->container['issue'] = $issue;
+
+        return $this;
+    }
+
+    /**
+     * Gets field
+     *
+     * @return string|null
+     */
+    public function getField()
+    {
+        return $this->container['field'];
+    }
+
+    /**
+     * Sets field
+     *
+     * @param string|null $field field
+     *
+     * @return self
+     */
+    public function setField($field)
+    {
+        if (is_null($field)) {
+            throw new \InvalidArgumentException('non-nullable field cannot be null');
+        }
+        $this->container['field'] = $field;
+
+        return $this;
+    }
+
+    /**
+     * Gets value
+     *
+     * @return string|null
+     */
+    public function getValue()
+    {
+        return $this->container['value'];
+    }
+
+    /**
+     * Sets value
+     *
+     * @param string|null $value value
+     *
+     * @return self
+     */
+    public function setValue($value)
+    {
+        if (is_null($value)) {
+            throw new \InvalidArgumentException('non-nullable value cannot be null');
+        }
+        $this->container['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Gets location
+     *
+     * @return string|null
+     */
+    public function getLocation()
+    {
+        return $this->container['location'];
+    }
+
+    /**
+     * Sets location
+     *
+     * @param string|null $location location
+     *
+     * @return self
+     */
+    public function setLocation($location)
+    {
+        if (is_null($location)) {
+            throw new \InvalidArgumentException('non-nullable location cannot be null');
+        }
+        $this->container['location'] = $location;
 
         return $this;
     }
