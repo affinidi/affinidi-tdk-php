@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **name** | **string** |  |
 **owner_id** | **string** |  | [optional]
 **description** | **string** |  | [optional]
+**identity_verification_enabled** | **bool** | flag indicates if identity verification is enabled for project | [optional] [default to false]
 **created_at** | **string** | creation date and time in ISO-8601 format, e.g. 2023-09-20T07:12:13 | [optional]
 **updated_at** | **string** | last update date and time in ISO-8601 format, e.g. 2023-09-20T07:12:13 | [optional]
 
