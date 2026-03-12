@@ -1,6 +1,6 @@
 <?php
 /**
- * ServiceErrorResponseDetailsInner
+ * SignJwtV2ResultDto
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * ServiceErrorResponseDetailsInner Class Doc Comment
+ * SignJwtV2ResultDto Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\WalletsClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class SignJwtV2ResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ServiceErrorResponse_details_inner';
+    protected static $openAPIModelName = 'SignJwtV2ResultDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +58,7 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
-        'issue' => 'string',
-        'field' => 'string',
-        'value' => 'string',
-        'location' => 'string'
+        'signed_jwt' => 'string'
     ];
 
     /**
@@ -72,10 +69,7 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'issue' => null,
-        'field' => null,
-        'value' => null,
-        'location' => null
+        'signed_jwt' => null
     ];
 
     /**
@@ -84,10 +78,7 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'issue' => false,
-        'field' => false,
-        'value' => false,
-        'location' => false
+        'signed_jwt' => false
     ];
 
     /**
@@ -176,10 +167,7 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'issue' => 'issue',
-        'field' => 'field',
-        'value' => 'value',
-        'location' => 'location'
+        'signed_jwt' => 'signedJwt'
     ];
 
     /**
@@ -188,10 +176,7 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'issue' => 'setIssue',
-        'field' => 'setField',
-        'value' => 'setValue',
-        'location' => 'setLocation'
+        'signed_jwt' => 'setSignedJwt'
     ];
 
     /**
@@ -200,10 +185,7 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'issue' => 'getIssue',
-        'field' => 'getField',
-        'value' => 'getValue',
-        'location' => 'getLocation'
+        'signed_jwt' => 'getSignedJwt'
     ];
 
     /**
@@ -263,10 +245,7 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('issue', $data ?? [], null);
-        $this->setIfExists('field', $data ?? [], null);
-        $this->setIfExists('value', $data ?? [], null);
-        $this->setIfExists('location', $data ?? [], null);
+        $this->setIfExists('signed_jwt', $data ?? [], null);
     }
 
     /**
@@ -296,9 +275,6 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
     {
         $invalidProperties = [];
 
-        if ($this->container['issue'] === null) {
-            $invalidProperties[] = "'issue' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -315,109 +291,28 @@ class ServiceErrorResponseDetailsInner implements ModelInterface, ArrayAccess, \
 
 
     /**
-     * Gets issue
-     *
-     * @return string
-     */
-    public function getIssue()
-    {
-        return $this->container['issue'];
-    }
-
-    /**
-     * Sets issue
-     *
-     * @param string $issue issue
-     *
-     * @return self
-     */
-    public function setIssue($issue)
-    {
-        if (is_null($issue)) {
-            throw new \InvalidArgumentException('non-nullable issue cannot be null');
-        }
-        $this->container['issue'] = $issue;
-
-        return $this;
-    }
-
-    /**
-     * Gets field
+     * Gets signed_jwt
      *
      * @return string|null
      */
-    public function getField()
+    public function getSignedJwt()
     {
-        return $this->container['field'];
+        return $this->container['signed_jwt'];
     }
 
     /**
-     * Sets field
+     * Sets signed_jwt
      *
-     * @param string|null $field field
+     * @param string|null $signed_jwt signed_jwt
      *
      * @return self
      */
-    public function setField($field)
+    public function setSignedJwt($signed_jwt)
     {
-        if (is_null($field)) {
-            throw new \InvalidArgumentException('non-nullable field cannot be null');
+        if (is_null($signed_jwt)) {
+            throw new \InvalidArgumentException('non-nullable signed_jwt cannot be null');
         }
-        $this->container['field'] = $field;
-
-        return $this;
-    }
-
-    /**
-     * Gets value
-     *
-     * @return string|null
-     */
-    public function getValue()
-    {
-        return $this->container['value'];
-    }
-
-    /**
-     * Sets value
-     *
-     * @param string|null $value value
-     *
-     * @return self
-     */
-    public function setValue($value)
-    {
-        if (is_null($value)) {
-            throw new \InvalidArgumentException('non-nullable value cannot be null');
-        }
-        $this->container['value'] = $value;
-
-        return $this;
-    }
-
-    /**
-     * Gets location
-     *
-     * @return string|null
-     */
-    public function getLocation()
-    {
-        return $this->container['location'];
-    }
-
-    /**
-     * Sets location
-     *
-     * @param string|null $location location
-     *
-     * @return self
-     */
-    public function setLocation($location)
-    {
-        if (is_null($location)) {
-            throw new \InvalidArgumentException('non-nullable location cannot be null');
-        }
-        $this->container['location'] = $location;
+        $this->container['signed_jwt'] = $signed_jwt;
 
         return $this;
     }

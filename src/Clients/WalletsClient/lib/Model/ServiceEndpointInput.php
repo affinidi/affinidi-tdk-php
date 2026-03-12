@@ -1,6 +1,6 @@
 <?php
 /**
- * SignCredentialsDm1LdResultDto
+ * ServiceEndpointInput
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * SignCredentialsDm1LdResultDto Class Doc Comment
+ * ServiceEndpointInput Class Doc Comment
  *
  * @category Class
- * @description DTO contains signed credential
+ * @description Input for adding a service endpoint
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class ServiceEndpointInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SignCredentialsDm1LdResultDto';
+    protected static $openAPIModelName = 'ServiceEndpointInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +59,10 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credential' => 'object'
+        'name' => 'string',
+        'description' => 'string',
+        'url' => 'string',
+        'service_type' => 'string'
     ];
 
     /**
@@ -70,7 +73,10 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credential' => null
+        'name' => null,
+        'description' => null,
+        'url' => null,
+        'service_type' => null
     ];
 
     /**
@@ -79,7 +85,10 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credential' => false
+        'name' => false,
+        'description' => false,
+        'url' => false,
+        'service_type' => false
     ];
 
     /**
@@ -168,7 +177,10 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'credential' => 'credential'
+        'name' => 'name',
+        'description' => 'description',
+        'url' => 'url',
+        'service_type' => 'serviceType'
     ];
 
     /**
@@ -177,7 +189,10 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'credential' => 'setCredential'
+        'name' => 'setName',
+        'description' => 'setDescription',
+        'url' => 'setUrl',
+        'service_type' => 'setServiceType'
     ];
 
     /**
@@ -186,7 +201,10 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'credential' => 'getCredential'
+        'name' => 'getName',
+        'description' => 'getDescription',
+        'url' => 'getUrl',
+        'service_type' => 'getServiceType'
     ];
 
     /**
@@ -230,6 +248,25 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
         return self::$openAPIModelName;
     }
 
+    public const SERVICE_TYPE_DID_COMM_MESSAGING = 'DIDCommMessaging';
+    public const SERVICE_TYPE_LINKED_DOMAINS = 'LinkedDomains';
+    public const SERVICE_TYPE_IDENTITY_HUB = 'IdentityHub';
+    public const SERVICE_TYPE_CREDENTIAL_REGISTRY = 'CredentialRegistry';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getServiceTypeAllowableValues()
+    {
+        return [
+            self::SERVICE_TYPE_DID_COMM_MESSAGING,
+            self::SERVICE_TYPE_LINKED_DOMAINS,
+            self::SERVICE_TYPE_IDENTITY_HUB,
+            self::SERVICE_TYPE_CREDENTIAL_REGISTRY,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -246,7 +283,10 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credential', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('service_type', $data ?? [], null);
     }
 
     /**
@@ -276,9 +316,38 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
     {
         $invalidProperties = [];
 
-        if ($this->container['credential'] === null) {
-            $invalidProperties[] = "'credential' can't be null";
+        if (!is_null($this->container['name']) && !preg_match("/^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,99}$/", $this->container['name'])) {
+            $invalidProperties[] = "invalid value for 'name', must be conform to the pattern /^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,99}$/.";
         }
+
+        if (!is_null($this->container['description']) && !preg_match("/^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,499}$/", $this->container['description'])) {
+            $invalidProperties[] = "invalid value for 'description', must be conform to the pattern /^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,499}$/.";
+        }
+
+        if ($this->container['url'] === null) {
+            $invalidProperties[] = "'url' can't be null";
+        }
+        if ((mb_strlen($this->container['url']) > 2048)) {
+            $invalidProperties[] = "invalid value for 'url', the character length must be smaller than or equal to 2048.";
+        }
+
+        if (!preg_match("/^https?:\/\/[a-zA-Z0-9\\-._~:\/?#[\\]@!$&'()*+,;=%]+$/", $this->container['url'])) {
+            $invalidProperties[] = "invalid value for 'url', must be conform to the pattern /^https?:\/\/[a-zA-Z0-9\\-._~:\/?#[\\]@!$&'()*+,;=%]+$/.";
+        }
+
+        $allowedValues = $this->getServiceTypeAllowableValues();
+        if (!is_null($this->container['service_type']) && !in_array($this->container['service_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'service_type', must be one of '%s'",
+                $this->container['service_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if (!is_null($this->container['service_type']) && (mb_strlen($this->container['service_type']) > 100)) {
+            $invalidProperties[] = "invalid value for 'service_type', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -295,28 +364,140 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets credential
+     * Gets name
      *
-     * @return object
+     * @return string|null
      */
-    public function getCredential()
+    public function getName()
     {
-        return $this->container['credential'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets credential
+     * Sets name
      *
-     * @param object $credential Signed credential can be in Dm1Ld format
+     * @param string|null $name Alphanumeric string with common punctuation (max 100 characters)
      *
      * @return self
      */
-    public function setCredential($credential)
+    public function setName($name)
     {
-        if (is_null($credential)) {
-            throw new \InvalidArgumentException('non-nullable credential cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['credential'] = $credential;
+
+        if ((!preg_match("/^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,99}$/", ObjectSerializer::toString($name)))) {
+            throw new \InvalidArgumentException("invalid value for \$name when calling ServiceEndpointInput., must conform to the pattern /^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,99}$/.");
+        }
+
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description Alphanumeric string with common punctuation (max 500 characters)
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+
+        if ((!preg_match("/^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,499}$/", ObjectSerializer::toString($description)))) {
+            throw new \InvalidArgumentException("invalid value for \$description when calling ServiceEndpointInput., must conform to the pattern /^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,499}$/.");
+        }
+
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->container['url'];
+    }
+
+    /**
+     * Sets url
+     *
+     * @param string $url HTTP or HTTPS URL
+     *
+     * @return self
+     */
+    public function setUrl($url)
+    {
+        if (is_null($url)) {
+            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        }
+        if ((mb_strlen($url) > 2048)) {
+            throw new \InvalidArgumentException('invalid length for $url when calling ServiceEndpointInput., must be smaller than or equal to 2048.');
+        }
+        if ((!preg_match("/^https?:\/\/[a-zA-Z0-9\\-._~:\/?#[\\]@!$&'()*+,;=%]+$/", ObjectSerializer::toString($url)))) {
+            throw new \InvalidArgumentException("invalid value for \$url when calling ServiceEndpointInput., must conform to the pattern /^https?:\/\/[a-zA-Z0-9\\-._~:\/?#[\\]@!$&'()*+,;=%]+$/.");
+        }
+
+        $this->container['url'] = $url;
+
+        return $this;
+    }
+
+    /**
+     * Gets service_type
+     *
+     * @return string|null
+     */
+    public function getServiceType()
+    {
+        return $this->container['service_type'];
+    }
+
+    /**
+     * Sets service_type
+     *
+     * @param string|null $service_type type of service endpoint
+     *
+     * @return self
+     */
+    public function setServiceType($service_type)
+    {
+        if (is_null($service_type)) {
+            throw new \InvalidArgumentException('non-nullable service_type cannot be null');
+        }
+        $allowedValues = $this->getServiceTypeAllowableValues();
+        if (!in_array($service_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'service_type', must be one of '%s'",
+                    $service_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        if ((mb_strlen($service_type) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $service_type when calling ServiceEndpointInput., must be smaller than or equal to 100.');
+        }
+
+        $this->container['service_type'] = $service_type;
 
         return $this;
     }
