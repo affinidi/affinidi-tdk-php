@@ -62,7 +62,7 @@ class TooManyRequestsError implements ModelInterface, ArrayAccess, \JsonSerializ
         'message' => 'string',
         'http_status_code' => 'float',
         'trace_id' => 'string',
-        'details' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]'
+        'details' => '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundErrorDetailsInner[]'
     ];
 
     /**
@@ -537,7 +537,7 @@ class TooManyRequestsError implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets details
      *
-     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\NotFoundErrorDetailsInner[]|null
      */
     public function getDetails()
     {
@@ -547,7 +547,7 @@ class TooManyRequestsError implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets details
      *
-     * @param \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null $details details
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\NotFoundErrorDetailsInner[]|null $details details
      *
      * @return self
      */
