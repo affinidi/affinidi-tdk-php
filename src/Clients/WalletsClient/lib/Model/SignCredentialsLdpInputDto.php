@@ -62,7 +62,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
         'unsigned_credential' => 'object',
         'revocable' => 'bool',
         'signature_scheme' => 'string',
-        'signature_suite' => 'string'
+        'signature_suite' => 'string',
+        'key_id' => 'string'
     ];
 
     /**
@@ -76,7 +77,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
         'unsigned_credential' => null,
         'revocable' => null,
         'signature_scheme' => null,
-        'signature_suite' => null
+        'signature_suite' => null,
+        'key_id' => null
     ];
 
     /**
@@ -88,7 +90,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
         'unsigned_credential' => false,
         'revocable' => false,
         'signature_scheme' => false,
-        'signature_suite' => false
+        'signature_suite' => false,
+        'key_id' => false
     ];
 
     /**
@@ -180,7 +183,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
         'unsigned_credential' => 'unsignedCredential',
         'revocable' => 'revocable',
         'signature_scheme' => 'signatureScheme',
-        'signature_suite' => 'signatureSuite'
+        'signature_suite' => 'signatureSuite',
+        'key_id' => 'keyId'
     ];
 
     /**
@@ -192,7 +196,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
         'unsigned_credential' => 'setUnsignedCredential',
         'revocable' => 'setRevocable',
         'signature_scheme' => 'setSignatureScheme',
-        'signature_suite' => 'setSignatureSuite'
+        'signature_suite' => 'setSignatureSuite',
+        'key_id' => 'setKeyId'
     ];
 
     /**
@@ -204,7 +209,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
         'unsigned_credential' => 'getUnsignedCredential',
         'revocable' => 'getRevocable',
         'signature_scheme' => 'getSignatureScheme',
-        'signature_suite' => 'getSignatureSuite'
+        'signature_suite' => 'getSignatureSuite',
+        'key_id' => 'getKeyId'
     ];
 
     /**
@@ -306,6 +312,7 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('revocable', $data ?? [], null);
         $this->setIfExists('signature_scheme', $data ?? [], null);
         $this->setIfExists('signature_suite', $data ?? [], null);
+        $this->setIfExists('key_id', $data ?? [], null);
     }
 
     /**
@@ -495,6 +502,33 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
             );
         }
         $this->container['signature_suite'] = $signature_suite;
+
+        return $this;
+    }
+
+    /**
+     * Gets key_id
+     *
+     * @return string|null
+     */
+    public function getKeyId()
+    {
+        return $this->container['key_id'];
+    }
+
+    /**
+     * Sets key_id
+     *
+     * @param string|null $key_id wallet key ID to use for signing (defaults to wallet's default key)
+     *
+     * @return self
+     */
+    public function setKeyId($key_id)
+    {
+        if (is_null($key_id)) {
+            throw new \InvalidArgumentException('non-nullable key_id cannot be null');
+        }
+        $this->container['key_id'] = $key_id;
 
         return $this;
     }
