@@ -62,7 +62,7 @@ class OperationForbiddenError implements ModelInterface, ArrayAccess, \JsonSeria
         'message' => 'string',
         'http_status_code' => 'float',
         'trace_id' => 'string',
-        'details' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]'
+        'details' => '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundErrorDetailsInner[]'
     ];
 
     /**
@@ -537,7 +537,7 @@ class OperationForbiddenError implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets details
      *
-     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\NotFoundErrorDetailsInner[]|null
      */
     public function getDetails()
     {
@@ -547,7 +547,7 @@ class OperationForbiddenError implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets details
      *
-     * @param \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null $details details
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\NotFoundErrorDetailsInner[]|null $details details
      *
      * @return self
      */

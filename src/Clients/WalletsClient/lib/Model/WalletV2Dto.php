@@ -67,6 +67,7 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => 'string',
         'algorithm' => 'string',
         'keys' => '\AffinidiTdk\Clients\WalletsClient\Model\WalletDtoKeysInner[]',
+        'services' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[]',
         'created_at' => 'string',
         'modified_at' => 'string'
     ];
@@ -87,6 +88,7 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => null,
         'algorithm' => null,
         'keys' => null,
+        'services' => null,
         'created_at' => null,
         'modified_at' => null
     ];
@@ -105,6 +107,7 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => false,
         'algorithm' => false,
         'keys' => false,
+        'services' => false,
         'created_at' => false,
         'modified_at' => false
     ];
@@ -203,6 +206,7 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => 'ari',
         'algorithm' => 'algorithm',
         'keys' => 'keys',
+        'services' => 'services',
         'created_at' => 'createdAt',
         'modified_at' => 'modifiedAt'
     ];
@@ -221,6 +225,7 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => 'setAri',
         'algorithm' => 'setAlgorithm',
         'keys' => 'setKeys',
+        'services' => 'setServices',
         'created_at' => 'setCreatedAt',
         'modified_at' => 'setModifiedAt'
     ];
@@ -239,6 +244,7 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => 'getAri',
         'algorithm' => 'getAlgorithm',
         'keys' => 'getKeys',
+        'services' => 'getServices',
         'created_at' => 'getCreatedAt',
         'modified_at' => 'getModifiedAt'
     ];
@@ -308,6 +314,7 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('ari', $data ?? [], null);
         $this->setIfExists('algorithm', $data ?? [], null);
         $this->setIfExists('keys', $data ?? [], null);
+        $this->setIfExists('services', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('modified_at', $data ?? [], null);
     }
@@ -566,6 +573,33 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable keys cannot be null');
         }
         $this->container['keys'] = $keys;
+
+        return $this;
+    }
+
+    /**
+     * Gets services
+     *
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[]|null
+     */
+    public function getServices()
+    {
+        return $this->container['services'];
+    }
+
+    /**
+     * Sets services
+     *
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[]|null $services list of service endpoints associated with this wallet
+     *
+     * @return self
+     */
+    public function setServices($services)
+    {
+        if (is_null($services)) {
+            throw new \InvalidArgumentException('non-nullable services cannot be null');
+        }
+        $this->container['services'] = $services;
 
         return $this;
     }
