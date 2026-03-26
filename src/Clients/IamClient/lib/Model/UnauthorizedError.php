@@ -62,7 +62,7 @@ class UnauthorizedError implements ModelInterface, ArrayAccess, \JsonSerializabl
         'message' => 'string',
         'http_status_code' => 'float',
         'trace_id' => 'string',
-        'details' => '\AffinidiTdk\Clients\IamClient\Model\ServiceErrorResponseDetailsInner[]'
+        'details' => '\AffinidiTdk\Clients\IamClient\Model\UnexpectedErrorDetailsInner[]'
     ];
 
     /**
@@ -537,7 +537,7 @@ class UnauthorizedError implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets details
      *
-     * @return \AffinidiTdk\Clients\IamClient\Model\ServiceErrorResponseDetailsInner[]|null
+     * @return \AffinidiTdk\Clients\IamClient\Model\UnexpectedErrorDetailsInner[]|null
      */
     public function getDetails()
     {
@@ -547,7 +547,7 @@ class UnauthorizedError implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets details
      *
-     * @param \AffinidiTdk\Clients\IamClient\Model\ServiceErrorResponseDetailsInner[]|null $details details
+     * @param \AffinidiTdk\Clients\IamClient\Model\UnexpectedErrorDetailsInner[]|null $details details
      *
      * @return self
      */
