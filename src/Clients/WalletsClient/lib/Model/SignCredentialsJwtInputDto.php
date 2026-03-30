@@ -61,7 +61,8 @@ class SignCredentialsJwtInputDto implements ModelInterface, ArrayAccess, \JsonSe
     protected static $openAPITypes = [
         'unsigned_credential' => 'object',
         'revocable' => 'bool',
-        'signature_scheme' => 'string'
+        'signature_scheme' => 'string',
+        'key_id' => 'string'
     ];
 
     /**
@@ -74,7 +75,8 @@ class SignCredentialsJwtInputDto implements ModelInterface, ArrayAccess, \JsonSe
     protected static $openAPIFormats = [
         'unsigned_credential' => null,
         'revocable' => null,
-        'signature_scheme' => null
+        'signature_scheme' => null,
+        'key_id' => null
     ];
 
     /**
@@ -85,7 +87,8 @@ class SignCredentialsJwtInputDto implements ModelInterface, ArrayAccess, \JsonSe
     protected static array $openAPINullables = [
         'unsigned_credential' => false,
         'revocable' => false,
-        'signature_scheme' => false
+        'signature_scheme' => false,
+        'key_id' => false
     ];
 
     /**
@@ -176,7 +179,8 @@ class SignCredentialsJwtInputDto implements ModelInterface, ArrayAccess, \JsonSe
     protected static $attributeMap = [
         'unsigned_credential' => 'unsignedCredential',
         'revocable' => 'revocable',
-        'signature_scheme' => 'signatureScheme'
+        'signature_scheme' => 'signatureScheme',
+        'key_id' => 'keyId'
     ];
 
     /**
@@ -187,7 +191,8 @@ class SignCredentialsJwtInputDto implements ModelInterface, ArrayAccess, \JsonSe
     protected static $setters = [
         'unsigned_credential' => 'setUnsignedCredential',
         'revocable' => 'setRevocable',
-        'signature_scheme' => 'setSignatureScheme'
+        'signature_scheme' => 'setSignatureScheme',
+        'key_id' => 'setKeyId'
     ];
 
     /**
@@ -198,7 +203,8 @@ class SignCredentialsJwtInputDto implements ModelInterface, ArrayAccess, \JsonSe
     protected static $getters = [
         'unsigned_credential' => 'getUnsignedCredential',
         'revocable' => 'getRevocable',
-        'signature_scheme' => 'getSignatureScheme'
+        'signature_scheme' => 'getSignatureScheme',
+        'key_id' => 'getKeyId'
     ];
 
     /**
@@ -278,6 +284,7 @@ class SignCredentialsJwtInputDto implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('unsigned_credential', $data ?? [], null);
         $this->setIfExists('revocable', $data ?? [], null);
         $this->setIfExists('signature_scheme', $data ?? [], null);
+        $this->setIfExists('key_id', $data ?? [], null);
     }
 
     /**
@@ -421,6 +428,33 @@ class SignCredentialsJwtInputDto implements ModelInterface, ArrayAccess, \JsonSe
             );
         }
         $this->container['signature_scheme'] = $signature_scheme;
+
+        return $this;
+    }
+
+    /**
+     * Gets key_id
+     *
+     * @return string|null
+     */
+    public function getKeyId()
+    {
+        return $this->container['key_id'];
+    }
+
+    /**
+     * Sets key_id
+     *
+     * @param string|null $key_id wallet key ID to use for signing (defaults to wallet's default key)
+     *
+     * @return self
+     */
+    public function setKeyId($key_id)
+    {
+        if (is_null($key_id)) {
+            throw new \InvalidArgumentException('non-nullable key_id cannot be null');
+        }
+        $this->container['key_id'] = $key_id;
 
         return $this;
     }
