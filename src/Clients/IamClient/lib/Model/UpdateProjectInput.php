@@ -59,7 +59,8 @@ class UpdateProjectInput implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static $openAPITypes = [
         'name' => 'string',
-        'description' => 'string'
+        'description' => 'string',
+        'identity_verification_enabled' => 'bool'
     ];
 
     /**
@@ -71,7 +72,8 @@ class UpdateProjectInput implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static $openAPIFormats = [
         'name' => null,
-        'description' => null
+        'description' => null,
+        'identity_verification_enabled' => null
     ];
 
     /**
@@ -81,7 +83,8 @@ class UpdateProjectInput implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'description' => false
+        'description' => false,
+        'identity_verification_enabled' => false
     ];
 
     /**
@@ -171,7 +174,8 @@ class UpdateProjectInput implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $attributeMap = [
         'name' => 'name',
-        'description' => 'description'
+        'description' => 'description',
+        'identity_verification_enabled' => 'identityVerificationEnabled'
     ];
 
     /**
@@ -181,7 +185,8 @@ class UpdateProjectInput implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $setters = [
         'name' => 'setName',
-        'description' => 'setDescription'
+        'description' => 'setDescription',
+        'identity_verification_enabled' => 'setIdentityVerificationEnabled'
     ];
 
     /**
@@ -191,7 +196,8 @@ class UpdateProjectInput implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     protected static $getters = [
         'name' => 'getName',
-        'description' => 'getDescription'
+        'description' => 'getDescription',
+        'identity_verification_enabled' => 'getIdentityVerificationEnabled'
     ];
 
     /**
@@ -253,6 +259,7 @@ class UpdateProjectInput implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('identity_verification_enabled', $data ?? [], null);
     }
 
     /**
@@ -362,6 +369,33 @@ class UpdateProjectInput implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets identity_verification_enabled
+     *
+     * @return bool|null
+     */
+    public function getIdentityVerificationEnabled()
+    {
+        return $this->container['identity_verification_enabled'];
+    }
+
+    /**
+     * Sets identity_verification_enabled
+     *
+     * @param bool|null $identity_verification_enabled flag indicates if identity verification is enabled for project
+     *
+     * @return self
+     */
+    public function setIdentityVerificationEnabled($identity_verification_enabled)
+    {
+        if (is_null($identity_verification_enabled)) {
+            throw new \InvalidArgumentException('non-nullable identity_verification_enabled cannot be null');
+        }
+        $this->container['identity_verification_enabled'] = $identity_verification_enabled;
 
         return $this;
     }
