@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ari** | **string** | ARI of the wallet | [optional]
 **algorithm** | **string** | algorithm used to generate key for the wallet | [optional]
 **keys** | [**\AffinidiTdk\Clients\WalletsClient\Model\WalletDtoKeysInner[]**](WalletDtoKeysInner.md) |  | [optional]
+**services** | [**\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[]**](ServiceEndpointDto.md) | list of service endpoints associated with this wallet | [optional]
 **created_at** | **string** |  | [optional]
 **modified_at** | **string** |  | [optional]
 
