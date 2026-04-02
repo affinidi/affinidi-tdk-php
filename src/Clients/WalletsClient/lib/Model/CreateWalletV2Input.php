@@ -62,7 +62,8 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
         'description' => 'string',
         'did_method' => 'string',
         'did_web_url' => 'string',
-        'algorithm' => 'string'
+        'algorithm' => 'string',
+        'services' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointInput[]'
     ];
 
     /**
@@ -77,7 +78,8 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
         'description' => null,
         'did_method' => null,
         'did_web_url' => null,
-        'algorithm' => null
+        'algorithm' => null,
+        'services' => null
     ];
 
     /**
@@ -90,7 +92,8 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
         'description' => false,
         'did_method' => false,
         'did_web_url' => false,
-        'algorithm' => false
+        'algorithm' => false,
+        'services' => false
     ];
 
     /**
@@ -183,7 +186,8 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
         'description' => 'description',
         'did_method' => 'didMethod',
         'did_web_url' => 'didWebUrl',
-        'algorithm' => 'algorithm'
+        'algorithm' => 'algorithm',
+        'services' => 'services'
     ];
 
     /**
@@ -196,7 +200,8 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
         'description' => 'setDescription',
         'did_method' => 'setDidMethod',
         'did_web_url' => 'setDidWebUrl',
-        'algorithm' => 'setAlgorithm'
+        'algorithm' => 'setAlgorithm',
+        'services' => 'setServices'
     ];
 
     /**
@@ -209,7 +214,8 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
         'description' => 'getDescription',
         'did_method' => 'getDidMethod',
         'did_web_url' => 'getDidWebUrl',
-        'algorithm' => 'getAlgorithm'
+        'algorithm' => 'getAlgorithm',
+        'services' => 'getServices'
     ];
 
     /**
@@ -256,6 +262,7 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
     public const DID_METHOD_KEY = 'key';
     public const DID_METHOD_WEB = 'web';
     public const DID_METHOD_PEER0 = 'peer0';
+    public const DID_METHOD_PEER2 = 'peer2';
     public const ALGORITHM_SECP256K1 = 'secp256k1';
     public const ALGORITHM_ED25519 = 'ed25519';
     public const ALGORITHM_P256 = 'p256';
@@ -271,6 +278,7 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
             self::DID_METHOD_KEY,
             self::DID_METHOD_WEB,
             self::DID_METHOD_PEER0,
+            self::DID_METHOD_PEER2,
         ];
     }
 
@@ -308,6 +316,7 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('did_method', $data ?? [], 'key');
         $this->setIfExists('did_web_url', $data ?? [], null);
         $this->setIfExists('algorithm', $data ?? [], 'secp256k1');
+        $this->setIfExists('services', $data ?? [], null);
     }
 
     /**
@@ -361,6 +370,10 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
                 $this->container['algorithm'],
                 implode("', '", $allowedValues)
             );
+        }
+
+        if (!is_null($this->container['services']) && (count($this->container['services']) > 20)) {
+            $invalidProperties[] = "invalid value for 'services', number of items must be less than or equal to 20.";
         }
 
         return $invalidProperties;
@@ -536,6 +549,37 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
             );
         }
         $this->container['algorithm'] = $algorithm;
+
+        return $this;
+    }
+
+    /**
+     * Gets services
+     *
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointInput[]|null
+     */
+    public function getServices()
+    {
+        return $this->container['services'];
+    }
+
+    /**
+     * Sets services
+     *
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointInput[]|null $services Service endpoints to include in DID document
+     *
+     * @return self
+     */
+    public function setServices($services)
+    {
+        if (is_null($services)) {
+            throw new \InvalidArgumentException('non-nullable services cannot be null');
+        }
+
+        if ((count($services) > 20)) {
+            throw new \InvalidArgumentException('invalid value for $services when calling CreateWalletV2Input., number of items must be less than or equal to 20.');
+        }
+        $this->container['services'] = $services;
 
         return $this;
     }
