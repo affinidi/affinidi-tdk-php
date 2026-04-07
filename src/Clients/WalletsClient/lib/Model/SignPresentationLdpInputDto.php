@@ -63,7 +63,8 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
         'signature_scheme' => 'string',
         'signature_suite' => 'string',
         'domain' => 'string[]',
-        'challenge' => 'string'
+        'challenge' => 'string',
+        'key_id' => 'string'
     ];
 
     /**
@@ -78,7 +79,8 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
         'signature_scheme' => null,
         'signature_suite' => null,
         'domain' => null,
-        'challenge' => null
+        'challenge' => null,
+        'key_id' => null
     ];
 
     /**
@@ -91,7 +93,8 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
         'signature_scheme' => false,
         'signature_suite' => false,
         'domain' => false,
-        'challenge' => false
+        'challenge' => false,
+        'key_id' => false
     ];
 
     /**
@@ -184,7 +187,8 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
         'signature_scheme' => 'signatureScheme',
         'signature_suite' => 'signatureSuite',
         'domain' => 'domain',
-        'challenge' => 'challenge'
+        'challenge' => 'challenge',
+        'key_id' => 'keyId'
     ];
 
     /**
@@ -197,7 +201,8 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
         'signature_scheme' => 'setSignatureScheme',
         'signature_suite' => 'setSignatureSuite',
         'domain' => 'setDomain',
-        'challenge' => 'setChallenge'
+        'challenge' => 'setChallenge',
+        'key_id' => 'setKeyId'
     ];
 
     /**
@@ -210,7 +215,8 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
         'signature_scheme' => 'getSignatureScheme',
         'signature_suite' => 'getSignatureSuite',
         'domain' => 'getDomain',
-        'challenge' => 'getChallenge'
+        'challenge' => 'getChallenge',
+        'key_id' => 'getKeyId'
     ];
 
     /**
@@ -313,6 +319,7 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('signature_suite', $data ?? [], null);
         $this->setIfExists('domain', $data ?? [], null);
         $this->setIfExists('challenge', $data ?? [], null);
+        $this->setIfExists('key_id', $data ?? [], null);
     }
 
     /**
@@ -529,6 +536,33 @@ class SignPresentationLdpInputDto implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable challenge cannot be null');
         }
         $this->container['challenge'] = $challenge;
+
+        return $this;
+    }
+
+    /**
+     * Gets key_id
+     *
+     * @return string|null
+     */
+    public function getKeyId()
+    {
+        return $this->container['key_id'];
+    }
+
+    /**
+     * Sets key_id
+     *
+     * @param string|null $key_id wallet key ID to use for signing (defaults to wallet's default key)
+     *
+     * @return self
+     */
+    public function setKeyId($key_id)
+    {
+        if (is_null($key_id)) {
+            throw new \InvalidArgumentException('non-nullable key_id cannot be null');
+        }
+        $this->container['key_id'] = $key_id;
 
         return $this;
     }
