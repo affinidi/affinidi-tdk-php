@@ -1,6 +1,6 @@
 <?php
 /**
- * SignMessageInput
+ * CreateWalletKeyInput
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * SignMessageInput Class Doc Comment
+ * CreateWalletKeyInput Class Doc Comment
  *
  * @category Class
- * @description DTO contains params to sign plain text DIDComm message
+ * @description Input for adding a new key to a wallet. Only supported for did:web ATM.
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SignMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateWalletKeyInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class SignMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SignMessageInput';
+    protected static $openAPIModelName = 'CreateWalletKeyInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +59,8 @@ class SignMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'plain_text_message' => 'object',
-        'signature_scheme' => 'string'
+        'key_type' => 'string',
+        'relationships' => '\AffinidiTdk\Clients\WalletsClient\Model\VerificationRelationship[]'
     ];
 
     /**
@@ -71,8 +71,8 @@ class SignMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'plain_text_message' => null,
-        'signature_scheme' => null
+        'key_type' => null,
+        'relationships' => null
     ];
 
     /**
@@ -81,8 +81,8 @@ class SignMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'plain_text_message' => false,
-        'signature_scheme' => false
+        'key_type' => false,
+        'relationships' => false
     ];
 
     /**
@@ -171,8 +171,8 @@ class SignMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'plain_text_message' => 'plainTextMessage',
-        'signature_scheme' => 'signatureScheme'
+        'key_type' => 'keyType',
+        'relationships' => 'relationships'
     ];
 
     /**
@@ -181,8 +181,8 @@ class SignMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'plain_text_message' => 'setPlainTextMessage',
-        'signature_scheme' => 'setSignatureScheme'
+        'key_type' => 'setKeyType',
+        'relationships' => 'setRelationships'
     ];
 
     /**
@@ -191,8 +191,8 @@ class SignMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'plain_text_message' => 'getPlainTextMessage',
-        'signature_scheme' => 'getSignatureScheme'
+        'key_type' => 'getKeyType',
+        'relationships' => 'getRelationships'
     ];
 
     /**
@@ -236,21 +236,21 @@ class SignMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256 = 'ecdsa_secp256k1_sha256';
-    public const SIGNATURE_SCHEME_ECDSA_P256_SHA256 = 'ecdsa_p256_sha256';
-    public const SIGNATURE_SCHEME_ED25519 = 'ed25519';
+    public const KEY_TYPE_SECP256K1 = 'secp256k1';
+    public const KEY_TYPE_ED25519 = 'ed25519';
+    public const KEY_TYPE_P256 = 'p256';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getSignatureSchemeAllowableValues()
+    public function getKeyTypeAllowableValues()
     {
         return [
-            self::SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256,
-            self::SIGNATURE_SCHEME_ECDSA_P256_SHA256,
-            self::SIGNATURE_SCHEME_ED25519,
+            self::KEY_TYPE_SECP256K1,
+            self::KEY_TYPE_ED25519,
+            self::KEY_TYPE_P256,
         ];
     }
 
@@ -269,8 +269,8 @@ class SignMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('plain_text_message', $data ?? [], null);
-        $this->setIfExists('signature_scheme', $data ?? [], null);
+        $this->setIfExists('key_type', $data ?? [], null);
+        $this->setIfExists('relationships', $data ?? [], null);
     }
 
     /**
@@ -300,18 +300,21 @@ class SignMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['plain_text_message'] === null) {
-            $invalidProperties[] = "'plain_text_message' can't be null";
+        if ($this->container['key_type'] === null) {
+            $invalidProperties[] = "'key_type' can't be null";
         }
-        $allowedValues = $this->getSignatureSchemeAllowableValues();
-        if (!is_null($this->container['signature_scheme']) && !in_array($this->container['signature_scheme'], $allowedValues, true)) {
+        $allowedValues = $this->getKeyTypeAllowableValues();
+        if (!is_null($this->container['key_type']) && !in_array($this->container['key_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'signature_scheme', must be one of '%s'",
-                $this->container['signature_scheme'],
+                "invalid value '%s' for 'key_type', must be one of '%s'",
+                $this->container['key_type'],
                 implode("', '", $allowedValues)
             );
         }
 
+        if ($this->container['relationships'] === null) {
+            $invalidProperties[] = "'relationships' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -328,65 +331,65 @@ class SignMessageInput implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets plain_text_message
+     * Gets key_type
      *
-     * @return object
+     * @return string
      */
-    public function getPlainTextMessage()
+    public function getKeyType()
     {
-        return $this->container['plain_text_message'];
+        return $this->container['key_type'];
     }
 
     /**
-     * Sets plain_text_message
+     * Sets key_type
      *
-     * @param object $plain_text_message Unsigned plain text DIDComm message
+     * @param string $key_type cryptographic algorithm for the new key
      *
      * @return self
      */
-    public function setPlainTextMessage($plain_text_message)
+    public function setKeyType($key_type)
     {
-        if (is_null($plain_text_message)) {
-            throw new \InvalidArgumentException('non-nullable plain_text_message cannot be null');
+        if (is_null($key_type)) {
+            throw new \InvalidArgumentException('non-nullable key_type cannot be null');
         }
-        $this->container['plain_text_message'] = $plain_text_message;
+        $allowedValues = $this->getKeyTypeAllowableValues();
+        if (!in_array($key_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'key_type', must be one of '%s'",
+                    $key_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['key_type'] = $key_type;
 
         return $this;
     }
 
     /**
-     * Gets signature_scheme
+     * Gets relationships
      *
-     * @return string|null
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\VerificationRelationship[]
      */
-    public function getSignatureScheme()
+    public function getRelationships()
     {
-        return $this->container['signature_scheme'];
+        return $this->container['relationships'];
     }
 
     /**
-     * Sets signature_scheme
+     * Sets relationships
      *
-     * @param string|null $signature_scheme signature_scheme
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\VerificationRelationship[] $relationships verification relationships for the key.
      *
      * @return self
      */
-    public function setSignatureScheme($signature_scheme)
+    public function setRelationships($relationships)
     {
-        if (is_null($signature_scheme)) {
-            throw new \InvalidArgumentException('non-nullable signature_scheme cannot be null');
+        if (is_null($relationships)) {
+            throw new \InvalidArgumentException('non-nullable relationships cannot be null');
         }
-        $allowedValues = $this->getSignatureSchemeAllowableValues();
-        if (!in_array($signature_scheme, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'signature_scheme', must be one of '%s'",
-                    $signature_scheme,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['signature_scheme'] = $signature_scheme;
+        $this->container['relationships'] = $relationships;
 
         return $this;
     }

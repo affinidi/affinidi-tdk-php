@@ -75,7 +75,13 @@ class WalletApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
+        'createServiceEndpoint' => [
+            'application/json',
+        ],
         'createWallet' => [
+            'application/json',
+        ],
+        'createWalletKey' => [
             'application/json',
         ],
         'createWalletV2' => [
@@ -87,7 +93,19 @@ class WalletApi
         'getWallet' => [
             'application/json',
         ],
+        'listServiceEndpoints' => [
+            'application/json',
+        ],
+        'listWalletKeys' => [
+            'application/json',
+        ],
         'listWallets' => [
+            'application/json',
+        ],
+        'removeServiceEndpoint' => [
+            'application/json',
+        ],
+        'removeWalletKey' => [
             'application/json',
         ],
         'signCredential' => [
@@ -105,10 +123,19 @@ class WalletApi
         'signJwtToken' => [
             'application/json',
         ],
+        'signJwtV2' => [
+            'application/json',
+        ],
         'signPresentationsLdp' => [
             'application/json',
         ],
+        'updateServiceEndpoint' => [
+            'application/json',
+        ],
         'updateWallet' => [
+            'application/json',
+        ],
+        'updateWalletKey' => [
             'application/json',
         ],
     ];
@@ -157,6 +184,344 @@ class WalletApi
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * Operation createServiceEndpoint
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointInput $service_endpoint_input AddServiceEndpoint (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto
+     */
+    public function createServiceEndpoint($wallet_id, $service_endpoint_input, string $contentType = self::contentTypes['createServiceEndpoint'][0])
+    {
+        list($response) = $this->createServiceEndpointWithHttpInfo($wallet_id, $service_endpoint_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation createServiceEndpointWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointInput $service_endpoint_input AddServiceEndpoint (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createServiceEndpointWithHttpInfo($wallet_id, $service_endpoint_input, string $contentType = self::contentTypes['createServiceEndpoint'][0])
+    {
+        $request = $this->createServiceEndpointRequest($wallet_id, $service_endpoint_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 201:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createServiceEndpointAsync
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointInput $service_endpoint_input AddServiceEndpoint (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createServiceEndpointAsync($wallet_id, $service_endpoint_input, string $contentType = self::contentTypes['createServiceEndpoint'][0])
+    {
+        return $this->createServiceEndpointAsyncWithHttpInfo($wallet_id, $service_endpoint_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createServiceEndpointAsyncWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointInput $service_endpoint_input AddServiceEndpoint (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createServiceEndpointAsyncWithHttpInfo($wallet_id, $service_endpoint_input, string $contentType = self::contentTypes['createServiceEndpoint'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto';
+        $request = $this->createServiceEndpointRequest($wallet_id, $service_endpoint_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createServiceEndpoint'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointInput $service_endpoint_input AddServiceEndpoint (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createServiceEndpointRequest($wallet_id, $service_endpoint_input, string $contentType = self::contentTypes['createServiceEndpoint'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling createServiceEndpoint'
+            );
+        }
+
+        // verify the required parameter 'service_endpoint_input' is set
+        if ($service_endpoint_input === null || (is_array($service_endpoint_input) && count($service_endpoint_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $service_endpoint_input when calling createServiceEndpoint'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/services';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($service_endpoint_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($service_endpoint_input));
+            } else {
+                $httpBody = $service_endpoint_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
     }
 
     /**
@@ -454,6 +819,344 @@ class WalletApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_wallet_input));
             } else {
                 $httpBody = $create_wallet_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation createWalletKey
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletKeyInput $create_wallet_key_input CreateWalletKey (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWalletKey'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto
+     */
+    public function createWalletKey($wallet_id, $create_wallet_key_input, string $contentType = self::contentTypes['createWalletKey'][0])
+    {
+        list($response) = $this->createWalletKeyWithHttpInfo($wallet_id, $create_wallet_key_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation createWalletKeyWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletKeyInput $create_wallet_key_input CreateWalletKey (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWalletKey'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createWalletKeyWithHttpInfo($wallet_id, $create_wallet_key_input, string $contentType = self::contentTypes['createWalletKey'][0])
+    {
+        $request = $this->createWalletKeyRequest($wallet_id, $create_wallet_key_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 201:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createWalletKeyAsync
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletKeyInput $create_wallet_key_input CreateWalletKey (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWalletKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createWalletKeyAsync($wallet_id, $create_wallet_key_input, string $contentType = self::contentTypes['createWalletKey'][0])
+    {
+        return $this->createWalletKeyAsyncWithHttpInfo($wallet_id, $create_wallet_key_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createWalletKeyAsyncWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletKeyInput $create_wallet_key_input CreateWalletKey (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWalletKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createWalletKeyAsyncWithHttpInfo($wallet_id, $create_wallet_key_input, string $contentType = self::contentTypes['createWalletKey'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto';
+        $request = $this->createWalletKeyRequest($wallet_id, $create_wallet_key_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createWalletKey'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletKeyInput $create_wallet_key_input CreateWalletKey (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createWalletKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createWalletKeyRequest($wallet_id, $create_wallet_key_input, string $contentType = self::contentTypes['createWalletKey'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling createWalletKey'
+            );
+        }
+
+        // verify the required parameter 'create_wallet_key_input' is set
+        if ($create_wallet_key_input === null || (is_array($create_wallet_key_input) && count($create_wallet_key_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $create_wallet_key_input when calling createWalletKey'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/keys';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($create_wallet_key_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_wallet_key_input));
+            } else {
+                $httpBody = $create_wallet_key_input;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1506,9 +2209,647 @@ class WalletApi
     }
 
     /**
+     * Operation listServiceEndpoints
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServiceEndpoints'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\ListServiceEndpointsOK
+     */
+    public function listServiceEndpoints($wallet_id, string $contentType = self::contentTypes['listServiceEndpoints'][0])
+    {
+        list($response) = $this->listServiceEndpointsWithHttpInfo($wallet_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listServiceEndpointsWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServiceEndpoints'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\ListServiceEndpointsOK, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listServiceEndpointsWithHttpInfo($wallet_id, string $contentType = self::contentTypes['listServiceEndpoints'][0])
+    {
+        $request = $this->listServiceEndpointsRequest($wallet_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\ListServiceEndpointsOK' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\ListServiceEndpointsOK' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\ListServiceEndpointsOK', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\ListServiceEndpointsOK';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\ListServiceEndpointsOK',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listServiceEndpointsAsync
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServiceEndpoints'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listServiceEndpointsAsync($wallet_id, string $contentType = self::contentTypes['listServiceEndpoints'][0])
+    {
+        return $this->listServiceEndpointsAsyncWithHttpInfo($wallet_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listServiceEndpointsAsyncWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServiceEndpoints'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listServiceEndpointsAsyncWithHttpInfo($wallet_id, string $contentType = self::contentTypes['listServiceEndpoints'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\ListServiceEndpointsOK';
+        $request = $this->listServiceEndpointsRequest($wallet_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listServiceEndpoints'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServiceEndpoints'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listServiceEndpointsRequest($wallet_id, string $contentType = self::contentTypes['listServiceEndpoints'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling listServiceEndpoints'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/services';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listWalletKeys
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWalletKeys'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\ListWalletKeysOK
+     */
+    public function listWalletKeys($wallet_id, string $contentType = self::contentTypes['listWalletKeys'][0])
+    {
+        list($response) = $this->listWalletKeysWithHttpInfo($wallet_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listWalletKeysWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWalletKeys'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\ListWalletKeysOK, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listWalletKeysWithHttpInfo($wallet_id, string $contentType = self::contentTypes['listWalletKeys'][0])
+    {
+        $request = $this->listWalletKeysRequest($wallet_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\ListWalletKeysOK' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\ListWalletKeysOK' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\ListWalletKeysOK', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\ListWalletKeysOK';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\ListWalletKeysOK',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listWalletKeysAsync
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWalletKeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listWalletKeysAsync($wallet_id, string $contentType = self::contentTypes['listWalletKeys'][0])
+    {
+        return $this->listWalletKeysAsyncWithHttpInfo($wallet_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listWalletKeysAsyncWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWalletKeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listWalletKeysAsyncWithHttpInfo($wallet_id, string $contentType = self::contentTypes['listWalletKeys'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\ListWalletKeysOK';
+        $request = $this->listWalletKeysRequest($wallet_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listWalletKeys'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWalletKeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listWalletKeysRequest($wallet_id, string $contentType = self::contentTypes['listWalletKeys'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling listWalletKeys'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/keys';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation listWallets
      *
-     * @param  string|null $did_type did_type (optional)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\WalletDidType|null $did_type did_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWallets'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1524,7 +2865,7 @@ class WalletApi
     /**
      * Operation listWalletsWithHttpInfo
      *
-     * @param  string|null $did_type (optional)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\WalletDidType|null $did_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWallets'] to see the possible values for this operation
      *
      * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1731,7 +3072,7 @@ class WalletApi
     /**
      * Operation listWalletsAsync
      *
-     * @param  string|null $did_type (optional)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\WalletDidType|null $did_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWallets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1750,7 +3091,7 @@ class WalletApi
     /**
      * Operation listWalletsAsyncWithHttpInfo
      *
-     * @param  string|null $did_type (optional)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\WalletDidType|null $did_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWallets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1800,7 +3141,7 @@ class WalletApi
     /**
      * Create request for operation 'listWallets'
      *
-     * @param  string|null $did_type (optional)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\WalletDidType|null $did_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWallets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1822,7 +3163,7 @@ class WalletApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $did_type,
             'didType', // param base name
-            'string', // openApiType
+            'WalletDidType', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -1883,6 +3224,510 @@ class WalletApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation removeServiceEndpoint
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $service_id id of the service endpoint to remove (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function removeServiceEndpoint($wallet_id, $service_id, string $contentType = self::contentTypes['removeServiceEndpoint'][0])
+    {
+        $this->removeServiceEndpointWithHttpInfo($wallet_id, $service_id, $contentType);
+    }
+
+    /**
+     * Operation removeServiceEndpointWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $service_id id of the service endpoint to remove (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function removeServiceEndpointWithHttpInfo($wallet_id, $service_id, string $contentType = self::contentTypes['removeServiceEndpoint'][0])
+    {
+        $request = $this->removeServiceEndpointRequest($wallet_id, $service_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation removeServiceEndpointAsync
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $service_id id of the service endpoint to remove (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function removeServiceEndpointAsync($wallet_id, $service_id, string $contentType = self::contentTypes['removeServiceEndpoint'][0])
+    {
+        return $this->removeServiceEndpointAsyncWithHttpInfo($wallet_id, $service_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation removeServiceEndpointAsyncWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $service_id id of the service endpoint to remove (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function removeServiceEndpointAsyncWithHttpInfo($wallet_id, $service_id, string $contentType = self::contentTypes['removeServiceEndpoint'][0])
+    {
+        $returnType = '';
+        $request = $this->removeServiceEndpointRequest($wallet_id, $service_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'removeServiceEndpoint'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $service_id id of the service endpoint to remove (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function removeServiceEndpointRequest($wallet_id, $service_id, string $contentType = self::contentTypes['removeServiceEndpoint'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling removeServiceEndpoint'
+            );
+        }
+
+        // verify the required parameter 'service_id' is set
+        if ($service_id === null || (is_array($service_id) && count($service_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $service_id when calling removeServiceEndpoint'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/services/{serviceId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($service_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'serviceId' . '}',
+                ObjectSerializer::toPathValue($service_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            [],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation removeWalletKey
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $key_id id of the key to remove (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeWalletKey'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function removeWalletKey($wallet_id, $key_id, string $contentType = self::contentTypes['removeWalletKey'][0])
+    {
+        $this->removeWalletKeyWithHttpInfo($wallet_id, $key_id, $contentType);
+    }
+
+    /**
+     * Operation removeWalletKeyWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $key_id id of the key to remove (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeWalletKey'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function removeWalletKeyWithHttpInfo($wallet_id, $key_id, string $contentType = self::contentTypes['removeWalletKey'][0])
+    {
+        $request = $this->removeWalletKeyRequest($wallet_id, $key_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation removeWalletKeyAsync
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $key_id id of the key to remove (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeWalletKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function removeWalletKeyAsync($wallet_id, $key_id, string $contentType = self::contentTypes['removeWalletKey'][0])
+    {
+        return $this->removeWalletKeyAsyncWithHttpInfo($wallet_id, $key_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation removeWalletKeyAsyncWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $key_id id of the key to remove (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeWalletKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function removeWalletKeyAsyncWithHttpInfo($wallet_id, $key_id, string $contentType = self::contentTypes['removeWalletKey'][0])
+    {
+        $returnType = '';
+        $request = $this->removeWalletKeyRequest($wallet_id, $key_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'removeWalletKey'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $key_id id of the key to remove (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeWalletKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function removeWalletKeyRequest($wallet_id, $key_id, string $contentType = self::contentTypes['removeWalletKey'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling removeWalletKey'
+            );
+        }
+
+        // verify the required parameter 'key_id' is set
+        if ($key_id === null || (is_array($key_id) && count($key_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $key_id when calling removeWalletKey'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/keys/{keyId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($key_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'keyId' . '}',
+                ObjectSerializer::toPathValue($key_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -4245,6 +6090,457 @@ class WalletApi
     }
 
     /**
+     * Operation signJwtV2
+     *
+     * Sign JWT.
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2InputDto $sign_jwt_v2_input_dto SignJwtV2 (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signJwtV2'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2ResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError
+     */
+    public function signJwtV2($wallet_id, $sign_jwt_v2_input_dto, string $contentType = self::contentTypes['signJwtV2'][0])
+    {
+        list($response) = $this->signJwtV2WithHttpInfo($wallet_id, $sign_jwt_v2_input_dto, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation signJwtV2WithHttpInfo
+     *
+     * Sign JWT.
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2InputDto $sign_jwt_v2_input_dto SignJwtV2 (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signJwtV2'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2ResultDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError|\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError|\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function signJwtV2WithHttpInfo($wallet_id, $sign_jwt_v2_input_dto, string $contentType = self::contentTypes['signJwtV2'][0])
+    {
+        $request = $this->signJwtV2Request($wallet_id, $sign_jwt_v2_input_dto, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2ResultDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2ResultDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2ResultDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2ResultDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2ResultDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\OperationForbiddenError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\NotFoundError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation signJwtV2Async
+     *
+     * Sign JWT.
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2InputDto $sign_jwt_v2_input_dto SignJwtV2 (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signJwtV2'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function signJwtV2Async($wallet_id, $sign_jwt_v2_input_dto, string $contentType = self::contentTypes['signJwtV2'][0])
+    {
+        return $this->signJwtV2AsyncWithHttpInfo($wallet_id, $sign_jwt_v2_input_dto, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation signJwtV2AsyncWithHttpInfo
+     *
+     * Sign JWT.
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2InputDto $sign_jwt_v2_input_dto SignJwtV2 (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signJwtV2'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function signJwtV2AsyncWithHttpInfo($wallet_id, $sign_jwt_v2_input_dto, string $contentType = self::contentTypes['signJwtV2'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2ResultDto';
+        $request = $this->signJwtV2Request($wallet_id, $sign_jwt_v2_input_dto, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'signJwtV2'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2InputDto $sign_jwt_v2_input_dto SignJwtV2 (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['signJwtV2'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function signJwtV2Request($wallet_id, $sign_jwt_v2_input_dto, string $contentType = self::contentTypes['signJwtV2'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling signJwtV2'
+            );
+        }
+
+        // verify the required parameter 'sign_jwt_v2_input_dto' is set
+        if ($sign_jwt_v2_input_dto === null || (is_array($sign_jwt_v2_input_dto) && count($sign_jwt_v2_input_dto) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $sign_jwt_v2_input_dto when calling signJwtV2'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/jwt/sign';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($sign_jwt_v2_input_dto)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($sign_jwt_v2_input_dto));
+            } else {
+                $httpBody = $sign_jwt_v2_input_dto;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation signPresentationsLdp
      *
      * @param  string $wallet_id id of the wallet (required)
@@ -4688,6 +6984,364 @@ class WalletApi
     }
 
     /**
+     * Operation updateServiceEndpoint
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $service_id id of the service endpoint to update (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\UpdateServiceEndpointInput $update_service_endpoint_input UpdateServiceEndpoint (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto
+     */
+    public function updateServiceEndpoint($wallet_id, $service_id, $update_service_endpoint_input, string $contentType = self::contentTypes['updateServiceEndpoint'][0])
+    {
+        list($response) = $this->updateServiceEndpointWithHttpInfo($wallet_id, $service_id, $update_service_endpoint_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation updateServiceEndpointWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $service_id id of the service endpoint to update (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\UpdateServiceEndpointInput $update_service_endpoint_input UpdateServiceEndpoint (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateServiceEndpointWithHttpInfo($wallet_id, $service_id, $update_service_endpoint_input, string $contentType = self::contentTypes['updateServiceEndpoint'][0])
+    {
+        $request = $this->updateServiceEndpointRequest($wallet_id, $service_id, $update_service_endpoint_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateServiceEndpointAsync
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $service_id id of the service endpoint to update (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\UpdateServiceEndpointInput $update_service_endpoint_input UpdateServiceEndpoint (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateServiceEndpointAsync($wallet_id, $service_id, $update_service_endpoint_input, string $contentType = self::contentTypes['updateServiceEndpoint'][0])
+    {
+        return $this->updateServiceEndpointAsyncWithHttpInfo($wallet_id, $service_id, $update_service_endpoint_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateServiceEndpointAsyncWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $service_id id of the service endpoint to update (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\UpdateServiceEndpointInput $update_service_endpoint_input UpdateServiceEndpoint (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateServiceEndpointAsyncWithHttpInfo($wallet_id, $service_id, $update_service_endpoint_input, string $contentType = self::contentTypes['updateServiceEndpoint'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto';
+        $request = $this->updateServiceEndpointRequest($wallet_id, $service_id, $update_service_endpoint_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateServiceEndpoint'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $service_id id of the service endpoint to update (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\UpdateServiceEndpointInput $update_service_endpoint_input UpdateServiceEndpoint (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateServiceEndpoint'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function updateServiceEndpointRequest($wallet_id, $service_id, $update_service_endpoint_input, string $contentType = self::contentTypes['updateServiceEndpoint'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling updateServiceEndpoint'
+            );
+        }
+
+        // verify the required parameter 'service_id' is set
+        if ($service_id === null || (is_array($service_id) && count($service_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $service_id when calling updateServiceEndpoint'
+            );
+        }
+
+        // verify the required parameter 'update_service_endpoint_input' is set
+        if ($update_service_endpoint_input === null || (is_array($update_service_endpoint_input) && count($update_service_endpoint_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $update_service_endpoint_input when calling updateServiceEndpoint'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/services/{serviceId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($service_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'serviceId' . '}',
+                ObjectSerializer::toPathValue($service_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($update_service_endpoint_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_service_endpoint_input));
+            } else {
+                $httpBody = $update_service_endpoint_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PATCH',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation updateWallet
      *
      * @param  string $wallet_id id of the wallet (required)
@@ -5008,6 +7662,399 @@ class WalletApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_wallet_input));
             } else {
                 $httpBody = $update_wallet_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PATCH',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation updateWalletKey
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $key_id wallet-scoped key identifier to update (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\UpdateWalletKeyInput $update_wallet_key_input UpdateWalletKey (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWalletKey'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError
+     */
+    public function updateWalletKey($wallet_id, $key_id, $update_wallet_key_input, string $contentType = self::contentTypes['updateWalletKey'][0])
+    {
+        list($response) = $this->updateWalletKeyWithHttpInfo($wallet_id, $key_id, $update_wallet_key_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation updateWalletKeyWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $key_id wallet-scoped key identifier to update (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\UpdateWalletKeyInput $update_wallet_key_input UpdateWalletKey (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWalletKey'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\WalletsClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto|\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateWalletKeyWithHttpInfo($wallet_id, $key_id, $update_wallet_key_input, string $contentType = self::contentTypes['updateWalletKey'][0])
+    {
+        $request = $this->updateWalletKeyRequest($wallet_id, $key_id, $update_wallet_key_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\WalletsClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateWalletKeyAsync
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $key_id wallet-scoped key identifier to update (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\UpdateWalletKeyInput $update_wallet_key_input UpdateWalletKey (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWalletKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateWalletKeyAsync($wallet_id, $key_id, $update_wallet_key_input, string $contentType = self::contentTypes['updateWalletKey'][0])
+    {
+        return $this->updateWalletKeyAsyncWithHttpInfo($wallet_id, $key_id, $update_wallet_key_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateWalletKeyAsyncWithHttpInfo
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $key_id wallet-scoped key identifier to update (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\UpdateWalletKeyInput $update_wallet_key_input UpdateWalletKey (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWalletKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateWalletKeyAsyncWithHttpInfo($wallet_id, $key_id, $update_wallet_key_input, string $contentType = self::contentTypes['updateWalletKey'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto';
+        $request = $this->updateWalletKeyRequest($wallet_id, $key_id, $update_wallet_key_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateWalletKey'
+     *
+     * @param  string $wallet_id id of the wallet (required)
+     * @param  string $key_id wallet-scoped key identifier to update (required)
+     * @param  \AffinidiTdk\Clients\WalletsClient\Model\UpdateWalletKeyInput $update_wallet_key_input UpdateWalletKey (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWalletKey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function updateWalletKeyRequest($wallet_id, $key_id, $update_wallet_key_input, string $contentType = self::contentTypes['updateWalletKey'][0])
+    {
+
+        // verify the required parameter 'wallet_id' is set
+        if ($wallet_id === null || (is_array($wallet_id) && count($wallet_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $wallet_id when calling updateWalletKey'
+            );
+        }
+
+        // verify the required parameter 'key_id' is set
+        if ($key_id === null || (is_array($key_id) && count($key_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $key_id when calling updateWalletKey'
+            );
+        }
+
+        // verify the required parameter 'update_wallet_key_input' is set
+        if ($update_wallet_key_input === null || (is_array($update_wallet_key_input) && count($update_wallet_key_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $update_wallet_key_input when calling updateWalletKey'
+            );
+        }
+
+
+        $resourcePath = '/v2/wallets/{walletId}/keys/{keyId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($wallet_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'walletId' . '}',
+                ObjectSerializer::toPathValue($wallet_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($key_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'keyId' . '}',
+                ObjectSerializer::toPathValue($key_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($update_wallet_key_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_wallet_key_input));
+            } else {
+                $httpBody = $update_wallet_key_input;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
