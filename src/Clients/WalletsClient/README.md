@@ -72,45 +72,51 @@ Class | Method | HTTP request | Description
 *RevocationApi* | [**getRevocationListCredential**](docs/Api/RevocationApi.md#getrevocationlistcredential) | **GET** /v1/wallets/{walletId}/revocation-list/{listId} | Return revocation list credential.
 *RevocationApi* | [**revokeCredential**](docs/Api/RevocationApi.md#revokecredential) | **POST** /v1/wallets/{walletId}/revoke | Revoke Credential.
 *RevocationApi* | [**revokeCredentials**](docs/Api/RevocationApi.md#revokecredentials) | **POST** /v2/wallets/{walletId}/credentials/revoke | Revoke Credentials.
+*WalletApi* | [**createServiceEndpoint**](docs/Api/WalletApi.md#createserviceendpoint) | **POST** /v2/wallets/{walletId}/services | 
 *WalletApi* | [**createWallet**](docs/Api/WalletApi.md#createwallet) | **POST** /v1/wallets | 
+*WalletApi* | [**createWalletKey**](docs/Api/WalletApi.md#createwalletkey) | **POST** /v2/wallets/{walletId}/keys | 
 *WalletApi* | [**createWalletV2**](docs/Api/WalletApi.md#createwalletv2) | **POST** /v2/wallets | 
 *WalletApi* | [**deleteWallet**](docs/Api/WalletApi.md#deletewallet) | **DELETE** /v1/wallets/{walletId} | 
 *WalletApi* | [**getWallet**](docs/Api/WalletApi.md#getwallet) | **GET** /v1/wallets/{walletId} | 
+*WalletApi* | [**listServiceEndpoints**](docs/Api/WalletApi.md#listserviceendpoints) | **GET** /v2/wallets/{walletId}/services | 
+*WalletApi* | [**listWalletKeys**](docs/Api/WalletApi.md#listwalletkeys) | **GET** /v2/wallets/{walletId}/keys | 
 *WalletApi* | [**listWallets**](docs/Api/WalletApi.md#listwallets) | **GET** /v1/wallets | 
+*WalletApi* | [**removeServiceEndpoint**](docs/Api/WalletApi.md#removeserviceendpoint) | **DELETE** /v2/wallets/{walletId}/services/{serviceId} | 
+*WalletApi* | [**removeWalletKey**](docs/Api/WalletApi.md#removewalletkey) | **DELETE** /v2/wallets/{walletId}/keys/{keyId} | 
 *WalletApi* | [**signCredential**](docs/Api/WalletApi.md#signcredential) | **POST** /v1/wallets/{walletId}/sign-credential | 
 *WalletApi* | [**signCredentialsJwt**](docs/Api/WalletApi.md#signcredentialsjwt) | **POST** /v2/wallets/{walletId}/credentials/jwt/sign | 
 *WalletApi* | [**signCredentialsLdp**](docs/Api/WalletApi.md#signcredentialsldp) | **POST** /v2/wallets/{walletId}/credentials/ldp/sign | 
 *WalletApi* | [**signCredentialsSdJwt**](docs/Api/WalletApi.md#signcredentialssdjwt) | **POST** /v2/wallets/{walletId}/credentials/sd-jwt/sign | 
 *WalletApi* | [**signJwtToken**](docs/Api/WalletApi.md#signjwttoken) | **POST** /v1/wallets/{walletId}/sign-jwt | 
+*WalletApi* | [**signJwtV2**](docs/Api/WalletApi.md#signjwtv2) | **POST** /v2/wallets/{walletId}/jwt/sign | Sign JWT.
 *WalletApi* | [**signPresentationsLdp**](docs/Api/WalletApi.md#signpresentationsldp) | **POST** /v2/wallets/{walletId}/presentations/ldp/sign | 
+*WalletApi* | [**updateServiceEndpoint**](docs/Api/WalletApi.md#updateserviceendpoint) | **PATCH** /v2/wallets/{walletId}/services/{serviceId} | 
 *WalletApi* | [**updateWallet**](docs/Api/WalletApi.md#updatewallet) | **PATCH** /v1/wallets/{walletId} | 
+*WalletApi* | [**updateWalletKey**](docs/Api/WalletApi.md#updatewalletkey) | **PATCH** /v2/wallets/{walletId}/keys/{keyId} | 
 
 ## Models
 
-- [AuthcryptMessageInput](docs/Model/AuthcryptMessageInput.md)
-- [AuthcryptMessageResultDto](docs/Model/AuthcryptMessageResultDto.md)
 - [CreateWalletInput](docs/Model/CreateWalletInput.md)
+- [CreateWalletKeyInput](docs/Model/CreateWalletKeyInput.md)
 - [CreateWalletResponse](docs/Model/CreateWalletResponse.md)
 - [CreateWalletV2Input](docs/Model/CreateWalletV2Input.md)
 - [CreateWalletV2Response](docs/Model/CreateWalletV2Response.md)
 - [EntityNotFoundError](docs/Model/EntityNotFoundError.md)
-- [GetRevocationCredentialStatusOK](docs/Model/GetRevocationCredentialStatusOK.md)
 - [GetRevocationListCredentialResultDto](docs/Model/GetRevocationListCredentialResultDto.md)
-- [InvalidDidParameterError](docs/Model/InvalidDidParameterError.md)
 - [InvalidParameterError](docs/Model/InvalidParameterError.md)
-- [KeyNotFoundError](docs/Model/KeyNotFoundError.md)
+- [ListServiceEndpointsOK](docs/Model/ListServiceEndpointsOK.md)
+- [ListWalletKeysOK](docs/Model/ListWalletKeysOK.md)
 - [NotFoundError](docs/Model/NotFoundError.md)
+- [NotFoundErrorDetailsInner](docs/Model/NotFoundErrorDetailsInner.md)
 - [OperationForbiddenError](docs/Model/OperationForbiddenError.md)
 - [RevokeCredentialInput](docs/Model/RevokeCredentialInput.md)
 - [RevokeCredentialsInput](docs/Model/RevokeCredentialsInput.md)
-- [ServiceErrorResponse](docs/Model/ServiceErrorResponse.md)
-- [ServiceErrorResponseDetailsInner](docs/Model/ServiceErrorResponseDetailsInner.md)
+- [ServiceEndpointDto](docs/Model/ServiceEndpointDto.md)
+- [ServiceEndpointInput](docs/Model/ServiceEndpointInput.md)
 - [SignCredential400Response](docs/Model/SignCredential400Response.md)
 - [SignCredentialInputDto](docs/Model/SignCredentialInputDto.md)
 - [SignCredentialInputDtoUnsignedCredentialParams](docs/Model/SignCredentialInputDtoUnsignedCredentialParams.md)
 - [SignCredentialResultDto](docs/Model/SignCredentialResultDto.md)
-- [SignCredentialsDm1LdInputDto](docs/Model/SignCredentialsDm1LdInputDto.md)
-- [SignCredentialsDm1LdResultDto](docs/Model/SignCredentialsDm1LdResultDto.md)
 - [SignCredentialsDm2SdJwtInputDto](docs/Model/SignCredentialsDm2SdJwtInputDto.md)
 - [SignCredentialsDm2SdJwtResultDto](docs/Model/SignCredentialsDm2SdJwtResultDto.md)
 - [SignCredentialsJwtInputDto](docs/Model/SignCredentialsJwtInputDto.md)
@@ -119,17 +125,20 @@ Class | Method | HTTP request | Description
 - [SignCredentialsLdpResultDto](docs/Model/SignCredentialsLdpResultDto.md)
 - [SignJwtToken](docs/Model/SignJwtToken.md)
 - [SignJwtTokenOK](docs/Model/SignJwtTokenOK.md)
-- [SignMessageInput](docs/Model/SignMessageInput.md)
-- [SignMessageResultDto](docs/Model/SignMessageResultDto.md)
+- [SignJwtV2InputDto](docs/Model/SignJwtV2InputDto.md)
+- [SignJwtV2ResultDto](docs/Model/SignJwtV2ResultDto.md)
 - [SignPresentationLdpInputDto](docs/Model/SignPresentationLdpInputDto.md)
 - [SignPresentationLdpResultDto](docs/Model/SignPresentationLdpResultDto.md)
 - [SigningFailedError](docs/Model/SigningFailedError.md)
 - [TooManyRequestsError](docs/Model/TooManyRequestsError.md)
-- [UnpackMessageInput](docs/Model/UnpackMessageInput.md)
-- [UnpackMessageResultDto](docs/Model/UnpackMessageResultDto.md)
+- [UpdateServiceEndpointInput](docs/Model/UpdateServiceEndpointInput.md)
 - [UpdateWalletInput](docs/Model/UpdateWalletInput.md)
+- [UpdateWalletKeyInput](docs/Model/UpdateWalletKeyInput.md)
+- [VerificationRelationship](docs/Model/VerificationRelationship.md)
+- [WalletDidType](docs/Model/WalletDidType.md)
 - [WalletDto](docs/Model/WalletDto.md)
 - [WalletDtoKeysInner](docs/Model/WalletDtoKeysInner.md)
+- [WalletKeyDto](docs/Model/WalletKeyDto.md)
 - [WalletV2Dto](docs/Model/WalletV2Dto.md)
 - [WalletsListDto](docs/Model/WalletsListDto.md)
 
@@ -161,5 +170,6 @@ info@affinidi.com
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `1.0.0`
+    - Package version: `1.0.0`
     - Generator version: `7.13.0`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`
