@@ -1,6 +1,6 @@
 <?php
 /**
- * CorsListRootNodeChildrenOK
+ * PartialProfileNodeDto
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\VaultDataManagerClient\ObjectSerializer;
 
 /**
- * CorsListRootNodeChildrenOK Class Doc Comment
+ * PartialProfileNodeDto Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\VaultDataManagerClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\VaultDataManagerClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CorsListRootNodeChildrenOK implements ModelInterface, ArrayAccess, \JsonSerializable
+class PartialProfileNodeDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CorsListRootNodeChildrenOK implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CorsListRootNodeChildrenOK';
+    protected static $openAPIModelName = 'PartialProfileNodeDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,7 +58,12 @@ class CorsListRootNodeChildrenOK implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'cors_list_root_node_children_ok' => 'string'
+        'id' => 'string',
+        'name' => 'string',
+        'description' => 'string',
+        'account_index' => 'float',
+        'profile_metadata' => 'string',
+        'account_metadata' => 'string'
     ];
 
     /**
@@ -69,7 +74,12 @@ class CorsListRootNodeChildrenOK implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'cors_list_root_node_children_ok' => null
+        'id' => null,
+        'name' => null,
+        'description' => null,
+        'account_index' => null,
+        'profile_metadata' => null,
+        'account_metadata' => null
     ];
 
     /**
@@ -78,7 +88,12 @@ class CorsListRootNodeChildrenOK implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'cors_list_root_node_children_ok' => false
+        'id' => false,
+        'name' => false,
+        'description' => false,
+        'account_index' => false,
+        'profile_metadata' => false,
+        'account_metadata' => false
     ];
 
     /**
@@ -167,7 +182,12 @@ class CorsListRootNodeChildrenOK implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'cors_list_root_node_children_ok' => 'corsListRootNodeChildrenOk'
+        'id' => 'id',
+        'name' => 'name',
+        'description' => 'description',
+        'account_index' => 'accountIndex',
+        'profile_metadata' => 'profileMetadata',
+        'account_metadata' => 'accountMetadata'
     ];
 
     /**
@@ -176,7 +196,12 @@ class CorsListRootNodeChildrenOK implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'cors_list_root_node_children_ok' => 'setCorsListRootNodeChildrenOk'
+        'id' => 'setId',
+        'name' => 'setName',
+        'description' => 'setDescription',
+        'account_index' => 'setAccountIndex',
+        'profile_metadata' => 'setProfileMetadata',
+        'account_metadata' => 'setAccountMetadata'
     ];
 
     /**
@@ -185,7 +210,12 @@ class CorsListRootNodeChildrenOK implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'cors_list_root_node_children_ok' => 'getCorsListRootNodeChildrenOk'
+        'id' => 'getId',
+        'name' => 'getName',
+        'description' => 'getDescription',
+        'account_index' => 'getAccountIndex',
+        'profile_metadata' => 'getProfileMetadata',
+        'account_metadata' => 'getAccountMetadata'
     ];
 
     /**
@@ -245,7 +275,12 @@ class CorsListRootNodeChildrenOK implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('cors_list_root_node_children_ok', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('account_index', $data ?? [], null);
+        $this->setIfExists('profile_metadata', $data ?? [], null);
+        $this->setIfExists('account_metadata', $data ?? [], null);
     }
 
     /**
@@ -275,6 +310,15 @@ class CorsListRootNodeChildrenOK implements ModelInterface, ArrayAccess, \JsonSe
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['account_index'] === null) {
+            $invalidProperties[] = "'account_index' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -291,28 +335,163 @@ class CorsListRootNodeChildrenOK implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets cors_list_root_node_children_ok
+     * Gets id
      *
-     * @return string|null
+     * @return string
      */
-    public function getCorsListRootNodeChildrenOk()
+    public function getId()
     {
-        return $this->container['cors_list_root_node_children_ok'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets cors_list_root_node_children_ok
+     * Sets id
      *
-     * @param string|null $cors_list_root_node_children_ok cors_list_root_node_children_ok
+     * @param string $id A unique identifier of the profile node
      *
      * @return self
      */
-    public function setCorsListRootNodeChildrenOk($cors_list_root_node_children_ok)
+    public function setId($id)
     {
-        if (is_null($cors_list_root_node_children_ok)) {
-            throw new \InvalidArgumentException('non-nullable cors_list_root_node_children_ok cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-        $this->container['cors_list_root_node_children_ok'] = $cors_list_root_node_children_ok;
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string $name display name of the profile node
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description Description of the profile node
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_index
+     *
+     * @return float
+     */
+    public function getAccountIndex()
+    {
+        return $this->container['account_index'];
+    }
+
+    /**
+     * Sets account_index
+     *
+     * @param float $account_index number that is used for profile DID derivation
+     *
+     * @return self
+     */
+    public function setAccountIndex($account_index)
+    {
+        if (is_null($account_index)) {
+            throw new \InvalidArgumentException('non-nullable account_index cannot be null');
+        }
+        $this->container['account_index'] = $account_index;
+
+        return $this;
+    }
+
+    /**
+     * Gets profile_metadata
+     *
+     * @return string|null
+     */
+    public function getProfileMetadata()
+    {
+        return $this->container['profile_metadata'];
+    }
+
+    /**
+     * Sets profile_metadata
+     *
+     * @param string|null $profile_metadata A JSON string format containing metadata of the profile node
+     *
+     * @return self
+     */
+    public function setProfileMetadata($profile_metadata)
+    {
+        if (is_null($profile_metadata)) {
+            throw new \InvalidArgumentException('non-nullable profile_metadata cannot be null');
+        }
+        $this->container['profile_metadata'] = $profile_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_metadata
+     *
+     * @return string|null
+     */
+    public function getAccountMetadata()
+    {
+        return $this->container['account_metadata'];
+    }
+
+    /**
+     * Sets account_metadata
+     *
+     * @param string|null $account_metadata A JSON string format containing metadata of the account
+     *
+     * @return self
+     */
+    public function setAccountMetadata($account_metadata)
+    {
+        if (is_null($account_metadata)) {
+            throw new \InvalidArgumentException('non-nullable account_metadata cannot be null');
+        }
+        $this->container['account_metadata'] = $account_metadata;
 
         return $this;
     }

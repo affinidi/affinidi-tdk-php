@@ -1,6 +1,6 @@
 <?php
 /**
- * AwsCredentialExchangeOperationOK
+ * ListProfilesOK
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\VaultDataManagerClient\ObjectSerializer;
 
 /**
- * AwsCredentialExchangeOperationOK Class Doc Comment
+ * ListProfilesOK Class Doc Comment
  *
  * @category Class
  * @package  AffinidiTdk\Clients\VaultDataManagerClient
@@ -41,7 +41,7 @@ use \AffinidiTdk\Clients\VaultDataManagerClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AwsCredentialExchangeOperationOK implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListProfilesOK implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class AwsCredentialExchangeOperationOK implements ModelInterface, ArrayAccess, \
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AwsCredentialExchangeOperationOK';
+    protected static $openAPIModelName = 'ListProfilesOK';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +58,7 @@ class AwsCredentialExchangeOperationOK implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
-        'token' => 'string',
-        'identity_id' => 'string'
+        'nodes' => '\AffinidiTdk\Clients\VaultDataManagerClient\Model\PartialProfileNodeDto[]'
     ];
 
     /**
@@ -70,8 +69,7 @@ class AwsCredentialExchangeOperationOK implements ModelInterface, ArrayAccess, \
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'token' => null,
-        'identity_id' => null
+        'nodes' => null
     ];
 
     /**
@@ -80,8 +78,7 @@ class AwsCredentialExchangeOperationOK implements ModelInterface, ArrayAccess, \
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'token' => false,
-        'identity_id' => false
+        'nodes' => false
     ];
 
     /**
@@ -170,8 +167,7 @@ class AwsCredentialExchangeOperationOK implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'token' => 'token',
-        'identity_id' => 'identityId'
+        'nodes' => 'nodes'
     ];
 
     /**
@@ -180,8 +176,7 @@ class AwsCredentialExchangeOperationOK implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'token' => 'setToken',
-        'identity_id' => 'setIdentityId'
+        'nodes' => 'setNodes'
     ];
 
     /**
@@ -190,8 +185,7 @@ class AwsCredentialExchangeOperationOK implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'token' => 'getToken',
-        'identity_id' => 'getIdentityId'
+        'nodes' => 'getNodes'
     ];
 
     /**
@@ -251,8 +245,7 @@ class AwsCredentialExchangeOperationOK implements ModelInterface, ArrayAccess, \
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('token', $data ?? [], null);
-        $this->setIfExists('identity_id', $data ?? [], null);
+        $this->setIfExists('nodes', $data ?? [], null);
     }
 
     /**
@@ -282,12 +275,6 @@ class AwsCredentialExchangeOperationOK implements ModelInterface, ArrayAccess, \
     {
         $invalidProperties = [];
 
-        if ($this->container['token'] === null) {
-            $invalidProperties[] = "'token' can't be null";
-        }
-        if ($this->container['identity_id'] === null) {
-            $invalidProperties[] = "'identity_id' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -304,55 +291,28 @@ class AwsCredentialExchangeOperationOK implements ModelInterface, ArrayAccess, \
 
 
     /**
-     * Gets token
+     * Gets nodes
      *
-     * @return string
+     * @return \AffinidiTdk\Clients\VaultDataManagerClient\Model\PartialProfileNodeDto[]|null
      */
-    public function getToken()
+    public function getNodes()
     {
-        return $this->container['token'];
+        return $this->container['nodes'];
     }
 
     /**
-     * Sets token
+     * Sets nodes
      *
-     * @param string $token token
+     * @param \AffinidiTdk\Clients\VaultDataManagerClient\Model\PartialProfileNodeDto[]|null $nodes nodes
      *
      * @return self
      */
-    public function setToken($token)
+    public function setNodes($nodes)
     {
-        if (is_null($token)) {
-            throw new \InvalidArgumentException('non-nullable token cannot be null');
+        if (is_null($nodes)) {
+            throw new \InvalidArgumentException('non-nullable nodes cannot be null');
         }
-        $this->container['token'] = $token;
-
-        return $this;
-    }
-
-    /**
-     * Gets identity_id
-     *
-     * @return string
-     */
-    public function getIdentityId()
-    {
-        return $this->container['identity_id'];
-    }
-
-    /**
-     * Sets identity_id
-     *
-     * @param string $identity_id identity_id
-     *
-     * @return self
-     */
-    public function setIdentityId($identity_id)
-    {
-        if (is_null($identity_id)) {
-            throw new \InvalidArgumentException('non-nullable identity_id cannot be null');
-        }
-        $this->container['identity_id'] = $identity_id;
+        $this->container['nodes'] = $nodes;
 
         return $this;
     }
