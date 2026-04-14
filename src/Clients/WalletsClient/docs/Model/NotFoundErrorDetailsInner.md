@@ -1,4 +1,4 @@
-# # ServiceErrorResponseDetailsInner
+# # NotFoundErrorDetailsInner
 
 ## Properties
 

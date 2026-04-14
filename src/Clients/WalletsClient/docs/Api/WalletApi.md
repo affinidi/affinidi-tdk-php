@@ -4,19 +4,92 @@ All URIs are relative to https://apse1.api.affinidi.io/cwe, except if the operat
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**createServiceEndpoint()**](WalletApi.md#createServiceEndpoint) | **POST** /v2/wallets/{walletId}/services |  |
 | [**createWallet()**](WalletApi.md#createWallet) | **POST** /v1/wallets |  |
+| [**createWalletKey()**](WalletApi.md#createWalletKey) | **POST** /v2/wallets/{walletId}/keys |  |
 | [**createWalletV2()**](WalletApi.md#createWalletV2) | **POST** /v2/wallets |  |
 | [**deleteWallet()**](WalletApi.md#deleteWallet) | **DELETE** /v1/wallets/{walletId} |  |
 | [**getWallet()**](WalletApi.md#getWallet) | **GET** /v1/wallets/{walletId} |  |
+| [**listServiceEndpoints()**](WalletApi.md#listServiceEndpoints) | **GET** /v2/wallets/{walletId}/services |  |
+| [**listWalletKeys()**](WalletApi.md#listWalletKeys) | **GET** /v2/wallets/{walletId}/keys |  |
 | [**listWallets()**](WalletApi.md#listWallets) | **GET** /v1/wallets |  |
+| [**removeServiceEndpoint()**](WalletApi.md#removeServiceEndpoint) | **DELETE** /v2/wallets/{walletId}/services/{serviceId} |  |
+| [**removeWalletKey()**](WalletApi.md#removeWalletKey) | **DELETE** /v2/wallets/{walletId}/keys/{keyId} |  |
 | [**signCredential()**](WalletApi.md#signCredential) | **POST** /v1/wallets/{walletId}/sign-credential |  |
 | [**signCredentialsJwt()**](WalletApi.md#signCredentialsJwt) | **POST** /v2/wallets/{walletId}/credentials/jwt/sign |  |
 | [**signCredentialsLdp()**](WalletApi.md#signCredentialsLdp) | **POST** /v2/wallets/{walletId}/credentials/ldp/sign |  |
 | [**signCredentialsSdJwt()**](WalletApi.md#signCredentialsSdJwt) | **POST** /v2/wallets/{walletId}/credentials/sd-jwt/sign |  |
 | [**signJwtToken()**](WalletApi.md#signJwtToken) | **POST** /v1/wallets/{walletId}/sign-jwt |  |
+| [**signJwtV2()**](WalletApi.md#signJwtV2) | **POST** /v2/wallets/{walletId}/jwt/sign | Sign JWT. |
 | [**signPresentationsLdp()**](WalletApi.md#signPresentationsLdp) | **POST** /v2/wallets/{walletId}/presentations/ldp/sign |  |
+| [**updateServiceEndpoint()**](WalletApi.md#updateServiceEndpoint) | **PATCH** /v2/wallets/{walletId}/services/{serviceId} |  |
 | [**updateWallet()**](WalletApi.md#updateWallet) | **PATCH** /v1/wallets/{walletId} |  |
+| [**updateWalletKey()**](WalletApi.md#updateWalletKey) | **PATCH** /v2/wallets/{walletId}/keys/{keyId} |  |
 
+
+## `createServiceEndpoint()`
+
+```php
+createServiceEndpoint($wallet_id, $service_endpoint_input): \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto
+```
+
+
+
+Add service endpoint to wallet, this applies to did:web only
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ProjectTokenAuth
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\WalletApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet_id = 'wallet_id_example'; // string | id of the wallet
+$service_endpoint_input = new \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointInput(); // \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointInput | AddServiceEndpoint
+
+try {
+    $result = $apiInstance->createServiceEndpoint($wallet_id, $service_endpoint_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WalletApi->createServiceEndpoint: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **wallet_id** | **string**| id of the wallet | |
+| **service_endpoint_input** | [**\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointInput**](../Model/ServiceEndpointInput.md)| AddServiceEndpoint | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto**](../Model/ServiceEndpointDto.md)
+
+### Authorization
+
+[ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `createWallet()`
 
@@ -66,6 +139,70 @@ try {
 ### Return type
 
 [**\AffinidiTdk\Clients\WalletsClient\Model\CreateWalletResponse**](../Model/CreateWalletResponse.md)
+
+### Authorization
+
+[ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createWalletKey()`
+
+```php
+createWalletKey($wallet_id, $create_wallet_key_input): \AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto
+```
+
+
+
+Add a new key to the wallet, this applies to did:web only
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ProjectTokenAuth
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\WalletApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet_id = 'wallet_id_example'; // string | id of the wallet
+$create_wallet_key_input = new \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletKeyInput(); // \AffinidiTdk\Clients\WalletsClient\Model\CreateWalletKeyInput | CreateWalletKey
+
+try {
+    $result = $apiInstance->createWalletKey($wallet_id, $create_wallet_key_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WalletApi->createWalletKey: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **wallet_id** | **string**| id of the wallet | |
+| **create_wallet_key_input** | [**\AffinidiTdk\Clients\WalletsClient\Model\CreateWalletKeyInput**](../Model/CreateWalletKeyInput.md)| CreateWalletKey | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto**](../Model/WalletKeyDto.md)
 
 ### Authorization
 
@@ -265,6 +402,130 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listServiceEndpoints()`
+
+```php
+listServiceEndpoints($wallet_id): \AffinidiTdk\Clients\WalletsClient\Model\ListServiceEndpointsOK
+```
+
+
+
+List service endpoints in wallet, this applies to did:web only
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ProjectTokenAuth
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\WalletApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet_id = 'wallet_id_example'; // string | id of the wallet
+
+try {
+    $result = $apiInstance->listServiceEndpoints($wallet_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WalletApi->listServiceEndpoints: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **wallet_id** | **string**| id of the wallet | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\WalletsClient\Model\ListServiceEndpointsOK**](../Model/ListServiceEndpointsOK.md)
+
+### Authorization
+
+[ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listWalletKeys()`
+
+```php
+listWalletKeys($wallet_id): \AffinidiTdk\Clients\WalletsClient\Model\ListWalletKeysOK
+```
+
+
+
+List all keys in the wallet, this applies to did:web only
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ProjectTokenAuth
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\WalletApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet_id = 'wallet_id_example'; // string | id of the wallet
+
+try {
+    $result = $apiInstance->listWalletKeys($wallet_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WalletApi->listWalletKeys: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **wallet_id** | **string**| id of the wallet | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\WalletsClient\Model\ListWalletKeysOK**](../Model/ListWalletKeysOK.md)
+
+### Authorization
+
+[ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listWallets()`
 
 ```php
@@ -294,7 +555,7 @@ $apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\WalletApi(
     new GuzzleHttp\Client(),
     $config
 );
-$did_type = 'did_type_example'; // string
+$did_type = new \AffinidiTdk\Clients\WalletsClient\Model\\AffinidiTdk\Clients\WalletsClient\Model\WalletDidType(); // \AffinidiTdk\Clients\WalletsClient\Model\WalletDidType
 
 try {
     $result = $apiInstance->listWallets($did_type);
@@ -308,11 +569,137 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **did_type** | **string**|  | [optional] |
+| **did_type** | [**\AffinidiTdk\Clients\WalletsClient\Model\WalletDidType**](../Model/.md)|  | [optional] |
 
 ### Return type
 
 [**\AffinidiTdk\Clients\WalletsClient\Model\WalletsListDto**](../Model/WalletsListDto.md)
+
+### Authorization
+
+[ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `removeServiceEndpoint()`
+
+```php
+removeServiceEndpoint($wallet_id, $service_id)
+```
+
+
+
+Remove service endpoint from wallet, this applies to did:web only
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ProjectTokenAuth
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\WalletApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet_id = 'wallet_id_example'; // string | id of the wallet
+$service_id = 'service_id_example'; // string | id of the service endpoint to remove
+
+try {
+    $apiInstance->removeServiceEndpoint($wallet_id, $service_id);
+} catch (Exception $e) {
+    echo 'Exception when calling WalletApi->removeServiceEndpoint: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **wallet_id** | **string**| id of the wallet | |
+| **service_id** | **string**| id of the service endpoint to remove | |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `removeWalletKey()`
+
+```php
+removeWalletKey($wallet_id, $key_id)
+```
+
+
+
+Remove a key from the wallet, this applies to did:web only
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ProjectTokenAuth
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\WalletApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet_id = 'wallet_id_example'; // string | id of the wallet
+$key_id = 'key_id_example'; // string | id of the key to remove
+
+try {
+    $apiInstance->removeWalletKey($wallet_id, $key_id);
+} catch (Exception $e) {
+    echo 'Exception when calling WalletApi->removeWalletKey: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **wallet_id** | **string**| id of the wallet | |
+| **key_id** | **string**| id of the key to remove | |
+
+### Return type
+
+void (empty response body)
 
 ### Authorization
 
@@ -647,6 +1034,70 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `signJwtV2()`
+
+```php
+signJwtV2($wallet_id, $sign_jwt_v2_input_dto): \AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2ResultDto
+```
+
+Sign JWT.
+
+Sign a JSON Web Token (JWT).
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ProjectTokenAuth
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\WalletApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet_id = 'wallet_id_example'; // string | id of the wallet
+$sign_jwt_v2_input_dto = new \AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2InputDto(); // \AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2InputDto | SignJwtV2
+
+try {
+    $result = $apiInstance->signJwtV2($wallet_id, $sign_jwt_v2_input_dto);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WalletApi->signJwtV2: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **wallet_id** | **string**| id of the wallet | |
+| **sign_jwt_v2_input_dto** | [**\AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2InputDto**](../Model/SignJwtV2InputDto.md)| SignJwtV2 | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\WalletsClient\Model\SignJwtV2ResultDto**](../Model/SignJwtV2ResultDto.md)
+
+### Authorization
+
+[ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `signPresentationsLdp()`
 
 ```php
@@ -711,6 +1162,72 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `updateServiceEndpoint()`
+
+```php
+updateServiceEndpoint($wallet_id, $service_id, $update_service_endpoint_input): \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto
+```
+
+
+
+Update service endpoint in wallet, this applies to did:web only
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ProjectTokenAuth
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\WalletApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet_id = 'wallet_id_example'; // string | id of the wallet
+$service_id = 'service_id_example'; // string | id of the service endpoint to update
+$update_service_endpoint_input = new \AffinidiTdk\Clients\WalletsClient\Model\UpdateServiceEndpointInput(); // \AffinidiTdk\Clients\WalletsClient\Model\UpdateServiceEndpointInput | UpdateServiceEndpoint
+
+try {
+    $result = $apiInstance->updateServiceEndpoint($wallet_id, $service_id, $update_service_endpoint_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WalletApi->updateServiceEndpoint: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **wallet_id** | **string**| id of the wallet | |
+| **service_id** | **string**| id of the service endpoint to update | |
+| **update_service_endpoint_input** | [**\AffinidiTdk\Clients\WalletsClient\Model\UpdateServiceEndpointInput**](../Model/UpdateServiceEndpointInput.md)| UpdateServiceEndpoint | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto**](../Model/ServiceEndpointDto.md)
+
+### Authorization
+
+[ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `updateWallet()`
 
 ```php
@@ -761,6 +1278,72 @@ try {
 ### Return type
 
 [**\AffinidiTdk\Clients\WalletsClient\Model\WalletDto**](../Model/WalletDto.md)
+
+### Authorization
+
+[ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateWalletKey()`
+
+```php
+updateWalletKey($wallet_id, $key_id, $update_wallet_key_input): \AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto
+```
+
+
+
+Update a wallet key's verification relationships, this applies to did:web only
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ProjectTokenAuth
+$config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\WalletsClient\Api\WalletApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet_id = 'wallet_id_example'; // string | id of the wallet
+$key_id = 'key_id_example'; // string | wallet-scoped key identifier to update
+$update_wallet_key_input = new \AffinidiTdk\Clients\WalletsClient\Model\UpdateWalletKeyInput(); // \AffinidiTdk\Clients\WalletsClient\Model\UpdateWalletKeyInput | UpdateWalletKey
+
+try {
+    $result = $apiInstance->updateWalletKey($wallet_id, $key_id, $update_wallet_key_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling WalletApi->updateWalletKey: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **wallet_id** | **string**| id of the wallet | |
+| **key_id** | **string**| wallet-scoped key identifier to update | |
+| **update_wallet_key_input** | [**\AffinidiTdk\Clients\WalletsClient\Model\UpdateWalletKeyInput**](../Model/UpdateWalletKeyInput.md)| UpdateWalletKey | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\WalletsClient\Model\WalletKeyDto**](../Model/WalletKeyDto.md)
 
 ### Authorization
 

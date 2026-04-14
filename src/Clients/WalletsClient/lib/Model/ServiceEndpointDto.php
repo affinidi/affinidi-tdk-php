@@ -1,6 +1,6 @@
 <?php
 /**
- * SignCredentialsDm1LdResultDto
+ * ServiceEndpointDto
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * SignCredentialsDm1LdResultDto Class Doc Comment
+ * ServiceEndpointDto Class Doc Comment
  *
  * @category Class
- * @description DTO contains signed credential
+ * @description Service endpoint information
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class ServiceEndpointDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SignCredentialsDm1LdResultDto';
+    protected static $openAPIModelName = 'ServiceEndpointDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +59,16 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credential' => 'object'
+        'id' => 'string',
+        'name' => 'string',
+        'description' => 'string',
+        'url' => 'string',
+        'wallet_ari' => 'string',
+        'project_id' => 'string',
+        'created_at' => 'string',
+        'modified_at' => 'string',
+        'created_by' => 'string',
+        'modified_by' => 'string'
     ];
 
     /**
@@ -70,7 +79,16 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credential' => null
+        'id' => null,
+        'name' => null,
+        'description' => null,
+        'url' => null,
+        'wallet_ari' => null,
+        'project_id' => null,
+        'created_at' => null,
+        'modified_at' => null,
+        'created_by' => null,
+        'modified_by' => null
     ];
 
     /**
@@ -79,7 +97,16 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credential' => false
+        'id' => false,
+        'name' => false,
+        'description' => false,
+        'url' => false,
+        'wallet_ari' => false,
+        'project_id' => false,
+        'created_at' => false,
+        'modified_at' => false,
+        'created_by' => false,
+        'modified_by' => false
     ];
 
     /**
@@ -168,7 +195,16 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'credential' => 'credential'
+        'id' => 'id',
+        'name' => 'name',
+        'description' => 'description',
+        'url' => 'url',
+        'wallet_ari' => 'walletAri',
+        'project_id' => 'projectId',
+        'created_at' => 'createdAt',
+        'modified_at' => 'modifiedAt',
+        'created_by' => 'createdBy',
+        'modified_by' => 'modifiedBy'
     ];
 
     /**
@@ -177,7 +213,16 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'credential' => 'setCredential'
+        'id' => 'setId',
+        'name' => 'setName',
+        'description' => 'setDescription',
+        'url' => 'setUrl',
+        'wallet_ari' => 'setWalletAri',
+        'project_id' => 'setProjectId',
+        'created_at' => 'setCreatedAt',
+        'modified_at' => 'setModifiedAt',
+        'created_by' => 'setCreatedBy',
+        'modified_by' => 'setModifiedBy'
     ];
 
     /**
@@ -186,7 +231,16 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'credential' => 'getCredential'
+        'id' => 'getId',
+        'name' => 'getName',
+        'description' => 'getDescription',
+        'url' => 'getUrl',
+        'wallet_ari' => 'getWalletAri',
+        'project_id' => 'getProjectId',
+        'created_at' => 'getCreatedAt',
+        'modified_at' => 'getModifiedAt',
+        'created_by' => 'getCreatedBy',
+        'modified_by' => 'getModifiedBy'
     ];
 
     /**
@@ -246,7 +300,16 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credential', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('wallet_ari', $data ?? [], null);
+        $this->setIfExists('project_id', $data ?? [], null);
+        $this->setIfExists('created_at', $data ?? [], null);
+        $this->setIfExists('modified_at', $data ?? [], null);
+        $this->setIfExists('created_by', $data ?? [], null);
+        $this->setIfExists('modified_by', $data ?? [], null);
     }
 
     /**
@@ -276,9 +339,6 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
     {
         $invalidProperties = [];
 
-        if ($this->container['credential'] === null) {
-            $invalidProperties[] = "'credential' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -295,28 +355,271 @@ class SignCredentialsDm1LdResultDto implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets credential
+     * Gets id
      *
-     * @return object
+     * @return string|null
      */
-    public function getCredential()
+    public function getId()
     {
-        return $this->container['credential'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets credential
+     * Sets id
      *
-     * @param object $credential Signed credential can be in Dm1Ld format
+     * @param string|null $id service endpoint ID
      *
      * @return self
      */
-    public function setCredential($credential)
+    public function setId($id)
     {
-        if (is_null($credential)) {
-            throw new \InvalidArgumentException('non-nullable credential cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-        $this->container['credential'] = $credential;
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name name of the service endpoint
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description description of the service endpoint
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets url
+     *
+     * @return string|null
+     */
+    public function getUrl()
+    {
+        return $this->container['url'];
+    }
+
+    /**
+     * Sets url
+     *
+     * @param string|null $url service endpoint URL
+     *
+     * @return self
+     */
+    public function setUrl($url)
+    {
+        if (is_null($url)) {
+            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        }
+        $this->container['url'] = $url;
+
+        return $this;
+    }
+
+    /**
+     * Gets wallet_ari
+     *
+     * @return string|null
+     */
+    public function getWalletAri()
+    {
+        return $this->container['wallet_ari'];
+    }
+
+    /**
+     * Sets wallet_ari
+     *
+     * @param string|null $wallet_ari wallet ARI this endpoint belongs to
+     *
+     * @return self
+     */
+    public function setWalletAri($wallet_ari)
+    {
+        if (is_null($wallet_ari)) {
+            throw new \InvalidArgumentException('non-nullable wallet_ari cannot be null');
+        }
+        $this->container['wallet_ari'] = $wallet_ari;
+
+        return $this;
+    }
+
+    /**
+     * Gets project_id
+     *
+     * @return string|null
+     */
+    public function getProjectId()
+    {
+        return $this->container['project_id'];
+    }
+
+    /**
+     * Sets project_id
+     *
+     * @param string|null $project_id project ID
+     *
+     * @return self
+     */
+    public function setProjectId($project_id)
+    {
+        if (is_null($project_id)) {
+            throw new \InvalidArgumentException('non-nullable project_id cannot be null');
+        }
+        $this->container['project_id'] = $project_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_at
+     *
+     * @return string|null
+     */
+    public function getCreatedAt()
+    {
+        return $this->container['created_at'];
+    }
+
+    /**
+     * Sets created_at
+     *
+     * @param string|null $created_at when this endpoint was created
+     *
+     * @return self
+     */
+    public function setCreatedAt($created_at)
+    {
+        if (is_null($created_at)) {
+            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
+        }
+        $this->container['created_at'] = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets modified_at
+     *
+     * @return string|null
+     */
+    public function getModifiedAt()
+    {
+        return $this->container['modified_at'];
+    }
+
+    /**
+     * Sets modified_at
+     *
+     * @param string|null $modified_at when this endpoint was last modified
+     *
+     * @return self
+     */
+    public function setModifiedAt($modified_at)
+    {
+        if (is_null($modified_at)) {
+            throw new \InvalidArgumentException('non-nullable modified_at cannot be null');
+        }
+        $this->container['modified_at'] = $modified_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_by
+     *
+     * @return string|null
+     */
+    public function getCreatedBy()
+    {
+        return $this->container['created_by'];
+    }
+
+    /**
+     * Sets created_by
+     *
+     * @param string|null $created_by identifier of the user who created the entity
+     *
+     * @return self
+     */
+    public function setCreatedBy($created_by)
+    {
+        if (is_null($created_by)) {
+            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
+        }
+        $this->container['created_by'] = $created_by;
+
+        return $this;
+    }
+
+    /**
+     * Gets modified_by
+     *
+     * @return string|null
+     */
+    public function getModifiedBy()
+    {
+        return $this->container['modified_by'];
+    }
+
+    /**
+     * Sets modified_by
+     *
+     * @param string|null $modified_by identifier of the user who last updated the entity
+     *
+     * @return self
+     */
+    public function setModifiedBy($modified_by)
+    {
+        if (is_null($modified_by)) {
+            throw new \InvalidArgumentException('non-nullable modified_by cannot be null');
+        }
+        $this->container['modified_by'] = $modified_by;
 
         return $this;
     }

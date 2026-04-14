@@ -1,6 +1,6 @@
 <?php
 /**
- * SignCredentialsDm1LdInputDto
+ * ListServiceEndpointsOK
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * SignCredentialsDm1LdInputDto Class Doc Comment
+ * ListServiceEndpointsOK Class Doc Comment
  *
  * @category Class
- * @description DTO contains params to sign credential
+ * @description Response containing service endpoints
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SignCredentialsDm1LdInputDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListServiceEndpointsOK implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class SignCredentialsDm1LdInputDto implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SignCredentialsDm1LdInputDto';
+    protected static $openAPIModelName = 'ListServiceEndpointsOK';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +59,7 @@ class SignCredentialsDm1LdInputDto implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'unsigned_credential' => 'object',
-        'revocable' => 'bool',
-        'signature_scheme' => 'string'
+        'services' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[]'
     ];
 
     /**
@@ -72,9 +70,7 @@ class SignCredentialsDm1LdInputDto implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'unsigned_credential' => null,
-        'revocable' => null,
-        'signature_scheme' => null
+        'services' => null
     ];
 
     /**
@@ -83,9 +79,7 @@ class SignCredentialsDm1LdInputDto implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'unsigned_credential' => false,
-        'revocable' => false,
-        'signature_scheme' => false
+        'services' => false
     ];
 
     /**
@@ -174,9 +168,7 @@ class SignCredentialsDm1LdInputDto implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
-        'unsigned_credential' => 'unsignedCredential',
-        'revocable' => 'revocable',
-        'signature_scheme' => 'signatureScheme'
+        'services' => 'services'
     ];
 
     /**
@@ -185,9 +177,7 @@ class SignCredentialsDm1LdInputDto implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
-        'unsigned_credential' => 'setUnsignedCredential',
-        'revocable' => 'setRevocable',
-        'signature_scheme' => 'setSignatureScheme'
+        'services' => 'setServices'
     ];
 
     /**
@@ -196,9 +186,7 @@ class SignCredentialsDm1LdInputDto implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
-        'unsigned_credential' => 'getUnsignedCredential',
-        'revocable' => 'getRevocable',
-        'signature_scheme' => 'getSignatureScheme'
+        'services' => 'getServices'
     ];
 
     /**
@@ -242,23 +230,6 @@ class SignCredentialsDm1LdInputDto implements ModelInterface, ArrayAccess, \Json
         return self::$openAPIModelName;
     }
 
-    public const SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256 = 'ecdsa_secp256k1_sha256';
-    public const SIGNATURE_SCHEME_ECDSA_P256_SHA256 = 'ecdsa_p256_sha256';
-    public const SIGNATURE_SCHEME_ED25519 = 'ed25519';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getSignatureSchemeAllowableValues()
-    {
-        return [
-            self::SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256,
-            self::SIGNATURE_SCHEME_ECDSA_P256_SHA256,
-            self::SIGNATURE_SCHEME_ED25519,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -275,9 +246,7 @@ class SignCredentialsDm1LdInputDto implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('unsigned_credential', $data ?? [], null);
-        $this->setIfExists('revocable', $data ?? [], null);
-        $this->setIfExists('signature_scheme', $data ?? [], null);
+        $this->setIfExists('services', $data ?? [], null);
     }
 
     /**
@@ -307,18 +276,9 @@ class SignCredentialsDm1LdInputDto implements ModelInterface, ArrayAccess, \Json
     {
         $invalidProperties = [];
 
-        if ($this->container['unsigned_credential'] === null) {
-            $invalidProperties[] = "'unsigned_credential' can't be null";
+        if ($this->container['services'] === null) {
+            $invalidProperties[] = "'services' can't be null";
         }
-        $allowedValues = $this->getSignatureSchemeAllowableValues();
-        if (!is_null($this->container['signature_scheme']) && !in_array($this->container['signature_scheme'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'signature_scheme', must be one of '%s'",
-                $this->container['signature_scheme'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -335,92 +295,28 @@ class SignCredentialsDm1LdInputDto implements ModelInterface, ArrayAccess, \Json
 
 
     /**
-     * Gets unsigned_credential
+     * Gets services
      *
-     * @return object
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[]
      */
-    public function getUnsignedCredential()
+    public function getServices()
     {
-        return $this->container['unsigned_credential'];
+        return $this->container['services'];
     }
 
     /**
-     * Sets unsigned_credential
+     * Sets services
      *
-     * @param object $unsigned_credential Unsigned Credential in Dm1 format
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[] $services list of service endpoints
      *
      * @return self
      */
-    public function setUnsignedCredential($unsigned_credential)
+    public function setServices($services)
     {
-        if (is_null($unsigned_credential)) {
-            throw new \InvalidArgumentException('non-nullable unsigned_credential cannot be null');
+        if (is_null($services)) {
+            throw new \InvalidArgumentException('non-nullable services cannot be null');
         }
-        $this->container['unsigned_credential'] = $unsigned_credential;
-
-        return $this;
-    }
-
-    /**
-     * Gets revocable
-     *
-     * @return bool|null
-     */
-    public function getRevocable()
-    {
-        return $this->container['revocable'];
-    }
-
-    /**
-     * Sets revocable
-     *
-     * @param bool|null $revocable revocable
-     *
-     * @return self
-     */
-    public function setRevocable($revocable)
-    {
-        if (is_null($revocable)) {
-            throw new \InvalidArgumentException('non-nullable revocable cannot be null');
-        }
-        $this->container['revocable'] = $revocable;
-
-        return $this;
-    }
-
-    /**
-     * Gets signature_scheme
-     *
-     * @return string|null
-     */
-    public function getSignatureScheme()
-    {
-        return $this->container['signature_scheme'];
-    }
-
-    /**
-     * Sets signature_scheme
-     *
-     * @param string|null $signature_scheme signature_scheme
-     *
-     * @return self
-     */
-    public function setSignatureScheme($signature_scheme)
-    {
-        if (is_null($signature_scheme)) {
-            throw new \InvalidArgumentException('non-nullable signature_scheme cannot be null');
-        }
-        $allowedValues = $this->getSignatureSchemeAllowableValues();
-        if (!in_array($signature_scheme, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'signature_scheme', must be one of '%s'",
-                    $signature_scheme,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['signature_scheme'] = $signature_scheme;
+        $this->container['services'] = $services;
 
         return $this;
     }

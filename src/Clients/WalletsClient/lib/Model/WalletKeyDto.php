@@ -1,6 +1,6 @@
 <?php
 /**
- * UnpackMessageResultDto
+ * WalletKeyDto
  *
  * PHP version 8.1
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * UnpackMessageResultDto Class Doc Comment
+ * WalletKeyDto Class Doc Comment
  *
  * @category Class
- * @description DTO contains decrypted message in JSON fromat
+ * @description Detailed information about a wallet key. Multiple keys are only supported for did:web wallets.
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class WalletKeyDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UnpackMessageResultDto';
+    protected static $openAPIModelName = 'WalletKeyDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +59,10 @@ class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'message' => 'object'
+        'key_id' => 'string',
+        'key_type' => 'string',
+        'key_ari' => 'string',
+        'relationships' => '\AffinidiTdk\Clients\WalletsClient\Model\VerificationRelationship[]'
     ];
 
     /**
@@ -70,7 +73,10 @@ class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'message' => null
+        'key_id' => null,
+        'key_type' => null,
+        'key_ari' => null,
+        'relationships' => null
     ];
 
     /**
@@ -79,7 +85,10 @@ class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'message' => false
+        'key_id' => false,
+        'key_type' => false,
+        'key_ari' => false,
+        'relationships' => false
     ];
 
     /**
@@ -168,7 +177,10 @@ class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'message' => 'message'
+        'key_id' => 'keyId',
+        'key_type' => 'keyType',
+        'key_ari' => 'keyAri',
+        'relationships' => 'relationships'
     ];
 
     /**
@@ -177,7 +189,10 @@ class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'message' => 'setMessage'
+        'key_id' => 'setKeyId',
+        'key_type' => 'setKeyType',
+        'key_ari' => 'setKeyAri',
+        'relationships' => 'setRelationships'
     ];
 
     /**
@@ -186,7 +201,10 @@ class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'message' => 'getMessage'
+        'key_id' => 'getKeyId',
+        'key_type' => 'getKeyType',
+        'key_ari' => 'getKeyAri',
+        'relationships' => 'getRelationships'
     ];
 
     /**
@@ -230,6 +248,23 @@ class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
+    public const KEY_TYPE_SECP256K1 = 'secp256k1';
+    public const KEY_TYPE_ED25519 = 'ed25519';
+    public const KEY_TYPE_P256 = 'p256';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getKeyTypeAllowableValues()
+    {
+        return [
+            self::KEY_TYPE_SECP256K1,
+            self::KEY_TYPE_ED25519,
+            self::KEY_TYPE_P256,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -246,7 +281,10 @@ class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('key_id', $data ?? [], null);
+        $this->setIfExists('key_type', $data ?? [], null);
+        $this->setIfExists('key_ari', $data ?? [], null);
+        $this->setIfExists('relationships', $data ?? [], null);
     }
 
     /**
@@ -276,9 +314,15 @@ class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
+        $allowedValues = $this->getKeyTypeAllowableValues();
+        if (!is_null($this->container['key_type']) && !in_array($this->container['key_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'key_type', must be one of '%s'",
+                $this->container['key_type'],
+                implode("', '", $allowedValues)
+            );
         }
+
         return $invalidProperties;
     }
 
@@ -295,28 +339,119 @@ class UnpackMessageResultDto implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets message
+     * Gets key_id
      *
-     * @return object
+     * @return string|null
      */
-    public function getMessage()
+    public function getKeyId()
     {
-        return $this->container['message'];
+        return $this->container['key_id'];
     }
 
     /**
-     * Sets message
+     * Sets key_id
      *
-     * @param object $message decrypted message in JSON format
+     * @param string|null $key_id wallet-scoped key identifier (e.g., \"key-1\")
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setKeyId($key_id)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($key_id)) {
+            throw new \InvalidArgumentException('non-nullable key_id cannot be null');
         }
-        $this->container['message'] = $message;
+        $this->container['key_id'] = $key_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets key_type
+     *
+     * @return string|null
+     */
+    public function getKeyType()
+    {
+        return $this->container['key_type'];
+    }
+
+    /**
+     * Sets key_type
+     *
+     * @param string|null $key_type cryptographic algorithm used by this key
+     *
+     * @return self
+     */
+    public function setKeyType($key_type)
+    {
+        if (is_null($key_type)) {
+            throw new \InvalidArgumentException('non-nullable key_type cannot be null');
+        }
+        $allowedValues = $this->getKeyTypeAllowableValues();
+        if (!in_array($key_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'key_type', must be one of '%s'",
+                    $key_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['key_type'] = $key_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets key_ari
+     *
+     * @return string|null
+     */
+    public function getKeyAri()
+    {
+        return $this->container['key_ari'];
+    }
+
+    /**
+     * Sets key_ari
+     *
+     * @param string|null $key_ari ARI identifier for the key (e.g., \"ari:key:...\")
+     *
+     * @return self
+     */
+    public function setKeyAri($key_ari)
+    {
+        if (is_null($key_ari)) {
+            throw new \InvalidArgumentException('non-nullable key_ari cannot be null');
+        }
+        $this->container['key_ari'] = $key_ari;
+
+        return $this;
+    }
+
+    /**
+     * Gets relationships
+     *
+     * @return \AffinidiTdk\Clients\WalletsClient\Model\VerificationRelationship[]|null
+     */
+    public function getRelationships()
+    {
+        return $this->container['relationships'];
+    }
+
+    /**
+     * Sets relationships
+     *
+     * @param \AffinidiTdk\Clients\WalletsClient\Model\VerificationRelationship[]|null $relationships verification relationships this key supports
+     *
+     * @return self
+     */
+    public function setRelationships($relationships)
+    {
+        if (is_null($relationships)) {
+            throw new \InvalidArgumentException('non-nullable relationships cannot be null');
+        }
+        $this->container['relationships'] = $relationships;
 
         return $this;
     }

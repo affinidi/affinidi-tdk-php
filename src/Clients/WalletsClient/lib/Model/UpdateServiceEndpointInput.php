@@ -1,6 +1,6 @@
 <?php
 /**
- * KeyNotFoundError
+ * UpdateServiceEndpointInput
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \AffinidiTdk\Clients\WalletsClient\ObjectSerializer;
 
 /**
- * KeyNotFoundError Class Doc Comment
+ * UpdateServiceEndpointInput Class Doc Comment
  *
  * @category Class
+ * @description Input for updating a service endpoint
  * @package  AffinidiTdk\Clients\WalletsClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateServiceEndpointInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'KeyNotFoundError';
+    protected static $openAPIModelName = 'UpdateServiceEndpointInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,10 +60,8 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'name' => 'string',
-        'message' => 'string',
-        'http_status_code' => 'float',
-        'trace_id' => 'string',
-        'details' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]'
+        'description' => 'string',
+        'url' => 'string'
     ];
 
     /**
@@ -74,10 +73,8 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'name' => null,
-        'message' => null,
-        'http_status_code' => null,
-        'trace_id' => null,
-        'details' => null
+        'description' => null,
+        'url' => null
     ];
 
     /**
@@ -87,10 +84,8 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'message' => false,
-        'http_status_code' => false,
-        'trace_id' => false,
-        'details' => false
+        'description' => false,
+        'url' => false
     ];
 
     /**
@@ -180,10 +175,8 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'name' => 'name',
-        'message' => 'message',
-        'http_status_code' => 'httpStatusCode',
-        'trace_id' => 'traceId',
-        'details' => 'details'
+        'description' => 'description',
+        'url' => 'url'
     ];
 
     /**
@@ -193,10 +186,8 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'name' => 'setName',
-        'message' => 'setMessage',
-        'http_status_code' => 'setHttpStatusCode',
-        'trace_id' => 'setTraceId',
-        'details' => 'setDetails'
+        'description' => 'setDescription',
+        'url' => 'setUrl'
     ];
 
     /**
@@ -206,10 +197,8 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'name' => 'getName',
-        'message' => 'getMessage',
-        'http_status_code' => 'getHttpStatusCode',
-        'trace_id' => 'getTraceId',
-        'details' => 'getDetails'
+        'description' => 'getDescription',
+        'url' => 'getUrl'
     ];
 
     /**
@@ -253,45 +242,6 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const NAME_KEY_NOT_FOUND_ERROR = 'KeyNotFoundError';
-    public const MESSAGE_KEY_NOT_FOUND = 'Key not found';
-    public const HTTP_STATUS_CODE_NUMBER_500 = 500;
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getNameAllowableValues()
-    {
-        return [
-            self::NAME_KEY_NOT_FOUND_ERROR,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getMessageAllowableValues()
-    {
-        return [
-            self::MESSAGE_KEY_NOT_FOUND,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getHttpStatusCodeAllowableValues()
-    {
-        return [
-            self::HTTP_STATUS_CODE_NUMBER_500,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -309,10 +259,8 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('http_status_code', $data ?? [], null);
-        $this->setIfExists('trace_id', $data ?? [], null);
-        $this->setIfExists('details', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('url', $data ?? [], null);
     }
 
     /**
@@ -342,45 +290,22 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        $allowedValues = $this->getNameAllowableValues();
-        if (!is_null($this->container['name']) && !in_array($this->container['name'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'name', must be one of '%s'",
-                $this->container['name'],
-                implode("', '", $allowedValues)
-            );
+        if (!is_null($this->container['name']) && !preg_match("/^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,99}$/", $this->container['name'])) {
+            $invalidProperties[] = "invalid value for 'name', must be conform to the pattern /^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,99}$/.";
         }
 
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
-        }
-        $allowedValues = $this->getMessageAllowableValues();
-        if (!is_null($this->container['message']) && !in_array($this->container['message'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'message', must be one of '%s'",
-                $this->container['message'],
-                implode("', '", $allowedValues)
-            );
+        if (!is_null($this->container['description']) && !preg_match("/^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,499}$/", $this->container['description'])) {
+            $invalidProperties[] = "invalid value for 'description', must be conform to the pattern /^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,499}$/.";
         }
 
-        if ($this->container['http_status_code'] === null) {
-            $invalidProperties[] = "'http_status_code' can't be null";
-        }
-        $allowedValues = $this->getHttpStatusCodeAllowableValues();
-        if (!is_null($this->container['http_status_code']) && !in_array($this->container['http_status_code'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'http_status_code', must be one of '%s'",
-                $this->container['http_status_code'],
-                implode("', '", $allowedValues)
-            );
+        if (!is_null($this->container['url']) && (mb_strlen($this->container['url']) > 2048)) {
+            $invalidProperties[] = "invalid value for 'url', the character length must be smaller than or equal to 2048.";
         }
 
-        if ($this->container['trace_id'] === null) {
-            $invalidProperties[] = "'trace_id' can't be null";
+        if (!is_null($this->container['url']) && !preg_match("/^https?:\/\/[a-zA-Z0-9\\-._~:\/?#[\\]@!$&'()*+,;=%]+$/", $this->container['url'])) {
+            $invalidProperties[] = "invalid value for 'url', must be conform to the pattern /^https?:\/\/[a-zA-Z0-9\\-._~:\/?#[\\]@!$&'()*+,;=%]+$/.";
         }
+
         return $invalidProperties;
     }
 
@@ -399,7 +324,7 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets name
      *
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
@@ -409,7 +334,7 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string $name name
+     * @param string|null $name Alphanumeric string with common punctuation (max 100 characters)
      *
      * @return self
      */
@@ -418,145 +343,78 @@ class KeyNotFoundError implements ModelInterface, ArrayAccess, \JsonSerializable
         if (is_null($name)) {
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $allowedValues = $this->getNameAllowableValues();
-        if (!in_array($name, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'name', must be one of '%s'",
-                    $name,
-                    implode("', '", $allowedValues)
-                )
-            );
+
+        if ((!preg_match("/^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,99}$/", ObjectSerializer::toString($name)))) {
+            throw new \InvalidArgumentException("invalid value for \$name when calling UpdateServiceEndpointInput., must conform to the pattern /^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,99}$/.");
         }
+
         $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets description
      *
-     * @return string
+     * @return string|null
      */
-    public function getMessage()
+    public function getDescription()
     {
-        return $this->container['message'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets message
+     * Sets description
      *
-     * @param string $message message
+     * @param string|null $description Alphanumeric string with common punctuation (max 500 characters)
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setDescription($description)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
-        $allowedValues = $this->getMessageAllowableValues();
-        if (!in_array($message, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'message', must be one of '%s'",
-                    $message,
-                    implode("', '", $allowedValues)
-                )
-            );
+
+        if ((!preg_match("/^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,499}$/", ObjectSerializer::toString($description)))) {
+            throw new \InvalidArgumentException("invalid value for \$description when calling UpdateServiceEndpointInput., must conform to the pattern /^[a-zA-Z0-9][a-zA-Z0-9\\s\\-_.,:#'()]{0,499}$/.");
         }
-        $this->container['message'] = $message;
+
+        $this->container['description'] = $description;
 
         return $this;
     }
 
     /**
-     * Gets http_status_code
+     * Gets url
      *
-     * @return float
+     * @return string|null
      */
-    public function getHttpStatusCode()
+    public function getUrl()
     {
-        return $this->container['http_status_code'];
+        return $this->container['url'];
     }
 
     /**
-     * Sets http_status_code
+     * Sets url
      *
-     * @param float $http_status_code http_status_code
+     * @param string|null $url HTTP or HTTPS URL
      *
      * @return self
      */
-    public function setHttpStatusCode($http_status_code)
+    public function setUrl($url)
     {
-        if (is_null($http_status_code)) {
-            throw new \InvalidArgumentException('non-nullable http_status_code cannot be null');
+        if (is_null($url)) {
+            throw new \InvalidArgumentException('non-nullable url cannot be null');
         }
-        $allowedValues = $this->getHttpStatusCodeAllowableValues();
-        if (!in_array($http_status_code, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'http_status_code', must be one of '%s'",
-                    $http_status_code,
-                    implode("', '", $allowedValues)
-                )
-            );
+        if ((mb_strlen($url) > 2048)) {
+            throw new \InvalidArgumentException('invalid length for $url when calling UpdateServiceEndpointInput., must be smaller than or equal to 2048.');
         }
-        $this->container['http_status_code'] = $http_status_code;
-
-        return $this;
-    }
-
-    /**
-     * Gets trace_id
-     *
-     * @return string
-     */
-    public function getTraceId()
-    {
-        return $this->container['trace_id'];
-    }
-
-    /**
-     * Sets trace_id
-     *
-     * @param string $trace_id trace_id
-     *
-     * @return self
-     */
-    public function setTraceId($trace_id)
-    {
-        if (is_null($trace_id)) {
-            throw new \InvalidArgumentException('non-nullable trace_id cannot be null');
+        if ((!preg_match("/^https?:\/\/[a-zA-Z0-9\\-._~:\/?#[\\]@!$&'()*+,;=%]+$/", ObjectSerializer::toString($url)))) {
+            throw new \InvalidArgumentException("invalid value for \$url when calling UpdateServiceEndpointInput., must conform to the pattern /^https?:\/\/[a-zA-Z0-9\\-._~:\/?#[\\]@!$&'()*+,;=%]+$/.");
         }
-        $this->container['trace_id'] = $trace_id;
 
-        return $this;
-    }
-
-    /**
-     * Gets details
-     *
-     * @return \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null
-     */
-    public function getDetails()
-    {
-        return $this->container['details'];
-    }
-
-    /**
-     * Sets details
-     *
-     * @param \AffinidiTdk\Clients\WalletsClient\Model\ServiceErrorResponseDetailsInner[]|null $details details
-     *
-     * @return self
-     */
-    public function setDetails($details)
-    {
-        if (is_null($details)) {
-            throw new \InvalidArgumentException('non-nullable details cannot be null');
-        }
-        $this->container['details'] = $details;
+        $this->container['url'] = $url;
 
         return $this;
     }
