@@ -11,6 +11,8 @@ docs/Model/AccountDto.md
 docs/Model/ConsumerMetadataDto.md
 docs/Model/CreateAccountInput.md
 docs/Model/CreateAccountOK.md
+docs/Model/CreateAccountWithProfileInput.md
+docs/Model/CreateAccountWithProfileOK.md
 docs/Model/CreateChildNodeInput.md
 docs/Model/CreateNodeInput.md
 docs/Model/CreateNodeOK.md
@@ -63,6 +65,8 @@ lib/Model/AccountDto.php
 lib/Model/ConsumerMetadataDto.php
 lib/Model/CreateAccountInput.php
 lib/Model/CreateAccountOK.php
+lib/Model/CreateAccountWithProfileInput.php
+lib/Model/CreateAccountWithProfileOK.php
 lib/Model/CreateChildNodeInput.php
 lib/Model/CreateNodeInput.php
 lib/Model/CreateNodeOK.php
