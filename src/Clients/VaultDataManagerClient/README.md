@@ -67,6 +67,7 @@ All URIs are relative to *https://api.vault.affinidi.com/vfs*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AccountsApi* | [**createAccount**](docs/Api/AccountsApi.md#createaccount) | **POST** /v1/accounts | 
+*AccountsApi* | [**createAccountWithProfile**](docs/Api/AccountsApi.md#createaccountwithprofile) | **POST** /v1/accounts/profiles | 
 *AccountsApi* | [**deleteAccount**](docs/Api/AccountsApi.md#deleteaccount) | **DELETE** /v1/accounts/{accountIndex} | 
 *AccountsApi* | [**listAccounts**](docs/Api/AccountsApi.md#listaccounts) | **GET** /v1/accounts | 
 *AccountsApi* | [**listProfiles**](docs/Api/AccountsApi.md#listprofiles) | **GET** /v1/accounts/profiles | 
@@ -96,6 +97,8 @@ Class | Method | HTTP request | Description
 - [ConsumerMetadataDto](docs/Model/ConsumerMetadataDto.md)
 - [CreateAccountInput](docs/Model/CreateAccountInput.md)
 - [CreateAccountOK](docs/Model/CreateAccountOK.md)
+- [CreateAccountWithProfileInput](docs/Model/CreateAccountWithProfileInput.md)
+- [CreateAccountWithProfileOK](docs/Model/CreateAccountWithProfileOK.md)
 - [CreateChildNodeInput](docs/Model/CreateChildNodeInput.md)
 - [CreateNodeInput](docs/Model/CreateNodeInput.md)
 - [CreateNodeOK](docs/Model/CreateNodeOK.md)
