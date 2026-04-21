@@ -78,6 +78,9 @@ class AccountsApi
         'createAccount' => [
             'application/json',
         ],
+        'createAccountWithProfile' => [
+            'application/json',
+        ],
         'deleteAccount' => [
             'application/json',
         ],
@@ -85,6 +88,9 @@ class AccountsApi
             'application/json',
         ],
         'listProfiles' => [
+            'application/json',
+        ],
+        'patchAccount' => [
             'application/json',
         ],
         'updateAccount' => [
@@ -439,6 +445,359 @@ class AccountsApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_account_input));
             } else {
                 $httpBody = $create_account_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation createAccountWithProfile
+     *
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileInput $create_account_with_profile_input CreateAccountWithProfile (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAccountWithProfile'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\VaultDataManagerClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileOK|\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError
+     */
+    public function createAccountWithProfile($create_account_with_profile_input, string $contentType = self::contentTypes['createAccountWithProfile'][0])
+    {
+        list($response) = $this->createAccountWithProfileWithHttpInfo($create_account_with_profile_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation createAccountWithProfileWithHttpInfo
+     *
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileInput $create_account_with_profile_input CreateAccountWithProfile (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAccountWithProfile'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\VaultDataManagerClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileOK|\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createAccountWithProfileWithHttpInfo($create_account_with_profile_input, string $contentType = self::contentTypes['createAccountWithProfile'][0])
+    {
+        $request = $this->createAccountWithProfileRequest($create_account_with_profile_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileOK' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileOK' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileOK', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileOK';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileOK',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createAccountWithProfileAsync
+     *
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileInput $create_account_with_profile_input CreateAccountWithProfile (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAccountWithProfile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createAccountWithProfileAsync($create_account_with_profile_input, string $contentType = self::contentTypes['createAccountWithProfile'][0])
+    {
+        return $this->createAccountWithProfileAsyncWithHttpInfo($create_account_with_profile_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createAccountWithProfileAsyncWithHttpInfo
+     *
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileInput $create_account_with_profile_input CreateAccountWithProfile (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAccountWithProfile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createAccountWithProfileAsyncWithHttpInfo($create_account_with_profile_input, string $contentType = self::contentTypes['createAccountWithProfile'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileOK';
+        $request = $this->createAccountWithProfileRequest($create_account_with_profile_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createAccountWithProfile'
+     *
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileInput $create_account_with_profile_input CreateAccountWithProfile (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAccountWithProfile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createAccountWithProfileRequest($create_account_with_profile_input, string $contentType = self::contentTypes['createAccountWithProfile'][0])
+    {
+
+        // verify the required parameter 'create_account_with_profile_input' is set
+        if ($create_account_with_profile_input === null || (is_array($create_account_with_profile_input) && count($create_account_with_profile_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $create_account_with_profile_input when calling createAccountWithProfile'
+            );
+        }
+
+
+        $resourcePath = '/v1/accounts/profiles';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($create_account_with_profile_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_account_with_profile_input));
+            } else {
+                $httpBody = $create_account_with_profile_input;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1546,6 +1905,379 @@ class AccountsApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation patchAccount
+     *
+     * @param  int $account_index account_index (required)
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\PatchAccountInput $patch_account_input PatchAccount (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchAccount'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\VaultDataManagerClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\VaultDataManagerClient\Model\UpdateAccountDto|\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError
+     */
+    public function patchAccount($account_index, $patch_account_input, string $contentType = self::contentTypes['patchAccount'][0])
+    {
+        list($response) = $this->patchAccountWithHttpInfo($account_index, $patch_account_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation patchAccountWithHttpInfo
+     *
+     * @param  int $account_index (required)
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\PatchAccountInput $patch_account_input PatchAccount (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchAccount'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\VaultDataManagerClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\VaultDataManagerClient\Model\UpdateAccountDto|\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function patchAccountWithHttpInfo($account_index, $patch_account_input, string $contentType = self::contentTypes['patchAccount'][0])
+    {
+        $request = $this->patchAccountRequest($account_index, $patch_account_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\VaultDataManagerClient\Model\UpdateAccountDto' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\VaultDataManagerClient\Model\UpdateAccountDto' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\VaultDataManagerClient\Model\UpdateAccountDto', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\VaultDataManagerClient\Model\UpdateAccountDto';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\VaultDataManagerClient\Model\UpdateAccountDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\VaultDataManagerClient\Model\InvalidParameterError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation patchAccountAsync
+     *
+     * @param  int $account_index (required)
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\PatchAccountInput $patch_account_input PatchAccount (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function patchAccountAsync($account_index, $patch_account_input, string $contentType = self::contentTypes['patchAccount'][0])
+    {
+        return $this->patchAccountAsyncWithHttpInfo($account_index, $patch_account_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation patchAccountAsyncWithHttpInfo
+     *
+     * @param  int $account_index (required)
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\PatchAccountInput $patch_account_input PatchAccount (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function patchAccountAsyncWithHttpInfo($account_index, $patch_account_input, string $contentType = self::contentTypes['patchAccount'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\VaultDataManagerClient\Model\UpdateAccountDto';
+        $request = $this->patchAccountRequest($account_index, $patch_account_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'patchAccount'
+     *
+     * @param  int $account_index (required)
+     * @param  \AffinidiTdk\Clients\VaultDataManagerClient\Model\PatchAccountInput $patch_account_input PatchAccount (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function patchAccountRequest($account_index, $patch_account_input, string $contentType = self::contentTypes['patchAccount'][0])
+    {
+
+        // verify the required parameter 'account_index' is set
+        if ($account_index === null || (is_array($account_index) && count($account_index) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_index when calling patchAccount'
+            );
+        }
+
+        // verify the required parameter 'patch_account_input' is set
+        if ($patch_account_input === null || (is_array($patch_account_input) && count($patch_account_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $patch_account_input when calling patchAccount'
+            );
+        }
+
+
+        $resourcePath = '/v1/accounts/{accountIndex}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($account_index !== null) {
+            $resourcePath = str_replace(
+                '{' . 'accountIndex' . '}',
+                ObjectSerializer::toPathValue($account_index),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($patch_account_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($patch_account_input));
+            } else {
+                $httpBody = $patch_account_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PATCH',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

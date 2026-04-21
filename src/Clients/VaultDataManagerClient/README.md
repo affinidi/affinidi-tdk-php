@@ -67,9 +67,11 @@ All URIs are relative to *https://api.vault.affinidi.com/vfs*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AccountsApi* | [**createAccount**](docs/Api/AccountsApi.md#createaccount) | **POST** /v1/accounts | 
+*AccountsApi* | [**createAccountWithProfile**](docs/Api/AccountsApi.md#createaccountwithprofile) | **POST** /v1/accounts/profiles | 
 *AccountsApi* | [**deleteAccount**](docs/Api/AccountsApi.md#deleteaccount) | **DELETE** /v1/accounts/{accountIndex} | 
 *AccountsApi* | [**listAccounts**](docs/Api/AccountsApi.md#listaccounts) | **GET** /v1/accounts | 
 *AccountsApi* | [**listProfiles**](docs/Api/AccountsApi.md#listprofiles) | **GET** /v1/accounts/profiles | 
+*AccountsApi* | [**patchAccount**](docs/Api/AccountsApi.md#patchaccount) | **PATCH** /v1/accounts/{accountIndex} | 
 *AccountsApi* | [**updateAccount**](docs/Api/AccountsApi.md#updateaccount) | **PUT** /v1/accounts/{accountIndex} | 
 *ConfigurationApi* | [**getConfiguration**](docs/Api/ConfigurationApi.md#getconfiguration) | **GET** /v1/config | 
 *FilesApi* | [**getScannedFileInfo**](docs/Api/FilesApi.md#getscannedfileinfo) | **GET** /v1/scanned-files/{scannedFileJobId} | 
@@ -96,6 +98,8 @@ Class | Method | HTTP request | Description
 - [ConsumerMetadataDto](docs/Model/ConsumerMetadataDto.md)
 - [CreateAccountInput](docs/Model/CreateAccountInput.md)
 - [CreateAccountOK](docs/Model/CreateAccountOK.md)
+- [CreateAccountWithProfileInput](docs/Model/CreateAccountWithProfileInput.md)
+- [CreateAccountWithProfileOK](docs/Model/CreateAccountWithProfileOK.md)
 - [CreateChildNodeInput](docs/Model/CreateChildNodeInput.md)
 - [CreateNodeInput](docs/Model/CreateNodeInput.md)
 - [CreateNodeOK](docs/Model/CreateNodeOK.md)
@@ -122,6 +126,7 @@ Class | Method | HTTP request | Description
 - [NodeStatus](docs/Model/NodeStatus.md)
 - [NodeType](docs/Model/NodeType.md)
 - [PartialProfileNodeDto](docs/Model/PartialProfileNodeDto.md)
+- [PatchAccountInput](docs/Model/PatchAccountInput.md)
 - [QueryProfileDataOK](docs/Model/QueryProfileDataOK.md)
 - [RestoreNodeFromTrashbin](docs/Model/RestoreNodeFromTrashbin.md)
 - [StartFileScanInput](docs/Model/StartFileScanInput.md)
