@@ -5,9 +5,11 @@ All URIs are relative to https://api.vault.affinidi.com/vfs, except if the opera
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**createAccount()**](AccountsApi.md#createAccount) | **POST** /v1/accounts |  |
+| [**createAccountWithProfile()**](AccountsApi.md#createAccountWithProfile) | **POST** /v1/accounts/profiles |  |
 | [**deleteAccount()**](AccountsApi.md#deleteAccount) | **DELETE** /v1/accounts/{accountIndex} |  |
 | [**listAccounts()**](AccountsApi.md#listAccounts) | **GET** /v1/accounts |  |
 | [**listProfiles()**](AccountsApi.md#listProfiles) | **GET** /v1/accounts/profiles |  |
+| [**patchAccount()**](AccountsApi.md#patchAccount) | **PATCH** /v1/accounts/{accountIndex} |  |
 | [**updateAccount()**](AccountsApi.md#updateAccount) | **PUT** /v1/accounts/{accountIndex} |  |
 
 
@@ -59,6 +61,68 @@ try {
 ### Return type
 
 [**\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountOK**](../Model/CreateAccountOK.md)
+
+### Authorization
+
+[ConsumerTokenAuth](../../README.md#ConsumerTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createAccountWithProfile()`
+
+```php
+createAccountWithProfile($create_account_with_profile_input): \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileOK
+```
+
+
+
+creates account and corresponding profile at the same time
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ConsumerTokenAuth
+$config = AffinidiTdk\Clients\VaultDataManagerClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\VaultDataManagerClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\VaultDataManagerClient\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$create_account_with_profile_input = new \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileInput(); // \AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileInput | CreateAccountWithProfile
+
+try {
+    $result = $apiInstance->createAccountWithProfile($create_account_with_profile_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->createAccountWithProfile: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **create_account_with_profile_input** | [**\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileInput**](../Model/CreateAccountWithProfileInput.md)| CreateAccountWithProfile | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\VaultDataManagerClient\Model\CreateAccountWithProfileOK**](../Model/CreateAccountWithProfileOK.md)
 
 ### Authorization
 
@@ -252,6 +316,70 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `patchAccount()`
+
+```php
+patchAccount($account_index, $patch_account_input): \AffinidiTdk\Clients\VaultDataManagerClient\Model\UpdateAccountDto
+```
+
+
+
+Patch account.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: ConsumerTokenAuth
+$config = AffinidiTdk\Clients\VaultDataManagerClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\VaultDataManagerClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\VaultDataManagerClient\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_index = 56; // int
+$patch_account_input = new \AffinidiTdk\Clients\VaultDataManagerClient\Model\PatchAccountInput(); // \AffinidiTdk\Clients\VaultDataManagerClient\Model\PatchAccountInput | PatchAccount
+
+try {
+    $result = $apiInstance->patchAccount($account_index, $patch_account_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->patchAccount: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_index** | **int**|  | |
+| **patch_account_input** | [**\AffinidiTdk\Clients\VaultDataManagerClient\Model\PatchAccountInput**](../Model/PatchAccountInput.md)| PatchAccount | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\VaultDataManagerClient\Model\UpdateAccountDto**](../Model/UpdateAccountDto.md)
+
+### Authorization
+
+[ConsumerTokenAuth](../../README.md#ConsumerTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
