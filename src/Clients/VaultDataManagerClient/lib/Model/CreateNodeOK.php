@@ -59,6 +59,8 @@ class CreateNodeOK implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'node_id' => 'string',
+        'created_at' => 'string',
+        'modified_at' => 'string',
         'url' => 'string',
         'link' => 'string',
         'fields' => 'array<string,mixed>'
@@ -73,6 +75,8 @@ class CreateNodeOK implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'node_id' => null,
+        'created_at' => null,
+        'modified_at' => null,
         'url' => null,
         'link' => null,
         'fields' => null
@@ -85,6 +89,8 @@ class CreateNodeOK implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'node_id' => false,
+        'created_at' => false,
+        'modified_at' => false,
         'url' => false,
         'link' => false,
         'fields' => false
@@ -177,6 +183,8 @@ class CreateNodeOK implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'node_id' => 'nodeId',
+        'created_at' => 'createdAt',
+        'modified_at' => 'modifiedAt',
         'url' => 'url',
         'link' => 'link',
         'fields' => 'fields'
@@ -189,6 +197,8 @@ class CreateNodeOK implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'node_id' => 'setNodeId',
+        'created_at' => 'setCreatedAt',
+        'modified_at' => 'setModifiedAt',
         'url' => 'setUrl',
         'link' => 'setLink',
         'fields' => 'setFields'
@@ -201,6 +211,8 @@ class CreateNodeOK implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'node_id' => 'getNodeId',
+        'created_at' => 'getCreatedAt',
+        'modified_at' => 'getModifiedAt',
         'url' => 'getUrl',
         'link' => 'getLink',
         'fields' => 'getFields'
@@ -264,6 +276,8 @@ class CreateNodeOK implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('node_id', $data ?? [], null);
+        $this->setIfExists('created_at', $data ?? [], null);
+        $this->setIfExists('modified_at', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('link', $data ?? [], null);
         $this->setIfExists('fields', $data ?? [], null);
@@ -298,6 +312,12 @@ class CreateNodeOK implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if ($this->container['node_id'] === null) {
             $invalidProperties[] = "'node_id' can't be null";
+        }
+        if ($this->container['created_at'] === null) {
+            $invalidProperties[] = "'created_at' can't be null";
+        }
+        if ($this->container['modified_at'] === null) {
+            $invalidProperties[] = "'modified_at' can't be null";
         }
         return $invalidProperties;
     }
@@ -337,6 +357,60 @@ class CreateNodeOK implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable node_id cannot be null');
         }
         $this->container['node_id'] = $node_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_at
+     *
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return $this->container['created_at'];
+    }
+
+    /**
+     * Sets created_at
+     *
+     * @param string $created_at creation date/time
+     *
+     * @return self
+     */
+    public function setCreatedAt($created_at)
+    {
+        if (is_null($created_at)) {
+            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
+        }
+        $this->container['created_at'] = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets modified_at
+     *
+     * @return string
+     */
+    public function getModifiedAt()
+    {
+        return $this->container['modified_at'];
+    }
+
+    /**
+     * Sets modified_at
+     *
+     * @param string $modified_at modification date/time
+     *
+     * @return self
+     */
+    public function setModifiedAt($modified_at)
+    {
+        if (is_null($modified_at)) {
+            throw new \InvalidArgumentException('non-nullable modified_at cannot be null');
+        }
+        $this->container['modified_at'] = $modified_at;
 
         return $this;
     }
