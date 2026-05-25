@@ -59,7 +59,7 @@ class AwsExchangeCredentialsOK implements ModelInterface, ArrayAccess, \JsonSeri
       */
     protected static $openAPITypes = [
         'connection_client_id' => 'string',
-        'credentials' => '\AffinidiTdk\Clients\IotaClient\Model\AwsExchangeCredentialsProjectTokenOKCredentials'
+        'credentials' => '\AffinidiTdk\Clients\IotaClient\Model\AwsExchangeCredentialsOKCredentials'
     ];
 
     /**
@@ -333,7 +333,7 @@ class AwsExchangeCredentialsOK implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets credentials
      *
-     * @return \AffinidiTdk\Clients\IotaClient\Model\AwsExchangeCredentialsProjectTokenOKCredentials
+     * @return \AffinidiTdk\Clients\IotaClient\Model\AwsExchangeCredentialsOKCredentials
      */
     public function getCredentials()
     {
@@ -343,7 +343,7 @@ class AwsExchangeCredentialsOK implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets credentials
      *
-     * @param \AffinidiTdk\Clients\IotaClient\Model\AwsExchangeCredentialsProjectTokenOKCredentials $credentials credentials
+     * @param \AffinidiTdk\Clients\IotaClient\Model\AwsExchangeCredentialsOKCredentials $credentials credentials
      *
      * @return self
      */
