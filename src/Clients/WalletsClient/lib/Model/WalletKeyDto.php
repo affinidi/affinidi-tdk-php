@@ -60,7 +60,7 @@ class WalletKeyDto implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'key_id' => 'string',
-        'key_type' => 'string',
+        'algorithm' => 'string',
         'key_ari' => 'string',
         'relationships' => '\AffinidiTdk\Clients\WalletsClient\Model\VerificationRelationship[]'
     ];
@@ -74,7 +74,7 @@ class WalletKeyDto implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'key_id' => null,
-        'key_type' => null,
+        'algorithm' => null,
         'key_ari' => null,
         'relationships' => null
     ];
@@ -86,7 +86,7 @@ class WalletKeyDto implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'key_id' => false,
-        'key_type' => false,
+        'algorithm' => false,
         'key_ari' => false,
         'relationships' => false
     ];
@@ -178,6 +178,7 @@ class WalletKeyDto implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'key_id' => 'keyId',
+        'algorithm' => 'algorithm',
         'key_type' => 'keyType',
         'key_ari' => 'keyAri',
         'relationships' => 'relationships'
@@ -190,7 +191,7 @@ class WalletKeyDto implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'key_id' => 'setKeyId',
-        'key_type' => 'setKeyType',
+        'algorithm' => 'setAlgorithm',
         'key_ari' => 'setKeyAri',
         'relationships' => 'setRelationships'
     ];
@@ -202,7 +203,7 @@ class WalletKeyDto implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'key_id' => 'getKeyId',
-        'key_type' => 'getKeyType',
+        'algorithm' => 'getAlgorithm',
         'key_ari' => 'getKeyAri',
         'relationships' => 'getRelationships'
     ];
@@ -248,9 +249,26 @@ class WalletKeyDto implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const ALGORITHM_SECP256K1 = 'secp256k1';
+    public const ALGORITHM_ED25519 = 'ed25519';
+    public const ALGORITHM_P256 = 'p256';
     public const KEY_TYPE_SECP256K1 = 'secp256k1';
     public const KEY_TYPE_ED25519 = 'ed25519';
     public const KEY_TYPE_P256 = 'p256';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAlgorithmAllowableValues()
+    {
+        return [
+            self::ALGORITHM_SECP256K1,
+            self::ALGORITHM_ED25519,
+            self::ALGORITHM_P256,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -282,6 +300,7 @@ class WalletKeyDto implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('key_id', $data ?? [], null);
+        $this->setIfExists('algorithm', $data ?? [], null);
         $this->setIfExists('key_type', $data ?? [], null);
         $this->setIfExists('key_ari', $data ?? [], null);
         $this->setIfExists('relationships', $data ?? [], null);
@@ -313,6 +332,15 @@ class WalletKeyDto implements ModelInterface, ArrayAccess, \JsonSerializable
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getAlgorithmAllowableValues();
+        if (!is_null($this->container['algorithm']) && !in_array($this->container['algorithm'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'algorithm', must be one of '%s'",
+                $this->container['algorithm'],
+                implode("', '", $allowedValues)
+            );
+        }
 
         $allowedValues = $this->getKeyTypeAllowableValues();
         if (!is_null($this->container['key_type']) && !in_array($this->container['key_type'], $allowedValues, true)) {
@@ -366,38 +394,38 @@ class WalletKeyDto implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets key_type
+     * Gets algorithm
      *
      * @return string|null
      */
-    public function getKeyType()
+    public function getAlgorithm()
     {
-        return $this->container['key_type'];
+        return $this->container['algorithm'];
     }
 
     /**
-     * Sets key_type
+     * Sets algorithm
      *
-     * @param string|null $key_type cryptographic algorithm used by this key
+     * @param string|null $algorithm cryptographic algorithm used by this key
      *
      * @return self
      */
-    public function setKeyType($key_type)
+    public function setAlgorithm($algorithm)
     {
-        if (is_null($key_type)) {
-            throw new \InvalidArgumentException('non-nullable key_type cannot be null');
+        if (is_null($algorithm)) {
+            throw new \InvalidArgumentException('non-nullable algorithm cannot be null');
         }
-        $allowedValues = $this->getKeyTypeAllowableValues();
-        if (!in_array($key_type, $allowedValues, true)) {
+        $allowedValues = $this->getAlgorithmAllowableValues();
+        if (!in_array($algorithm, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'key_type', must be one of '%s'",
-                    $key_type,
+                    "Invalid value '%s' for 'algorithm', must be one of '%s'",
+                    $algorithm,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['key_type'] = $key_type;
+        $this->container['algorithm'] = $algorithm;
 
         return $this;
     }
