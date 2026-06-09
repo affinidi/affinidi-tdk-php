@@ -70,7 +70,8 @@ class IotaConfigurationDto implements ModelInterface, ArrayAccess, \JsonSerializ
         'client_metadata' => '\AffinidiTdk\Clients\IotaClient\Model\IotaConfigurationDtoClientMetadata',
         'mode' => 'string',
         'redirect_uris' => 'string[]',
-        'enable_idv_providers' => 'bool'
+        'enable_idv_providers' => 'bool',
+        'mediator_did' => 'string'
     ];
 
     /**
@@ -93,7 +94,8 @@ class IotaConfigurationDto implements ModelInterface, ArrayAccess, \JsonSerializ
         'client_metadata' => null,
         'mode' => null,
         'redirect_uris' => null,
-        'enable_idv_providers' => null
+        'enable_idv_providers' => null,
+        'mediator_did' => null
     ];
 
     /**
@@ -114,7 +116,8 @@ class IotaConfigurationDto implements ModelInterface, ArrayAccess, \JsonSerializ
         'client_metadata' => false,
         'mode' => false,
         'redirect_uris' => false,
-        'enable_idv_providers' => false
+        'enable_idv_providers' => false,
+        'mediator_did' => false
     ];
 
     /**
@@ -215,7 +218,8 @@ class IotaConfigurationDto implements ModelInterface, ArrayAccess, \JsonSerializ
         'client_metadata' => 'clientMetadata',
         'mode' => 'mode',
         'redirect_uris' => 'redirectUris',
-        'enable_idv_providers' => 'enableIdvProviders'
+        'enable_idv_providers' => 'enableIdvProviders',
+        'mediator_did' => 'mediatorDid'
     ];
 
     /**
@@ -236,7 +240,8 @@ class IotaConfigurationDto implements ModelInterface, ArrayAccess, \JsonSerializ
         'client_metadata' => 'setClientMetadata',
         'mode' => 'setMode',
         'redirect_uris' => 'setRedirectUris',
-        'enable_idv_providers' => 'setEnableIdvProviders'
+        'enable_idv_providers' => 'setEnableIdvProviders',
+        'mediator_did' => 'setMediatorDid'
     ];
 
     /**
@@ -257,7 +262,8 @@ class IotaConfigurationDto implements ModelInterface, ArrayAccess, \JsonSerializ
         'client_metadata' => 'getClientMetadata',
         'mode' => 'getMode',
         'redirect_uris' => 'getRedirectUris',
-        'enable_idv_providers' => 'getEnableIdvProviders'
+        'enable_idv_providers' => 'getEnableIdvProviders',
+        'mediator_did' => 'getMediatorDid'
     ];
 
     /**
@@ -347,6 +353,7 @@ class IotaConfigurationDto implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('mode', $data ?? [], 'websocket');
         $this->setIfExists('redirect_uris', $data ?? [], null);
         $this->setIfExists('enable_idv_providers', $data ?? [], null);
+        $this->setIfExists('mediator_did', $data ?? [], null);
     }
 
     /**
@@ -410,6 +417,10 @@ class IotaConfigurationDto implements ModelInterface, ArrayAccess, \JsonSerializ
                 $this->container['mode'],
                 implode("', '", $allowedValues)
             );
+        }
+
+        if (!is_null($this->container['mediator_did']) && !preg_match("/^did:(?:web|webvh):.*$/", $this->container['mediator_did'])) {
+            $invalidProperties[] = "invalid value for 'mediator_did', must be conform to the pattern /^did:(?:web|webvh):.*$/.";
         }
 
         return $invalidProperties;
@@ -784,6 +795,38 @@ class IotaConfigurationDto implements ModelInterface, ArrayAccess, \JsonSerializ
             throw new \InvalidArgumentException('non-nullable enable_idv_providers cannot be null');
         }
         $this->container['enable_idv_providers'] = $enable_idv_providers;
+
+        return $this;
+    }
+
+    /**
+     * Gets mediator_did
+     *
+     * @return string|null
+     */
+    public function getMediatorDid()
+    {
+        return $this->container['mediator_did'];
+    }
+
+    /**
+     * Sets mediator_did
+     *
+     * @param string|null $mediator_did mediator_did
+     *
+     * @return self
+     */
+    public function setMediatorDid($mediator_did)
+    {
+        if (is_null($mediator_did)) {
+            throw new \InvalidArgumentException('non-nullable mediator_did cannot be null');
+        }
+
+        if ((!preg_match("/^did:(?:web|webvh):.*$/", ObjectSerializer::toString($mediator_did)))) {
+            throw new \InvalidArgumentException("invalid value for \$mediator_did when calling IotaConfigurationDto., must conform to the pattern /^did:(?:web|webvh):.*$/.");
+        }
+
+        $this->container['mediator_did'] = $mediator_did;
 
         return $this;
     }
