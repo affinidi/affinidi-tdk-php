@@ -59,7 +59,7 @@ class CreateWalletKeyInput implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'key_type' => 'string',
+        'algorithm' => 'string',
         'relationships' => '\AffinidiTdk\Clients\WalletsClient\Model\VerificationRelationship[]'
     ];
 
@@ -71,7 +71,7 @@ class CreateWalletKeyInput implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'key_type' => null,
+        'algorithm' => null,
         'relationships' => null
     ];
 
@@ -81,7 +81,7 @@ class CreateWalletKeyInput implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'key_type' => false,
+        'algorithm' => false,
         'relationships' => false
     ];
 
@@ -171,6 +171,7 @@ class CreateWalletKeyInput implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
+        'algorithm' => 'algorithm',
         'key_type' => 'keyType',
         'relationships' => 'relationships'
     ];
@@ -181,7 +182,7 @@ class CreateWalletKeyInput implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'key_type' => 'setKeyType',
+        'algorithm' => 'setAlgorithm',
         'relationships' => 'setRelationships'
     ];
 
@@ -191,7 +192,7 @@ class CreateWalletKeyInput implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'key_type' => 'getKeyType',
+        'algorithm' => 'getAlgorithm',
         'relationships' => 'getRelationships'
     ];
 
@@ -236,9 +237,26 @@ class CreateWalletKeyInput implements ModelInterface, ArrayAccess, \JsonSerializ
         return self::$openAPIModelName;
     }
 
+    public const ALGORITHM_SECP256K1 = 'secp256k1';
+    public const ALGORITHM_ED25519 = 'ed25519';
+    public const ALGORITHM_P256 = 'p256';
     public const KEY_TYPE_SECP256K1 = 'secp256k1';
     public const KEY_TYPE_ED25519 = 'ed25519';
     public const KEY_TYPE_P256 = 'p256';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAlgorithmAllowableValues()
+    {
+        return [
+            self::ALGORITHM_SECP256K1,
+            self::ALGORITHM_ED25519,
+            self::ALGORITHM_P256,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -269,6 +287,7 @@ class CreateWalletKeyInput implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('algorithm', $data ?? [], null);
         $this->setIfExists('key_type', $data ?? [], null);
         $this->setIfExists('relationships', $data ?? [], null);
     }
@@ -300,9 +319,15 @@ class CreateWalletKeyInput implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        if ($this->container['key_type'] === null) {
-            $invalidProperties[] = "'key_type' can't be null";
+        $allowedValues = $this->getAlgorithmAllowableValues();
+        if (!is_null($this->container['algorithm']) && !in_array($this->container['algorithm'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'algorithm', must be one of '%s'",
+                $this->container['algorithm'],
+                implode("', '", $allowedValues)
+            );
         }
+
         $allowedValues = $this->getKeyTypeAllowableValues();
         if (!is_null($this->container['key_type']) && !in_array($this->container['key_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -331,38 +356,38 @@ class CreateWalletKeyInput implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets key_type
+     * Gets algorithm
      *
-     * @return string
+     * @return string|null
      */
-    public function getKeyType()
+    public function getAlgorithm()
     {
-        return $this->container['key_type'];
+        return $this->container['algorithm'];
     }
 
     /**
-     * Sets key_type
+     * Sets algorithm
      *
-     * @param string $key_type cryptographic algorithm for the new key
+     * @param string|null $algorithm cryptographic algorithm for the new key
      *
      * @return self
      */
-    public function setKeyType($key_type)
+    public function setAlgorithm($algorithm)
     {
-        if (is_null($key_type)) {
-            throw new \InvalidArgumentException('non-nullable key_type cannot be null');
+        if (is_null($algorithm)) {
+            throw new \InvalidArgumentException('non-nullable algorithm cannot be null');
         }
-        $allowedValues = $this->getKeyTypeAllowableValues();
-        if (!in_array($key_type, $allowedValues, true)) {
+        $allowedValues = $this->getAlgorithmAllowableValues();
+        if (!in_array($algorithm, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'key_type', must be one of '%s'",
-                    $key_type,
+                    "Invalid value '%s' for 'algorithm', must be one of '%s'",
+                    $algorithm,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['key_type'] = $key_type;
+        $this->container['algorithm'] = $algorithm;
 
         return $this;
     }
