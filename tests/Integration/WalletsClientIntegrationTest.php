@@ -205,7 +205,6 @@ class WalletsClientIntegrationTest extends TestCase
 
         $this->assertArrayHasKey('credential', $data);
         $credential = $data['credential'];
-        echo "\n\033[0;36m[CREDENTIAL]\033[0m " . json_encode($credential, JSON_PRETTY_PRINT) . "\n";
         $this->assertArrayHasKey('proof', $credential);
 
         $revocationListUrl = $credential['credentialStatus']['revocationListCredential'];

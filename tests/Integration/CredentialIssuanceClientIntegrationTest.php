@@ -37,12 +37,34 @@ class CredentialIssuanceClientIntegrationTest extends TestCase
         $this->assertEquals($configId, $config['id'] ?? null, 'Fetched config ID does not match.');
     }
 
+    private function getWalletApi(): \AffinidiTdk\Clients\WalletsClient\Api\WalletApi
+    {
+        $originalBasePath = \AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()->getHost();
+        $host = replaceBaseDomain($originalBasePath);
+
+        $config = \AffinidiTdk\Clients\WalletsClient\Configuration::getDefaultConfiguration()
+            ->setApiKey('authorization', '', getTokenCallback())
+            ->setHost($host);
+
+        return new \AffinidiTdk\Clients\WalletsClient\Api\WalletApi(config: $config);
+    }
+
     public function testBatchIssuance(): void
     {
         debugMessage('Start Batch Credential Issuance', [
             'projectId' => self::$projectId,
             'issuanceData' => getConfiguration()['credentialIssuanceData']
         ]);
+
+        // Ensure the configuration's wallet exists before starting issuance
+        $configApi = $this->getConfigurationApi();
+        $configListResponse = $configApi->getIssuanceConfigList();
+        $configData = decodeJson($configListResponse);
+        
+        if (!empty($configData['configurations'])) {
+            $configId = $configData['configurations'][0]['id'];
+            ensureConfigWalletExists($configId);
+        }
 
         $issuance = $this->startBatchCredentialIssuance();
         $this->assertArrayHasKey('issuanceId', $issuance);

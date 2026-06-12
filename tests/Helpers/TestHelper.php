@@ -9,6 +9,7 @@ use AffinidiTdk\Clients\WalletsClient;
 use AffinidiTdk\Clients\WalletsClient\Model\CreateWalletInput;
 use AffinidiTdk\Clients\WalletsClient\Model\CreateWalletV2Input;
 use AffinidiTdk\Clients\CredentialVerificationClient;
+use AffinidiTdk\Clients\CredentialIssuanceClient;
 
 
 // Load the .env file
@@ -193,6 +194,50 @@ function deleteWallet(string $walletId): void
 }
 
 /**
+ * Get a wallet by ID.
+ */
+function getWalletById(string $walletId): array
+{
+    $originalBasePath = WalletsClient\Configuration::getDefaultConfiguration()->getHost();
+    $host = replaceBaseDomain($originalBasePath);
+
+    $config = WalletsClient\Configuration::getDefaultConfiguration()
+        ->setApiKey('authorization', '', getTokenCallback())
+        ->setHost($host);
+
+    $api = new WalletsClient\Api\WalletApi(config: $config);
+    $response = $api->getWallet($walletId);
+    return decodeJson($response);
+}
+
+/**
+ * Ensure the wallet referenced by the issuance config exists.
+ */
+function ensureConfigWalletExists(string $configId): void
+{
+    $cisBasePath = CredentialIssuanceClient\Configuration::getDefaultConfiguration()->getHost();
+    $cisHost = replaceBaseDomain($cisBasePath);
+    $cisConfig = CredentialIssuanceClient\Configuration::getDefaultConfiguration()
+        ->setApiKey('authorization', '', getTokenCallback())
+        ->setHost($cisHost);
+    $cisConfigApi = new CredentialIssuanceClient\Api\ConfigurationApi(config: $cisConfig);
+    
+    $configResponse = $cisConfigApi->getIssuanceConfigById($configId);
+    $config = decodeJson($configResponse);
+    
+    $issuerWalletId = $config['issuer_wallet_id'] ?? $config['issuerWalletId'] ?? null;
+    if ($issuerWalletId) {
+        try {
+            getWalletById($issuerWalletId);
+        } catch (WalletsClient\NotFoundError $e) {
+            $newWallet = createWallet();
+            $updatePayload = ['issuerWalletId' => $newWallet['id']];
+            $cisConfigApi->updateIssuanceConfigById($configId, $updatePayload);
+        }
+    }
+}
+
+/**
  * Validates a verifiable credential.
  */
 function isCredentialValid($credential): bool
@@ -287,8 +332,32 @@ function checkWalletLimitExceeded(): void
     if (count($data['wallets']) > $WALLETS_LIMIT_THRESHOLD) {
         print("❗️Number of wallets reaching the limit (10). Deleting wallets.");
 
+        // Get protected wallet ID from issuance configuration
+        $protectedWalletId = null;
+        try {
+            $cisBasePath = CredentialIssuanceClient\Configuration::getDefaultConfiguration()->getHost();
+            $cisHost = replaceBaseDomain($cisBasePath);
+            $cisConfig = CredentialIssuanceClient\Configuration::getDefaultConfiguration()
+                ->setApiKey('authorization', '', getTokenCallback())
+                ->setHost($cisHost);
+            $cisConfigApi = new CredentialIssuanceClient\Api\ConfigurationApi(config: $cisConfig);
+            $configListResponse = $cisConfigApi->getIssuanceConfigList();
+            $configList = decodeJson($configListResponse);
+            
+            if (!empty($configList['configurations'])) {
+                $protectedWalletId = $configList['configurations'][0]['issuer_wallet_id'] 
+                    ?? $configList['configurations'][0]['issuerWalletId'] 
+                    ?? null;
+            }
+        } catch (Exception $e) {
+            // Proceed without protection if config unavailable
+        }
+
         foreach ($data['wallets'] as $wallet) {
-            deleteWallet($wallet['id']);
+            // Skip deleting the wallet used by the issuance configuration
+            if ($wallet['id'] !== $protectedWalletId) {
+                deleteWallet($wallet['id']);
+            }
         }
     }
 }
