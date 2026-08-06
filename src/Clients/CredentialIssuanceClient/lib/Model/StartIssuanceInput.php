@@ -326,6 +326,14 @@ class StartIssuanceInput implements ModelInterface, ArrayAccess, \JsonSerializab
             $invalidProperties[] = "invalid value for 'holder_did', must be conform to the pattern /^did:.+$/.";
         }
 
+        if (!is_null($this->container['issuance_id']) && (mb_strlen($this->container['issuance_id']) > 500)) {
+            $invalidProperties[] = "invalid value for 'issuance_id', the character length must be smaller than or equal to 500.";
+        }
+
+        if (!is_null($this->container['issuance_id']) && (mb_strlen($this->container['issuance_id']) < 1)) {
+            $invalidProperties[] = "invalid value for 'issuance_id', the character length must be bigger than or equal to 1.";
+        }
+
         if ($this->container['data'] === null) {
             $invalidProperties[] = "'data' can't be null";
         }
@@ -435,6 +443,13 @@ class StartIssuanceInput implements ModelInterface, ArrayAccess, \JsonSerializab
         if (is_null($issuance_id)) {
             throw new \InvalidArgumentException('non-nullable issuance_id cannot be null');
         }
+        if ((mb_strlen($issuance_id) > 500)) {
+            throw new \InvalidArgumentException('invalid length for $issuance_id when calling StartIssuanceInput., must be smaller than or equal to 500.');
+        }
+        if ((mb_strlen($issuance_id) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $issuance_id when calling StartIssuanceInput., must be bigger than or equal to 1.');
+        }
+
         $this->container['issuance_id'] = $issuance_id;
 
         return $this;
