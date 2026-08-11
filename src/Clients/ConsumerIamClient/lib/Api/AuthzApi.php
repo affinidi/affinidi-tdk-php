@@ -78,6 +78,9 @@ class AuthzApi
         'deleteAccessVfs' => [
             'application/json',
         ],
+        'getAccessVfs' => [
+            'application/json',
+        ],
         'grantAccessVfs' => [
             'application/json',
         ],
@@ -385,6 +388,403 @@ class AuthzApi
     }
 
     /**
+     * Operation getAccessVfs
+     *
+     * Get permissions to the virtual file system for a subject
+     *
+     * @param  string $grantee_did grantee_did (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccessVfs'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\ConsumerIamClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \AffinidiTdk\Clients\ConsumerIamClient\Model\GetAccessOutput|\AffinidiTdk\Clients\ConsumerIamClient\Model\UnauthorizedError|\AffinidiTdk\Clients\ConsumerIamClient\Model\UnexpectedError
+     */
+    public function getAccessVfs($grantee_did, string $contentType = self::contentTypes['getAccessVfs'][0])
+    {
+        list($response) = $this->getAccessVfsWithHttpInfo($grantee_did, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getAccessVfsWithHttpInfo
+     *
+     * Get permissions to the virtual file system for a subject
+     *
+     * @param  string $grantee_did (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccessVfs'] to see the possible values for this operation
+     *
+     * @throws \AffinidiTdk\Clients\ConsumerIamClient\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \AffinidiTdk\Clients\ConsumerIamClient\Model\GetAccessOutput|\AffinidiTdk\Clients\ConsumerIamClient\Model\UnauthorizedError|\AffinidiTdk\Clients\ConsumerIamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAccessVfsWithHttpInfo($grantee_did, string $contentType = self::contentTypes['getAccessVfs'][0])
+    {
+        $request = $this->getAccessVfsRequest($grantee_did, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $jsonResponse = json_decode($e->getResponse()->getBody());
+                if ($jsonResponse->name === 'InvalidJwtTokenError') {
+                    $issue = $jsonResponse->details[0]->issue;
+                    throw new InvalidJwtTokenError($issue, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'NotFoundError') {
+                    throw new NotFoundError($jsonResponse->message, $jsonResponse->traceId);
+                }
+
+                if ($jsonResponse->name === 'InvalidParameterError') {
+                    throw new InvalidParameterError($jsonResponse->message, $jsonResponse->details, $jsonResponse->traceId);
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\AffinidiTdk\Clients\ConsumerIamClient\Model\GetAccessOutput' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\ConsumerIamClient\Model\GetAccessOutput' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\ConsumerIamClient\Model\GetAccessOutput', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\AffinidiTdk\Clients\ConsumerIamClient\Model\UnauthorizedError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\ConsumerIamClient\Model\UnauthorizedError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\ConsumerIamClient\Model\UnauthorizedError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\AffinidiTdk\Clients\ConsumerIamClient\Model\UnexpectedError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\AffinidiTdk\Clients\ConsumerIamClient\Model\UnexpectedError' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\AffinidiTdk\Clients\ConsumerIamClient\Model\UnexpectedError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\AffinidiTdk\Clients\ConsumerIamClient\Model\GetAccessOutput';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\ConsumerIamClient\Model\GetAccessOutput',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\ConsumerIamClient\Model\UnauthorizedError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\AffinidiTdk\Clients\ConsumerIamClient\Model\UnexpectedError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAccessVfsAsync
+     *
+     * Get permissions to the virtual file system for a subject
+     *
+     * @param  string $grantee_did (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccessVfs'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccessVfsAsync($grantee_did, string $contentType = self::contentTypes['getAccessVfs'][0])
+    {
+        return $this->getAccessVfsAsyncWithHttpInfo($grantee_did, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAccessVfsAsyncWithHttpInfo
+     *
+     * Get permissions to the virtual file system for a subject
+     *
+     * @param  string $grantee_did (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccessVfs'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccessVfsAsyncWithHttpInfo($grantee_did, string $contentType = self::contentTypes['getAccessVfs'][0])
+    {
+        $returnType = '\AffinidiTdk\Clients\ConsumerIamClient\Model\GetAccessOutput';
+        $request = $this->getAccessVfsRequest($grantee_did, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAccessVfs'
+     *
+     * @param  string $grantee_did (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccessVfs'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAccessVfsRequest($grantee_did, string $contentType = self::contentTypes['getAccessVfs'][0])
+    {
+
+        // verify the required parameter 'grantee_did' is set
+        if ($grantee_did === null || (is_array($grantee_did) && count($grantee_did) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $grantee_did when calling getAccessVfs'
+            );
+        }
+
+
+        $resourcePath = '/v1/authz/vfs/access/{granteeDid}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($grantee_did !== null) {
+            $resourcePath = str_replace(
+                '{' . 'granteeDid' . '}',
+                ObjectSerializer::toPathValue($grantee_did),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('authorization');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation grantAccessVfs
      *
      * Grant access to the virtual file system
@@ -396,6 +796,7 @@ class AuthzApi
      * @throws \AffinidiTdk\Clients\ConsumerIamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \AffinidiTdk\Clients\ConsumerIamClient\Model\GrantAccessOutput|\AffinidiTdk\Clients\ConsumerIamClient\Model\UnauthorizedError|\AffinidiTdk\Clients\ConsumerIamClient\Model\UnexpectedError
+     * @deprecated
      */
     public function grantAccessVfs($grantee_did, $grant_access_input, string $contentType = self::contentTypes['grantAccessVfs'][0])
     {
@@ -415,6 +816,7 @@ class AuthzApi
      * @throws \AffinidiTdk\Clients\ConsumerIamClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \AffinidiTdk\Clients\ConsumerIamClient\Model\GrantAccessOutput|\AffinidiTdk\Clients\ConsumerIamClient\Model\UnauthorizedError|\AffinidiTdk\Clients\ConsumerIamClient\Model\UnexpectedError, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function grantAccessVfsWithHttpInfo($grantee_did, $grant_access_input, string $contentType = self::contentTypes['grantAccessVfs'][0])
     {
@@ -624,6 +1026,7 @@ class AuthzApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function grantAccessVfsAsync($grantee_did, $grant_access_input, string $contentType = self::contentTypes['grantAccessVfs'][0])
     {
@@ -646,6 +1049,7 @@ class AuthzApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function grantAccessVfsAsyncWithHttpInfo($grantee_did, $grant_access_input, string $contentType = self::contentTypes['grantAccessVfs'][0])
     {
@@ -697,6 +1101,7 @@ class AuthzApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function grantAccessVfsRequest($grantee_did, $grant_access_input, string $contentType = self::contentTypes['grantAccessVfs'][0])
     {
