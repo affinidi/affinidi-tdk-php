@@ -8,6 +8,6 @@ Name | Type | Description | Notes
 **message** | **string** |  |
 **http_status_code** | **float** |  |
 **trace_id** | **string** |  |
-**details** | [**\AffinidiTdk\Clients\IamClient\Model\ServiceErrorResponseDetailsInner[]**](ServiceErrorResponseDetailsInner.md) |  | [optional]
+**details** | [**\AffinidiTdk\Clients\IamClient\Model\UnexpectedErrorDetailsInner[]**](UnexpectedErrorDetailsInner.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
