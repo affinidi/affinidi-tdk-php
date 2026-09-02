@@ -257,11 +257,14 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
     public const SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256 = 'ecdsa_secp256k1_sha256';
     public const SIGNATURE_SCHEME_ECDSA_P256_SHA256 = 'ecdsa_p256_sha256';
     public const SIGNATURE_SCHEME_ED25519 = 'ed25519';
+    public const SIGNATURE_SCHEME_MLDSA44 = 'mldsa44';
     public const SIGNATURE_SUITE_ECDSA_JCS_2019 = 'ecdsa-jcs-2019';
     public const SIGNATURE_SUITE_ECDSA_RDFC_2019 = 'ecdsa-rdfc-2019';
     public const SIGNATURE_SUITE_EDDSA_JCS_2022 = 'eddsa-jcs-2022';
     public const SIGNATURE_SUITE_EDDSA_RDFC_2022 = 'eddsa-rdfc-2022';
     public const SIGNATURE_SUITE_ECDSA_SECP256K1_SIGNATURE2019 = 'EcdsaSecp256k1Signature2019';
+    public const SIGNATURE_SUITE_MLDSA44_JCS_2024 = 'mldsa44-jcs-2024';
+    public const SIGNATURE_SUITE_MLDSA44_RDFC_2024 = 'mldsa44-rdfc-2024';
 
     /**
      * Gets allowable values of the enum
@@ -274,6 +277,7 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
             self::SIGNATURE_SCHEME_ECDSA_SECP256K1_SHA256,
             self::SIGNATURE_SCHEME_ECDSA_P256_SHA256,
             self::SIGNATURE_SCHEME_ED25519,
+            self::SIGNATURE_SCHEME_MLDSA44,
         ];
     }
 
@@ -290,6 +294,8 @@ class SignCredentialsLdpInputDto implements ModelInterface, ArrayAccess, \JsonSe
             self::SIGNATURE_SUITE_EDDSA_JCS_2022,
             self::SIGNATURE_SUITE_EDDSA_RDFC_2022,
             self::SIGNATURE_SUITE_ECDSA_SECP256K1_SIGNATURE2019,
+            self::SIGNATURE_SUITE_MLDSA44_JCS_2024,
+            self::SIGNATURE_SUITE_MLDSA44_RDFC_2024,
         ];
     }
 
