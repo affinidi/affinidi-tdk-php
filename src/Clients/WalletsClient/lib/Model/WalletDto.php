@@ -67,7 +67,8 @@ class WalletDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => 'string',
         'keys' => '\AffinidiTdk\Clients\WalletsClient\Model\WalletDtoKeysInner[]',
         'created_at' => 'string',
-        'modified_at' => 'string'
+        'modified_at' => 'string',
+        'version' => 'float'
     ];
 
     /**
@@ -86,7 +87,8 @@ class WalletDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => null,
         'keys' => null,
         'created_at' => null,
-        'modified_at' => null
+        'modified_at' => null,
+        'version' => null
     ];
 
     /**
@@ -103,7 +105,8 @@ class WalletDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => false,
         'keys' => false,
         'created_at' => false,
-        'modified_at' => false
+        'modified_at' => false,
+        'version' => false
     ];
 
     /**
@@ -200,7 +203,8 @@ class WalletDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => 'ari',
         'keys' => 'keys',
         'created_at' => 'createdAt',
-        'modified_at' => 'modifiedAt'
+        'modified_at' => 'modifiedAt',
+        'version' => 'version'
     ];
 
     /**
@@ -217,7 +221,8 @@ class WalletDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => 'setAri',
         'keys' => 'setKeys',
         'created_at' => 'setCreatedAt',
-        'modified_at' => 'setModifiedAt'
+        'modified_at' => 'setModifiedAt',
+        'version' => 'setVersion'
     ];
 
     /**
@@ -234,7 +239,8 @@ class WalletDto implements ModelInterface, ArrayAccess, \JsonSerializable
         'ari' => 'getAri',
         'keys' => 'getKeys',
         'created_at' => 'getCreatedAt',
-        'modified_at' => 'getModifiedAt'
+        'modified_at' => 'getModifiedAt',
+        'version' => 'getVersion'
     ];
 
     /**
@@ -303,6 +309,7 @@ class WalletDto implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('keys', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('modified_at', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
     }
 
     /**
@@ -586,6 +593,33 @@ class WalletDto implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable modified_at cannot be null');
         }
         $this->container['modified_at'] = $modified_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets version
+     *
+     * @return float|null
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param float|null $version The version of the wallet
+     *
+     * @return self
+     */
+    public function setVersion($version)
+    {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
+        $this->container['version'] = $version;
 
         return $this;
     }
