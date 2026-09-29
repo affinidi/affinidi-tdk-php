@@ -7,6 +7,7 @@ All URIs are relative to https://apse1.api.affinidi.io/iam, except if the operat
 | [**addPrincipalToProject()**](ProjectsApi.md#addPrincipalToProject) | **POST** /v1/projects/principals |  |
 | [**createProject()**](ProjectsApi.md#createProject) | **POST** /v1/projects |  |
 | [**deletePrincipalFromProject()**](ProjectsApi.md#deletePrincipalFromProject) | **DELETE** /v1/projects/principals/{principalId} |  |
+| [**getProject()**](ProjectsApi.md#getProject) | **GET** /v1/projects/{projectId} |  |
 | [**listPrincipalsOfProject()**](ProjectsApi.md#listPrincipalsOfProject) | **GET** /v1/projects/principals |  |
 | [**listProject()**](ProjectsApi.md#listProject) | **GET** /v1/projects |  |
 | [**updateProject()**](ProjectsApi.md#updateProject) | **PATCH** /v1/projects/{projectId} |  |
@@ -182,6 +183,66 @@ void (empty response body)
 ### Authorization
 
 [ProjectTokenAuth](../../README.md#ProjectTokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getProject()`
+
+```php
+getProject($project_id): \AffinidiTdk\Clients\IamClient\Model\ProjectDto
+```
+
+
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: UserTokenAuth
+$config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
+
+
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\ProjectsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$project_id = 'project_id_example'; // string | projectId
+
+try {
+    $result = $apiInstance->getProject($project_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ProjectsApi->getProject: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **project_id** | **string**| projectId | |
+
+### Return type
+
+[**\AffinidiTdk\Clients\IamClient\Model\ProjectDto**](../Model/ProjectDto.md)
+
+### Authorization
+
+[UserTokenAuth](../../README.md#UserTokenAuth)
 
 ### HTTP request headers
 
