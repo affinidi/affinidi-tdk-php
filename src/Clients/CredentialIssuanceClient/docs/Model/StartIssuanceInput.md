@@ -1,4 +1,4 @@
-# # StartIssuanceInput
+# StartIssuanceInput
 
 ## Properties
 
