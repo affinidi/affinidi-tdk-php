@@ -1,4 +1,4 @@
-# # StartIssuanceInputDataInner
+# StartIssuanceInputDataInner
 
 ## Properties
 

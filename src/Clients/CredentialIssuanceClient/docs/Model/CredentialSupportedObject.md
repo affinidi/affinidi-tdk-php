@@ -1,4 +1,4 @@
-# # CredentialSupportedObject
+# CredentialSupportedObject
 
 ## Properties
 
