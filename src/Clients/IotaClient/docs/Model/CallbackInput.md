@@ -1,4 +1,4 @@
-# # CallbackInput
+# CallbackInput
 
 ## Properties
 

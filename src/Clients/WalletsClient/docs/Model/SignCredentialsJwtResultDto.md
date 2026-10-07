@@ -1,4 +1,4 @@
-# # SignCredentialsJwtResultDto
+# SignCredentialsJwtResultDto
 
 ## Properties
 

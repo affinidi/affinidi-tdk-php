@@ -1,5 +1,7 @@
 # AffinidiTdk\Clients\VaultDataManagerClient\WellKnownApi
 
+
+
 All URIs are relative to https://api.vault.affinidi.com/vfs, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
