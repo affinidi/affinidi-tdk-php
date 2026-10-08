@@ -1,4 +1,4 @@
-# # GetDetailedNodeInfoOK
+# GetDetailedNodeInfoOK
 
 ## Properties
 
