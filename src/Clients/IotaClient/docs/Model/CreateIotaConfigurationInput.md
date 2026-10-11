@@ -1,4 +1,4 @@
-# # CreateIotaConfigurationInput
+# CreateIotaConfigurationInput
 
 ## Properties
 

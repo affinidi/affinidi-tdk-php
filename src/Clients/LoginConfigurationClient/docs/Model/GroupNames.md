@@ -1,4 +1,4 @@
-# # GroupNames
+# GroupNames
 
 ## Properties
 

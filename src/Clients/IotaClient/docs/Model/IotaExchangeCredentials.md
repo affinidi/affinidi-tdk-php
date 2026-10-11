@@ -1,4 +1,4 @@
-# # IotaExchangeCredentials
+# IotaExchangeCredentials
 
 ## Properties
 
