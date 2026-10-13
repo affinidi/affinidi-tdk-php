@@ -1,4 +1,4 @@
-# # CredentialIssuanceIdExistError
+# CredentialIssuanceIdExistError
 
 ## Properties
 

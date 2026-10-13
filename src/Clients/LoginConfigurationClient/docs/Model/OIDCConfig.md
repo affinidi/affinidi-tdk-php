@@ -1,4 +1,4 @@
-# # OIDCConfig
+# OIDCConfig
 
 ## Properties
 
