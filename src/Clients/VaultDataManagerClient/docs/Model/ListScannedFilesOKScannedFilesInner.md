@@ -1,4 +1,4 @@
-# # ListScannedFilesOKScannedFilesInner
+# ListScannedFilesOKScannedFilesInner
 
 ## Properties
 

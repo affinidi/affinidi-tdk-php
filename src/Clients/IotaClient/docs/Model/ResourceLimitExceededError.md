@@ -1,4 +1,4 @@
-# # ResourceLimitExceededError
+# ResourceLimitExceededError
 
 ## Properties
 

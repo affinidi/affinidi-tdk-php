@@ -1,4 +1,4 @@
-# # NodeDto
+# NodeDto
 
 ## Properties
 
