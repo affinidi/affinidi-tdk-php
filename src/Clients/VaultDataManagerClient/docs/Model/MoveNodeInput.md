@@ -1,4 +1,4 @@
-# # MoveNodeInput
+# MoveNodeInput
 
 ## Properties
 

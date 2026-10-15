@@ -1,4 +1,4 @@
-# # CisConfigurationWebhookSettingEndpoint
+# CisConfigurationWebhookSettingEndpoint
 
 ## Properties
 
