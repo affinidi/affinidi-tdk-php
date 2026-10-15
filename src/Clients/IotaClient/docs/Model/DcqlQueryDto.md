@@ -1,4 +1,4 @@
-# # DcqlQueryDto
+# DcqlQueryDto
 
 ## Properties
 

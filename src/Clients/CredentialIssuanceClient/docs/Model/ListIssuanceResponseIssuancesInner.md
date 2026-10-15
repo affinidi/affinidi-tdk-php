@@ -1,4 +1,4 @@
-# # ListIssuanceResponseIssuancesInner
+# ListIssuanceResponseIssuancesInner
 
 ## Properties
 

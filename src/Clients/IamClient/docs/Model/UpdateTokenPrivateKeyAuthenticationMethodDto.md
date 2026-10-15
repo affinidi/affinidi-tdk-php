@@ -1,4 +1,4 @@
-# # UpdateTokenPrivateKeyAuthenticationMethodDto
+# UpdateTokenPrivateKeyAuthenticationMethodDto
 
 ## Properties
 
