@@ -1,4 +1,4 @@
-# # DeleteAccountDto
+# DeleteAccountDto
 
 ## Properties
 

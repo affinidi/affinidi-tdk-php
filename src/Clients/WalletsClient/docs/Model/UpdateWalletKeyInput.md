@@ -1,4 +1,4 @@
-# # UpdateWalletKeyInput
+# UpdateWalletKeyInput
 
 ## Properties
 

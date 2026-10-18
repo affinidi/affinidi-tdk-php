@@ -1,4 +1,4 @@
-# # ClaimedCredentialResponse
+# ClaimedCredentialResponse
 
 ## Properties
 
