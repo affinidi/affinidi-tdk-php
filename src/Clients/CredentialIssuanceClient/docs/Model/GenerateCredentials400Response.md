@@ -1,4 +1,4 @@
-# # GenerateCredentials400Response
+# GenerateCredentials400Response
 
 ## Properties
 

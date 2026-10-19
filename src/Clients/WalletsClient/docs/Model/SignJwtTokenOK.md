@@ -1,4 +1,4 @@
-# # SignJwtTokenOK
+# SignJwtTokenOK
 
 ## Properties
 

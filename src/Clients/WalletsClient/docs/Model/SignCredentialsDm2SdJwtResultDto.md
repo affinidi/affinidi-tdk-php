@@ -1,4 +1,4 @@
-# # SignCredentialsDm2SdJwtResultDto
+# SignCredentialsDm2SdJwtResultDto
 
 ## Properties
 

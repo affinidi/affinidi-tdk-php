@@ -1,4 +1,4 @@
-# # ListLoginConfigurationOutput
+# ListLoginConfigurationOutput
 
 ## Properties
 
