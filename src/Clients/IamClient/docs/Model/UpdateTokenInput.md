@@ -1,4 +1,4 @@
-# # UpdateTokenInput
+# UpdateTokenInput
 
 ## Properties
 

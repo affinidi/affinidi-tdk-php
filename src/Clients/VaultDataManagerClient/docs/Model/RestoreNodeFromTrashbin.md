@@ -1,4 +1,4 @@
-# # RestoreNodeFromTrashbin
+# RestoreNodeFromTrashbin
 
 ## Properties
 
