@@ -1,4 +1,4 @@
-# # GroupUserMappingsList
+# GroupUserMappingsList
 
 ## Properties
 

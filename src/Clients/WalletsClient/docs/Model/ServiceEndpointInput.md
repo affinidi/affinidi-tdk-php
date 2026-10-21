@@ -1,4 +1,4 @@
-# # ServiceEndpointInput
+# ServiceEndpointInput
 
 ## Properties
 
