@@ -1,5 +1,7 @@
 # AffinidiTdk\Clients\LoginConfigurationClient\DenyListApi
 
+
+
 All URIs are relative to https://apse1.api.affinidi.io/vpa, except if the operation defines another base path.
 
 | Method | HTTP request | Description |

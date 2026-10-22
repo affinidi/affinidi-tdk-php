@@ -1,4 +1,4 @@
-# # ConsumerAuthTokenEndpointInput
+# ConsumerAuthTokenEndpointInput
 
 ## Properties
 

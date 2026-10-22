@@ -1,4 +1,4 @@
-# # CredentialProof
+# CredentialProof
 
 ## Properties
 
