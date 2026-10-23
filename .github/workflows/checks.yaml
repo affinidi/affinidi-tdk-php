@@ -33,8 +33,10 @@ jobs:
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
+      env:
+        update: true
       with:
-        php-version-file: .php-version
+        php-version: '8.2'
 
     - name: Show PHP version
       run: php -v
