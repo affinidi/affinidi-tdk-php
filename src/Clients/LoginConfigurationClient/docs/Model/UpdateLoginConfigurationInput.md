@@ -1,4 +1,4 @@
-# # UpdateLoginConfigurationInput
+# UpdateLoginConfigurationInput
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # CreateDcqlQueryInput
+# CreateDcqlQueryInput
 
 ## Properties
 
