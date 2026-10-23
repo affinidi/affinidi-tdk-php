@@ -17,7 +17,7 @@ Each module has its own README that you can check to better understand how to in
 
 ## Requirements
 
-- PHP version 7.4 or higher.
+- PHP version 8.2 or higher. Run a patched PHP release (8.2.35, 8.3.36, 8.4.27, 8.5.12 or later), see the [PHP security release of 21 Oct 2026](https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/).
 - [Composer](https://getcomposer.org/download/) package manager.
 
 ## Installation
