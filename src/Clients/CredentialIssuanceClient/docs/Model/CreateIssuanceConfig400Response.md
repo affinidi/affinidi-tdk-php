@@ -1,4 +1,4 @@
-# # CreateIssuanceConfig400Response
+# CreateIssuanceConfig400Response
 
 ## Properties
 

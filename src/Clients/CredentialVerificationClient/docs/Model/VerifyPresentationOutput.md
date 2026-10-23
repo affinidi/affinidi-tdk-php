@@ -1,4 +1,4 @@
-# # VerifyPresentationOutput
+# VerifyPresentationOutput
 
 ## Properties
 
