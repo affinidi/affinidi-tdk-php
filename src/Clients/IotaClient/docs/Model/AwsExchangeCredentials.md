@@ -1,4 +1,4 @@
-# # AwsExchangeCredentials
+# AwsExchangeCredentials
 
 ## Properties
 

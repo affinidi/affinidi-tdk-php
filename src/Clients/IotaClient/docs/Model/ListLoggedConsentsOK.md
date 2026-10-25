@@ -1,4 +1,4 @@
-# # ListLoggedConsentsOK
+# ListLoggedConsentsOK
 
 ## Properties
 
