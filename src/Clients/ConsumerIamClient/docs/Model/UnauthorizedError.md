@@ -1,4 +1,4 @@
-# # UnauthorizedError
+# UnauthorizedError
 
 ## Properties
 
