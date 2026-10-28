@@ -1,4 +1,4 @@
-# # DeletePexQueriesInput
+# DeletePexQueriesInput
 
 ## Properties
 

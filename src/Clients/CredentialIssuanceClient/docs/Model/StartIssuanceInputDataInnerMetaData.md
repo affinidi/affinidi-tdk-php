@@ -1,4 +1,4 @@
-# # StartIssuanceInputDataInnerMetaData
+# StartIssuanceInputDataInnerMetaData
 
 ## Properties
 

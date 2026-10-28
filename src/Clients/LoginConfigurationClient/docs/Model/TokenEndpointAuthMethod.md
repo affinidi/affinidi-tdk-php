@@ -1,4 +1,4 @@
-# # TokenEndpointAuthMethod
+# TokenEndpointAuthMethod
 
 ## Properties
 

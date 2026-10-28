@@ -1,4 +1,4 @@
-# # CreateChildNodeInput
+# CreateChildNodeInput
 
 ## Properties
 
