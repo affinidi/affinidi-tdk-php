@@ -1,4 +1,4 @@
-# # TokenList
+# TokenList
 
 ## Properties
 

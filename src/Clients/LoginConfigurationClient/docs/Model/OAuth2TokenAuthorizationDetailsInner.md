@@ -1,4 +1,4 @@
-# # OAuth2TokenAuthorizationDetailsInner
+# OAuth2TokenAuthorizationDetailsInner
 
 ## Properties
 

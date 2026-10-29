@@ -1,4 +1,4 @@
-# # GetIotaConfigurationMetaDataOK
+# GetIotaConfigurationMetaDataOK
 
 ## Properties
 

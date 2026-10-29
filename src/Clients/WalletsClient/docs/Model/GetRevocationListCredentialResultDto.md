@@ -1,4 +1,4 @@
-# # GetRevocationListCredentialResultDto
+# GetRevocationListCredentialResultDto
 
 ## Properties
 
