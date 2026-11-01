@@ -1,4 +1,4 @@
-# # StartIssuance400Response
+# StartIssuance400Response
 
 ## Properties
 

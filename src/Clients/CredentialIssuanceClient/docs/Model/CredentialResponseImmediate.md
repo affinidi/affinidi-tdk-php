@@ -1,4 +1,4 @@
-# # CredentialResponseImmediate
+# CredentialResponseImmediate
 
 ## Properties
 
