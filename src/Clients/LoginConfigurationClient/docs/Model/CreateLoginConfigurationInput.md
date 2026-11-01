@@ -1,4 +1,4 @@
-# # CreateLoginConfigurationInput
+# CreateLoginConfigurationInput
 
 ## Properties
 

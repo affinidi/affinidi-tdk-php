@@ -1,4 +1,4 @@
-# # RemoveUserFromGroupInput
+# RemoveUserFromGroupInput
 
 ## Properties
 

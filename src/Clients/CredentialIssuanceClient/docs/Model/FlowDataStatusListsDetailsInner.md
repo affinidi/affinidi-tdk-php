@@ -1,4 +1,4 @@
-# # FlowDataStatusListsDetailsInner
+# FlowDataStatusListsDetailsInner
 
 ## Properties
 
