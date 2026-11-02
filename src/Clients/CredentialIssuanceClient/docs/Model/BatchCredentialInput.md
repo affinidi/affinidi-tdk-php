@@ -1,4 +1,4 @@
-# # BatchCredentialInput
+# BatchCredentialInput
 
 ## Properties
 

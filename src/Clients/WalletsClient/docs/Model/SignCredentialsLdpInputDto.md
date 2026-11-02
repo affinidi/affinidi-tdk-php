@@ -1,4 +1,4 @@
-# # SignCredentialsLdpInputDto
+# SignCredentialsLdpInputDto
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # SignCredentialsLdpResultDto
+# SignCredentialsLdpResultDto
 
 ## Properties
 

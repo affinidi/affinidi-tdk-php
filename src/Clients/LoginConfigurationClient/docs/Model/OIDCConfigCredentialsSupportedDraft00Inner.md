@@ -1,4 +1,4 @@
-# # OIDCConfigCredentialsSupportedDraft00Inner
+# OIDCConfigCredentialsSupportedDraft00Inner
 
 ## Properties
 

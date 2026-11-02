@@ -1,4 +1,4 @@
-# # ListIssuanceRecordResponse
+# ListIssuanceRecordResponse
 
 ## Properties
 

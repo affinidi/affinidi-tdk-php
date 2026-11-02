@@ -1,4 +1,4 @@
-# # CallbackResponseOK
+# CallbackResponseOK
 
 ## Properties
 

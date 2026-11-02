@@ -1,4 +1,4 @@
-# # CreateAccountOK
+# CreateAccountOK
 
 ## Properties
 

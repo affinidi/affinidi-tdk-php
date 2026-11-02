@@ -1,4 +1,4 @@
-# # CreateNodeOK
+# CreateNodeOK
 
 ## Properties
 
