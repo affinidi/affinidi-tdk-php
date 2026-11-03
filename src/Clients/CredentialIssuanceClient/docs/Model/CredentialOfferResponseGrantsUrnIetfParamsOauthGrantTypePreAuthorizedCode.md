@@ -1,4 +1,4 @@
-# # CredentialOfferResponseGrantsUrnIetfParamsOauthGrantTypePreAuthorizedCode
+# CredentialOfferResponseGrantsUrnIetfParamsOauthGrantTypePreAuthorizedCode
 
 ## Properties
 

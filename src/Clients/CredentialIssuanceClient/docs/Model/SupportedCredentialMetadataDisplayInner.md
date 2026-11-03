@@ -1,4 +1,4 @@
-# # SupportedCredentialMetadataDisplayInner
+# SupportedCredentialMetadataDisplayInner
 
 ## Properties
 

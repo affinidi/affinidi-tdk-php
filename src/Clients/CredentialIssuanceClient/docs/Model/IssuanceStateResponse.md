@@ -1,4 +1,4 @@
-# # IssuanceStateResponse
+# IssuanceStateResponse
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # SigningFailedError
+# SigningFailedError
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # GroupsPerUserLimitExceededError
+# GroupsPerUserLimitExceededError
 
 ## Properties
 

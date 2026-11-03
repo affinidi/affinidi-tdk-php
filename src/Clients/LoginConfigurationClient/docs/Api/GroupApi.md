@@ -1,5 +1,7 @@
 # AffinidiTdk\Clients\LoginConfigurationClient\GroupApi
 
+Permission Groups to manage user access
+
 All URIs are relative to https://apse1.api.affinidi.io/vpa, except if the operation defines another base path.
 
 | Method | HTTP request | Description |

@@ -1,4 +1,4 @@
-# # VcClaimedError
+# VcClaimedError
 
 ## Properties
 

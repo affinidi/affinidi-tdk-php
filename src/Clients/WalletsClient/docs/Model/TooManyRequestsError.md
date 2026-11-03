@@ -1,4 +1,4 @@
-# # TooManyRequestsError
+# TooManyRequestsError
 
 ## Properties
 

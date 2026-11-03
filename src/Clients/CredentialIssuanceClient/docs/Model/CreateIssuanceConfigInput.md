@@ -1,4 +1,4 @@
-# # CreateIssuanceConfigInput
+# CreateIssuanceConfigInput
 
 ## Properties
 

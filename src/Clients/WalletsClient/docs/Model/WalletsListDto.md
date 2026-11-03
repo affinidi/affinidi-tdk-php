@@ -1,4 +1,4 @@
-# # WalletsListDto
+# WalletsListDto
 
 ## Properties
 
