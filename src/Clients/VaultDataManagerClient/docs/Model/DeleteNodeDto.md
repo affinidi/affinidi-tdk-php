@@ -1,4 +1,4 @@
-# # DeleteNodeDto
+# DeleteNodeDto
 
 ## Properties
 

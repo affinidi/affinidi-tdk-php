@@ -1,5 +1,7 @@
 # AffinidiTdk\Clients\CredentialVerificationClient\DefaultApi
 
+
+
 All URIs are relative to https://apse1.api.affinidi.io/ver, except if the operation defines another base path.
 
 | Method | HTTP request | Description |

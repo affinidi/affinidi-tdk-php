@@ -1,4 +1,4 @@
-# # UpdateDcqlQueryInput
+# UpdateDcqlQueryInput
 
 ## Properties
 

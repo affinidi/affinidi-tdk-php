@@ -1,4 +1,4 @@
-# # SignJwtV2ResultDto
+# SignJwtV2ResultDto
 
 ## Properties
 

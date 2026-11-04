@@ -1,4 +1,4 @@
-# # GetScannedFileInfoOK
+# GetScannedFileInfoOK
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # SupportedCredentialMetadataItemLogo
+# SupportedCredentialMetadataItemLogo
 
 ## Properties
 
