@@ -1,4 +1,4 @@
-# # UpdateAccountInput
+# UpdateAccountInput
 
 ## Properties
 

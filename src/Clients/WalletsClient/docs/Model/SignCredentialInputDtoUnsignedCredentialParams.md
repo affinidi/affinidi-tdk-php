@@ -1,4 +1,4 @@
-# # SignCredentialInputDtoUnsignedCredentialParams
+# SignCredentialInputDtoUnsignedCredentialParams
 
 ## Properties
 

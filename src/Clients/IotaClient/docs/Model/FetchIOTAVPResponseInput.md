@@ -1,4 +1,4 @@
-# # FetchIOTAVPResponseInput
+# FetchIOTAVPResponseInput
 
 ## Properties
 
