@@ -1,4 +1,4 @@
-# # CredentialOfferExpiredError
+# CredentialOfferExpiredError
 
 ## Properties
 

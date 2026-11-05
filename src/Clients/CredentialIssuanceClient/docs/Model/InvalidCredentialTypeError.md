@@ -1,4 +1,4 @@
-# # InvalidCredentialTypeError
+# InvalidCredentialTypeError
 
 ## Properties
 

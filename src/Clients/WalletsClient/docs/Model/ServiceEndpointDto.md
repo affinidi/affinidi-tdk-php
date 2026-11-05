@@ -1,4 +1,4 @@
-# # ServiceEndpointDto
+# ServiceEndpointDto
 
 ## Properties
 

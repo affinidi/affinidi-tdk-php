@@ -1,4 +1,4 @@
-# # CreateCredentialInput
+# CreateCredentialInput
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # VerifyCredentialOutput
+# VerifyCredentialOutput
 
 ## Properties
 

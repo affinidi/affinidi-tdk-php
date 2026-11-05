@@ -1,4 +1,4 @@
-# # BatchCredentialResponseCredentialResponsesInner
+# BatchCredentialResponseCredentialResponsesInner
 
 ## Properties
 

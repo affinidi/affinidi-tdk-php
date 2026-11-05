@@ -1,4 +1,4 @@
-# # QueryProfileDataOK
+# QueryProfileDataOK
 
 ## Properties
 

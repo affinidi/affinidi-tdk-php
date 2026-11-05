@@ -1,4 +1,4 @@
-# # BlockedUsersInput
+# BlockedUsersInput
 
 ## Properties
 
