@@ -1,4 +1,4 @@
-# # CreateWalletV2Input
+# CreateWalletV2Input
 
 ## Properties
 

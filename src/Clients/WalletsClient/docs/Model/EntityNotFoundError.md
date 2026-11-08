@@ -1,4 +1,4 @@
-# # EntityNotFoundError
+# EntityNotFoundError
 
 ## Properties
 

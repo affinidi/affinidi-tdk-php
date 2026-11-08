@@ -1,5 +1,7 @@
 # AffinidiTdk\Clients\IamClient\AuthzApi
 
+Authorization operations
+
 All URIs are relative to https://apse1.api.affinidi.io/iam, except if the operation defines another base path.
 
 | Method | HTTP request | Description |

@@ -1,4 +1,4 @@
-# # FetchIOTAVPResponseOK
+# FetchIOTAVPResponseOK
 
 ## Properties
 

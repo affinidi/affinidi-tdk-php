@@ -1,4 +1,4 @@
-# # GrantAccessOutput
+# GrantAccessOutput
 
 ## Properties
 

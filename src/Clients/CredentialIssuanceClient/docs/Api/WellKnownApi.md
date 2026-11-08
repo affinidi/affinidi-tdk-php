@@ -1,5 +1,7 @@
 # AffinidiTdk\Clients\CredentialIssuanceClient\WellKnownApi
 
+
+
 All URIs are relative to https://apse1.api.affinidi.io/cis, except if the operation defines another base path.
 
 | Method | HTTP request | Description |

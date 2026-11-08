@@ -1,4 +1,4 @@
-# # UpdateServiceEndpointInput
+# UpdateServiceEndpointInput
 
 ## Properties
 

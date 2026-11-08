@@ -1,4 +1,4 @@
-# # LoginConfigurationObject
+# LoginConfigurationObject
 
 ## Properties
 
