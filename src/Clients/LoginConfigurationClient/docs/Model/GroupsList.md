@@ -1,4 +1,4 @@
-# # GroupsList
+# GroupsList
 
 ## Properties
 

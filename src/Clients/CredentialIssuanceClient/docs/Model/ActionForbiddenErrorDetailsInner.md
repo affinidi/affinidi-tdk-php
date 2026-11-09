@@ -1,4 +1,4 @@
-# # ActionForbiddenErrorDetailsInner
+# ActionForbiddenErrorDetailsInner
 
 ## Properties
 
