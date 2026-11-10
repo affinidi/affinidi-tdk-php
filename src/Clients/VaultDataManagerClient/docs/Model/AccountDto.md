@@ -1,4 +1,4 @@
-# # AccountDto
+# AccountDto
 
 ## Properties
 

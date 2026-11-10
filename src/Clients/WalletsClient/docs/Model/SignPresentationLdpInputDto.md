@@ -1,4 +1,4 @@
-# # SignPresentationLdpInputDto
+# SignPresentationLdpInputDto
 
 ## Properties
 

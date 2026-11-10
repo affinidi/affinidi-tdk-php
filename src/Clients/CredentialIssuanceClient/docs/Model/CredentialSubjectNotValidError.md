@@ -1,4 +1,4 @@
-# # CredentialSubjectNotValidError
+# CredentialSubjectNotValidError
 
 ## Properties
 

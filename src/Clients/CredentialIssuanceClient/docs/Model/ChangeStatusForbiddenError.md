@@ -1,4 +1,4 @@
-# # ChangeStatusForbiddenError
+# ChangeStatusForbiddenError
 
 ## Properties
 
