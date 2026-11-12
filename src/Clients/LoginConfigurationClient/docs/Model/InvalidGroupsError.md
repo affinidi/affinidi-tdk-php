@@ -1,4 +1,4 @@
-# # InvalidGroupsError
+# InvalidGroupsError
 
 ## Properties
 

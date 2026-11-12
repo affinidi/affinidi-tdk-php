@@ -1,4 +1,4 @@
-# # PartialProfileNodeDto
+# PartialProfileNodeDto
 
 ## Properties
 

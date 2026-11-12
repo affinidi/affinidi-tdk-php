@@ -1,4 +1,4 @@
-# # WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner
+# WellKnownOpenIdCredentialIssuerResponseCredentialsSupportedInner
 
 ## Properties
 

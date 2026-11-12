@@ -1,4 +1,4 @@
-# # TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo
+# TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo
 
 ## Properties
 

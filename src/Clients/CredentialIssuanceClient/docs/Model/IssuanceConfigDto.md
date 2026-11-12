@@ -1,4 +1,4 @@
-# # IssuanceConfigDto
+# IssuanceConfigDto
 
 ## Properties
 
