@@ -1,4 +1,4 @@
-# # SignPresentationLdpResultDto
+# SignPresentationLdpResultDto
 
 ## Properties
 

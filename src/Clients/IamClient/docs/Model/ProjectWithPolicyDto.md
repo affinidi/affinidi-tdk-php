@@ -1,4 +1,4 @@
-# # ProjectWithPolicyDto
+# ProjectWithPolicyDto
 
 ## Properties
 

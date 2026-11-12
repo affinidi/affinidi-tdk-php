@@ -1,4 +1,4 @@
-# # CredentialResponseImmediateCNonceExpiresIn
+# CredentialResponseImmediateCNonceExpiresIn
 
 ## Properties
 

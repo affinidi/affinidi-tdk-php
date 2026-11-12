@@ -1,4 +1,4 @@
-# # ResourceCreationError
+# ResourceCreationError
 
 ## Properties
 

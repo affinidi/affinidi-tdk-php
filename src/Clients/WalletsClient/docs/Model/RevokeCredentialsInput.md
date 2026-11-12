@@ -1,4 +1,4 @@
-# # RevokeCredentialsInput
+# RevokeCredentialsInput
 
 ## Properties
 
