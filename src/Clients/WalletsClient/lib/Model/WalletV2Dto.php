@@ -69,7 +69,8 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'keys' => '\AffinidiTdk\Clients\WalletsClient\Model\WalletDtoKeysInner[]',
         'services' => '\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[]',
         'created_at' => 'string',
-        'modified_at' => 'string'
+        'modified_at' => 'string',
+        'version' => 'float'
     ];
 
     /**
@@ -90,7 +91,8 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'keys' => null,
         'services' => null,
         'created_at' => null,
-        'modified_at' => null
+        'modified_at' => null,
+        'version' => null
     ];
 
     /**
@@ -109,7 +111,8 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'keys' => false,
         'services' => false,
         'created_at' => false,
-        'modified_at' => false
+        'modified_at' => false,
+        'version' => false
     ];
 
     /**
@@ -208,7 +211,8 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'keys' => 'keys',
         'services' => 'services',
         'created_at' => 'createdAt',
-        'modified_at' => 'modifiedAt'
+        'modified_at' => 'modifiedAt',
+        'version' => 'version'
     ];
 
     /**
@@ -227,7 +231,8 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'keys' => 'setKeys',
         'services' => 'setServices',
         'created_at' => 'setCreatedAt',
-        'modified_at' => 'setModifiedAt'
+        'modified_at' => 'setModifiedAt',
+        'version' => 'setVersion'
     ];
 
     /**
@@ -246,7 +251,8 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         'keys' => 'getKeys',
         'services' => 'getServices',
         'created_at' => 'getCreatedAt',
-        'modified_at' => 'getModifiedAt'
+        'modified_at' => 'getModifiedAt',
+        'version' => 'getVersion'
     ];
 
     /**
@@ -317,6 +323,7 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('services', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('modified_at', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
     }
 
     /**
@@ -654,6 +661,33 @@ class WalletV2Dto implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable modified_at cannot be null');
         }
         $this->container['modified_at'] = $modified_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets version
+     *
+     * @return float|null
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param float|null $version The version of the wallet
+     *
+     * @return self
+     */
+    public function setVersion($version)
+    {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
+        $this->container['version'] = $version;
 
         return $this;
     }

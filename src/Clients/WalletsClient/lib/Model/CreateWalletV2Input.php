@@ -266,6 +266,7 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
     public const ALGORITHM_SECP256K1 = 'secp256k1';
     public const ALGORITHM_ED25519 = 'ed25519';
     public const ALGORITHM_P256 = 'p256';
+    public const ALGORITHM_MLDSA44 = 'mldsa44';
 
     /**
      * Gets allowable values of the enum
@@ -293,6 +294,7 @@ class CreateWalletV2Input implements ModelInterface, ArrayAccess, \JsonSerializa
             self::ALGORITHM_SECP256K1,
             self::ALGORITHM_ED25519,
             self::ALGORITHM_P256,
+            self::ALGORITHM_MLDSA44,
         ];
     }
 

@@ -15,5 +15,6 @@ Name | Type | Description | Notes
 **services** | [**\AffinidiTdk\Clients\WalletsClient\Model\ServiceEndpointDto[]**](ServiceEndpointDto.md) | list of service endpoints associated with this wallet | [optional]
 **created_at** | **string** |  | [optional]
 **modified_at** | **string** |  | [optional]
+**version** | **float** | The version of the wallet | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
