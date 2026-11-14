@@ -77,7 +77,7 @@ try {
 ## `listIssuanceDataRecords()`
 
 ```php
-listIssuanceDataRecords($project_id, $configuration_id, $limit, $exclusive_start_key): \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceRecordResponse
+listIssuanceDataRecords($project_id, $configuration_id, $issuance_id, $limit, $exclusive_start_key): \AffinidiTdk\Clients\CredentialIssuanceClient\Model\ListIssuanceRecordResponse
 ```
 
 List records
@@ -105,11 +105,12 @@ $apiInstance = new AffinidiTdk\Clients\CredentialIssuanceClient\Api\DefaultApi(
 );
 $project_id = 'project_id_example'; // string | Affinidi project id
 $configuration_id = 'configuration_id_example'; // string | The id of the issuance configuration
+$issuance_id = 'issuance_id_example'; // string | Optional filter to retrieve records for a specific issuance ID
 $limit = 10; // int | Maximum number of records to fetch in a list
 $exclusive_start_key = 'exclusive_start_key_example'; // string | exclusiveStartKey for retrieving the next batch of data.
 
 try {
-    $result = $apiInstance->listIssuanceDataRecords($project_id, $configuration_id, $limit, $exclusive_start_key);
+    $result = $apiInstance->listIssuanceDataRecords($project_id, $configuration_id, $issuance_id, $limit, $exclusive_start_key);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->listIssuanceDataRecords: ', $e->getMessage(), PHP_EOL;
@@ -122,6 +123,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **project_id** | **string**| Affinidi project id | |
 | **configuration_id** | **string**| The id of the issuance configuration | |
+| **issuance_id** | **string**| Optional filter to retrieve records for a specific issuance ID | [optional] |
 | **limit** | **int**| Maximum number of records to fetch in a list | [optional] [default to 10] |
 | **exclusive_start_key** | **string**| exclusiveStartKey for retrieving the next batch of data. | [optional] |
 
