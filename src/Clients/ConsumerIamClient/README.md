@@ -66,6 +66,7 @@ All URIs are relative to *https://apse1.api.affinidi.io/cid*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AuthzApi* | [**deleteAccessVfs**](docs/Api/AuthzApi.md#deleteaccessvfs) | **DELETE** /v1/authz/vfs/access/{granteeDid} | delete access of granteeDid
+*AuthzApi* | [**getAccessVfs**](docs/Api/AuthzApi.md#getaccessvfs) | **GET** /v1/authz/vfs/access/{granteeDid} | Get permissions to the virtual file system for a subject
 *AuthzApi* | [**grantAccessVfs**](docs/Api/AuthzApi.md#grantaccessvfs) | **POST** /v1/authz/vfs/access/{granteeDid} | Grant access to the virtual file system
 *AuthzApi* | [**updateAccessVfs**](docs/Api/AuthzApi.md#updateaccessvfs) | **PUT** /v1/authz/vfs/access/{granteeDid} | Update access of granteeDid
 *ConsumerAuthApi* | [**consumerAuthTokenEndpoint**](docs/Api/ConsumerAuthApi.md#consumerauthtokenendpoint) | **POST** /v1/consumer/oauth2/token | The Consumer OAuth 2.0 Token Endpoint
@@ -76,6 +77,7 @@ Class | Method | HTTP request | Description
 - [ConsumerAuthTokenEndpointInput](docs/Model/ConsumerAuthTokenEndpointInput.md)
 - [ConsumerAuthTokenEndpointOutput](docs/Model/ConsumerAuthTokenEndpointOutput.md)
 - [CorsConsumerAuthTokenEndpointOK](docs/Model/CorsConsumerAuthTokenEndpointOK.md)
+- [GetAccessOutput](docs/Model/GetAccessOutput.md)
 - [GrantAccessInput](docs/Model/GrantAccessInput.md)
 - [GrantAccessOutput](docs/Model/GrantAccessOutput.md)
 - [InvalidDIDError](docs/Model/InvalidDIDError.md)

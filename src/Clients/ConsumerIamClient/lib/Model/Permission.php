@@ -59,7 +59,8 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'rights' => '\AffinidiTdk\Clients\ConsumerIamClient\Model\RightsEnum[]',
-        'node_ids' => 'string[]'
+        'node_ids' => 'string[]',
+        'expires_at' => '\DateTime'
     ];
 
     /**
@@ -71,7 +72,8 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'rights' => null,
-        'node_ids' => null
+        'node_ids' => null,
+        'expires_at' => 'date-time'
     ];
 
     /**
@@ -81,7 +83,8 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'rights' => false,
-        'node_ids' => false
+        'node_ids' => false,
+        'expires_at' => false
     ];
 
     /**
@@ -171,7 +174,8 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'rights' => 'rights',
-        'node_ids' => 'nodeIds'
+        'node_ids' => 'nodeIds',
+        'expires_at' => 'expiresAt'
     ];
 
     /**
@@ -181,7 +185,8 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'rights' => 'setRights',
-        'node_ids' => 'setNodeIds'
+        'node_ids' => 'setNodeIds',
+        'expires_at' => 'setExpiresAt'
     ];
 
     /**
@@ -191,7 +196,8 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'rights' => 'getRights',
-        'node_ids' => 'getNodeIds'
+        'node_ids' => 'getNodeIds',
+        'expires_at' => 'getExpiresAt'
     ];
 
     /**
@@ -253,6 +259,7 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('rights', $data ?? [], null);
         $this->setIfExists('node_ids', $data ?? [], null);
+        $this->setIfExists('expires_at', $data ?? [], null);
     }
 
     /**
@@ -353,6 +360,33 @@ class Permission implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable node_ids cannot be null');
         }
         $this->container['node_ids'] = $node_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets expires_at
+     *
+     * @return \DateTime|null
+     */
+    public function getExpiresAt()
+    {
+        return $this->container['expires_at'];
+    }
+
+    /**
+     * Sets expires_at
+     *
+     * @param \DateTime|null $expires_at expires_at
+     *
+     * @return self
+     */
+    public function setExpiresAt($expires_at)
+    {
+        if (is_null($expires_at)) {
+            throw new \InvalidArgumentException('non-nullable expires_at cannot be null');
+        }
+        $this->container['expires_at'] = $expires_at;
 
         return $this;
     }
