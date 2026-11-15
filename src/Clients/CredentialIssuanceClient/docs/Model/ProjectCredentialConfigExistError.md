@@ -1,4 +1,4 @@
-# # ProjectCredentialConfigExistError
+# ProjectCredentialConfigExistError
 
 ## Properties
 

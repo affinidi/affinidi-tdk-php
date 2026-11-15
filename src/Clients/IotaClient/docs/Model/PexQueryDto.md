@@ -1,4 +1,4 @@
-# # PexQueryDto
+# PexQueryDto
 
 ## Properties
 
