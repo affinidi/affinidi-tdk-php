@@ -1,4 +1,4 @@
-# # InitNodesOK
+# InitNodesOK
 
 ## Properties
 

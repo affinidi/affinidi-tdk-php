@@ -1,4 +1,4 @@
-# # ListAccountsDto
+# ListAccountsDto
 
 ## Properties
 

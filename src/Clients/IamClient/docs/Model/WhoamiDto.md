@@ -1,4 +1,4 @@
-# # WhoamiDto
+# WhoamiDto
 
 ## Properties
 

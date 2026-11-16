@@ -1,4 +1,4 @@
-# # JsonWebKeySetDto
+# JsonWebKeySetDto
 
 ## Properties
 

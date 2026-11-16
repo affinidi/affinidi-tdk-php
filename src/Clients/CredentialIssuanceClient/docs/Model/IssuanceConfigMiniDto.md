@@ -1,4 +1,4 @@
-# # IssuanceConfigMiniDto
+# IssuanceConfigMiniDto
 
 ## Properties
 
