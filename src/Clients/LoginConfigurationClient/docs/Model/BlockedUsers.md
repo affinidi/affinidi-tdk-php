@@ -1,4 +1,4 @@
-# # BlockedUsers
+# BlockedUsers
 
 ## Properties
 

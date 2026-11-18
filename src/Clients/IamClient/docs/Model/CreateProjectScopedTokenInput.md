@@ -1,4 +1,4 @@
-# # CreateProjectScopedTokenInput
+# CreateProjectScopedTokenInput
 
 ## Properties
 

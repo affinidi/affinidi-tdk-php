@@ -1,5 +1,7 @@
 # AffinidiTdk\Clients\ConsumerIamClient\ConsumerAuthApi
 
+
+
 All URIs are relative to https://apse1.api.affinidi.io/cid, except if the operation defines another base path.
 
 | Method | HTTP request | Description |

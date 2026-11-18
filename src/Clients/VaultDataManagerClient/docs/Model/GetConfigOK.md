@@ -1,4 +1,4 @@
-# # GetConfigOK
+# GetConfigOK
 
 ## Properties
 
