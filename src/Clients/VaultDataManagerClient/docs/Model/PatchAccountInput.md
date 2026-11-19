@@ -1,4 +1,4 @@
-# # PatchAccountInput
+# PatchAccountInput
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # GetCredentialOffer400Response
+# GetCredentialOffer400Response
 
 ## Properties
 

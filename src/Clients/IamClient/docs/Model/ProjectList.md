@@ -1,4 +1,4 @@
-# # ProjectList
+# ProjectList
 
 ## Properties
 

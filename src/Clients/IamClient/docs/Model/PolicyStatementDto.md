@@ -1,4 +1,4 @@
-# # PolicyStatementDto
+# PolicyStatementDto
 
 ## Properties
 

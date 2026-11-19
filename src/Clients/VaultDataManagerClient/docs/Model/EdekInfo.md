@@ -1,4 +1,4 @@
-# # EdekInfo
+# EdekInfo
 
 ## Properties
 

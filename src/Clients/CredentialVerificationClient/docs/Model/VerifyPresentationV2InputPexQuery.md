@@ -1,4 +1,4 @@
-# # VerifyPresentationV2InputPexQuery
+# VerifyPresentationV2InputPexQuery
 
 ## Properties
 

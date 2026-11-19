@@ -1,4 +1,4 @@
-# # CreateAccountInput
+# CreateAccountInput
 
 ## Properties
 
