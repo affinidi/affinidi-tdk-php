@@ -1,4 +1,4 @@
-# # ConsentDto
+# ConsentDto
 
 ## Properties
 

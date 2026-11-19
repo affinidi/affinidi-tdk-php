@@ -1,4 +1,4 @@
-# # InitiateDataSharingRequestInput
+# InitiateDataSharingRequestInput
 
 ## Properties
 
