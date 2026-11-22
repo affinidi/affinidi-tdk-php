@@ -1,4 +1,4 @@
-# # StartFileScanInput
+# StartFileScanInput
 
 ## Properties
 

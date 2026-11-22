@@ -1,4 +1,4 @@
-# # InvalidJwtTokenError
+# InvalidJwtTokenError
 
 ## Properties
 

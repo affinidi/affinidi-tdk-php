@@ -1,4 +1,4 @@
-# # CreateLoginConfigurations400Response
+# CreateLoginConfigurations400Response
 
 ## Properties
 

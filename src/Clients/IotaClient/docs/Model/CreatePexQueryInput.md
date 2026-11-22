@@ -1,4 +1,4 @@
-# # CreatePexQueryInput
+# CreatePexQueryInput
 
 ## Properties
 

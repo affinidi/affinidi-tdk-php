@@ -1,4 +1,4 @@
-# # GetUserInfo
+# GetUserInfo
 
 ## Properties
 
