@@ -1,4 +1,4 @@
-# # GroupUserMappingDto
+# GroupUserMappingDto
 
 ## Properties
 

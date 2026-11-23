@@ -1,4 +1,4 @@
-# # NodeStatus
+# NodeStatus
 
 ## Properties
 

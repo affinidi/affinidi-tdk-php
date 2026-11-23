@@ -1,4 +1,4 @@
-# # CreateGroupInput
+# CreateGroupInput
 
 ## Properties
 

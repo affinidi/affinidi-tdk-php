@@ -1,4 +1,4 @@
-# # BatchCredentialInputCredentialRequestsInner
+# BatchCredentialInputCredentialRequestsInner
 
 ## Properties
 

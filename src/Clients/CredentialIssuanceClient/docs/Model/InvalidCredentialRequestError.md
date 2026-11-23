@@ -1,4 +1,4 @@
-# # InvalidCredentialRequestError
+# InvalidCredentialRequestError
 
 ## Properties
 

@@ -1,5 +1,7 @@
 # AffinidiTdk\Clients\WalletsClient\WalletApi
 
+Operations on the wallet
+
 All URIs are relative to https://apse1.api.affinidi.io/cwe, except if the operation defines another base path.
 
 | Method | HTTP request | Description |

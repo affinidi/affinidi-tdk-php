@@ -1,4 +1,4 @@
-# # SupportedCredentialMetadata
+# SupportedCredentialMetadata
 
 ## Properties
 
