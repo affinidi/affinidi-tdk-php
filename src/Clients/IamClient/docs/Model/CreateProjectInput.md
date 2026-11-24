@@ -1,4 +1,4 @@
-# # CreateProjectInput
+# CreateProjectInput
 
 ## Properties
 

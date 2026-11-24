@@ -1,4 +1,4 @@
-# # SavePexQueriesUpdateInput
+# SavePexQueriesUpdateInput
 
 ## Properties
 

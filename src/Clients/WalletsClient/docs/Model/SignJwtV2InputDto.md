@@ -1,4 +1,4 @@
-# # SignJwtV2InputDto
+# SignJwtV2InputDto
 
 ## Properties
 

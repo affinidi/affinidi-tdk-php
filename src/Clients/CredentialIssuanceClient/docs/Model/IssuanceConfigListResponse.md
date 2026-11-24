@@ -1,4 +1,4 @@
-# # IssuanceConfigListResponse
+# IssuanceConfigListResponse
 
 ## Properties
 
