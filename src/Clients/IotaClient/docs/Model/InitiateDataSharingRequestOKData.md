@@ -1,4 +1,4 @@
-# # InitiateDataSharingRequestOKData
+# InitiateDataSharingRequestOKData
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # LoginConfigurationClientMetadataOutput
+# LoginConfigurationClientMetadataOutput
 
 ## Properties
 

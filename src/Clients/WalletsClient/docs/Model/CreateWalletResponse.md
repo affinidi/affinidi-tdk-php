@@ -1,4 +1,4 @@
-# # CreateWalletResponse
+# CreateWalletResponse
 
 ## Properties
 
