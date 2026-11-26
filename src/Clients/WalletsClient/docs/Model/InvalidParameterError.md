@@ -1,4 +1,4 @@
-# # InvalidParameterError
+# InvalidParameterError
 
 ## Properties
 

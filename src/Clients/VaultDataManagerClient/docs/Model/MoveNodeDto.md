@@ -1,4 +1,4 @@
-# # MoveNodeDto
+# MoveNodeDto
 
 ## Properties
 

@@ -37,24 +37,23 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-// Configure API key authorization: ConsumerTokenAuth
+// Configure API key authorization: UserTokenAuth
 $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKey('authorization', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = AffinidiTdk\Clients\IamClient\Configuration::getDefaultConfiguration()->setApiKeyPrefix('authorization', 'Bearer');
 
-
-$apiInstance = new AffinidiTdk\Clients\IamClient\Api\AuthzApi(
+$apiInstance = new AffinidiTdk\Clients\IamClient\Api\AccountsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$grantee_did = 'grantee_did_example'; // string
 
 try {
-    $apiInstance->deleteAccessVfs($grantee_did);
+    $result = $apiInstance->listAccountPasskeys();
+    print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling AuthzApi->deleteAccessVfs: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AccountsApi->listAccountPasskeys: ', $e->getMessage(), PHP_EOL;
 }
 
 ```
@@ -65,6 +64,8 @@ All URIs are relative to *https://apse1.api.affinidi.io/iam*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AccountsApi* | [**listAccountPasskeys**](docs/Api/AccountsApi.md#listaccountpasskeys) | **GET** /v1/accounts/passkeys | 
+*AccountsApi* | [**listAccountProviders**](docs/Api/AccountsApi.md#listaccountproviders) | **GET** /v1/accounts/providers | 
 *AuthzApi* | [**deleteAccessVfs**](docs/Api/AuthzApi.md#deleteaccessvfs) | **DELETE** /v1/authz/vfs/access/{granteeDid} | delete access of granteeDid
 *AuthzApi* | [**grantAccessVfs**](docs/Api/AuthzApi.md#grantaccessvfs) | **POST** /v1/authz/vfs/access | Grant access to the virtual file system
 *AuthzApi* | [**updateAccessVfs**](docs/Api/AuthzApi.md#updateaccessvfs) | **PUT** /v1/authz/vfs/access/{granteeDid} | Update access of granteeDid
@@ -84,6 +85,7 @@ Class | Method | HTTP request | Description
 *ProjectsApi* | [**addPrincipalToProject**](docs/Api/ProjectsApi.md#addprincipaltoproject) | **POST** /v1/projects/principals | 
 *ProjectsApi* | [**createProject**](docs/Api/ProjectsApi.md#createproject) | **POST** /v1/projects | 
 *ProjectsApi* | [**deletePrincipalFromProject**](docs/Api/ProjectsApi.md#deleteprincipalfromproject) | **DELETE** /v1/projects/principals/{principalId} | 
+*ProjectsApi* | [**getProject**](docs/Api/ProjectsApi.md#getproject) | **GET** /v1/projects/{projectId} | 
 *ProjectsApi* | [**listPrincipalsOfProject**](docs/Api/ProjectsApi.md#listprincipalsofproject) | **GET** /v1/projects/principals | 
 *ProjectsApi* | [**listProject**](docs/Api/ProjectsApi.md#listproject) | **GET** /v1/projects | 
 *ProjectsApi* | [**updateProject**](docs/Api/ProjectsApi.md#updateproject) | **PATCH** /v1/projects/{projectId} | 
@@ -104,22 +106,21 @@ Class | Method | HTTP request | Description
 - [AddUserToProjectInput](docs/Model/AddUserToProjectInput.md)
 - [ConsumerAuthTokenEndpointInput](docs/Model/ConsumerAuthTokenEndpointInput.md)
 - [ConsumerAuthTokenEndpointOutput](docs/Model/ConsumerAuthTokenEndpointOutput.md)
-- [CorsConsumerAuthTokenEndpointOK](docs/Model/CorsConsumerAuthTokenEndpointOK.md)
-- [CorsGrantAccessVfsOK](docs/Model/CorsGrantAccessVfsOK.md)
-- [CorsUpdateAccessVfsOK](docs/Model/CorsUpdateAccessVfsOK.md)
 - [CreateProjectInput](docs/Model/CreateProjectInput.md)
 - [CreateProjectScopedTokenInput](docs/Model/CreateProjectScopedTokenInput.md)
 - [CreateProjectScopedTokenOutput](docs/Model/CreateProjectScopedTokenOutput.md)
 - [CreateTokenInput](docs/Model/CreateTokenInput.md)
-- [DeleteAccessOutput](docs/Model/DeleteAccessOutput.md)
 - [GrantAccessInput](docs/Model/GrantAccessInput.md)
 - [GrantAccessOutput](docs/Model/GrantAccessOutput.md)
+- [IdentityMappingError](docs/Model/IdentityMappingError.md)
 - [InvalidDIDError](docs/Model/InvalidDIDError.md)
-- [InvalidJwtTokenError](docs/Model/InvalidJwtTokenError.md)
 - [InvalidParameterError](docs/Model/InvalidParameterError.md)
 - [JsonWebKeyDto](docs/Model/JsonWebKeyDto.md)
 - [JsonWebKeySetDto](docs/Model/JsonWebKeySetDto.md)
+- [MalformedUpstreamResponseError](docs/Model/MalformedUpstreamResponseError.md)
 - [NotFoundError](docs/Model/NotFoundError.md)
+- [PasskeyDto](docs/Model/PasskeyDto.md)
+- [PasskeyList](docs/Model/PasskeyList.md)
 - [PolicyDto](docs/Model/PolicyDto.md)
 - [PolicyStatementDto](docs/Model/PolicyStatementDto.md)
 - [PrincipalCannotBeDeletedError](docs/Model/PrincipalCannotBeDeletedError.md)
@@ -128,24 +129,25 @@ Class | Method | HTTP request | Description
 - [ProjectList](docs/Model/ProjectList.md)
 - [ProjectWithPolicyDto](docs/Model/ProjectWithPolicyDto.md)
 - [ProjectWithPolicyList](docs/Model/ProjectWithPolicyList.md)
-- [PublicKeyCannotBeResolvedFromDidError](docs/Model/PublicKeyCannotBeResolvedFromDidError.md)
+- [ProviderDto](docs/Model/ProviderDto.md)
+- [ProviderList](docs/Model/ProviderList.md)
 - [RightsEnum](docs/Model/RightsEnum.md)
-- [ServiceErrorResponse](docs/Model/ServiceErrorResponse.md)
-- [ServiceErrorResponseDetailsInner](docs/Model/ServiceErrorResponseDetailsInner.md)
+- [TokenAuthenticationMethodDto](docs/Model/TokenAuthenticationMethodDto.md)
 - [TokenDto](docs/Model/TokenDto.md)
 - [TokenList](docs/Model/TokenList.md)
 - [TokenPrivateKeyAuthenticationMethodDto](docs/Model/TokenPrivateKeyAuthenticationMethodDto.md)
 - [TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo](docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfo.md)
 - [TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf](docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf.md)
 - [TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf1](docs/Model/TokenPrivateKeyAuthenticationMethodDtoPublicKeyInfoOneOf1.md)
-- [TypedPrincipalId](docs/Model/TypedPrincipalId.md)
 - [UnauthorizedError](docs/Model/UnauthorizedError.md)
 - [UnexpectedError](docs/Model/UnexpectedError.md)
+- [UnexpectedErrorDetailsInner](docs/Model/UnexpectedErrorDetailsInner.md)
 - [UpdateAccessInput](docs/Model/UpdateAccessInput.md)
 - [UpdateAccessOutput](docs/Model/UpdateAccessOutput.md)
 - [UpdateProjectInput](docs/Model/UpdateProjectInput.md)
 - [UpdateTokenInput](docs/Model/UpdateTokenInput.md)
 - [UpdateTokenPrivateKeyAuthenticationMethodDto](docs/Model/UpdateTokenPrivateKeyAuthenticationMethodDto.md)
+- [UpstreamUnavailableError](docs/Model/UpstreamUnavailableError.md)
 - [UserDto](docs/Model/UserDto.md)
 - [UserList](docs/Model/UserList.md)
 - [WhoamiDto](docs/Model/WhoamiDto.md)
@@ -199,5 +201,6 @@ info@affinidi.com
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `1.0.0`
-    - Generator version: `7.13.0`
+    - Package version: `1.0.0`
+    - Generator version: `7.25.0`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

@@ -1,4 +1,4 @@
-# # StartFileScanOK
+# StartFileScanOK
 
 ## Properties
 

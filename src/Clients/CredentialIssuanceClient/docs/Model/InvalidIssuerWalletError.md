@@ -1,4 +1,4 @@
-# # InvalidIssuerWalletError
+# InvalidIssuerWalletError
 
 ## Properties
 

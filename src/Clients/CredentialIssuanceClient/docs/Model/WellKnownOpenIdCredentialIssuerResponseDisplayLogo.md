@@ -1,4 +1,4 @@
-# # WellKnownOpenIdCredentialIssuerResponseDisplayLogo
+# WellKnownOpenIdCredentialIssuerResponseDisplayLogo
 
 ## Properties
 

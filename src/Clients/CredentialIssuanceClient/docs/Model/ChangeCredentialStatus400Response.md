@@ -1,4 +1,4 @@
-# # ChangeCredentialStatus400Response
+# ChangeCredentialStatus400Response
 
 ## Properties
 

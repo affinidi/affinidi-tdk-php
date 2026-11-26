@@ -1,4 +1,4 @@
-# # UpdateNodeInput
+# UpdateNodeInput
 
 ## Properties
 

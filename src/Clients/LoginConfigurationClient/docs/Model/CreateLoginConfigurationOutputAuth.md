@@ -1,4 +1,4 @@
-# # CreateLoginConfigurationOutputAuth
+# CreateLoginConfigurationOutputAuth
 
 ## Properties
 

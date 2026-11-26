@@ -1,4 +1,4 @@
-# # SignCredential400Response
+# SignCredential400Response
 
 ## Properties
 
