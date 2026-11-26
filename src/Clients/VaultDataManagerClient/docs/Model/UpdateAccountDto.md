@@ -1,4 +1,4 @@
-# # UpdateAccountDto
+# UpdateAccountDto
 
 ## Properties
 

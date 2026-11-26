@@ -1,4 +1,4 @@
-# # UpdateConfigurationByIdInput
+# UpdateConfigurationByIdInput
 
 ## Properties
 

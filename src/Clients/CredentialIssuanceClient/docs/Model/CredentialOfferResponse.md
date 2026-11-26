@@ -1,4 +1,4 @@
-# # CredentialOfferResponse
+# CredentialOfferResponse
 
 ## Properties
 

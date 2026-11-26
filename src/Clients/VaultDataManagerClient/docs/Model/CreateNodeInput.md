@@ -1,4 +1,4 @@
-# # CreateNodeInput
+# CreateNodeInput
 
 ## Properties
 

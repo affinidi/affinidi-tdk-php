@@ -1,4 +1,4 @@
-# # UserDto
+# UserDto
 
 ## Properties
 

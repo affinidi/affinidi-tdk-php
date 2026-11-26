@@ -1,4 +1,4 @@
-# # AddUserToGroupInput
+# AddUserToGroupInput
 
 ## Properties
 
